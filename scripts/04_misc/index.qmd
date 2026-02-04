@@ -2,7 +2,7 @@
 title: "Einleitung"
 author:
   - name: "Dr. Sandra Grinschgl"
-  - name: "MSc. Aaron Friedli"
+  - name: "MSc. Laura Hirt"
   - name: "Bsc. Lars Schilling"
 date: today
 ---
