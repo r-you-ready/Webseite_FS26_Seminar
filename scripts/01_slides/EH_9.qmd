@@ -1,6 +1,6 @@
 ---
-title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 9"
-author: Sandra Grinschgl, Aaron Friedli, Lars Schilling
+title: "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 9"
+author: Sandra Grinschgl, Laura Hirt, Lars Schilling
 format: 
   revealjs:
     title-slide-attributes:
@@ -17,6 +17,7 @@ format:
     controls: true
     embed-resources: true
 bibliography: references.bib
+draft: true
 ---
 
 ```{r, echo = FALSE, message=FALSE}
@@ -35,7 +36,7 @@ penguins <- penguins
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
 
-HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**9. Einheit**, 12.11.2025
+FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**9. Einheit**, 22.04.2026
 
 ------------------------------------------------------------------------
 

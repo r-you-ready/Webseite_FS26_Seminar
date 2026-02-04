@@ -1,6 +1,6 @@
 ---
-title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 2"
-author: Sandra Grinschgl, Aaron Friedli, Lars Schilling
+title: "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 2"
+author: Sandra Grinschgl, Laura Hirt, Lars Schilling
 format: 
   revealjs:
     title-slide-attributes:
@@ -16,11 +16,12 @@ format:
     progress: true
     controls: true
     embed-resources: true
+draft: true
 ---
 
 ## R u Ready? Reprodzierbare Datenaufbereitung und -analyse mit R
 
-HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**2. Einheit**, 24.09.2025
+FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**2. Einheit**, 25.02.2026
 
 ------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ Gibt es Fragen, die sich nach letzter Woche aufgetan haben?
 
 ## Ergebnisse der Bedarfsanalyse (1)
 
-**10:15 (*N* = 24)**
+**12:15 (*N* = 24)**
 
 ***Wie würdest du aktuell deine R-Kenntnisse einschätzen?***
 
@@ -54,7 +55,7 @@ Gibt es Fragen, die sich nach letzter Woche aufgetan haben?
 
 ***Wie oft hast du R schon verwendet?***
 
-**10:15**
+**12:15**
 
 ![](../../images/EH_2_files/Bedarfsanalyse/Verwendung_1015.png)
 
@@ -92,7 +93,7 @@ Hinweis auf Ian's Reproducible Data Analyses Seminar –\> Mo 16:15; wenn dann d
 
 **Hast du R auch außerhalb von Lehrveranstaltungen verwendet?**
 
-**10:15**
+**12:15**
 
 ![](../../images/EH_2_files/Bedarfsanalyse/Verwendung_ausserhalb_1015.png)
 
@@ -122,7 +123,7 @@ Fast alle nur mit tidyverse, fast niemand mit BaseR und fast niemand mit einem a
 
 **Wie unsicher fühlst du dich im Umgang mit den folgenden Themen?**
 
-**10:15**
+**12:15**
 
 ![](../../images/EH_2_files/Bedarfsanalyse/unsicherheiten_1015.png){fig-align="center"}
 
@@ -258,7 +259,7 @@ Welche Unterstützung um die Datenaufbereitung und -analyse in R würdest du dir
 
 ## Peer-Pairing:
 
-**10:15**
+**12:15**
 
 ![](../../images/clipboard-1580035438.png){width="350"}
 
@@ -270,7 +271,7 @@ Welche Unterstützung um die Datenaufbereitung und -analyse in R würdest du dir
 
 ## Peer-Pairing:
 
--   Vorgehen: Melden bis **Sonntag 28.09** **(ILIAS Forum**, siehe EH2) mit Namen des 2er Teams
+-   Vorgehen: Melden bis **Sonntag 29.02** **(ILIAS Forum**, siehe EH2) mit Namen des 2er Teams
 
 -   Ansonsten: Zufällige Zuteilung am Montag - Kennenlernen in der nächsten Einheit
 
