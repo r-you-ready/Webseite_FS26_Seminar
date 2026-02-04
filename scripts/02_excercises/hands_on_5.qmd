@@ -1,0 +1,505 @@
+---
+title: "Hands On – Coding Basics (Einheiten 9 und 10)"
+editor: visual
+bibliography: references.bib
+---
+
+```{r, echo = FALSE, results = 'hide', message= FALSE, warning=FALSE}
+library(tidyverse)
+
+dat_full <- read_csv("data/raw/dat_full.csv")
+```
+
+Bei Bedarf finden sich hier nochmal die Slides zur EH9:
+
+::: {=html}
+<iframe src="../01_slides/EH_9.html"
+        width="100%"
+        height="500"
+        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+:::
+
+Und hier die Slides zur EH10:
+
+::: {=html}
+<iframe src="../01_slides/EH_10.html"
+        width="100%"
+        height="500"
+        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+:::
+
+# Lernziele
+
+✅ Dplyr: Repetition
+
+✅ Duplizierte Werte Entfernen
+
+✅ Long & Wide Transformationen
+
+✅ Datenqualitätsindkatoren berechnen
+
+✅ Ausreisseranalysen
+
+✅ Tabellen
+
+::: callout-important
+Für die heutigen Übungen benötigen wir `dat_full`!
+:::
+
+# **Duplizierte Werte entfernen**
+
+In vielen Datensätzen kann es vorkommen, dass Werte mehrfach auftreten (z. B. wenn eine ID mehrmals vorkommt). Um dies zu bereinigen, müssen wir zunächst die Duplikate identifizieren und sie anschliessend bearbeiten oder entfernen.
+
+Im nächsten Schritt duplizieren wir exemplarisch drei zufällige Zeilen aus unserem Datensatz **dat_full**. Diese künstlich erzeugten Duplikate werden wir danach wieder bereinigen.
+
+Führe diesen Code-Chunk aus: Danach sollte dein **dat_full** 162 Beobachtungen enthalten.
+
+```{r}
+set.seed(123)   
+
+dup_rows <- dat_full %>% 
+  slice_sample(n = 3)
+
+dat_full <- bind_rows(dat_full, dup_rows)
+
+```
+
+Es gibt mehrere Arten und Weisen, Duplikate zu identifizieren. Verwende die `dplyr`-Funktion `count()`, um die einzelnen IDs zu zählen. Gib dir anschliessend mit `filter()` diejenigen aus, die mehr als einmal vorkommen.
+
+```{r echo = TRUE, eval = FALSE}
+dat_full |> 
+  count(XXXX) |> 
+  filter(XXX)
+
+
+```
+
+```{r echo = FALSE, eval = FALSE}
+dat_full |>
+  count(code) |> 
+  filter(n > 1)
+```
+
+Entferne die Duplikate wieder, indem du z. B. `unique()` auf den Datensatz anwendest. `unique()` entfernt vollständig identische Zeilen und behält nur eine davon.
+
+```{r, echo = FALSE}
+dat_full <- unique(dat_full)
+```
+
+::: {.callout-note collapse="true"}
+Alternative: Falls du Duplikate nur auf Basis einer bestimmten Variable (z. B. id) entfernen möchtest, kannst du duplicated() verwenden. Dadurch bleibt pro ID nur die erste Zeile erhalten.
+
+```{r echo = TRUE, eval = FALSE}
+dat_full <- dat_full[!duplicated(dat_full$code), ]
+
+```
+:::
+
+# Dplyr: Code korrigieren und verbessern
+
+**Dieser Code funktioniert nicht. Korrigiere ihn. Achte dabei auf Syntaxfehler.**
+
+```{r, echo = TRUE, eval=FALSE}
+dat_full %>%
+  select(code, post, strategies)
+  filter(strtegies = "1")
+
+
+
+```
+
+```{r echo = FALSE, eval = FALSE}
+dat_full %>%
+  select(code, post, strategies) %>%
+  filter(strategies == 1)
+```
+
+**Dieser Code funktioniert, ist jedoch sehr umständlich und ineffizient. Verwende `dplyr`-Funktionen, um ihn kürzer und übersichtlicher zu gestalten.**
+
+```{r echo = TRUE, eval=FALSE}
+dat_full |> 
+  summarise(
+    Gesamtmittelwert = mean(
+      c(
+        question1, question2, question3, question4, question5,
+        question6, question7, question8, question9, question10,
+        question11, question12, question13, question14, question15,
+        question16, question17, question18
+      )
+    )
+  )
+
+```
+
+**💡Tips:**
+
+-   Nutze `select()` zusammen mit `starts_with()`.\
+    Achtung: `select()` braucht als erstes Argument den Datensatz obwohl wir die Pipe verwenden.
+
+-   Um den Gesamtmean zu berechnen, musst du zuerst `rowMeans()` anwenden und dann mit `mean()` kombinieren. `select()` gibt als Resultat nur ein Dataframe zurück, das `mean()` nicht direkt verarbeiten kann.
+
+Du kannst versuchen diese Struktur mit den richtigen Funktionen zu ergänzen.
+
+```{r, echo = TRUE, eval = FALSE}
+
+dat_full |>
+  summarise(
+    Gesamtmittelwert = Funktion_1(
+      Funktion_2(
+        Funktion_3(dat_full, starts_with("XXX"))
+      )
+    )
+  )
+
+```
+
+```{r, echo = FALSE, eval=FALSE}
+
+dat_full |> summarise(Gesamtmean = mean(rowMeans(select(dat_full, starts_with("question")))))
+
+#Alternative
+
+dat_full |> summarise(Gesamtmean = mean(c_across(starts_with("question"))))
+```
+
+# Wide to Long:
+
+## Übungen zur Datenkonversion
+
+📖[R4DS - Kapitel 5.3](https://r4ds.hadley.nz/data-tidy.html#sec-pivoting)
+
+📖[Einführung in R - Kapitel 3.1.3](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#manuelle-konversion-von-wide-zu-long)
+
+Die folgenden Schritte dienen der Konversion von Daten zwischen dem Wide- und Long-Format unter Verwendung des `Tidyverse`-Pakets in R.
+
+-   Mit der Funktion **`pivot_longer()`** Spalten der Leistungseinschätzung in Long-Format umwandeln und in neuen Datensatz speichern, **nur für Übungszwecke**.
+
+    ```{r echo = FALSE, eval=FALSE}
+    df_long <- dat_full |>
+      pivot_longer(
+        cols = c(pre1, pre2, pre3, pre4, post),
+        names_to = "time_rating",
+        values_to = "rating"
+      )
+    ```
+
+-   Wandle den Datensatz noch mal in das Long Format um, aber nur basierend auf den Spalten **`pre1`** und **`pre4`** **Long-Format wird für 2x3 ANOVA aus Grinschgl et al. (2020) benötigt; für Vergleich der 2 Messzeitpunkte in dieser Analysen, benötigen wir diese im Long-Format.**
+
+    ```{r, echo=FALSE, eval=FALSE}
+    df_long <- dat_full |>
+      pivot_longer(
+        cols = c(pre1, pre4),
+        names_to = "time_rating",
+        values_to = "rating"
+      )
+    ```
+
+-   Wandle die Spalte **`time_rating`** in einen Factor um –\> **auch notwendig für Analysen**.
+
+    ```{r, echo=FALSE, eval=FALSE}
+
+    df_long$time_rating <- factor(df_long$time_rating)
+    ```
+
+-   Speichere den Long Datensatz als **`csv.`** Datei ab. Den Long Datensatz werden wir in den kommenden Wochen benötigen.
+
+```{r, echo=FALSE, eval=FALSE}
+
+write.csv(df_long, "processed/data_long.csv", row.names = FALSE)
+
+```
+
+-   Verwende **`pivot_wider`** unter Angabe von **`names_from`** und **`values_from`** um den Datensatz wieder in das Wide-Format zu bringen. –\> **nur für Übungszwecke.**
+
+```{r, echo=FALSE, eval=FALSE}
+
+df_wide <- df_long |> 
+  pivot_wider(names_from = time_rating,
+              values_from = rating)
+```
+
+# Datenqualität
+
+Ab hier wieder mit dem normalen Datensatz (`dat_full`) arbeiten.
+
+## Skewness und Kurtosis
+
+Die folgenden Schritte dienen der Vorbereitung und deskriptiven Analyse von Daten in R.
+
+-   **Installieren und laden des Pakets** {psych}: Stelle sicher, dass das Statis Paket `psych`für die weiteren Analysen geladen ist.
+
+```{r, echo=FALSE, eval=FALSE}
+
+#install.packages("psych")
+library(psych)
+```
+
+-   Berechne die Schiefe und die Kurtosis der Variablen "Öffnungen des Modellfensters" (`mean_rl_all`) für die drei Gruppen. Verwende hierfür die `dplyr`-Funktionen `group_by()` und `summarize()`.
+
+```{r, echo=FALSE, eval=FALSE}
+
+summary_table <- dat_full |>
+  group_by(group_all) |>
+  summarize(schiefe = skew(mean_rl_all),
+            wölbung = kurtosi(mean_rl_all))
+
+summary_table
+```
+
+## Residuen
+
+📖Siehe auch: [Normalverteilung der Residuen bei der Regression in R testen](https://bjoernwalther.com/normalverteilung-der-residuen-bei-der-regression-in-r-testen/)
+
+Für die folgenden Schritte berechnen wir zuerst ein Regressionsmodell:
+
+-   **Spezifikation des Regressionsmodells:** Verwende die Funktion `lm()` um ein Regressionsmodell zwischen Cognitive Offloading (`mean_rl_all` und der Arbeitsgedächtnisleistung (Feature Switch Detection Task - `cvstm_propcorrect`) zu spezifizieren.
+
+```{r, echo = TRUE, eval= FALSE}
+
+reg_fit <- lm(Cognitive_Offloading_Variable ~ Arbeitsgedächtnisleistung, data = dat_ full)
+
+```
+
+```{r, echo=FALSE, eval=FALSE}
+
+reg_fit <- lm(mean_rl_all ~ cvstm_propcorrect, data = dat_full)
+```
+
+-   **Speichern der Residuen:** Speichere die Residuen dieses Regressionsmodells mit der Funktion `rstandard()`
+
+```{r, echo=FALSE, eval=FALSE}
+
+residuals <- rstandard(reg_fit)
+```
+
+-   **Visualisierung mittels Histogramm:** Stelle die die Residuen in einem Histogramm mit der Funktion `hist()` dar.
+
+    ```{r, echo=FALSE, eval=FALSE}
+    hist(residuals)
+
+    ```
+
+    *Frage:* Ist im Histogramm eine **Glockenkurve** (Normalverteilung) erkennbar?
+
+-   **Visualisierung mittels QQ-Plot:** Stelledie Residuen in einem `QQ-Plot` mit der Funktion `qqnorm()` dar. Ergänze die **Regressionsgerade** mit `qqline()`.
+
+    ```{r, echo=FALSE, eval=FALSE}
+
+    qqnorm(residuals)
+    qqline(residuals)
+    ```
+
+    *Frage:* Wie nah sind die Residuen einer **perfekten Normalverteilung** (d.h. der Geraden)?
+
+## Skalenreliabilität
+
+📖 [Psychometrics in R](https://bookdown.org/annabrown/psychometricsR/exercise5.html) & [Björn Walther](https://bjoernwalther.com/cronbachs-alpha-in-r-berechnen/)
+
+Die folgenden Schritte dienen der Prüfung der ***internen Konsistenz*** der Messinstrumente.
+
+-   **Datenvorbereitung für die Analyse:** Speichere alle Variablen des `MMQs` in einem **neuen** Data Frame ab. Wähle dabei die Spalten mittels `select` aus.
+
+    ```{r, echo=FALSE, eval=FALSE}
+
+    mmq_vars <- dat_full |>
+      select(starts_with("question"))
+
+    ```
+
+-   **Berechnung von Cronbach's Alpha:** Verwende die Funktion `alpha()` aus dem `psych`-Paket und wende sie auf das neue Objekt an, um **Cronbach's Alpha** (Interne Konsistenz) für diesen Fragebogen zu berechnen. Schau dir die Ergebnisse (insbesondere `raw_alpha`) an. Dieses sollte mit Werten in @grinschgl2021 übereinstimmen.
+
+::: callout-warning
+Achtung: Wenn du das Package ggplot() geladen hast, kann es sein dass die Funktion `alpha()`dadurch verdeckt wird. Spezifiziere aus welchem Package du die Funktion verwenden willst mit `psych::alpha()`
+:::
+
+```{r, echo=FALSE, eval=FALSE}
+
+psych::alpha(mmq_vars)
+```
+
+-   Verwende die Funktion `omega()` aus dem **psych-Paket** und wende sie auf dein Objekt (z. B. den Datensatz mit den relevanten Items) an, um **McDonald’s Omega** (interne Konsistenz auf Basis eines Faktorenmodells) zu berechnen.\
+
+    ```{r, echo=FALSE, eval=FALSE}
+
+    psych::omega(mmq_vars)
+
+    ```
+
+::: {.callout-note collapse="true"}
+## PDF Grinschgl2021 –\> Seite 7 –\> Multifactorial Memory Questionnaire
+
+<iframe src="../../PDFs/Grinschgl2020.pdf" width="100%" height="500px">
+
+</iframe>
+:::
+
+```{r, echo=FALSE, eval=FALSE}
+
+alpha(mmq_vars)
+
+```
+
+> **Tipp:** In der `alpha()` Funktion werden unter `details` alle Werte beschrieben. Für weitere Erklärungen siehe auch: [Psychometrics in R](https://bookdown.org/annabrown/psychometricsR/exercise5.html)
+
+------------------------------------------------------------------------
+
+## Streudiagramme/Scatterplots & weitere Datenverteilungen
+
+📊[Auflistung von Argumenten](https://ggplot2.tidyverse.org/reference/index.html)
+
+📊[R4DS - Layers](https://r4ds.hadley.nz/layers)
+
+📊[R4DS - EDA](https://r4ds.hadley.nz/EDA.html)
+
+### Tabelle mit Geoms()
+
+| Geom | Funktion | Einsatzbereich | Bild / Beispiel |
+|------------------|------------------|------------------|------------------|
+| **geom_point()** | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) | ![](images/EH_10/geom_point.png) |
+| **geom_jitter()** | Jitter-Plot | Punkte leicht versetzen, um Überlappung zu vermeiden (v. a. bei kategorialem x) | ![](images/EH_10/geom_jitter.png) |
+| **geom_line()** | Liniendiagramm | Werteverlauf Über kontinuierliche x-Achse darstellen | ![](images/EH_10/geom_line.png) |
+| **geom_bar()** | Balkendiagramm | Häufigkeiten oder Aggregationen für Kategorien (x = Gruppe) | ![](images/EH_10/geom_bar.png) |
+| **geom_histogram()** | Histogramm | Verteilung einer numerischen Variable (x = Wert) | ![](images/EH_10/geom_histogram.png) |
+| **geom_boxplot()** | Boxplot | Verteilungen über Gruppen vergleichen (x = Gruppe, y = Wert) | ![](images/EH_10/geom_boxplot.png) |
+
+::: {.callout-note collapse="true"}
+## Cheatsheet ggplot2
+
+<iframe src="../../PDFs/ggplot.pdf" width="100%" height="500px">
+
+</iframe>
+:::
+
+Um Plots zu erstellen gibt es diverse Packages. Für einfache Darstellungen ist die Syntax der Base r `plot()` Funktion nützlich, bietet jedoch wesentlich weniger Optionen an als `ggplot()`. Für diese aufgaben sind zwar beide geeignet, jedoch empfehlen wir `ggplot()`
+
+-   Plotte den Zusammenhang zwischen Cognitive Offloading (Öffnungen des Modelfensters - `mean_rl_all`) und der Arbeitsgedächtnisleistung (Feature Switch Detection Task `cvstm_propcorrect`). Ergänze dafür den Code unten mit den richtigen Variablen. (Wichtig für Ausreißerkontrolle bei Berechnungen von Korrelationen/Regressionen)
+
+```{r, echo = TRUE, eval=FALSE}
+ggplot(data = dat_full, aes(x = XXXXX, y = XXXXXX))+
+  geom_XXXX()
+```
+
+-   Ausreißer können auch mit `boxplots` für einzelne Variablen identifiziert werden 👉 für Öffnungen des Modelfensters anschauen. Nutze das richtige `geom()` aus der Tabelle.
+
+```{r, echo=FALSE, eval=FALSE}
+ggplot(data = dat_full, aes(y = mean_rl_all))+
+  geom_boxplot()
+```
+
+❗Man sollte schon vor Studienerhebung oder zumindest vor der Datenanalyse festlegen ob bzw. wie man Ausreißer identifiziert und ausschließt (z.B. in Präregistrierungen oder Datenanalyseplänen)
+
+-   Lass dir den `boxplot()` getrennt für die 3 Experimentalgruppen anzeigen. Setze dafür `y = group`.
+
+```{r, echo=FALSE, eval=FALSE}
+ggplot(data = dat_full, aes(x = group_all, y = mean_rl_all)) +
+  geom_boxplot()
+
+```
+
+## Fortgeschrittene (freiwillige Übungen)
+
+-   Erweitere den Scatterplot deiner beiden Variablen um die folgenden Dinge:
+
+    -   Färbe deine Datenpunkte nach Gruppenzugehörigkeit ein mit `color()`
+
+    -   Füge einen titel ein mit `labs` und title()
+
+    -   Benne die Achsen mit `ylab()` und `xlab()`
+
+    -   Änder die Darstellungart zu `theme_minimal()`
+
+```{r, echo = FALSE, eval=FALSE}
+ggplot(data = dat_full, aes(x = mean_rl_all, y = cvstm_propcorrect, color = group_all))+
+  geom_point()+
+  theme_minimal()+
+  ggtitle("Meine Wunderschöne Darstellung")+
+  ylab("Arbeitsgedächtnisleistung")+
+  xlab("Öffnungen des Modellfensters")
+```
+
+***Wir werden in EH 11 noch vertiefende Übungen zu ggplot durchführen.***
+
+# Tabellen
+
+Diese Schritte dienen der Erstellung eines übersichtlichen Tabellen mit deskriptiver Statistik.
+
+-   **Paketinstallation und Laden:** Paket `knitr` **installieren** und **laden** (ggf. muss davor das Paket `xfun` geupdated werden.
+
+```{r, echo=FALSE, eval=FALSE}
+
+#install.packages("knitr")
+library(knitr)
+
+```
+
+-   **Erstellung des Data Frames:** Erstelle einen Data Frame mit deskriptiver Statistik, z.B. mittels `summarise()` für die 4 Variablen des Pattern Copy Task
+
+    ```{r, echo=FALSE, eval=FALSE}
+    summary_table <- dat_full |>
+      group_by(group_all) |>
+      summarize("Mean Openings of Model Window" = mean(mean_rl_all),
+                "Mean Initially correctly copied items"  = mean(mean_e1_all),
+                "Mean Initial encoding duration (sec)" = mean(mean_d1_all),
+                "Mean Trial Duration (sec)" = mean(mean_d_all))
+
+
+    summary_table
+    ```
+
+-   **Anwendung von Labels:** Wende `kable()` auf den Data Frame mit deskriptiver Statistik an.
+
+    ```{r, echo=FALSE, eval=FALSE}
+
+    knitr::kable(summary_table)
+    ```
+
+-   **Hilfefunktion und Formatierung:** Schau dir die Hilfefunktion von `kable` an und nimm Formatierungen vor, wie etwa die Umbenennung der Spalten mit `col.names(c(„new colnames here“))`, die Anpassung der Nachkommastellen auf 2 mit `digit =`, das Ergänzen einer Überschrift mit `caption =`
+
+```{r, echo=FALSE, eval=FALSE}
+
+knittr::kable(
+  summary_table,
+  col.names = c("Gruppe", "Durschschnittliche Modellöffnungen", "Durschnittliche Korrekt kopierte Items", "Durschnittliche Enkodierungszeit", "Durschnittliche Trialdauer"),   # Spaltennamen
+  digits = 2,                                                # 2 Nachkommastellen
+  caption = "Deskriptivstatistik Cognitive Offloading")      
+```
+
+------------------------------------------------------------------------
+
+# APA-konforme Tabellen von statistischen Analysen
+
+**📑Referenz:** <https://dstanley4.github.io/apaTables/articles/apaTables.html>
+
+-   **Paketinstallation und Laden:** Paket `apaTables` **installieren** und **laden**.
+
+```{r, echo=FALSE, eval=FALSE}
+
+#install.packages("apaTables")
+library(apaTables)
+
+```
+
+-   **Datenvorbereitung:** Erstelle einen Data Frame nur mit den **Proportion Correct Variablen** der 3 Arbeitsgedächtnistests.
+
+```{r, echo=FALSE, eval=FALSE}
+propcorrect_cortable <- prop_correct_vars <- dat_full |> 
+  select(ends_with("correct"))
+```
+
+-   **Erstellung der Korrelationstabelle:** Wende `apa.cor.table()` auf diesen Data Frame an → du bekommst eine **Korrelationstabelle im** APA Format.
+
+```{r, echo=FALSE, eval=FALSE}
+
+apa.cor.table(prop_correct_vars)
+```
+
+-   **Speichern der Tabelle:** Speichere die Tabelle in einer Word Datei mit der Ergänzung `filename = "somefilename.doc"` im Ordner *data -\> outputs -\> results*
+
+```{r, echo=FALSE, eval=FALSE}
+apa.cor.table(prop_correct_vars,
+              filename = "propcorrtable.doc")
+```
+
+> **Wichtiger Hinweis:** Diese Funktion kann man auch für Regressionen und ANOVAs erstellen. Wir benutzen aber ein anderes Paket für ANOVAs (nicht ezANOVA, auf dem apaTables basiert)!
+
+# Am Ende deiner Übungen - vergiss nicht dein Skript abzuspeichern! 😉

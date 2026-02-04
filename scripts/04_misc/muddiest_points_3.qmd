@@ -1,0 +1,320 @@
+---
+title: "Muddiest Points 3"
+editor: visual
+format: html
+execute: 
+  eval: false
+bibliography: references.bib
+---
+
+# Muddiest Points 3
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+options(scipen = 999)
+library(tidyverse)
+library(palmerpenguins)
+library(afex)
+penguins <- palmerpenguins::penguins
+penguins <- penguins %>%
+  tibble::rownames_to_column(var = "id")
+
+
+dat_full <- read_csv("raw/dat_full.csv")
+
+dat_long <- dat_full |>
+      pivot_longer(
+        cols = c(pre1, pre4),
+        names_to = "time_rating",
+        values_to = "rating"
+      )
+
+therapie_results <- read_delim("raw/therapie_results.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+therapie_bedingung <- read_delim("raw/therapie_bedingung.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+```
+
+## **Abschlussarbeit:**
+
+### **Frage 1: Datensatz einlesen**
+
+-   *Ich habe mich gefragt (v.a. auch in Bezug auf unsere spezialisierten Daten), ob man zuerst die einzelnen Dataframes bereinigen muss (v.a. in Bezug auf die duplizierten Zeilen) oder ob mann zuerst einen dat_full erstellen soll und dann diesen bereinigen?*
+
+-   *Mir ist nicht ganz klar in welcher Reihenfolge man fehlende Werte, duplizierte Werte und das mergen macht.*
+
+-   *Sicherheit im Umgang mit den verschiedenen Schritten der Datenbereinigung*
+
+**Antwort:**\
+Einige Schritte der Datenaufbereitung sollten vor dem Mergen durchgeführt werden, da das Zusammenführen der Datensätze sonst unnötig kompliziert werden kann. Beispielsweise können Duplikate oder fehlende Werte (NAs) beim Mergen zu Problemen führen und sollten daher idealerweise bereits vorher behandelt werden. Für viele andere Schritte, wie etwa Rekodierungen, spielt es hingegen keine Rolle, ob sie im einzelnen Datensatz oder erst im gemergten Datensatz durchgeführt werden. Es gibt dabei keine festgelegte Reihenfolge, die zwingend eingehalten werden muss. Ob das Vorgehen korrekt war, kann man abschliessend überprüfen, indem man den gemergten Datensatz inspiziert und auf Plausibilität prüft (z. B. ob *N* = 159).
+
+------------------------------------------------------------------------
+
+### Frage 2: Codebook
+
+-   *Codebook: Muss es für die einzelnen Datensätze gemacht werden? Ich habe nämlich alles zuerst bereinigt, umgepoolt und dann gemerged und als dat_full.csv abgespeichert. Bedeutet, dass in dat_full keine NAs und revers kodierte Items mehr sind und auch nicht mehr im Codebook wären, sollte dat_full im Codebook verwendet werden müssen (zumind. bei mir). Zudem wurde in dat_full noch mmq_mean hinzugefügt, muss das auch ins Codebook?\
+    *\
+    **Antwort:**
+
+Das Codebook für den gemergten Datensatz ist ausreichend. Reverse-kodierte Items sollten dennoch angegeben werden, wobei im Codebook vermerkt werden sollte, dass diese bereits rekodiert wurden. Wenn keine `NAs` vorhanden sind müssen diese auch nicht vermerkt werden. Jede Variable sollte im Codebook enthalten sein, einschliesslich zusammengesetzter Variablen wie `mmq_mean`.
+
+------------------------------------------------------------------------
+
+### Frage 3: Abbildungen/Tabellen
+
+-   *Es steht man soll eine Tabelle/Abbildung nach Wahl erstellen. Heisst, wir müssen nicht alle Plots nachmachen?*
+
+**Antwort:** Eine Tabelle oder eine Abbildung genügt. Ihr müsst nicht alle Plots des Papers nachmachen!
+
+------------------------------------------------------------------------
+
+### Frage 4: Interpretation
+
+*Müssen Resultate interpretiert werden und wenn ja, wie müssen diese verschriftlicht werden?*
+
+**Antwort:** Es werden keine inhaltlichen Interpretationen der Ergebnisse gefordert. Kurze Zusammenfassungen der Resultate direkt nach den jeweiligen Codechunks können jedoch das Verständnis erleichtern und illustrieren, dass ihr die Analysen richtig lesen könnt.
+
+Zum Beispiel: *The one-way ANOVA indicated that there were no significant group differences in this working memory performance measure, F(2, 156) = 0.07, p = 0.929, η² \< 0.01.*
+
+------------------------------------------------------------------------
+
+### Frage 5: Rekodierung mittlerer Items
+
+-   *Wenn man etwas umkodiert (z.B. umgekehrt kodierte Items) und es eine ungerade Anzahl hat, muss man dann das mittlere Item bei der Umkodierung auch angeben (z.B. bei fünf Stufen wäre es die 3, die gleich bleibt - müsste ich das bei der Umkodierung dennoch notieren?)*
+
+**Antwort:** Nein, solange die Rekodierung klar nachvollziehbar ist ist es nicht zwingend nötig (aber schadet auch nicht).
+
+------------------------------------------------------------------------
+
+### Frage 6: Ordnerstruktur und relative Pfade
+
+*Ordner- und Pfadstruktur: Wo genau sollten die Quartoskripte relativ zu den eingelesenen Daten abgespeichert werden? -\> Wenn man die Quartoskripte im Ordner Grinschgl2020 abspeichert geht das zwar gut, jedoch sind dann die Quartoskripte nicht in einem eignen Ordner. Wenn ich sie in einen eignen Ordner lege, dann stimmt der Pfad aber nicht mehr. Gibt es hier eine gute Lösung?*
+
+**Antwort:** Öffne die Skripte innerhalb des Projekts. Dann wird der Dateipfad automatisch relativ zum Projektverzeichnis ausgewertet, auch wenn sich die Skripte nicht im gleichen Ordner befinden. Falls dies nicht funktioniert, überprüfe in den Einstellungen, ob die Option „Evaluate chunks in directory“ auf „Project“ gesetzt ist.
+
+![](../../images/EH_14/screenshot_2025-12-15_134205.png){fig-align="center"}
+
+
+------------------------------------------------------------------------
+
+## Statistik
+
+### Frage 7: ANOVAs und t-Tests
+
+-   *Bitte nochmals die Logik der ANOVA sowohl für **One-way ANOVA** wie v.a. auch **2x3 mixed ANOVA** erklären. Welcher Output liefert nun welche Inhalte? Und welche Codes sind alle wichtig?*
+
+-   *Ich finde es schwierig, die Outputs der verschiedenen **Anovas** und **t-tests** zu verstehen.*
+
+-   Ich würde gerne die **Mixed Anovas** und **t-Tests** noch einmal anschauen, vielleicht einfach noch einmal kurz repetieren, worauf man da bei den Codes und der Interpretation achten muss.
+
+**Antwort:**
+
+[🌐Erklärvideo ANOVA](https://www.youtube.com/watch?v=ITf4vHhyGpc)
+
+[🌐Erklärvideo ANOVA + t-Test](https://www.youtube.com/watch?v=4dIYRo5WsIo)
+
+[🌐Erklärvideo: **Using Linear Models for t tests and ANOVA, Clearly Explained!!!**](http://youtube.com/watch?v=R7xd624pR1A&t=338s)
+
+#### **Frage 7.1 One-Way ANOVA:**
+
+Die ANOVA prüft generell die Frage, ob die beobachtete Variation in den Daten größer ist, als man sie durch Zufall erwarten würde. Der zentrale Gedanke der ANOVA ist, dass Unterschiede zwischen Gruppen dann als bedeutsam gelten, wenn die Gruppenmittelwerte stark voneinander abweichen, während die Streuung innerhalb der Gruppen gering ist, sodass es unwahrscheinlich ist, dass diese Unterschiede nur durch Zufall entstanden sind.
+
+Dieses Verhältnis wird durch den F-Wert ausgedrückt:
+
+$F = \frac{\text{Varianz zwischen den Gruppen}}{\text{Varianz innerhalb der Gruppen}}$.
+
+**Die One-Way ANOVA beantwortet die Frage:**
+
+> *Unterscheiden sich mehr als zwei Gruppen in einer abhängigen Variable?*
+
+**Beispiel:**
+
+Beispielsweise wird untersucht, ob sich Pinguine in ihrer Schnabellänge zwischen mehreren Gruppen (z. B. Inseln) unterscheiden. Da mehr als zwei Gruppen verglichen werden, ist eine One-Way ANOVA angemessen.
+
+Da der p-Wert \< 0.05 ist, ist die ANOVA signifikant. Das bedeutet, dass sich mindestens zwei der Gruppen signifikant voneinander unterscheiden. Welche Gruppen sich konkret unterscheiden, kann jedoch erst mit Post-hoc-t-Tests überprüft werden.
+
+Das generalized `η²` (ges) gibt an, wie viel Varianz der abhängigen Variable durch den Faktor erklärt wird. In diesem Fall erklärt die Gruppenzugehörigkeit (z. B. Spezies) ca. 70 % der Varianz der Schnabellänge.
+
+```{r, echo = TRUE}
+model_1 <- aov_4(bill_length_mm ~ species + (1 |id), data = penguins)
+
+summary(model_1)
+```
+
+#### **Frage 7.2 t-Tests**
+
+Der Post-hoc t-Test hier ist die logische Konsequenz aus der signifikanten ANOVA.
+
+Da es drei Spezies (Gentoo, Chinstrap, Adelie) gibt können wir drei verschiedene Gruppenvergleiche berechnen. Hier zeigen wir ein Beispiel.
+
+Der t-Test prüft, ob sich die Mittelwerte zweier Gruppen in der abhängigen Variable (Schnabellänge) unterscheiden. Auf Basis von Stichprobendaten wird untersucht, ob sich Pinguine der Spezies Adelie und Chinstrap in ihrer Schnabellänge (bill_length_mm) unterscheiden. Das signifikante Ergebnis (p \< 0.05) spricht dafür, dass sich die mittlere Schnabellänge dieser beiden Gruppen auf Populationsebene unterscheidet.
+
+```{r, echo = TRUE}
+
+penguins_filtered <- penguins |>
+  filter(species != "Gentoo")
+
+t.test(bill_length_mm ~ species, data = penguins_filtered)
+
+```
+
+#### Frage 7.3 : t-Test Notationen
+
+-   *Wieso braucht man bei t.test() "\~" und nicht "," bzw. wovon hängt dies ab?*
+
+**Antwort:** Bei `t.test()` wird das `~` verwendet, wenn der Test in der Formel-Schreibweise durchgeführt wird. Diese Schreibweise trennt die abhängige Variable (links vom `~`) von der Gruppierungsvariable (rechts vom `~`) und ist typisch für viele statistische Funktionen in R. Sie wird vor allem dann genutzt, wenn die Daten in einem Dataframe vorliegen.
+
+Ein Komma wird hingegen verwendet, wenn man die beiden Gruppen direkt als separate Vektoren übergibt. Welche Schreibweise man verwendet, hängt also davon ab, wie die Daten strukturiert sind (Dataframe vs. einzelne Vektoren) und welche Schnittstelle die Funktion anbietet.
+
+**Beispiele mit Formelschreibweise:**
+
+```{r, echo = TRUE}
+# Datensatz auf zwei Arten beschränken
+penguins_2 <- subset(
+  penguins,
+  species %in% c("Adelie", "Chinstrap")
+)
+
+# t-Test mit Formel-Schreibweise
+t.test(flipper_length_mm ~ species, data = penguins_2)
+
+```
+
+**Mit Komma:**
+
+```{r, echo = TRUE}
+# Vektoren für die zwei Gruppen
+adelie_flipper <- penguins$flipper_length_mm[
+  penguins$species == "Adelie"
+]
+
+chinstrap_flipper <- penguins$flipper_length_mm[
+  penguins$species == "Chinstrap"
+]
+
+# t-Test mit Vektoren
+t.test(adelie_flipper, chinstrap_flipper)
+
+```
+
+------------------------------------------------------------------------
+
+#### **Frage 7.2 ANOVA:**
+
+Die 2×3 ANOVA im Grinschgl et al. (2021) Paper beantwortet die folgenden Fragen:\
+Gibt es Unterschiede zwischen den Feedbackgruppen, gibt es Veränderungen über die Zeit (`Pre1` vs. `Pre4`), und unterscheiden sich diese zeitlichen Veränderungen zwischen den Gruppen (`above` vs. `control` vs. `below`)?
+
+```{r, echo = TRUE}
+mixed_anova <- aov_4(rating ~ group_all + (time_rating | code), data = dat_long)
+
+summary(mixed_anova)
+```
+
+Der signifikante Haupteffekt der Feedbackgruppe (`group_all`) zeigt, dass sich die mittleren Ratings zwischen den Gruppen unterscheiden, unabhängig vom Zeitpunkt der Messung.
+
+Der signifikante Haupteffekt der Feedbackgruppe (`group_all`) zeigt, dass sich die mittleren Ratings zwischen den Gruppen unterscheiden, unabhängig vom Zeitpunkt der Messung.
+
+Der signifikante Interaktionseffekt zeigt, dass sich die Veränderung der Ratings über die Zeit zwischen den Feedbackgruppen unterscheidet. 👉Der Effekt der Zeit ist **nicht für alle Gruppen gleich.**
+
+------------------------------------------------------------------------
+
+### Frage 8: Berechnung Cohens d für 2x3 ANOVA
+
+-   *bitte Berechnung von Cohens d erneut für spezifisch 2x3 mixed ANOVA erklären. Hier sehe ich weder in den Hands On noch in den Foliensätze einen passenden Code, der bei mir funktioniert.*
+
+**Antwort:** Cohen’s d wird für die Post-hoc-t-Tests berechnet, nicht für die 2×3-ANOVA selbst. (Für die ANOVA selbst berechnen wir Eta2). Cohen’s d ist ein Effektstärkenmaß, das angibt, wie groß der Unterschied zwischen zwei Gruppen ist, unabhängig von der Stichprobengröße. Hier ein Beispiel aus den Hands On Übungen. ​​
+
+```{r, echo = TRUE}
+dat_full_below_above <- dat_full |> 
+  filter(group_all != "control")
+
+dat_full_below_above$group_all <- as.factor(dat_full_below_above$group_all)
+
+t.test(pre4 ~ group_all, data = dat_full_below_above, var.equal = TRUE)
+effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
+
+
+```
+
+------------------------------------------------------------------------
+
+### Frage 10: na.rm = true.
+
+-   *Was macht es aus, dass man explizit na.rm = TRUE bei mean() und sd() angibt*
+
+**Antwort:** Mittelwerte und Standardabweichungen können nicht korrekt berechnet werden, wenn sich fehlende Werte (`NAs`) in den Daten befinden. Mit `na.rm = TRUE` werden diese fehlenden Werte bei der Berechnung ausgeschlossen. Wurden die `NAs` bereits zuvor bereinigt, ist dieser Befehl zwar redundant, schadet jedoch nicht.
+
+```{r, echo=TRUE}
+x <- c(1,2,3,4,5,6,NA)
+
+mean(x)
+mean(x, na.rm = TRUE)
+```
+
+------------------------------------------------------------------------
+
+### Frage 11: Rowmeans oder mean:
+
+-   *Woher weiss man, ob man rowMeans() und(/oder) mean() anwenden soll?*
+
+`rowMeans(df)` berechnet die Zeilenmittelwerte, also den Mittelwert pro Zeile über alle Spalten hinweg.\
+In einem Wide-Datensatz entspricht das typischerweise dem Mittelwert pro Person über mehrere Variablen / Messungen.
+
+`mean(df$V1)` berechnet den Mittelwert einer einzelnen Spalte (`V1`) über alle Zeilen hinweg.\
+Das entspricht dem Mittelwert einer Variable über alle Personen
+
+`rowMeans` bietet sich also dafür an z.B. Skalenwerte zu berechnen (z.B. Durschnitt mehrerer Skalenitems) zu berechnen, während `mean` besser für Durschnittswerte über das gesamte Sample geeignet ist.
+
+| V1  | V2  | V3  |
+|-----|-----|-----|
+| 1   | 2   | 3   |
+| 4   | 5   | 6   |
+| 7   | 8   | 9   |
+
+```{r, echo = TRUE}
+df <- data.frame(
+  V1 = c(1, 4, 7),
+  V2 = c(2, 5, 8),
+  V3 = c(3, 6, 9)
+)
+
+# Zeilenmittelwerte (Mittelwert pro Zeile über V1–V3)
+rowMeans(df)
+
+# Mittelwert über Variable
+mean((df$V1))
+
+
+```
+
+------------------------------------------------------------------------
+
+### Frage 13: Tabellen
+
+-   *Mir ist noch nicht richtig klar, wie man APA konforme ANOVA Tabellen erzeugt, die man gerade abspeichern kann und dann in eine Word Datei einfügen kann. Z.B für eine dreifaktorielle ANOVA?*
+
+**Antwort:** Tabellen für ANOVAs haben wir nicht behandelt. In der Praxis werden ANOVAs meist auch nicht in Tabellenform berichtet, sondern direkt im Text. Es ist jedoch möglich, APA-konforme ANOVA-Tabellen mit Packages `apaTables` wie [Papaja](https://cran.r-project.org/web/packages/papaja/refman/papaja.html#arrange_anova) zu erstellen.
+
+Beispiel aus @grinschgl2021
+
+```{r, echo = TRUE}
+
+library(apaTables)
+
+model_1 <- aov(bill_length_mm ~ island + sex + species, data = penguins_filtered)
+
+apa.aov.table(
+  lm_output = model_1,
+  filename  = "anova_table.doc"
+)
+
+```
+
+![](../../images/EH_14/aov_table.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+### Frage 14: Statistik
+
+-   *Besseres Verständnis dafür, welche statistischen Tests in welcher Situation angemessen sind*
+
+**Antwort:** Sprengt hier leider den Rahmen. Wir verweisen hier gerne auf den [Statistikbaum der UZH](https://www.methodenberatung.uzh.ch/de/datenanalyse_spss.html). Jedoch kann auch dieser eine tiefergehende Auseinandersetzung mit der Fragestellung und dem Datenformat nicht ersetzen! Für spezifische Fragen zu diesem Thema, kann auch gerne die Methodenberatung genutzt werden!

@@ -1,0 +1,218 @@
+---
+title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 12"
+author: Sandra Grinschgl, Aaron Friedli, Lars Schilling
+format: 
+  revealjs:
+    title-slide-attributes:
+      data-visibility: hidden
+    theme: [default, ../../custom.scss]
+    transition: slide
+    slide-number: true
+    logo: /images/unibe.png
+    incremental: false
+    self_contained: true
+    show-slide-number: all
+    smaller: true
+    progress: true
+    controls: true
+    embed-resources: true
+bibliography: references.bib
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+options(scipen = 999)
+
+library(tidyverse)
+library(palmerpenguins)
+library(apaTables)
+
+penguins <- palmerpenguins::penguins
+
+
+bfi_10_data <- read_delim("raw/bfi_10_data.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+dat_full <- read_csv("raw/dat_full.csv")
+
+dat_full_long <- dat_full |>
+      pivot_longer(
+        cols = c(pre1, pre4),
+        names_to = "time_rating",
+        values_to = "rating"
+      )
+
+
+dat_full <- dat_full |>
+  mutate(pre1 = pre1*10,
+         pre2 = pre2*10,
+         pre3 = pre3*10,
+         pre4 = pre4*10)
+```
+
+## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
+
+HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**12. Einheit**, 03.12.2025
+
+------------------------------------------------------------------------
+
+## Heute:
+
+<iframe src="../../PDFs/Syllabus.pdf" width="100%" height="600px">
+
+</iframe>
+
+------------------------------------------------------------------------
+
+## Fragen zur R Hausübung 2??
+
+## 
+
+------------------------------------------------------------------------
+
+## Abgabe simulierte Datensätze
+
+Auf ILIAS findet ihr Ordner mit eurem Namen. Diese sind nach dem PsychDS System strukturiert. In Raw findet ihr dann eure individuellen Datensätze
+
+![](../../images/EH_12/Daten_Abschlussarbeit.png){fig-align="center" width="400"}
+
+------------------------------------------------------------------------
+
+## Abschlussarbeit / Leistungsnachweis
+
+<iframe src="../../PDFs/LeistungsnachweisHS25.pdf" width="100%" height="600px">
+
+</iframe>
+
+------------------------------------------------------------------------
+
+## **Simulierte Datensätze**
+
+-   Vorgehen: Eine Funktion simuliert Population(en) und zieht daraus zufällig Datenpunkte. Diese Zufälligkeit der Ziehung führt dazu, dass sich eure **Datensätze** **unterscheiden**!
+
+<br>
+
+-   Dadurch ergeben sich Unterschiede in den **Hypothesentests und deskriptiven Statistiken**.
+
+<br>
+
+-   Aber: Die Ergebnisse werden sich dennoch in einer vergleichbaren Range voneinander bewegen.
+
+------------------------------------------------------------------------
+
+## **Plausible Ergebnisse**
+
+-   Angenommen der Effekt der Intervention hat wirklich **keine Auswirkung** auf das Offloading Verhalten der Personen (H0 ist wahr).
+
+    -   ✅**H0** = Keine Gruppenunterschiede zwischen above und below gruppen.
+
+    -   ❌**H1** = Gruppen unterscheiden sich voneinander im Offlading Verhalten.
+
+<br>
+
+-   Hypothesentest: t-Test für unabhängige Stichproben (`above` vs. `below)`
+
+<br>
+
+-   Wie hoch ist die Wahrscheinlichkeit das wir trotzdem ein sigifikantes Ergebnis (Fehler 1. Art) erhalten?
+
+::: notes
+Alpha-Fehler 0.05. In allen Analysen in denen wir signifikante werte erwarten (2x3 anova und mmq one-way anova) werden auch signifikante werte rauskommen (simulation so eingestellt). In den ANOVAs in denen wir nicht mit signifikanten werten rechnen, kann es sein das es per zufall trotzdem zu signifikanten werten kommt. In diesen fällen wird nicht erwartet das noch posthoc t-tests gerechnet werden.
+:::
+
+------------------------------------------------------------------------
+
+## t-Tests
+
+::::: columns
+::: column
+![](../../images/EH_11/T-Test.png){fig-align="left"}
+:::
+
+::: column
+Mittelwertvergleiche
+
+-   Für unabhängige Stichproben: Testet, ob sich die Mittelwerte zweier unabhängiger Gruppen unterscheiden.
+
+-   Für abhängige Stichproben: Testet, ob sich die Mittelwerte derselben Personen in zwei Bedingungen (z. B. Messwiederholung) unterscheiden.
+
+-   Voraussetzungen: Normalverteilung, Varianzhomogenität
+
+-   Alternative: z. B. Welch-t-Test
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## t-Test: Voraussetzungsprüfung
+
+**Levene-Test**
+
+Der Levene Test überprüft Varianzhomogenität! Varianzhomogenität bedeutet, dass alle Gruppen in einer Analyse ungeführ die gleiche Streuung aufweisen, bzw. ähnlich um ihren Mittelwert schwanken.
+
+```{r, echo = TRUE}
+
+dat_full_below_above <- dat_full |> 
+  filter(group_all != "control")
+
+dat_full_below_above$group_all <- as.factor(dat_full_below_above$group_all)
+```
+
+<br>
+
+```{r, echo = TRUE}
+library(car)
+
+leveneTest(dat_full_below_above$pre4, dat_full_below_above$group_all)
+```
+
+## t-Test: Beispiel
+
+```{r, echo = TRUE}
+
+t.test(pre4 ~ group_all, data = dat_full_below_above, var.equal = TRUE)
+
+effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
+
+```
+
+::: notes
+:::
+
+------------------------------------------------------------------------
+
+## **Grundlegende t-Test-Funktionen**
+
+| **Funktion** | **Beschreibung** |
+|------------------------------------|------------------------------------|
+| `t.test` | Allgemeine Funktion für verschiedene t-Tests: Ein-Stichproben-, unabhängige und abhängige Stichproben. |
+| `t.test(av, mu = x)` | Ein-Stichproben-t-Test. *av* = abhängige Variable, *x* = Vergleichswert der Population. |
+| `t.test(av ~ uv)` | Welch-t-Test für unabhängige Stichproben. *av* = abhängige Variable, *uv* = Gruppenvariable (Ungleiche Varianzen erlaubt). |
+| `t.test(av ~ uv, var.equal = TRUE)` | Klassischer t-Test für unabhängige Stichproben (Varianzgleichheit vorausgesetzt). |
+
+------------------------------------------------------------------------
+
+## **Paired t-Test, Varianzhomogenität und Effektgrössen**
+
+| **Funktion** | **Beschreibung** |
+|------------------------------------|------------------------------------|
+| `t.test(av1, av2, paired = TRUE)` | t-Test für abhängige Stichproben (z. B. Prä–Post). *av1* und *av2* = Messzeitpunkte. |
+| `leveneTest(av, uv)` \* | Levene-Test auf Varianzhomogenität für unabhängige Gruppen. Aus dem **car**-Paket. |
+| `effsize::cohen.d()` \* | Berechnet Cohen’s d + Konfidenzintervall. Aus dem **efffsize**-Paket. |
+
+------------------------------------------------------------------------
+
+## **Heute haben wir...**
+
+... uns die simulierten Datensätze für die Abschlussarbeit angeschaut.
+
+...Korrelationen, Regressionen und *t*-Tests gerechnet
+
+------------------------------------------------------------------------
+
+## Hausübung
+
+R Übung 3 bis 12.12.25
+
+**Nächste Woche:** Aaron übernimmt beide Gruppen
+
+![with ChatGPT](../../images/ChatGPT%20Image%201.%20Dez.%202025,%2015_25_19.png){width="442"}

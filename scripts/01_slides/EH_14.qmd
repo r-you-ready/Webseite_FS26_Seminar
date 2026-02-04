@@ -1,0 +1,266 @@
+---
+title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 14"
+author: Sandra Grinschgl, Aaron Friedli, Lars Schilling
+format: 
+  revealjs:
+    title-slide-attributes:
+      data-visibility: hidden
+    theme: [default, ../../custom.scss]
+    transition: slide
+    slide-number: true
+    logo: /images/unibe.png
+    incremental: false
+    self_contained: true
+    show-slide-number: all
+    smaller: true
+    progress: true
+    controls: true
+    embed-resources: true
+bibliography: references.bib
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+
+options(scipen = 999)
+library(tidyverse)
+library(palmerpenguins)
+library(apaTables)
+library(car)
+library(afex)
+library(emmeans)
+
+library(effectsize)
+
+
+penguins <- drop_na(palmerpenguins::penguins)
+
+
+bfi_10_data <- read_delim("raw/bfi_10_data.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+dat_full <- read_csv("raw/dat_full.csv")
+
+dat_full_long <- dat_full |>
+      pivot_longer(
+        cols = c(pre1, pre4),
+        names_to = "time_rating",
+        values_to = "rating"
+      )
+
+
+dat_full$group_all <- as.factor(dat_full$group_all)
+
+dat_full <- dat_full |>
+  mutate(pre1 = pre1*10,
+         pre2 = pre2*10,
+         pre3 = pre3*10,
+         pre4 = pre4*10)
+```
+
+## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
+
+HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**14. Einheit**, 17.12.2025
+
+------------------------------------------------------------------------
+
+## Heute:
+
+<iframe src="../../PDFs/Syllabus.pdf" width="100%" height="600px">
+
+</iframe>
+
+------------------------------------------------------------------------
+
+## Congrats
+
+![](../../images/EH_14/mastered_r.png)
+
+------------------------------------------------------------------------
+
+## Fragen zu Hausübung 3 - Hands On 7?
+
+------------------------------------------------------------------------
+
+### Muddiest Points
+
+-   Auf Website
+
+**Werden nach Weihnachten ins FAQ integriert.**
+
+------------------------------------------------------------------------
+
+## **Recap**
+
+**Konzeptionelle Kompetenzen**
+
+-   Replikationskrise und ihre Ursachen
+
+-   Open-Science-Praktiken
+
+-   Möglichkeiten zur Steigerung der Transparenz, z. B. durch Datenanalysepläne und Codebooks
+
+-   Grundlagen des FAIR Forschungsdatenmanagement – PsychDS
+
+------------------------------------------------------------------------
+
+## **Praktische Kompetenzen**
+
+-   Installation von RStudio sowie Installation und Laden von Paketen
+
+-   Anlegen von Projekten; Einführung in die RStudio- und Quarto-Benutzeroberfläche
+
+-   Coding-Basics (z. B. Erstellen und Verändern von Vektoren, mathematische Operatoren, Arbeitsverzeichnis setzen)
+
+-   Stilregeln und Fehlersuche (Error Detection) in R
+
+-   Datenimport und -export
+
+-   Manipulation von Data Frames, Matrizen und Listen
+
+-   Umwandeln von Data Frames zwischen Wide- und Long-Format
+
+-   Verwendung des Pipe-Operators `%>%` oder `|>`
+
+------------------------------------------------------------------------
+
+## **Praktische Kompetenzen**
+
+-   Umgang mit fehlenden Werten
+
+-   Filtern, Manipulieren und Gruppieren von Datensätzen (Data Wrangling)
+
+-   Umkodieren von Variablen
+
+-   Berechnen von deskriptiver Statistik (z. B. Mittelwerte, Standardabweichungen, Schiefe, Kurtosis)
+
+-   Überprüfung der Normalverteilung inkl. visueller Darstellung der Residuen
+
+-   Berechnung von Skalenreliabilitäten
+
+-   Datenvisualisierungen
+
+-   Korrelationen und Regressionen
+
+-   t-Tests und ANOVAs (inkl. Überprüfung der Voraussetzungen und Berechnung von Effektstärken)
+
+------------------------------------------------------------------------
+
+## Was wir nicht gemacht haben:
+
+-   Wiederholung/Auffrischung von Statistik
+
+-   Ein „Kochbuch“ für die Masterarbeit ein Cheatsheet mit „allen Funktionen“ in R
+
+-   komplexe statistische Analysen in R wie etwa Strukturgleichungsmodelle oder Multilevel Models
+
+    -   Siehe weiterführende Methodenseminare der Abteilungen Gesundheitspsychologie und Psychologie der Digitalisierung
+
+------------------------------------------------------------------------
+
+## Errinnerung Leistungsbeurteilung
+
+<iframe src="../../PDFs/LeistungsnachweisHS25.pdf" width="100%" height="600px">
+
+</iframe>
+
+------------------------------------------------------------------------
+
+**Leistungsbeurteilung:**
+
+**✅ Mitarbeit - 14 Punkte**
+
+**✅ Regelmässige Hausübungen** **-** **40 Punkte**
+
+**⬜ Abschlussprojekt - 46 Punkte**
+
+------------------------------------------------------------------------
+
+## **Mitarbeit**
+
+-   **14 Punkte Insgesamt**
+
+-   **7 Punkte dürft ihr euch selbst vergeben**
+
+👉Umfrage auf ILIAS!
+
+![](../../images/EH_13/Mitarbeit.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## **Mitarbeit**
+
+![](../../images/EH_14/Zusatzeval.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## **Abschlussarbeit**
+
+**Deadline 11.1.2026 - 23:55**
+
+**Checkliste auf Website**
+
+------------------------------------------------------------------------
+
+## Feedback-Möglichkeit
+
+-   Wenn du individuelles Feedback zu deiner Abschlussarbeit möchtest
+
+-   Zur Zusammensetzung deiner Note
+
+-   Zu anderen Seminar-bezogenen Dingen
+
+👉 Selbstständig bei und (aaron.friedli\@unibe.ch / sandra.grinschgl\@unibe.ch) melden!
+
+Aaron nur mehr bis Ende Januar erreichbar!
+
+------------------------------------------------------------------------
+
+## **Evaluation**
+
+**Standardfragebogen der Uni**
+
+------------------------------------------------------------------------
+
+## 10:15
+
+<https://scanserveruls.unibe.ch/evasys/public/online/index/index?online_php=&pswd=F7GK9&ONLINEID=65188644261466756196721217091602273395940>
+
+![](../../images/EH_14/eval_1015.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## 16:15
+
+<https://scanserveruls.unibe.ch/evasys/public/online/index/index?online_php=&pswd=SFR8Z&ONLINEID=799329654453545430845235731708924671495875>
+
+![](../../images/EH_14/eval_1615.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## **Zusatzfragebogen**
+
+**Auf ILIAS in Ordner EH 14**
+
+![](../../images/EH_14/Zusatzeval.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## **Weiterführende Ressourcen!**
+
+![](../../images/EH_14/Weiterführende%20Resssourcen.png){fig-align="center"}
+
+---
+
+## Methodenberatung
+
+**Ab Januar/Februrar von Laura Hirt**
+
+<iframe src="../../PDFs/Flyer_Methodenberatung.pdf" width="100%" height="600px">
+
+</iframe>
+
+---
+
+## Schöne Ferien!
+
+![](../../images/EH_14/Winter_break.png){fig-align="center"}

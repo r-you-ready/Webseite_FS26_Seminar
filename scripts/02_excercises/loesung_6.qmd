@@ -1,0 +1,622 @@
+---
+title: "Hands On – Analyze (Einheiten 11 und 12)"
+editor: visual
+bibliography: references.bib
+---
+
+```{r, echo = FALSE, results = 'hide', message= FALSE, warning=FALSE}
+library(tidyverse)
+
+dat_full <- read_csv("data/raw/dat_full.csv")
+dat_long <- read_csv(here::here("scripts/02_excercises/data/processed/data_long.csv"))
+```
+
+Bei Bedarf finden sich hier nochmal die Slides zur EH11:
+
+::: {=html}
+<iframe src="../01_slides/EH_11.html"
+        width="100%"
+        height="500"
+        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+:::
+
+Und hier die Slides zur EH12:
+
+::: {=html}
+<iframe src="../01_slides/EH_12.html"
+        width="100%"
+        height="500"
+        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+:::
+
+# Lernziele
+
+✅ ggplot2
+
+✅ Korrelationen
+
+✅ Regressionen
+
+✅ t-Tests
+
+::: callout-important
+Für die heutigen Übungen benötigen wir den **Wide Datensatz** `dat_full` sowie den **Long Datensatz** `dat_long`
+:::
+
+------------------------------------------------------------------------
+
+## Visualize - Übungen zu `ggplot2`
+
+[📚 Einführung in R - Kapitel 5](https://methodenlehre.github.io/einfuehrung-in-R/chapters/05-plotting.html)
+
+[📚 R for Data Science - Kapitel 1](https://r4ds.hadley.nz/data-visualize.html)
+
+[📚R for Data Science - Kapitel 11](https://r4ds.hadley.nz/communication.html)
+
+::: {.callout-note collapse="true"}
+### Tabelle mit häufig verwendeten Geoms()
+
+| Geom | Funktion | Einsatzbereich | Bild / Beispiel |
+|------------------|------------------|------------------|------------------|
+| **geom_point()** | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) | ![](../../images/EH_10/geom_point.png) |
+| **geom_jitter()** | Jitter-Plot | Punkte leicht versetzen, um Überlappung zu vermeiden (v. a. bei kategorialem x) | ![](../../images/EH_10/geom_jitter.png) |
+| **geom_line()** | Liniendiagramm | Werteverlauf Über kontinuierliche x-Achse darstellen | ![](../../images/EH_10/geom_line.png) |
+| **geom_bar()** | Balkendiagramm | Häufigkeiten oder Aggregationen für Kategorien (x = Gruppe) | ![](../../images/EH_10/geom_bar.png) |
+| **geom_histogram()** | Histogramm | Verteilung einer numerischen Variable (x = Wert) | ![](../../images/EH_10/geom_histogram.png) |
+| **geom_boxplot()** | Boxplot | Verteilungen über Gruppen vergleichen (x = Gruppe, y = Wert) | ![](../../images/EH_10/geom_boxplot.png) |
+:::
+
+::: {.callout-note collapse="true"}
+## Cheatsheet ggplot2
+
+<iframe src="../../PDFs/ggplot.pdf" width="100%" height="500px">
+
+</iframe>
+:::
+
+**Im folgenden wollen wir Figure 4 aus @grinschgl2021 reproduzieren:**
+
+```{r, echo = FALSE}
+
+dat_full <- dat_full |> 
+  mutate(mmq_mean = rowMeans(select(dat_full, starts_with("question")), # bedingt, dass neben den 18 Variablen vom mmq sonst keinerlei andere Variablen mit "question" starten
+                             na.rm = TRUE))
+
+group_summary <- dat_full %>%
+  group_by(group_all) %>%
+  summarize(
+    group_mean_mmq = mean(mmq_mean),
+    se_mmq = sd(mmq_mean) / sqrt(n())
+  )
+
+
+group_summary$group_all <- factor(group_summary$group_all,
+                                  levels = c("below", "control", "above"))
+
+ggplot(group_summary, aes(x = group_all, y = group_mean_mmq)) +
+  geom_col(fill = "gray", color = "black") + 
+  geom_errorbar(
+    aes(ymin = group_mean_mmq - se_mmq, ymax = group_mean_mmq + se_mmq),  
+    width = 0.2,
+    color = "black"
+  ) +
+  labs(
+    x = "Feedback Group",
+    y = "Mean MMQ Ratings",
+    title = "Group Means of Mean MMQ with SE Error Bars"
+  ) +
+  ylim(0, 4)+
+  theme_classic()
+```
+
+### **Vorbereitungen:**
+
+Um die Mittelwerte plotten zu können, müssen wir die Gruppenmittelwerte und Standardfehler berechnen. Passe dafür den Codeblock an:
+
+Im Hands-on Block 4 haben wir bereits mit *dplyr* die MMQ-Skalenwerte „mmq_mean“ pro Person berechnet. Nutze nun die *dplyr*-Funktionen, insbesondere `group_by()`, um den durchschnittlichen MMQ-Wert pro Gruppe (`group_all`) sowie den Standardfehler zu berechnen. Die Formel für den Standardfehler lautet: **SE = SD / √n** und kann z.b so berechnet werden. `se_mmq = sd(mmq_mean) / sqrt(n())` . Ergänze den Code unten mit den nötigen Angaben. Lege group_all in deinem summary als Faktor fest mit den Levels in der Reihenfolge: "below", "control", "above".
+
+::: {.callout-note collapse="true"}
+Der **Standardfehler des Mittelwerts (SEM)** beschreibt **wie stark der geschätzte Stichprobenmittelwert zufällig vom wahren Populationsmittelwert abweichen kann**. Er ist damit ein **Mass für die Präzision** des Mittelwerts.
+:::
+
+```{r, echo=TRUE, eval = FALSE}
+
+dat_full <- dat_full |> 
+  mutate(mmq_mean = rowMeans(select(dat_full, starts_with("question")))
+
+
+group_summary <- dat_full %>%
+  group_by(XXXXXXX) %>%
+  summarize(
+    group_mean_mmq = mean(XXXXXX),
+    se_mmq = sd(XXXXXX) / sqrt(n())
+  )
+
+group_summary$group_all <- factor(group_summary$group_all,
+                                  levels = c("XXXXX", "XXXXX", "XXXXX"))
+
+
+```
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, echo = TRUE}
+
+dat_full <- dat_full |> 
+  mutate(mmq_mean = rowMeans(select(dat_full, starts_with("question"))))
+
+
+group_summary <- dat_full %>%
+  group_by(group_all) %>%
+  summarize(
+    group_mean_mmq = mean(mmq_mean),
+    se_mmq = sd(mmq_mean) / sqrt(n())
+  )
+
+group_summary$group_all <- factor(group_summary$group_all,
+                                  levels = c("below", "control", "above"))
+
+```
+:::
+
+### **1. Erstelle einen leeren Plot und gib deinen Datensatz an**
+
+Beginne mit:
+
+-   `ggplot()` und deinem Datensatz
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+
+plot_base <- group_summary |> 
+  ggplot()
+
+```
+:::
+
+### **2. Definiere die Aesthetic Mappings**
+
+Lege fest:
+
+-   welche Variable auf der **x-Achse** liegt
+
+-   welche Variable auf der **y-Achse** liegt
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+
+plot_base_updated <- plot_base +
+  aes(x = group_all, y = group_mean_mmq)
+
+```
+:::
+
+### **3. Füge `geom_col()` dem Plot hinzu**
+
+Damit zeichnest du die Balken für die Gruppenmittelwerte.
+
+-   `color =` für Konturen
+
+-   `fill =` für die Füllfarben der Balken
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+
+plot_base_updated <- plot_base_updated +
+  geom_col(fill = "gray", color = "black")
+
+```
+:::
+
+### **4. Füge Fehlerbalken hinzu**
+
+Nutze `geom_errorbar()` und definiere innerhalb von `aes()`:
+
+-   `ymin = mean - se` - Füge die passenden Variablen ein.
+
+-   `ymax = mean + se` - Füge die passenden Variablen ein.
+
+Passe die Breite der Fehlerbalken mit `width =` an.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+
+plot_base_updated <- plot_base_updated +
+  geom_errorbar(
+    aes(ymin = group_mean_mmq - se_mmq, ymax = group_mean_mmq + se_mmq),  
+    width = 0.2,
+    color = "black"
+  )
+
+```
+:::
+
+### **5. Füge Titel und Achsenbeschriftungen hinzu**
+
+Nutze dafür `labs()`. Verändere das theme zu `theme_classic()`
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+
+plot_base_updated <- plot_base_updated +
+  labs(
+    x = "Feedback Group",
+    y = "Mean MMQ Ratings",
+    title = "Group Means of Mean MMQ with SE Error Bars"
+  ) +
+  theme_classic()
+
+```
+:::
+
+### **6. Stelle sicher, dass der vollständige Wertebereich sichtbar ist**
+
+-   mit `ylim(0, 4)`
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+
+plot_final <- plot_base_updated +
+  ylim(0, 4)
+plot_final
+```
+:::
+
+------------------------------------------------------------------------
+
+Nun wollen wir den zweiten Plot aus @grinschgl2021 reproduzieren.
+
+Ergänze dafür den folgenden Code an den nötigen Stellen mit den passenden Werten und Argumenten.
+
+-   Lade zuerst den in der letzten Woche gespeicherten *Long-Datensatz*.
+
+-   Ersetze anschliessend die Platzhalter **"XXXXXX"** durch die erforderlichen Werte, um den Plot zu reproduzieren.
+
+```{r echo = TRUE, eval = FALSE}
+
+descriptives <- dat_long |> 
+  group_by(XXXXXX, XXXXXXX) |> 
+  summarize(N = length(rating),
+               mean_d = mean(rating),
+               sd_d   = sd(rating),
+               se_d   = sd_d / sqrt(N)
+)
+
+descriptives$group_all <- factor(descriptives$group_all, c("above", "control", "below"))
+
+rate_plot <- descriptives |> 
+  ggplot(aes(x = XXXXXX, 
+             y = XXXXXX, 
+             group = XXXX)) 
+
+rate_plot +
+  geom_line(aes(color = group_all, linetype = group_all), size = 1.2) +
+  geom_errorbar(aes(ymin = mean_d - se_d, ymax = mean_d + se_d), width = .1) +
+  scale_color_manual(values = c("green4", "red", "black")) +
+  theme_classic() +
+  labs(title = "XXXXXXX") +
+  ylab("XXXXXXXX") +
+  xlab("XXXXXXXXX") +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = "bold"), 
+        axis.text = element_text(size = 11), axis.title = element_text(size = 14))
+
+```
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, echo = TRUE, message=TRUE, warning= FALSE}
+descriptives <- dat_long |> 
+  group_by(group_all, time_rating) |> 
+  summarize(N = length(rating),
+               mean_d = mean(rating)*10,
+               sd_d   = sd(rating)*10,
+               se_d   = sd_d / sqrt(N)
+)
+
+descriptives$group_all <- factor(descriptives$group_all, c("above", "control", "below"))
+
+rate_plot <- descriptives |> 
+  ggplot(aes(x = time_rating, 
+             y = mean_d, 
+             group = group_all)) 
+
+rate_plot_updated <- rate_plot +
+  geom_line(aes(color = group_all, linetype = group_all), size = 1.2) +
+  geom_errorbar(aes(ymin = mean_d - se_d, ymax = mean_d + se_d), width = .1) +
+  scale_color_manual(values = c("green4", "red", "black")) +
+  theme_classic() +
+  labs(title = "Subjective Performance Ratings ") +
+  ylab("Percentile Rank") +
+  xlab("Time") +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = "bold"), 
+        axis.text = element_text(size = 11), axis.title = element_text(size = 14))
+rate_plot_updated
+```
+:::
+
+-   Speichere deinen Plot als PNG Datei ab.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+ggsave(
+  "rate_plot.png",
+  plot = rate_plot_updated,
+  width = 10,
+  height = 6,
+  dpi = 300
+)
+```
+:::
+
+------------------------------------------------------------------------
+
+# Inferenzstatistik
+
+::: {.callout-note collapse="true"}
+## Cheatsheets Statistik
+
+<iframe src="../../PDFs/stat_1.pdf" width="100%" height="500px">
+
+</iframe>
+
+<iframe src="../../PDFs/stat_3.pdf" width="100%" height="500px">
+
+</iframe>
+:::
+
+## Korrelationen:
+
+-   Wähle zwei metrische Variablen aus dem Wide Datensatz aus. Berechne die Korrelation mit `cor.test()` für diese beiden Variablen.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval = TRUE}
+
+cor.test(dat_full$mean_d1_all, dat_full$mean_d_all)
+
+```
+:::
+
+<!-- -->
+
+-   Finde den Korrelationskoeffizienten *r*, den *p*-Wert und die Freiheitsgrade (df). Versuche das Ergebnis zu interpretieren.
+
+::: {.callout-note collapse="true" title="Lösung"}
+In dem von uns gewählten Beispiel wurde die Korrelation von `mean_d1_all` mit `mean_d_all` berechnet. Der Korrelationskoeffizient r beträgt r = 0.78, was auf eine starke positive Korrelation hinweist. Der p-Wert ist p \< 0.001, was darauf hindeutet, dass die Korrelation statistisch signifikant ist. Die Freiheitsgrade (df) betragen 157, was auf die Anzahl der Beobachtungen minus 2 zurückzuführen ist (n-2). Das die Dauer bis zur ersten Fensteröffnung und die Dauer des gesamten Trials zusammenhängen war inhaltlich zu erwarten.
+:::
+
+<!-- -->
+
+-   Rufe die Hilfefunktion von `cor.test()` auf. Welche Anpassungen kannst du vornehmen, um die Korrelation einseitig (z.B. nur positiver Zusammenhang) und mit der Spearman-Methode zu berechnen?
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+?cor.test
+
+# Für eine einseitige Korrelation kannst du das Argument `alternative` verwenden, z.B. `alternative = "greater"` für eine positive Korrelation.
+cor.test(dat_full$mean_d1_all, dat_full$mean_d_all, alternative = "greater")
+
+# Für die Spearman-Methode kannst du das Argument `method` verwenden, z.B. `method = "spearman"`.
+cor.test(dat_full$mean_d1_all, dat_full$mean_d_all, method = "spearman")
+```
+:::
+
+::: {.callout-note collapse="true"}
+### Korrelationen
+
+Linearer Zusammenhang (Kovarianz) zweier Variablen. Positive Korrelation = hohe Ausprägungen einer Variable hängen mit hohen Ausprägungen einer anderen Variable zusammen. Negative Korrelation = Hohe Ausprägungen einer Variable hängen mit niedrigen Ausprägungen einer anderen Variable zusammen. Korrelationskoeffizient *r* kann von -1 bis +1 gehen. Der Korrelationstest testet ob r sich signifikant von 0 (kein Zusammenhang unterscheidet). Für Pearson Korrelationen sollte die Normalverteilung der Residuen gegeben sein. Alternative: Spearman Korrelation.
+:::
+
+------------------------------------------------------------------------
+
+## Regressionen
+
+::: {.callout-note collapse="true"}
+### **Tabelle: Funktionen für Regressionen und verwandte Analysen in R**
+
+| Funktion | Beschreibung |
+|------------------------------------|------------------------------------|
+| **lm(y \~ x)** | Einfache lineare Regression mit einer abhängigen Variablen *y* und einem Prädiktor *x*. |
+| **lm(y \~ x1 + x2)** | Multiple Regression mit einer abhängigen Variablen *y* und zwei Prädiktoren *x1* und *x2*. |
+| **summary()** | Gibt die Ergebnisse der Regressionsanalyse für ein Regressionsmodell aus. |
+| **confint()** | Konfidenzintervalle für die Regressionskoeffizienten. |
+| **fitted()** | Vorhergesagte Werte des Regressionsmodells. |
+| **resid()** | Residuen des Regressionsmodells. |
+| **predict()** | Vorhergesagte Werte für bestimmte Werte der Prädiktorvariablen. |
+| **anova()** | Vergleicht die Determinationskoeffizienten zweier Regressionsmodelle mit einem F-Test. |
+| **vif()** \* | Variance Inflation Factors (VIF) für jeden Prädiktor; aus dem *car*-Paket. |
+
+\* aus zusätzlichen Paketen
+:::
+
+-   Paket `„car“` installieren und laden.
+
+```{r, echo = FALSE}
+
+library(car)
+
+```
+
+-   Mach aus deiner davor berechneten Korrelation nun ein Regressionsmodel mit der Funktion `model <- lm(outcome ~ predictor, data)`. Schau dir den Output mit `summary(model)` an und versuche ihn zu interpretieren.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval = TRUE}
+
+model_1 <- lm(mean_d1_all ~ mean_d_all, data = dat_full)
+
+summary(model_1)
+
+```
+
+Mit `summary(model_1)` erhalten wir Informationen über das Regressionsmodell. Der Koeffizient für `mean_d_all` zeigt an, wie stark sich `mean_d1_all` ändert, wenn `mean_d_all` um eine Einheit steigt. Der p-Wert für diesen Koeffizienten ist signifikant (p \< 0.001), was darauf hinweist, dass `mean_d_all` Prädiktor signifikant zur Vorhersage der abhängigen Variable `mean_d1_all` beiträgt. Das R-Quadrat (R²) beträgt 0.64, was bedeutet, dass etwa 64% der Varianz in `mean_d1_all` durch `mean_d_all` erklärt wird.
+
+Wie die folgende logische Abfrage zeigt, entspricht die Wurzel von R-Squared der Korrelation zwischen den beiden Variablen.
+
+```{r}
+
+cor(dat_full$mean_d1_all, dat_full$mean_d_all) == sqrt(summary(model_1)$r.squared)
+
+```
+:::
+
+-   Ergänze das Modell nun um eine weitere Prädiktorvariable (mit + Variable), sodass du eine multiple Regression berechnest. Hier müssen wir auf Multikollinearität testen – mit `vif(model)` aus dem „car“ Paket (die Werte sollten größer als 0.10 sein, sodass keine Multikollinearität vorliegt). Berechne auch die Konfidenzintervalle der Beta-Koeffizienten mit `confint(model)`.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval = TRUE}
+
+model_2 <- lm(mean_d1_all ~ mean_d_all + mean_rl_all, data = dat_full)
+
+summary(model_2)
+
+vif(model_2)
+
+confint(model_2)
+
+```
+
+Mit summary(model_2) erhalten wir auch Informationen über das neue, multiple Regressionsmodell. Die Koeffizienten für `mean_d_all` und `mean_rl_all` zeigen an, wie stark sich `mean_d1_all` ändert, wenn diese Prädiktoren um eine Einheit steigen. Beide Prädiktoren haben signifikante p-Werte (p \< 0.001), was darauf hinweist, dass sie signifikant zur Vorhersage der abhängigen Variable beitragen. Das R-Quadrat (R²) beträgt 0.77, was bedeutet, dass etwa 77% der Varianz in `mean_d1_all` durch beide Prödiktoren zusammen erklärt wird.
+
+Die VIF-Werte für beide Prädiktoren sind unter 10, was darauf hinweist, dass keine Multikollinearität vorliegt.
+
+Die Konfidenzintervalle für die Koeffizienten geben den Bereich an, in dem wir mit 95%iger Sicherheit erwarten können, dass die wahren Koeffizientenwerte liegen. Beinhalten diese Konfidenzintervalle die 0 **nicht**, dann gelten die Koeffizienten ebenfalls als signifkant (unterschiedlich zu null).
+:::
+
+:::: {.callout-note collapse="true"}
+**Fortgeschritten/Freiwillig:**
+
+Berechne eine einfache logistische Regression zwischen Strategien (ohne strategies == 3) und Offloading (mean_rl_all) mit dem Wide Datensatz. Nimm das Statistik III Cheatsheet von Dr. Boris Mayer zur Hand. Tipp: Du musst die Strategien in 0 und 1 umkodieren.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval = TRUE}
+
+dat_log <- dat_full |> 
+  filter(strategies != 3) |>  # entferne Strategie 3
+  mutate(strategy_bin = if_else(strategies == 1, 0, 1)) # setze alle Strategien 1 auf 0 und 2 auf 1
+
+model <- glm(strategy_bin ~ mean_rl_all, # hier soll das Offloading die Vorhersage der Strategiewahl übernehmen
+             data = dat_log,
+             family = binomial)
+
+summary(model)
+
+```
+
+Einmal mehr erhalten wir mit `summary()` informationen über das von uns gerechnete Modell. Der Koeffizient für `mean_rl_all` zeigt an, wie sich die Wahrscheinlichkeiten (Log-Odds) der Wahl von Strategie 2 (im Vergleich zu Strategie 1) ändern, wenn `mean_rl_all` um eine Einheit steigt. Der p-Wert für diesen Koeffizienten ist signifikant (p \< 0.05), was darauf hinweist, dass `mean_rl_all` signifikant zur Vorhersage der Strategiewahl beiträgt.
+:::
+::::
+
+------------------------------------------------------------------------
+
+## *t*-Tests für abhängige Stichproben
+
+::: {.callout-note collapse="true"}
+### **Tabelle: Funktionen für *t*-Tests und verwandte Analysen in R**
+
+| Funktion | Beschreibung |
+|------------------------------------|------------------------------------|
+| **t.test** | Allgemeine Funktion für verschiedene t-Tests: Ein-Stichproben-t-Test, t-Test für unabhängige Stichproben und t-Test für abhängige Stichproben. |
+| **t.test(av, mu = x)** | Ein-Stichproben-t-Test. **av** = abhängige Variable. **x** = Vergleichswert der Population. |
+| **t.test(av \~ uv)** | Welch-t-Test für **unabhängige Stichproben**. **av** = abhängige Variable, **uv** = Gruppenvariable. |
+| **t.test(av \~ uv, var.equal = TRUE)** | Klassischer t-Test für unabhängige Stichproben (Varianzen vorausgesetzt gleich). |
+| **t.test(av1, av2, paired = TRUE)** | t-Test für **abhängige Stichproben** (z. B. Prä–Post). **av1** und **av2** = gemessene Variablen. |
+| **leveneTest(av, uv)** \* | Levene-Test auf Varianzhomogenität für unabhängige Gruppen. Aus dem **car**-Paket. |
+| **effsize::cohen.d()** \* | Berechnet die standardisierte Effektgröße **Cohen’s d** + Konfidenzintervall. Aus dem **effsize**-Paket. |
+
+\* Funktionen aus zusätzlichen Paketen.
+:::
+
+-   Paket `„effsize“` installieren und laden.
+
+```{r, echo = FALSE}
+
+library(effsize)
+
+```
+
+-   Wir wollen einen t-Test für unabhängige Stichproben durchführen, um das Pre 4 Rating der `„above“` und `„below“` Gruppen zu vergleichen. Starte mit einem `leveneTest()` aus dem `„car“` Paket um die Varianzhomogenität zu prüfen. Tipp: Filtere die Daten, sodass nur die beiden Gruppen `„above“` und `„below“` beinhaltet sind (d.h. ohne die Gruppe `„control“`).
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval = TRUE}
+
+dat_full_below_above <- dat_full |> 
+  filter(group_all != "control")
+
+dat_full_below_above$group_all <- as.factor(dat_full_below_above$group_all)
+
+leveneTest(dat_full_below_above$pre4, dat_full_below_above$group_all)
+
+```
+
+Der Levene Test prüft die Homogenität der Varianzen zwischen den Gruppen. Ein nicht-signifikanter p-Wert (p \> 0.05) deutet darauf hin, dass die Varianzen in den beiden Gruppen als gleich angenommen werden können. Der vorliegende Test ist nicht signifikant (p = 0.09 \> 0.05), was darauf hinweist, dass die Varianzen in den Gruppen `„above“` und `„below“` als homogen betrachtet werden können.
+:::
+
+-   Berechne nun den entsprechenden t-Test mit `t.test()`. Du kannst auch die Hilfefunktion zu Rate ziehen. Versuche dann den Output zu verstehen bzw. das Ergebnis zu interpretieren. Tipp: Wenn die Varianzhomogenität gegeben ist (d.h. der Levene Test nicht signifikant ist), muss man `var.equal = TRUE` angeben, ansonsten wird ein `Welch t-Test` berechnet.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval = TRUE}
+
+t.test(pre4 ~ group_all, data = dat_full_below_above, var.equal = TRUE)
+
+```
+
+Der students t-Test vergleicht die Mittelwerte der `pre4` Ratings zwischen den Gruppen `„above“` und `„below“`. Der p-Wert weisst auf einen statistisch signifikanten Unterschied der beiden Mittelwerte hin (p \< 0.05). Das 95%-Konfidenzintervall für den Mittelwertunterschied liegt zwischen 2.03 und 3.36. Das dieser Bereich **nicht** die 0 beinhaltet spricht ebenfalls für die Signifikanz der Mittelwertsunterschiede. Unter Einbezug der beiden Gruppenmittelwerte (`mean in group above` = 5.97 und `mean in group below` 3.27) deutet das Ergebnis darauf hin, dass die `„above“` Gruppe signifikant höhere `pre4` Ratings aufweist als die `„below“` Gruppe.
+:::
+
+-   Nun berechnen wir noch `Cohen‘s d` als Effektstärken-Maß für den Mittelwertsunterschied. Verwende dafür `effsize::cohen.d()`.  Da es `„cohen.D“` auch im Paket `„psych“` gibt, ist es wichtig hier `„effsize::“` voranzusetzen.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval = TRUE}
+
+effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
+
+```
+
+Cohen's d beträgt 1.55, was auf einen großen Effekt hinweist.
+:::
+
+👉 Und schon haben wir einen der Post-Hoc t-Tests für die 2x3 ANOVA aus Grinschgl et al. (2020) berechnet (notwendig für die Abschlussarbeit)
+
+------------------------------------------------------------------------
+
+## *t*-Tests für abhängige Stichproben
+
+-   Berechne einen *t*-Test für abhängige Stichproben um in der `„control“` Gruppe `Pre 1` und `Pre 4` zu vergleichen. (D.h. filtere zunächst den Datensatz, sodass nur mehr die `„control“` Gruppe
+
+```{r, eval = FALSE, echo = TRUE}
+
+t.test(datensatz$Variable1, datensatz$Variable2, paired = TRUE) 
+
+```
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval = TRUE}
+
+dat_full_control <- dat_full |>
+  filter(group_all == "control")
+
+t.test(dat_full$pre1, dat_full$pre4, paired = TRUE)
+
+```
+
+Der t-Test für abhängige Stichproben (paired = TRUE) vergleicht die Mittelwerte von `pre1` und `pre4` innerhalb der `„control“` Gruppe. Der p-Wert weisst auf einen signifikanten Unterschied zwischen den Mittelwerten dieser beiden Messzeitpunkte hin (p \< 0.05). Das 95%-Konfidenzintervall für den Mittelwertunterschied liegt zwischen 0.39 und 1.06, umschliesst damit nicht die 0, und zeigt dadurch ebenfalls einen signifikanten Mittelwertsunterschied zwsichen den beiden Messzeitpunkten an. Die Angabe `mean_difference` zeigt an, wie stark der Mittelwert von `pre1` auf `pre4`angestiegen ist (mean difference = 0.73).
+:::
+
+-   Wandle den t-Test nun in einen einseitigen Test mit alternative = „greater“ oder alternative = „less“ um und berechne Cohen‘s d als Effektstärkenmaß (Achtung: paired = True setzen).
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, eval=TRUE}
+
+t.test(dat_full$pre1, dat_full$pre4, paired = TRUE, alternative = "greater")
+
+
+library(effectsize)
+
+cohens_d(
+  dat_full$pre1,
+  dat_full$pre4,
+  paired = TRUE
+)
+
+```
+
+Während der ungerichtete t-test prüft, ob die Mittelwerte von `pre1` und `pre4` ungleich sind, prüft der gerichtete t-test (alternative = "greater") spezifischer, ob der Mittelwert von `pre4` signifikant größer ist als der Mittelwert von `pre1`. Dies ist auch am Ergebnis "alternative hypothesis: true mean difference is greather than 0" erkennen. Der Unterschied im `mean_difference` ist allerdings gleich geblieben, ebenso das Resultat der Signifikanzprüfung.
+:::
+
+# Am Ende deiner Übungen - vergiss nicht dein Skript abzuspeichern! 😉

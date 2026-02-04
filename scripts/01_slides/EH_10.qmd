@@ -1,0 +1,446 @@
+---
+title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 10"
+author: Sandra Grinschgl, Aaron Friedli, Lars Schilling
+format: 
+  revealjs:
+    title-slide-attributes:
+      data-visibility: hidden
+    theme: [default, ../../custom.scss]
+    transition: slide
+    slide-number: true
+    logo: /images/unibe.png
+    incremental: false
+    self_contained: true
+    show-slide-number: all
+    smaller: true
+    progress: true
+    controls: true
+    embed-resources: true
+bibliography: references.bib
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+library(palmerpenguins)
+library(apaTables)
+penguins <- palmerpenguins::penguins
+
+
+bfi_10_data <- read_delim("raw/bfi_10_data.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+dat_full <- read_csv("raw/dat_full.csv")
+
+dat_full_long <- dat_full |>
+      pivot_longer(
+        cols = c(pre1, pre4),
+        names_to = "time_rating",
+        values_to = "rating"
+      )
+
+```
+
+## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
+
+HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**10. Einheit**, 19.11.2025
+
+------------------------------------------------------------------------
+
+## Heute:
+
+<iframe src="../../PDFs/Syllabus.pdf" width="100%" height="600px">
+
+</iframe>
+
+::: notes
+Verschiebung der Abgabe der Datensätze an die Studierenden auf EH12 auf Wunsch der Studierenden
+:::
+
+------------------------------------------------------------------------
+
+## Muddiest Points!
+
+<iframe src="../../PDFs/muddiest_points_2.pdf" width="100%" height="600px">
+
+</iframe>
+
+------------------------------------------------------------------------
+
+## Gruppe Sandra
+
+Fortsetzung Datenqualität -\> Folien EH 9
+
+Zuerst Theorie, dann Hands-On
+
+------------------------------------------------------------------------
+
+## Hands-on Block 5: Check In
+
+Haben alle einen Long Datensatz (e.g. dat_full_long) mit 318 Zeilen = 2 Zeilen pro Versuchsperson?
+
+Wenn nicht:
+
+```{r echo = TRUE}
+dat_full_long <- dat_full |> 
+  pivot_longer(cols = c(pre1, pre4),
+               names_to = "time_rating",         
+               values_to = "rating")
+```
+
+❗Falls ihr bis Ende Lektion noch nicht den LONG Datensatz erstellt und gespeichert habt - meldet euch bei uns
+
+------------------------------------------------------------------------
+
+## Visualize: Tabellen
+
+-   Möglichkeit APA konforme Tabellen in R zu erstellen
+
+**Schritt 1: Deskriptive Tabelle erstellen mit `summarize`**
+
+```{r echo=TRUE}
+penguins_full <- drop_na(penguins)
+penguins_summary <- penguins_full |> 
+  group_by(species) |>
+  summarize(mean_body_mass = mean(body_mass_g),
+            min_body_mass = min(body_mass_g),
+            max_body_mass = max(body_mass_g)
+            )
+
+penguins_summary
+```
+
+------------------------------------------------------------------------
+
+## Visualize: Tabellen
+
+**Schritt 2: `kable` auf deskriptive Tabelle anwenden**
+
+```{r, echo = TRUE}
+library(knitr)
+
+penguins_summary |>
+  kable(
+    caption = "Summary of penguin body mass by species",
+    digits = 1,
+    col.names = c("Species", "Mean body mass (g)", "Min", "Max")
+  )
+
+```
+
+Weitere Formatierungen möglich, z.B. row.names, col.names...siehe Hilfefunktion
+
+------------------------------------------------------------------------
+
+## [`apaTables`](https://dstanley4.github.io/apaTables/articles/apaTables.html) - APA konforme Tabellen von statistischen Analysen
+
+Korrelationstabelle im APA Format –\> Kann man auch für Regressionen und ANOVAs verwenden
+
+**1.Schritt: Auswahl von Variablen**
+
+```{r, echo = TRUE, eval = FALSE}
+penguins_subset <- penguins |>
+  select(bill_length_mm, bill_depth_mm, flipper_length_mm)
+```
+
+------------------------------------------------------------------------
+
+## [`apaTables`](https://dstanley4.github.io/apaTables/articles/apaTables.html) - APA konforme Tabellen von statistischen Analysen
+
+**2.Schritt: Korrelationstabelle for ausgewählte Variablen**
+
+Speichert Tabelle als Word Datei
+
+```{r, echo=TRUE, eval = FALSE}
+library(apaTables)
+apa.cor.table(penguins_subset)
+```
+
+![](../../images/EH_10/Propcorr%20table.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Abbildungen: Visualize (Fortsetzung in EH 11)
+
+![](../../images/EH_10/ggplot.png){fig-align="center" width="186"}
+
+------------------------------------------------------------------------
+
+## Visualisierungen: Reproduktion der Figures aus Grinschgl 2021
+
+```{r echo=FALSE}
+
+dat_full <- dat_full |>    
+  mutate(
+    mmq_mean = rowMeans(
+      across(starts_with("question"), .names = "{col}"),
+      na.rm = TRUE
+    )
+  )
+
+group_summary <- dat_full %>%
+  group_by(group_all) %>%
+  summarize(
+    mean_mmq = mean(mmq_mean, na.rm = TRUE),
+    se_mmq = sd(mmq_mean, na.rm = TRUE) / sqrt(sum(!is.na(mmq_mean)))
+  )
+
+```
+
+```{r, echo = FALSE}
+ggplot(group_summary, aes(x = group_all, y = mean_mmq)) +
+  geom_col(fill = "gray", color = "black") + 
+  geom_errorbar(
+    aes(ymin = mean_mmq - se_mmq, ymax = mean_mmq + se_mmq),  
+    width = 0.2,
+    color = "black"
+  ) +
+  labs(
+    x = "Group",
+    y = "Mean MMQ",
+    title = "Group Means of Mean MMQ with SE Error Bars"
+  ) +
+  theme_minimal() +
+  ylim(0, 4)
+```
+
+------------------------------------------------------------------------
+
+## Visualisierungen
+
+```{r, echo=FALSE}
+descriptives <- dat_full_long |> 
+  group_by(group_all, time_rating) |> 
+  summarize(N = length(rating),
+               mean_d = mean(rating),
+               sd_d   = sd(rating),
+               se_d   = sd_d / sqrt(N)
+)
+
+descriptives$group_all <- factor(descriptives$group_all, c("above", "control", "below"))
+
+rate_plot <- descriptives |> 
+  ggplot(aes(x = time_rating, 
+             y = mean_d, 
+             group = group_all)) 
+
+rate_plot +
+  geom_line(aes(color = group_all, linetype = group_all), size = 1.2) +
+  geom_errorbar(aes(ymin = mean_d - se_d, ymax = mean_d + se_d), width = .1) +
+  scale_color_manual(values = c("green4", "red", "black")) +
+  theme_classic() +
+  labs(title = "Subjective Performance Ratings ") +
+  ylab("Percentile Rank") +
+  xlab("Time") +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = "bold"), 
+        axis.text = element_text(size = 11), axis.title = element_text(size = 14)) +
+  labs(colour = "Feedback Group", linetype = "Feedback Group", shape = "Feedback Group") 
+```
+
+------------------------------------------------------------------------
+
+## `ggplot2()`
+
+Sehr flexibles Paket.
+
+-   Plots werden schrittweise "befüllt"
+
+<!-- -->
+
+-   Alle plots beginnen mit `ggplot()` und dem verwendeten Datensatz
+
+-   Mit aes() definieren wir die elemantaren Elemente der Plots - Variablen die geplottet werden sollen
+
+-   mit + können wir geoms, layers und weitere Elemente hinzufügen.
+
+------------------------------------------------------------------------
+
+## `ggplot2()` - Cheatsheet
+
+:::::: {style="display: flex; justify-content: space-between; gap: 1rem;"}
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot1.png)
+:::
+
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot2.png)
+:::
+
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot3.png)
+:::
+::::::
+
+::: notes
+With ggplot2, you begin a plot with the function ggplot(), defining a plot object that you then add layers to. The first argument of ggplot() is the dataset to use in the graph and so ggplot(data = penguins) creates an empty graph that is primed to display the penguins data, but since we haven’t told it how to visualize it yet, for now it’s empty. This is not a very exciting plot, but you can think of it like an empty canvas you’ll paint the remaining layers of your plot onto.
+
+Next, we need to tell ggplot() how the information from our data will be visually represented. The mapping argument of the ggplot() function defines how variables in your dataset are mapped to visual properties (aesthetics) of your plot. The mapping argument is always defined in the aes() function, and the x and y arguments of aes() specify which variables to map to the x and y axes. For now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic. ggplot2 looks for the mapped variables in the data argument, in this case, penguins.
+
+To do so, we need to define a geom: the geometrical object that a plot uses to represent data. These geometric objects are made available in ggplot2 with functions that start with geom\_. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms (geom_bar()), line charts use line geoms (geom_line()), boxplots use boxplot geoms (geom_boxplot()), scatterplots use point geoms (geom_point()), and so on.
+
+Zusammenhang bedeutet die Verwendung von +, dass wir einzelne Elemente eines Plot-Objektes zusammenfügen.
+:::
+
+------------------------------------------------------------------------
+
+## Argumente von `ggplot()`
+
+-   Variablen als Aestheatic Mappings defineren
+
+-   Mapping ist immer das zweite argument, "call" kann also auch verkürzt werden.
+
+```{r, echo = TRUE}
+
+p <- penguins |>
+  ggplot( 
+       mapping = 
+         aes(x = body_mass_g, 
+           y = bill_length_mm))
+p
+```
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Geoms
+
+-   Layers Hinzufügen z.B. ein geom mit +
+-   Geoms = geometrische Objekte, die die Daten darstellen (z.B. Punkte, Linien)
+-   Muss je nachdem welche Daten man hat und wie man diese darstellen will ausgewählt werden, z.B.
+    -   Kategoriale Variable: `geom_bar()`
+    -   Kontinuierliche Variable: `geom_histogram()`
+    -   2 kontinuierliche Variablen: `geom_point()`, `geom_line()`
+    -   2 Kategoriale Variablen: `geom_count()`
+    -   Kategorial + Kontinuierlich: `geom_boxplot()`, `geom_violin()`
+
+```{r, echo = TRUE}
+
+p <- p +
+  geom_point()
+
+p
+```
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Layers
+
+-   Mappings können auch in den Layers definiert werden
+
+```{r, echo = TRUE}
+p <- p + 
+  geom_point(aes(x = body_mass_g, 
+           y = bill_length_mm))
+
+p
+```
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Layers
+
+-   Titel + Achsenbeschriftung (= `labs`), Regressionslinien, vereinfachtes Design
+
+```{r, echo = TRUE}
+p <- p +
+  geom_smooth(aes(group = 1), method = "lm") +
+  theme_classic() +
+  labs(
+    title = "Relationship Between Body Mass and Bill Length",
+    x = "Body Mass (g)",
+    y = "Bill Length (mm)"
+  )
+
+p
+```
+
+mit `theme_` können [verschiedene Formatierungen](https://ggplot2.tidyverse.org/reference/ggtheme.html) gewählt werden. `theme_classic` wird typischerweise für APA7 passende Formatierungen gewählt.
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Verschiedene Layers/Geoms kombiniert
+
+```{r echo = TRUE}
+p2 <- penguins |>
+  ggplot(aes(x = island, y = body_mass_g, color = island, shape = sex)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.5)+
+  theme_classic()+
+  labs(
+    title = "Body Mass Per Island and Species", x = "Island", y = "Body Mass (g)")
+p2
+```
+
+::: notes
+Achtung: Nicht optimal formatiert, weil sonst der Plot zu klein dargestellt wird.
+:::
+
+------------------------------------------------------------------------
+
+## Abbildungen speichern
+
+```{r echo = TRUE}
+
+ggsave(filename = "my_first_plot.png", plot = p2)
+
+```
+
+------------------------------------------------------------------------
+
+## Weitere Ressourcen:
+
+Viel, viel mehr Möglichkeiten als wir hier besprechen, siehe z.B.:
+
+[**Auflistung von Argumenten**](https://ggplot2.tidyverse.org/reference/index.html)
+
+[**ggplot2 Cheatsheet**](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf)
+
+**R for Data Science – Kapitel 9 & 10:**\
+[Kapitel „Layers“](https://r4ds.hadley.nz/layers)
+
+[Kapitel „EDA“](https://r4ds.hadley.nz/EDA.html)
+
+[**Weitere Textelemente in Abbildungen (Kapitel 11)**](https://r4ds.hadley.nz/communication)
+
+Hier findet man auch weitere Visualisierungsmöglichkeiten & Informationen dazu, wie man verschiedene Plots neben/untereinander abbilden kann.
+
+[Top 50 Visualisierungen mit ggplot2](https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Waffle%20Chart)
+
+[für Animationen, Signifikanztests, Wordclouds usw.](https://exts.ggplot2.tidyverse.org/gallery/)
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+## Heute haben wir:
+
+-   Muddiest Points besprochen
+
+-   Basics der Datenvisualisierungen kennengelernt
+
+    -   Erstellung von Tabellen
+
+    -   `ggplot()`
+
+**Reminder: Beim Abschlussprojekt müsst ihr 1 Tabelle oder Abbildung nach Wahl zu den simulierten Daten abgeben.**
+
+------------------------------------------------------------------------
+
+## R Hausübung 2
+
+Abgabe bis Freitag **28.11.2025, 23:55**
+
+Peerfeedback bis Mittwoch **03.12.2025 (vor der Einheit)**
+
+**Achtung: Einhalten der Namensvorgaben!**
+
+::: notes
+Namenseinhaltung für Abgabe der Files (da wir diese via R-Funktion öffnen)
+:::

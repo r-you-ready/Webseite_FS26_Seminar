@@ -1,0 +1,272 @@
+---
+title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 7"
+author: Sandra Grinschgl, Aaron Friedli, Lars Schilling
+format: 
+  revealjs:
+    title-slide-attributes:
+      data-visibility: hidden
+    theme: [default, ../../custom.scss]
+    transition: slide
+    slide-number: true
+    logo: /images/unibe.png
+    incremental: false
+    self_contained: true
+    show-slide-number: all
+    smaller: true
+    progress: true
+    controls: true
+    embed-resources: true
+---
+
+## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
+
+HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**7. Einheit**, 29.10.2025
+
+------------------------------------------------------------------------
+
+## Heute:
+
+<iframe src="../../PDFs/Syllabus.pdf" width="100%" height="600px">
+
+</iframe>
+
+------------------------------------------------------------------------
+
+## Fragen zu Hands On Block 2?
+
+![](../../images/EH_7/Bild1.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Pipe:
+
+-   Aus dem *magrittr*-Package %\>% (Teil des ***tidyverse***) oder Base R \|\>
+
+<!-- -->
+
+-   Zweck: Macht Code leserlicher und verständlicher
+
+<!-- -->
+
+-   Hilft bei Funktionen, die als erstes Argument Daten erwarten
+
+![](../../images/EH_7/Piper.png)
+
+::: notes
+Der Name `pipe` ist so zu verstehen, dass wir ein Objekt an eine Funktionen “weiterleiten” oder “übergeben”.
+
+Unterschiede zwischen den beiden Pipes: Unterschiedliche Platzhalter, native pipe etwas schneller. Für uns spielt der Unterschied keine Rolle.
+:::
+
+------------------------------------------------------------------------
+
+## Pipe: Beispiel
+
+👎Unübersichtliche verschachtelte Funktion
+
+```{r, echo= TRUE , results = 'hide'}
+library(palmerpenguins)
+library(tidyverse)
+
+head(select(filter(penguins, species == "Adelie"), species, bill_length_mm))
+
+```
+
+👍 Übersichtlich und nachvollziehbar mit der Pipe
+
+```{r, echo = TRUE}
+penguins |>  
+  filter(species == "Adelie") |>  
+  select(species, bill_length_mm) |>  
+  head()
+```
+
+------------------------------------------------------------------------
+
+## Tidyverse: dplyr
+
+*Bietet und einige der wichtigsten Funktionen für die Datenaufbereitung!*
+
+::: {style="display: flex; justify-content: center; gap: 50px;"}
+<img src="/images/EH_7/images.jpg" alt="Image 1" width="45%"/> <img src="/images/EH_7/Functions.png" alt="Image 2" width="45%"/>
+:::
+
+------------------------------------------------------------------------
+
+## dplyr: filter()
+
+![](/images/EH_7/filter.png){fig-align="center"}
+
+::: notes
+fehlendes " bei "Gentoo"
+:::
+
+------------------------------------------------------------------------
+
+## dplyr: filter()
+
+**Filtert den Datensatz basierend auf den logischen Argumenten die wir geben.**
+
+-   **Rows (Zeilen) auswählen**
+
+```{r echo = TRUE, }
+library(palmerpenguins)
+
+penguins |> 
+  filter(species == "Gentoo")
+
+```
+
+------------------------------------------------------------------------
+
+## dplyr: select()
+
+-   **Colums (Spalten) auswählen**
+
+```{r}
+penguins |> 
+  select(species, island, bill_length_mm)
+```
+
+------------------------------------------------------------------------
+
+## dplyer: select ()
+
+```{r, echo = FALSE, results='hide'}
+
+penguins |> 
+  select(species, island, bill_length_mm)
+```
+
+![](../../images/EH_7/select.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## dplyr: select()
+
+-   **Mit Hilfsfunktionen wie** `starts_with`
+
+```{r, echo=TRUE}
+penguins |> 
+  select(starts_with("bill"))
+
+```
+
+------------------------------------------------------------------------
+
+## dplyr: select()
+
+-   **Ausschliessen mit `-`**
+
+```{r, echo = TRUE }
+penguins |> 
+  select(-species, -island)
+```
+
+------------------------------------------------------------------------
+
+## dplyr: summarize()
+
+-   **Fasst Daten zusammen**, indem Kennwerte (z. B. Mittelwerte) berechnet werden.
+
+-   **Reduziert** viele Zeilen zu einer oder wenigen zusammengefassten Zeilen.
+
+-   Wird oft mit `group_by()` kombiniert, um Kennwerte pro Gruppe zu berechnen.
+
+```{r, echo=TRUE}
+
+penguins |> 
+  summarise(
+    mean_bill_length = mean(bill_length_mm, na.rm = TRUE),
+    mean_flipper_length = mean(flipper_length_mm, na.rm = TRUE)
+  )
+
+```
+
+------------------------------------------------------------------------
+
+## dplyr: summarize()
+
+![](../../images/EH_7/summarize.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## dplyr: mutate()
+
+-   **Erstellt neue Variablen** oder verändert Bestehende.
+
+-   **Behält alle Zeilen** des ursprünglichen Datensatzes bei.
+
+<!-- -->
+
+-   Wird oft genutzt, um **berechnete Spalten** hinzuzufügen (z. B. `bill_to_flipper_ratio`).
+
+```{r, echo=TRUE}
+
+library(tidyverse)
+library(palmerpenguins)
+
+penguins_upgraded <- penguins |> 
+  mutate(
+    bill_to_flipper_ratio = bill_length_mm / flipper_length_mm,
+    body_mass_kg = body_mass_g / 1000
+  )
+
+head(penguins_upgraded)
+
+```
+
+------------------------------------------------------------------------
+
+## dplyr: mutate()
+
+![](../../images/EH_7/mutate.png)
+
+------------------------------------------------------------------------
+
+## dplyr: group_by()
+
+-   **Teilt den Datensatz in Gruppen** auf (z. B. nach `species`).
+
+-   **Verändert die Daten nicht**, sondern markiert sie intern als gruppiert.
+
+-   **Bereitet Daten auf Aggregationen** mit `summarise()` oder Berechnungen mit `mutate()` vor.
+
+```{r, echo=TRUE}
+
+grouped_summary <- penguins |> 
+  group_by(species) |> 
+  summarise(
+    mean_bill_length = mean(bill_length_mm, na.rm = TRUE),
+    mean_flipper_length = mean(flipper_length_mm, na.rm = TRUE)
+  )
+
+grouped_summary
+
+```
+
+------------------------------------------------------------------------
+
+## dplyr: group_by()
+
+![](../../images/EH_7/group_by.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Heute haben wir:
+
+-   Die Pipe kennengelernt
+
+-   Dplyr Funktionen (Teil des tidyverse) zur Datenaufbereitung kennengelernt
+
+------------------------------------------------------------------------
+
+## Hausübung
+
+-   Bis 7.11.2025 (Freitag nach EH 8)
+
+-   Alle Instruktionen auf der Website
+
+-   Danach Peer Feedback (Instruktionen folgen in EH 8)
+
+------------------------------------------------------------------------

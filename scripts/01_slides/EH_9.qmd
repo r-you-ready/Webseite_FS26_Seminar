@@ -1,0 +1,479 @@
+---
+title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 9"
+author: Sandra Grinschgl, Aaron Friedli, Lars Schilling
+format: 
+  revealjs:
+    title-slide-attributes:
+      data-visibility: hidden
+    theme: [default, ../../custom.scss]
+    transition: slide
+    slide-number: true
+    logo: /images/unibe.png
+    incremental: false
+    self_contained: true
+    show-slide-number: all
+    smaller: true
+    progress: true
+    controls: true
+    embed-resources: true
+bibliography: references.bib
+---
+
+```{r, echo = FALSE, message=FALSE}
+
+library(tidyverse)
+library(palmerpenguins)
+
+
+bfi_10_data <- read_delim("raw/bfi_10_data.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+bfi_10 <- drop_na(bfi_10_data)
+
+
+penguins <- penguins
+```
+
+## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
+
+HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**9. Einheit**, 12.11.2025
+
+------------------------------------------------------------------------
+
+## Heute:
+
+<iframe src="../../PDFs/Syllabus.pdf" width="100%" height="600px">
+
+</iframe>
+
+::: notes
+Verschiebung der Abgabe der Datensätze an die Studierenden auf EH13.
+:::
+
+------------------------------------------------------------------------
+
+## Besprechung Hands On Block 4 & Hausübung 1:
+
+-   Scheint sehr gut gelungen zu sein!
+
+**Probleme beim Einlesen –\> Keine NAs sondern nur leere Zellen –\> Andere Funktionen als read_delim genutzt.**
+
+```{r echo=TRUE, eval = FALSE}
+
+data <- read_delim("raw/fake_bfi_dataset.csv", delim = ";")
+
+bfi_10 <- drop_na(data)
+```
+
+------------------------------------------------------------------------
+
+## Besprechung Hausübung 1:
+
+**Effizienter Code Beispiel aus den Musterlösungen mit `across()`**
+
+Argument 1: cols = –\> welche colums sollen bearbeitet werden
+
+Argument 2: .fns 👉 Welche Funktion wenden wir auf die cols. an.
+
+```{r echo=TRUE, eval = FALSE}
+
+
+data_bfi_recoded <- clean_data_bfi_10 |> 
+  mutate(
+    across(
+      c(bfi_extra_1_r, bfi_agree_2_r, bfi_consc_2_r, bfi_neuro_2_r, bfi_open_2_r),
+      ~ case_when(
+        . == 1 ~ 5,
+        . == 2 ~ 4,
+        . == 3 ~ 3,
+        . == 4 ~ 2,
+        . == 5 ~ 1
+      )
+    )
+  )
+
+#Sparsamere Alternative
+
+data_bfi_recoded <- clean_data_bfi_10 |>
+  mutate(
+    across(ends_with("_r"), ~ 6 - .)  # 6- Minus current Value . 
+  )
+
+
+data_bfi_recoded <- clean_data_bfi_10 |>
+  mutate(
+    across(ends_with("_r"), function(x) 6 - x) # Umgeschrieben
+  )
+
+```
+
+[Anonyme Funktionen](https://coolbutuseless.github.io/2019/03/13/anonymous-functions-in-r-part-1/)
+
+------------------------------------------------------------------------
+
+## Hausübung 1
+
+Falls eure gerenderten Skripte bei den Peer-Partnern nicht richtig angezeigt werden 👉 Im Header des Quarto-Dokuments
+
+`embed-resources = true`
+
+![](../../images/EH_9/Embedd%20Resources.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Genzplyr 💅
+
+\
+**Falls euch die `dplyr()` Funktionen zu Öde sind 😄[genzplyr](https://hadley.github.io/genzplyr/) - Hadley Wickham**
+
+![](../../images/EH_9/Genzplyr.png){fig-align="center"}
+
+```{r, echo=TRUE, eval = FALSE}
+library(genzplyr)
+
+penguins |> 
+  vibe_check(island, species, sex)
+  yeet(island == "Biscoe")
+  
+```
+
+------------------------------------------------------------------------
+
+## Heute:
+
+-   Wide - Long
+-   Datenqualität (Schiefe, Kurtoseis, Ausreisser, Skalenreliabilität)
+
+------------------------------------------------------------------------
+
+## Wide to Long Tranformation:
+
+-   Wide: Jede Zeile bezieht sich auf eine Person und beinhaltet alle Messzeitpunkte
+
+-   Long: Pro Messung (repeated measures) eine Zeile, Personen strecken sich über mehrere Zeilen hinweg.
+
+👉 Long Format is häufig benötigt für Analysen mit einem **repeated measures** Faktor
+
+![](/images/EH_9/variables.png){fig-align="center" width="1200"}
+
+------------------------------------------------------------------------
+
+## **Transformation wide to long**
+
+<br><br>
+
+**Wie müssen wir den folgenden Datensatz transformieren, um ihn ins long Format zu bekommen?**
+
+| *id* | *messzeitpunkt_t1* | *messzeitpunkt_t2* | *messzeitpunkt_t3* |
+|------|--------------------|--------------------|--------------------|
+| 1    | 10                 | 14                 | 18                 |
+| 2    | 12                 | 15                 | 17                 |
+| 3    | 9                  | 13                 | 15                 |
+| 4    | 11                 | 12                 | 16                 |
+
+------------------------------------------------------------------------
+
+## **Long to Wide mit `pivot_longer()`**
+
+**Argumente:**
+
+-   **`cols`** 👉Welche Variablen sollen transformiert (also zusammengestapelt) werden?
+
+-   **`names_to`**👉 Wie heisst die neue Variable, die den Messzeitpunkt (oder generell den ursprünglichen Spaltennamen) enthält?
+
+-   **`values_to`**👉 Wie heisst die neue Variable, in der die Werte aus den ursprünglichen Spalten gespeichert werden?
+
+```{r}
+df_wide <- data.frame(
+  id = 1:4,
+  messzeitpunkt_t1 = c(10, 12, 9, 11),
+  messzeitpunkt_t2 = c(14, 15, 13, 12),
+  messzeitpunkt_t3 = c(18, 17, 15, 16)
+)
+```
+
+```{r, echo = TRUE, eval = TRUE}
+df_long <- df_wide |>
+  pivot_longer(
+    cols = starts_with("messzeitpunkt_t"),
+    names_to = "messzeitpunkt",
+    values_to = "score"
+  )
+
+df_long[1:3, 1:3]
+```
+
+::: notes
+notwendig für dat_full um 2x3 ANOVA zu berechnen
+:::
+
+------------------------------------------------------------------------
+
+## Long to Wide mit `pivot_wider()`
+
+**Argumente:**
+
+-   **`names_from`** 👉Die Werte aus dieser Spalte (`messzeitpunkt`) werden wieder zu Spaltennamen.
+
+-   **`values_from`**👉Die Werte aus dieser Spalte (`score`) füllen die neu entstandenen Spalten.
+
+```{r echo = TRUE}
+df_wide_again <- df_long |> 
+  pivot_wider(
+    names_from = messzeitpunkt,
+    values_from = score
+  )
+
+df_wide_again[1:4, 1:4]
+
+```
+
+------------------------------------------------------------------------
+
+## Paket tidyr
+
+![](../../images/clipboard-3012076459.png){fig-align="center" width="148"}
+
+`pivot_longer()` und `pivot_wider()` stammen aus dem Paket tidyr - Teil des tidyverse
+
+[Cheatsheet tidyr](https://rstudio.github.io/cheatsheets/tidyr.pdf)
+
+Umgang mit fehlenden Werten: `drop_na()`, `replace_na()` stammen auch aus tidyr
+
+------------------------------------------------------------------------
+
+## Wichtige Funktionen Datenaufbereitung:
+
+aus [Einführung in R, Kapitel 4.1](https://methodenlehre.github.io/einfuehrung-in-R/chapters/04-tidyverse.html)
+
+![](/images/Datenaufbereitung.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Hands On!
+
+-   Code korrigieren / verbessern
+
+-   Long Transformationen
+
+------------------------------------------------------------------------
+
+# Datenqualität:
+
+-   Normalverteilung der Residuen
+-   Schiefe /Skewness
+-   Kurtosis / Kurtosis
+-   Skalenreliabilität
+-   Ausreisseranalyse
+
+Paket: **psych**
+
+::: notes
+psych sollte aus Diagnostik bekannt sein. Beinhaltet zb Funktionen zu Schiefe, Kurtosis, Reliabilität
+:::
+
+------------------------------------------------------------------------
+
+## Skewness / Kurtosis
+
+**Schiefe / Skewness: Funktion `skew()`**
+
+[![](../../images/EH_9/Schiefe.png){fig-align="center"}](https://de.wikipedia.org/wiki/Schiefe_(Statistik)#/media/Datei:Rechtsschief.svg)
+
+**Kurtosis / Wölbung: Funktion `kurtosi()`**
+
+![](../../images/clipboard-2777451693.png){fig-align="center"}
+
+::: notes
+Kurtosis: Je kleiner der Wert, desto flacher ist die Kurve, je höher, desto steiler. Negative Werte sind dabei nicht möglich. Eine Normalverteilung hat eine Kurtosis von 3.
+:::
+
+:::: notes
+::: notes
+Eine Schiefe nahe 0 und eine Kurtosis von etwa 3 sprechen für eine Normalverteilung. Statt der Kurtosis wird oft der Exzess betrachtet. Dabei wird von der Kurtosis der Wert 3 abgezogen, sodass eine Normalverteilung den Wert 0 hat. Werte \< 0 sprechen für einen im Vergleich zur Normalverteilung flacheren, Werte \> 0 für einen steileren Verlauf
+:::
+::::
+
+------------------------------------------------------------------------
+
+## Residuen
+
+Die Normalverteilung der Residuen ist eine Voraussetzung für viele statistische Tests.
+
+Mögliche Arten, diese Annahme zu ueberprüfen:
+
+-   **Visuelle Verfahren** (z.B. QQ-Plot)
+
+-   **Formale Tests** (z. B. Shapiro-Wilk) –\> "veraltete" Methode
+
+<br>
+
+Visuelle Verfahren werden heute meist bevorzugt, da sie weniger sensitiv gegenüber Stichprobengrössen sind.
+
+<br>
+
+Allerdings gilt: Verletzungen der Normalitätsannahme sind in der Praxis oft weniger problematisch als angenommen. Sollte es problematisch sein, kann auf nichtparametrische Verfahren ausgewichen werden.
+
+------------------------------------------------------------------------
+
+## Normalität der Residuen
+
+```{r}
+model_1 <- lm(body_mass_g ~ bill_length_mm + sex, data = penguins)
+
+residuals <- rstandard((model_1))
+hist(residuals)
+```
+
+::: notes
+Eine Residuum ist die Abweichung eines vorhergesagten Wertes vom tatsächlich beobachteten Wert. Der vorhergesagte Wert wurde dabei mithilfe eines mathematischen Modells ermittelt. Indem die Residuen minimiert werden, wird das Modell optimiert und es können genauere Vorhersagen getroffen werden. Im Gegensatz zu den Störgrößen sind Residuen (lateinisch residuum = „das Zurückgebliebene“) berechnete Größen und messen den vertikalen Abstand zwischen Beobachtungspunkt und der geschätzten Regressionsgerade. 
+:::
+
+------------------------------------------------------------------------
+
+## Residuen: QQ-Plot
+
+**Zweck:** QQ-Plots prüfen, ob die Daten einer theoretischen Verteilung (z. B. Normalverteilung) folgen.
+
+-   **X-Achse:** **Theoretische Quantile**
+
+-   **Y-Achse:** **Beobachtete (empirische) Datenquantile**
+
+```{r}
+
+qqnorm(residuals)
+qqline(residuals)
+
+```
+
+::: notes
+Der QQ-Plot und das Histogramm zeigen, dass die Residuen insgesamt nahe an einer Normalverteilung liegen, jedoch im linken Extrembereich **etwas mehr Werte** (heavy tail) und im rechten Extrembereich **etwas weniger Werte** (light tail) aufweisen. Diese Abweichungen sind gering, sodass parametrische Analysen weiterhin angemessen sind.
+:::
+
+------------------------------------------------------------------------
+
+## Ausreisser
+
+Sollten in Abhängigkeit des Studiendesigns und der Fragestellungen in einer Präregistrierung oder einem Datenanalyseplan definiert werden.
+
+z.B.:
+
+-   Werte +/- 3 SD vom Gruppenmittelwert
+
+-   Visuelle Ausreisser bei Boxplots und/oder Scatterplots
+
+    **ABER: Nur weil ein Wert extrem aussieht sollte man den nicht unüberlegt entfernen! Mehr dazu in @leys2019**
+
+------------------------------------------------------------------------
+
+## Ausreisser
+
+```{r, echo=FALSE}
+
+new_penguin <- tibble(
+  species = "Adelie",
+  island = "XX",
+  bill_length_mm = 1,
+  bill_depth_mm = 1,
+  flipper_length_mm = 170,
+  body_mass_g = 7200,
+  sex = "male",
+  year = 1990
+)
+
+penguins <- bind_rows(penguins, new_penguin)
+
+penguins_dropped <- drop_na(penguins)
+
+
+```
+
+**Streudiagramme/Scatterplots**
+
+```{r echo = TRUE}
+
+ggplot(data = penguins_dropped, aes( x = flipper_length_mm, y = body_mass_g))+
+  geom_point()
+```
+
+------------------------------------------------------------------------
+
+## Ausreisser
+
+**boxplot**
+
+```{r}
+ggplot(penguins_dropped, aes(x = "", y = body_mass_g)) +
+  geom_boxplot()
+
+```
+
+::: notes
+Ein **Ausreißer** stammt vermutlich aus einer anderen Population und trägt daher nicht zu gültigen Schlussfolgerungen über die Zielpopulation bei, weshalb er grundsätzlich ausgeschlossen werden sollte. **Extremwerte** hingegen stammen aus derselben Population, sind lediglich sehr groß oder klein und dürfen daher nicht pauschal entfernt werden.
+
+--\> Beispiel: Pinguin wurde immer von menschen gefütteret und ist deswegen sehr dick –\> andere Polulation als die Zielpopulation
+:::
+
+------------------------------------------------------------------------
+
+## Skalenreliabilität
+
+-   Interne Konsistsenz (Cronbach's Alpha)
+
+```{r echo=TRUE}
+#Mit psych Package
+library(psych)
+
+bfi_10_extra <- bfi_10_data |>
+  select(bfi_extra_1_r, bfi_extra_2)
+
+alpha(bfi_10_extra, check.keys = TRUE)
+
+
+```
+
+------------------------------------------------------------------------
+
+## Skalenreliabilität (2)
+
+-   [Mc Donalds Omega](McDonald's%20Omega%20(ω)%20https://dorsch.hogrefe.com/stichwort/mcdonalds-omega-o)
+
+<br>
+
+-   Test-Retest Reliabilität 👉 Korrelation zwischen Fragebögen an zwei Messzeitpunkten
+
+<br>
+
+-   Split-half Reliabilität 👉 Aufteilen des Fragebogens in zwei Hälften und deren Reliabilitäten (z.B. Cronbach‘s Alpha) vergleichen. Möglich mit der Funktion `splitHalf()` aus dem psych Paket.
+
+<br>
+
+Mehr Infos dazu: [Psychometrics in R](https://bookdown.org/annabrown/psychometricsR/exercise5.html) & [Björn Walther](https://bjoernwalther.com/cronbachs-alpha-in-r-berechnen/)
+
+::: notes
+In diesem Beispiel werden nur zwei Items verwendet - wir gehen davon aus dass bfi_extra_1_r schon rekodiert wurde. Anonsten könnte man das auch im alpha befehl weiter spezifizieren.
+:::
+
+------------------------------------------------------------------------
+
+## Heute haben wir:
+
+-   Wide to long Transformationen gemacht - **You mastered the tidyr!**
+
+    ![](/images/tidyr.png){width="156"}
+
+-   Datenqualitätsindikatoren kennengelernt
+
+------------------------------------------------------------------------
+
+## Bis nächste Woche
+
+-   Muddiest Points Umfrage bis Sonntag 23:55
+-   Es gibt sonst keine HÜ - nutzt die Zeit verpasstes nachzuholen, schwierige Aspekte noch mal anzuschauen etc.
+-   Lars kann bei Bedarf kontaktiert werden
+-   Forum nutzen!
+
+------------------------------------------------------------------------
+
+References:
+
+Wickham H (2025). *genzplyr: dplyr but make it bussin fr fr no cap*. R package version 0.0.0.9000, <https://github.com/hadley/genzplyr>.

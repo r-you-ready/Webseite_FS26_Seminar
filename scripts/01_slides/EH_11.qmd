@@ -1,0 +1,482 @@
+---
+title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 11"
+author: "Sandra Grinschgl, Aaron Friedli, Lars Schilling"
+format:
+  revealjs:
+    title-slide-attributes:
+      data-visibility: hidden
+    theme: [default, ../../custom.scss]
+    transition: slide
+    slide-number: true
+    logo: /images/unibe.png
+    incremental: false
+    self_contained: true
+    show-slide-number: all
+    smaller: true
+    progress: true
+    controls: true
+    embed-resources: true
+bibliography: references.bib
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+library(palmerpenguins)
+library(apaTables)
+penguins <- palmerpenguins::penguins
+
+
+bfi_10_data <- read_delim("raw/bfi_10_data.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+dat_full <- read_csv("raw/dat_full.csv")
+
+dat_full_long <- dat_full |>
+      pivot_longer(
+        cols = c(pre1, pre4),
+        names_to = "time_rating",
+        values_to = "rating"
+      )
+
+```
+
+## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
+
+HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**11. Einheit**, 24.11.2025
+
+------------------------------------------------------------------------
+
+## Heute:
+
+<iframe src="../../PDFs/Syllabus.pdf" width="100%" height="600px">
+
+</iframe>
+
+------------------------------------------------------------------------
+
+## Fragen Hands On Block 5?
+
+------------------------------------------------------------------------
+
+## Abbildungen: Visualize
+
+![](../../images/EH_10/ggplot.png){fig-align="center" width="186"}
+
+------------------------------------------------------------------------
+
+## Visualisierungen: Reproduktion der Figures aus Grinschgl 2021
+
+```{r echo=FALSE}
+
+dat_full <- dat_full |>    
+  mutate(
+    mmq_mean = rowMeans(
+      across(starts_with("question"), .names = "{col}"),
+      na.rm = TRUE
+    )
+  )
+
+group_summary <- dat_full %>%
+  group_by(group_all) %>%
+  summarize(
+    mean_mmq = mean(mmq_mean, na.rm = TRUE),
+    se_mmq = sd(mmq_mean, na.rm = TRUE) / sqrt(sum(!is.na(mmq_mean)))
+  )
+
+
+group_summary$group_all <- factor(group_summary$group_all,
+                                  levels = c("below", "control", "above"))
+```
+
+```{r, echo = FALSE}
+ggplot(group_summary, aes(x = group_all, y = mean_mmq)) +
+  geom_col(fill = "gray", color = "black") + 
+  geom_errorbar(
+    aes(ymin = mean_mmq - se_mmq, ymax = mean_mmq + se_mmq),  
+    width = 0.2,
+    color = "black"
+  ) +
+  labs(
+    x = "Group",
+    y = "Mean MMQ",
+    title = "Group Means of Mean MMQ with SE Error Bars"
+  ) +
+  theme_minimal() +
+  ylim(0, 4)+
+  theme_classic()
+```
+
+------------------------------------------------------------------------
+
+## Visualisierungen
+
+```{r, echo=FALSE}
+descriptives <- dat_full_long |> 
+  group_by(group_all, time_rating) |> 
+  summarize(N = length(rating),
+               mean_d = mean(rating)*10,
+               sd_d   = sd(rating)*10,
+               se_d   = sd_d / sqrt(N)
+)
+
+descriptives$group_all <- factor(descriptives$group_all, c("above", "control", "below"))
+
+rate_plot <- descriptives |> 
+  ggplot(aes(x = time_rating, 
+             y = mean_d, 
+             group = group_all)) 
+
+rate_plot +
+  geom_line(aes(color = group_all, linetype = group_all), size = 1.2) +
+  geom_errorbar(aes(ymin = mean_d - se_d, ymax = mean_d + se_d), width = .1) +
+  scale_color_manual(values = c("green4", "red", "black")) +
+  theme_classic() +
+  labs(title = "Subjective Performance Ratings ") +
+  ylab("Percentile Rank") +
+  xlab("Time") +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = "bold"), 
+        axis.text = element_text(size = 11), axis.title = element_text(size = 14)) +
+  labs(colour = "Feedback Group", linetype = "Feedback Group", shape = "Feedback Group") 
+```
+
+------------------------------------------------------------------------
+
+## `ggplot2()`
+
+Sehr flexibles Paket.
+
+-   Plots werden schrittweise "befüllt"
+
+<!-- -->
+
+-   Alle plots beginnen mit `ggplot()` und dem verwendeten Datensatz
+
+-   Mit aes() definieren wir die elemantaren Elemente der Plots - Variablen die geplottet werden sollen
+
+-   mit + können wir geoms, layers und weitere Elemente hinzufügen.
+
+------------------------------------------------------------------------
+
+## `ggplot2()` - Cheatsheet
+
+:::::: {style="display: flex; justify-content: space-between; gap: 1rem;"}
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot1.png)
+:::
+
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot2.png)
+:::
+
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot3.png)
+:::
+::::::
+
+::: notes
+With ggplot2, you begin a plot with the function ggplot(), defining a plot object that you then add layers to. The first argument of ggplot() is the dataset to use in the graph and so ggplot(data = penguins) creates an empty graph that is primed to display the penguins data, but since we haven’t told it how to visualize it yet, for now it’s empty. This is not a very exciting plot, but you can think of it like an empty canvas you’ll paint the remaining layers of your plot onto.
+
+Next, we need to tell ggplot() how the information from our data will be visually represented. The mapping argument of the ggplot() function defines how variables in your dataset are mapped to visual properties (aesthetics) of your plot. The mapping argument is always defined in the aes() function, and the x and y arguments of aes() specify which variables to map to the x and y axes. For now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic. ggplot2 looks for the mapped variables in the data argument, in this case, penguins.
+
+To do so, we need to define a geom: the geometrical object that a plot uses to represent data. These geometric objects are made available in ggplot2 with functions that start with geom\_. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms (geom_bar()), line charts use line geoms (geom_line()), boxplots use boxplot geoms (geom_boxplot()), scatterplots use point geoms (geom_point()), and so on.
+
+Zusammenhang bedeutet die Verwendung von +, dass wir einzelne Elemente eines Plot-Objektes zusammenfügen.
+:::
+
+------------------------------------------------------------------------
+
+## Argumente von `ggplot()`
+
+-   Variablen als Aesthetic Mappings definieren
+
+-   Mapping ist immer das zweite Argument (nach dem Datensatz), "call" kann also auch verkürzt werden.
+
+```{r, echo = TRUE}
+
+p <- penguins |>
+  ggplot( 
+       mapping = 
+         aes(x = body_mass_g, 
+           y = bill_length_mm))
+p
+```
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Geoms
+
+-   Layers Hinzufügen z.B. ein geom mit +
+-   Geoms = geometrische Objekte, die die Daten darstellen (z.B. Punkte, Linien)
+-   Muss je nachdem welche Daten man hat und wie man diese darstellen will ausgewählt werden, z.B.
+    -   Kategoriale Variable: `geom_bar()`
+    -   Kontinuierliche Variable: `geom_histogram()`
+    -   2 kontinuierliche Variablen: `geom_point()`, `geom_line()`
+    -   2 Kategoriale Variablen: `geom_count()`
+    -   Kategorial + Kontinuierlich: `geom_boxplot()`, `geom_violin()`
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Geoms
+
+```{r, echo = TRUE}
+
+p <- p +
+  geom_point()
+
+p
+```
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Layers
+
+-   Mappings können auch in den Layers definiert werden
+
+```{r, echo = TRUE}
+p <- p + 
+  geom_point(aes(x = body_mass_g, 
+           y = bill_length_mm))
+
+p
+```
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Layers
+
+-   Titel + Achsenbeschriftung (= `labs`), Regressionslinien, vereinfachtes Design
+
+```{r, echo = TRUE}
+p <- p +
+  geom_smooth(aes(group = 1), method = "lm") +
+  theme_classic() +
+  labs(
+    title = "Relationship Between Body Mass and Bill Length",
+    x = "Body Mass (g)",
+    y = "Bill Length (mm)"
+  )
+
+p
+```
+
+mit `theme_` können [verschiedene Formatierungen](https://ggplot2.tidyverse.org/reference/ggtheme.html) gewählt werden. `theme_classic` wird typischerweise für APA7 passende Formatierungen gewählt.
+
+------------------------------------------------------------------------
+
+## `ggplot()` - Verschiedene Layers/Geoms kombiniert
+
+```{r echo = TRUE}
+p2 <- penguins |>
+  ggplot(aes(x = island, y = body_mass_g, color = island, shape = sex)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.5)+
+  theme_classic()+
+  labs(
+    title = "Body Mass Per Island and Species", x = "Island", y = "Body Mass (g)")
+p2
+```
+
+::: notes
+Achtung: Nicht optimal formatiert, weil sonst der Plot zu klein dargestellt wird.
+:::
+
+------------------------------------------------------------------------
+
+## Abbildungen speichern
+
+```{r, eval = FALSE, echo = TRUE}
+
+ggsave(filename = "my_first_plot.png", plot = p2)
+
+```
+
+------------------------------------------------------------------------
+
+## Weitere Ressourcen:
+
+Viel, viel mehr Möglichkeiten als wir hier besprechen, siehe z.B.:
+
+[**Auflistung von Argumenten**](https://ggplot2.tidyverse.org/reference/index.html)
+
+[**ggplot2 Cheatsheet**](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf)
+
+**R for Data Science – Kapitel 9 & 10:**\
+[Kapitel „Layers“](https://r4ds.hadley.nz/layers)
+
+[Kapitel „EDA“](https://r4ds.hadley.nz/EDA.html)
+
+[**Weitere Textelemente in Abbildungen (Kapitel 11)**](https://r4ds.hadley.nz/communication)
+
+Hier findet man auch weitere Visualisierungsmöglichkeiten & Informationen dazu, wie man verschiedene Plots neben/untereinander abbilden kann.
+
+[Top 50 Visualisierungen mit ggplot2](https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Waffle%20Chart)
+
+[für Animationen, Signifikanztests, Wordclouds usw.](https://exts.ggplot2.tidyverse.org/gallery/)
+
+------------------------------------------------------------------------
+
+# Inferenzstatistik
+
+------------------------------------------------------------------------
+
+## Erinnerung Statistik
+
+-   Forschungsfrage/ Hyptothese aufstellen und Auswahl passender Testverfahren 👉 Bereits im Datenanalyseplan gemacht
+
+[Entscheidungsbaum statistischer Testverfahren](https://etools.fernuni.ch/entscheidungsbaum/main.html)
+
+<br><br>
+
+[Entscheidungsbaum UZH](https://www.methodenberatung.uzh.ch/de/datenanalyse_spss.html)
+
+------------------------------------------------------------------------
+
+## Korrelationen
+
+-   Linearer Zusammenhang zweier Variablen
+-   Positive Korrelation = hohe Ausprägungen einer Variable hängen mit hohen Ausprägungen einer anderen Variable zusammen
+-   Negative Korrelation = Hohe Ausprägungen einer Variable hängen mit niedrigen Ausprägungen einer anderen Variable zusammen
+-   Korrelationskoeffizient *r* kann von -1 bis +1 gehen
+-   Voraussetzung: Normalverteilung der Residuen (siehe EH 10)
+-   Nicht-parametrische Alternative: Spearman Korrelation
+
+```{r, echo = TRUE}
+
+cor.test(penguins$bill_length_mm, penguins$body_mass_g)
+
+```
+
+------------------------------------------------------------------------
+
+## Notation
+
+```{r, echo = TRUE}
+
+options(scipen = 999)
+cor.test(penguins$bill_length_mm, penguins$body_mass_g)
+
+```
+
+------------------------------------------------------------------------
+
+## Hinweise zur linearen Regression
+
+-   Testet den Zusammenhang zwischen zwei Variablen
+-   Einfache lineare Regression = Korrelation
+-   Keine Kausalaussagen möglich (wie auch bei Korrelationen)
+-   Voraussetzungen: Normalverteilung der Residuen, Multikollinearität und Homoskedastizität
+-   Nicht-parametrische Alternative: Poisson-Regression
+
+![](../../images/EH_11/Regressionen.png){fig-align="center"}
+
+::: notes
+Homoskedastizität bedeutet, dass die Varianz der Residuen in einer Regressionsanalyse   für alle Werte des Prädiktors konstant ist. Das heißt, die Abweichungen der vorhergesagten Werte von den wahren Werten sind in etwa immer gleich groß – unabhängig wie hoch oder niedrig der Wert des Prädiktors ist. Um deine Regressionsanalyse sinnvoll interpretieren zu können, ist es wichtig, dass Homoskedastizität vorliegt. Homoskedastizität bildet deshalb neben einigen weiteren Aspekten (z.B. Vermeidung von Multikollinearität ) eine wichtige Voraussetzung für die lineare Regression. Heteroskedastizität Das Gegenteil von Homoskedastizität ist Heteroskedastizität. In diesem Fall verändert sich die Varianz der Residuen mit ansteigenden oder abfallenden Werten des Prädiktors. Beispielsweise kannst du bei Heteroskedastizität mit deiner Vorhersage systematisch umso weiter daneben liegen, je größer der Prädiktorwert ist, für den du dein Kriterium schätzen möchtest.
+:::
+
+------------------------------------------------------------------------
+
+## Einfache lineare Regressionen
+
+**Argumente**
+
+```{r, echo=TRUE}
+
+model_1 <- lm(mean_rl_all ~ cvstm_propcorrect, data = dat_full)
+
+summary(model_1)
+```
+
+------------------------------------------------------------------------
+
+## Regression: Output
+
+![](../../images/EH_11/Regressionsoutput.png){fig-align="center"}
+
+::: notes
+Hier eine **sehr kurze, punktuelle Zusammenfassung**:
+
+-   **Intercept (7.63)**: Ausgangswert von *mean_rl_all*, wenn cvstm_propcorrect = 0.
+
+-   **Steigung (-3.30)**: Hoeherer cvstm_propcorrect sagt niedrigeren mean_rl_all voraus (negativer Zusammenhang
+
+-   **p = .0037**: Zusammenhang ist **signifikant**.
+
+-   **Residuen**: Durchschnittliche Abweichung vom Modell ca. 1.10.
+
+-   **R² = 0.052**: Modell erklaert **5% der Varianz** → kleiner Effekt.
+
+-   **F-Test p = .0037**: Das Gesamtmodell ist signifikant.
+
+**Kurz:** Höhere cvstm_propcorrect-Werte gehen mit niedrigeren mean_rl_all-Werten einher, aber das Modell erklaert nur wenig Varianz.
+:::
+
+------------------------------------------------------------------------
+
+### **Tabelle: Funktionen für Regressionen und verwandte Analysen in R**
+
+| Funktion | Beschreibung |
+|----|----|
+| `lm(y ~ x)` | Einfache lineare Regression mit einer abhängigen Variablen *y* und einem Prädiktor *x*. |
+| `lm(y ~ x1 + x2)` | Multiple Regression mit einer abhängigen Variablen *y* und zwei Prädiktoren *x1* und *x2*. |
+| `summary()` | Gibt die Ergebnisse der Regressionsanalyse für ein Regressionsmodell aus. |
+| `confint()` | Konfidenzintervalle für die Regressionskoeffizienten. |
+
+------------------------------------------------------------------------
+
+| Funktion | Beschreibung |
+|----|----|
+| `fitted()` | Vorhergesagte Werte des Regressionsmodells. |
+| `resid()` | Residuen des Regressionsmodells. |
+| `predict()` | Vorhergesagte Werte für bestimmte Werte der Prädiktorvariablen. |
+| `anova()` | Vergleicht die Determinationskoeffizienten zweier Regressionsmodelle mit einem F-Test. |
+| `vif()` \* | Variance Inflation Factors (VIF) für jeden Prädiktor; aus dem **car**-Paket. |
+
+\* aus zusätzlichen Paketen
+
+------------------------------------------------------------------------
+
+## Hierarchische Regression
+
+-   Man legt zwei oder mehr Regressionsmodelle an mit zunehmenden Prädiktoren
+
+-   Dann vergleicht man diese Modelle mit `anova(model1, model2)`. Gibt es einen signifikanten Zuwachs an aufgeklärter Varianz (siehe Determinationskoeffizient) von model1 zu model2?
+
+Siehe hier: [**Lineare Regression mit R (einfach, multiple, hierarchisch)**](https://www.youtube.com/watch?v=JzcIKIW6mfc)
+
+------------------------------------------------------------------------
+
+## Heute haben wir:
+
+-   Basics der Datenvisualisierungen kennengelernt
+
+    -   Erstellung von Tabellen
+
+    -   `ggplot()`
+
+-   Korrelationen und Regressionen in R kennengelernt
+
+**Reminder: R Übung bis Freitag 28.11, Peer Feedback über Forum bis 03.12.**
+
+------------------------------------------------------------------------
+
+## **Optionale Slide Korrelation = Einfache lineare Regression**
+
+```{r}
+cor.test(penguins$bill_length_mm, penguins$body_mass_g)
+
+summary(lm(bill_length_mm ~ body_mass_g, data = penguins))
+
+```
+
+```{r}
+0.5951098^2
+```

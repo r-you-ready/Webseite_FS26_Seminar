@@ -1,0 +1,125 @@
+project:
+  type: website
+  resources:
+    - PDFs
+
+website:
+  title: "R u Ready"
+  site-url: https://r-you-ready.github.io/Webseite_FS26/
+  sidebar:
+    style: floating
+    search: true
+    collapse-level: 1
+    logo: images/ryouready_logo.png
+    active-link: true
+    contents:
+      - href: scripts/04_misc/front_page.qmd
+        text: "Einleitung"
+      - href: scripts/01_slides/0_presentation.qmd
+        text: "Präsentationen"
+        contents:
+          - href: scripts/01_slides/EH_1.qmd
+            text: "Einheit 1 - 17.09.2025"
+          - href: scripts/01_slides/EH_2.qmd
+            text: "Einheit 2 - 24.09.2025"
+          - href: scripts/01_slides/EH_3.qmd
+            text: "Einheit 3 - 01.10.2025"
+          - href: scripts/01_slides/EH_4.qmd
+            text: "Einheit 4 - 08.10.2025"
+          - href: scripts/01_slides/EH_5.qmd 
+            text: "Einheit 5 - 15.10.2025"
+          - href: scripts/01_slides/EH_6.qmd
+            text: "Einheit 6 - 22.10.2025"
+          - href: scripts/01_slides/EH_7.qmd
+            text: "Einheit 7 - 29.10.2025"
+          - href: scripts/01_slides/EH_8.qmd
+            text: "Einheit 8 - 05.11.2025"
+          - href: scripts/01_slides/EH_9.qmd
+            text: "Einheit 9 - 12.11.2025"
+          - href: scripts/01_slides/EH_10.qmd 
+            text: "Einheit 10 - 19.11.2025"
+          - href: scripts/01_slides/EH_11.qmd
+            text: "Einheit 11 - 26.11.2025"
+          - href: scripts/01_slides/EH_12.qmd
+            text: "Einheit 12 - 03.12.2025"
+          - href: scripts/01_slides/EH_13.qmd
+            text: "Einheit 13 - 10.12.2025"
+          - href: scripts/01_slides/EH_14.qmd
+            text: "Einheit 14 - 17.12.2025"
+      - href: scripts/02_excercises/Übungen.qmd
+        text: "Übungen zu den Einheiten"
+        contents: 
+          - href: scripts/02_excercises/loesung_1.qmd
+            text: "Hands on - Block 1 (Woche 1 - 2) - Mit Musterlösungen"
+          - href: scripts/02_excercises/loesung_2.qmd
+            text: "Hands on - Block 2 (Woche 3 - 4) - Mit Musterlösungen"
+          - href: scripts/02_excercises/loesung_3.qmd
+            text: "Hands on - Block 3 (Woche 5 - 6) - Mit Musterlösungen"
+          - href: scripts/02_excercises/loesung_4.qmd
+            text: "Hands on - Block 4 (Woche 7- 8) - Mit Musterlösungen"
+          - href: scripts/02_excercises/loesung_5.qmd
+            text: "Hands on - Block 5 (Woche 9 - 10) - Mit Musterlösungen"
+          - href: scripts/02_excercises/loesung_6.qmd
+            text: "Hands on - Block 6 (Woche 11 - 12) - Mit Musterlösungen"
+          - href: scripts/02_excercises/loesung_7.qmd
+            text: "Hands on - Block 7 (Woche 13)"
+      - href: hausuebungen.qmd
+        text: "Hausübungen"
+        contents:
+        - href: scripts/02_excercises/hausuebung_loesung_1.qmd
+          text: "Hausübung 1 - Mit Lösungen"
+        - href: scripts/02_excercises/hausuebung_loesung_2.qmd
+          text: "Hausübung 2 - Mit Lösungen"
+        - href: scripts/02_excercises/hausuebung_loesung_3.qmd
+          text: "Hausübung 3 - Mit Lösungen"
+      - href: scripts/04_misc/muddiest_points_2.qmd
+        text: "Muddiest Points"
+        contents:
+        - href: scripts/04_misc/muddiest_points_2.qmd
+          text: "Muddiest Points 2"
+        - href: scripts/04_misc/muddiest_points_3.qmd
+          text: "Muddiest Points 3"
+      - href: scripts/03_faq/faq.qmd
+        text: "FAQ"
+        contents:
+          - href: scripts/03_faq/rstudio.qmd
+            text: "1  RStudio"
+            contents:
+              - href: scripts/03_faq/fehlermeldungen.qmd
+                text: "1.1  Fehlermeldungen"
+          - href: scripts/03_faq/codebook.qmd
+            text: "2  Codebook"
+          - href: scripts/03_faq/datenanalyseplan.qmd
+            text: "3  Datenanalyseplan"
+          - href: scripts/03_faq/statistic.qmd
+            text: "4  Statistik"
+          - href: scripts/03_faq/endabgabe.qmd
+            text: "5  Abschlussprojekt"
+      - href: scripts/04_misc/here.qmd
+        text: "Probleme beim Rendern"
+      - href: scripts/04_misc/links_und_ressourcen.qmd
+        text: "Links und Ressourcen"
+        contents:
+          - href: scripts/04_misc/ChatGPT.qmd
+            text: "ChatGPT in RStudio"
+          - href: scripts/04_misc/Memes.qmd
+            text: "Memes :)"
+      - href: scripts/04_misc/leistungsnachweis.qmd
+        text: "Leistungsnachweis"
+      - href: scripts/04_misc/checkliste_abschlussarbeit.qmd
+        text: "Checkliste Abschlussarbeit"
+      - href: scripts/04_misc/individuelle_loesungen.qmd
+        text: "Individuelle Musterlösungen"
+      - href: scripts/04_misc/learnr_shinyapp.qmd
+        text: "LearnR - Shinyapp"
+      - href: scripts/04_misc/about.qmd
+        text: "About"
+
+format:
+  html:
+    toc: true
+    toc-expand: false
+    css:
+      - styles.css
+      - styles/website_styles.css
+
