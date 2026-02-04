@@ -1,6 +1,7 @@
 ---
 title: "Hausübung 2 Lösung"
 editor: visual
+draft: true
 format:
   html:
     toc: TRUE

@@ -1,5 +1,6 @@
 ---
 title: "Lösung 1"
+draft: true
 ---
 
 # Lösung - Codings Basics (Einheiten 1 und 2)

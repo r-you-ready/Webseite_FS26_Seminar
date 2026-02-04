@@ -1,5 +1,6 @@
 ---
 title: "Lösung 2"
+draft: true
 ---
 
 # Lösung - Coding Basics (Einheiten 3 und 4)

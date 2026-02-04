@@ -2,6 +2,7 @@
 title: "Hands On – Analyze (Einheiten 11 und 12)"
 editor: visual
 bibliography: references.bib
+draft: true
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE, warning=FALSE}
@@ -14,19 +15,17 @@ dat_long <- read_csv(here::here("scripts/02_excercises/data/processed/data_long.
 Bei Bedarf finden sich hier nochmal die Slides zur EH11:
 
 ::: {=html}
-<iframe src="../01_slides/EH_11.html"
-        width="100%"
-        height="500"
-        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+<iframe src="../01_slides/EH_11.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
+
+</iframe>
 :::
 
 Und hier die Slides zur EH12:
 
 ::: {=html}
-<iframe src="../01_slides/EH_12.html"
-        width="100%"
-        height="500"
-        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+<iframe src="../01_slides/EH_12.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
+
+</iframe>
 :::
 
 # Lernziele
@@ -57,7 +56,7 @@ Für die heutigen Übungen benötigen wir den **Wide Datensatz** `dat_full` sowi
 ### Tabelle mit häufig verwendeten Geoms()
 
 | Geom | Funktion | Einsatzbereich | Bild / Beispiel |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | **geom_point()** | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) | ![](../../images/EH_10/geom_point.png) |
 | **geom_jitter()** | Jitter-Plot | Punkte leicht versetzen, um Überlappung zu vermeiden (v. a. bei kategorialem x) | ![](../../images/EH_10/geom_jitter.png) |
 | **geom_line()** | Liniendiagramm | Werteverlauf Über kontinuierliche x-Achse darstellen | ![](../../images/EH_10/geom_line.png) |
@@ -412,7 +411,7 @@ Linearer Zusammenhang (Kovarianz) zweier Variablen. Positive Korrelation = hohe 
 ### **Tabelle: Funktionen für Regressionen und verwandte Analysen in R**
 
 | Funktion | Beschreibung |
-|------------------------------------|------------------------------------|
+|----|----|
 | **lm(y \~ x)** | Einfache lineare Regression mit einer abhängigen Variablen *y* und einem Prädiktor *x*. |
 | **lm(y \~ x1 + x2)** | Multiple Regression mit einer abhängigen Variablen *y* und zwei Prädiktoren *x1* und *x2*. |
 | **summary()** | Gibt die Ergebnisse der Regressionsanalyse für ein Regressionsmodell aus. |
@@ -510,7 +509,7 @@ Einmal mehr erhalten wir mit `summary()` informationen über das von uns gerechn
 ### **Tabelle: Funktionen für *t*-Tests und verwandte Analysen in R**
 
 | Funktion | Beschreibung |
-|------------------------------------|------------------------------------|
+|----|----|
 | **t.test** | Allgemeine Funktion für verschiedene t-Tests: Ein-Stichproben-t-Test, t-Test für unabhängige Stichproben und t-Test für abhängige Stichproben. |
 | **t.test(av, mu = x)** | Ein-Stichproben-t-Test. **av** = abhängige Variable. **x** = Vergleichswert der Population. |
 | **t.test(av \~ uv)** | Welch-t-Test für **unabhängige Stichproben**. **av** = abhängige Variable, **uv** = Gruppenvariable. |

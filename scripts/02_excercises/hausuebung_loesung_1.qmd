@@ -1,6 +1,7 @@
 ---
 title: "Hausübung 1 Lösung"
 editor: visual
+draft: true
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE}

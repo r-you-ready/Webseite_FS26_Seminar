@@ -1,6 +1,7 @@
 ---
 title: "Individuelle Musterlösungen"
 toc: false
+draft: true
 ---
 
 Hier kannst du deine individuellen Lösungen basierend auf deinem Datensatz abrufen.

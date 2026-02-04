@@ -2,6 +2,7 @@
 title: "Checkliste Abschlussarbeit"
 format: html
 editor: visual
+draft: true
 ---
 
 **Abgabe bis 11.1.2026 - 23:55**

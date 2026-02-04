@@ -2,6 +2,7 @@
 title: "Hands On – Tidy & Transform / Analyze (Einheiten 9 und 10)"
 editor: visual
 bibliography: references.bib
+draft: true
 ---
 
 ```{r, echo = TRUE, results = 'hide', message = FALSE, warning = FALSE}
@@ -14,19 +15,17 @@ dat_full <- read_csv(here("data/raw/dat_full.csv"))
 Bei Bedarf finden sich hier nochmal die Slides zur EH9:
 
 ::: {=html}
-<iframe src="../01_slides/EH_9.html"
-        width="100%"
-        height="500"
-        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+<iframe src="../01_slides/EH_9.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
+
+</iframe>
 :::
 
 Und hier die Slides zur EH10:
 
 ::: {=html}
-<iframe src="../01_slides/EH_10.html"
-        width="100%"
-        height="500"
-        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+<iframe src="../01_slides/EH_10.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
+
+</iframe>
 :::
 
 # Lernziele
@@ -365,7 +364,7 @@ alpha(mmq_vars)
 ## Streudiagramme/Scatterplots & weitere Datenverteilungen
 
 | **Geom** | **Funktion** | **Einsatzbereich** |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | geom_point() | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) |
 | geom_line() | Liniendiagramm | Werteverlauf über kontinuierliche x-Achse darstellen |
 | geom_bar() | Balkendiagramm | Häufigkeiten oder Aggregationen für Kategorien (x = Gruppe) |

@@ -2,6 +2,7 @@
 title: "Hands On – Analyze (Einheiten 11 und 12)"
 editor: visual
 bibliography: references.bib
+draft: true
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE, warning=FALSE}
@@ -19,10 +20,9 @@ dat_long <- read_csv(here::here("scripts/02_excercises/data/processed/data_long.
 Bei Bedarf finden sich hier nochmal die Slides zur EH13:
 
 ::: {=html}
-<iframe src="../01_slides/EH_13.html"
-        width="100%"
-        height="500"
-        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+<iframe src="../01_slides/EH_13.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
+
+</iframe>
 :::
 
 # Lernziele
