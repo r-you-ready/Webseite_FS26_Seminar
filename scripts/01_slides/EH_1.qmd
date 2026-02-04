@@ -1,6 +1,6 @@
 ---
-title: "R u Ready? HS2025 | Psychologie der Digitalisierung - Einheit 1"
-author: Sandra Grinschgl, Aaron Friedli, Lars Schilling
+title: "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1"
+author: Sandra Grinschgl, Laura Hirt, Lars Schilling
 format: 
   revealjs:
     history: true
@@ -21,7 +21,7 @@ format:
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse
 
-HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br>**1. Einheit**, 17.09.2025
+FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**1. Einheit**, 18.02.2026
 
 <br>
 
@@ -52,7 +52,7 @@ HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br
 
 ::::: columns
 ::: {.column width="80%"}
-### *Aaron Friedli (er/ihm) (MSc. Psychologie)*
+### *Laura Hirt (sie/ihr) (MSc. Psychologie)*
 
 -   Lehrassistenz R you Ready / Methodenberatung\
 
@@ -60,13 +60,13 @@ HS 2025<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br
 
 -   Sprechstunde/Methodenberatung nach Vereinbarung\
 
--   aaron.friedli\@unibe.ch
+-   laura.hirt\@unibe.ch
 
 -   Weiss nie, ob ich 'R' Englisch oder Deutsch aussprechen soll.
 :::
 
 ::: {.column width="20%"}
-![](/images/aaron.jpg){fig-align="center"}
+![](../../images/aaron.jpg){fig-align="center"}
 :::
 :::::
 
@@ -114,7 +114,7 @@ Bitte gebt uns auch Bescheid, falls wir euch falsch ansprechen!
 
 ## Österreichisch vs. Berndeutsch
 
-Bitte gebt mir/uns auch Bescheid solltet ihr etwas nicht verstehen! Seht es uns nach falls wir etwas nicht verstehen und nachfragen!
+Bitte gebt mir/uns auch Bescheid, solltet ihr etwas nicht verstehen! Seht es uns nach, falls wir etwas nicht verstehen und nachfragen!
 
 ::::: columns
 ::: {.column width="50%"}
@@ -130,7 +130,7 @@ Bitte gebt mir/uns auch Bescheid solltet ihr etwas nicht verstehen! Seht es uns 
 
 ## Organisatorisches
 
--   🕝 Immer Mittwochs um 10:15 (Gruppe Aaron) / 16:15 (Gruppe Sandra)
+-   🕝 Immer Mittwochs um 12:15 (Gruppe Laura) / 16:15 (Gruppe Sandra)
 
 -   📍Fabrikstrasse 8, Raum B101
 
@@ -315,7 +315,7 @@ Bei Problemen die ihr nicht lösen könnt und keine Ressourcen findet, könnt ih
 
 Abgabe: Datenanalyseplan, Codebook, Datenfiles, Analyseskript(e) nach vorgegebener Ordnerstruktur
 
-**Deadline: 11.01.26**
+**Deadline: TBD**
 
 -\> Weitere Informationen im Verlauf des Semesters
 
@@ -405,7 +405,7 @@ Bitte reflektiere das im Bachelor erworbene Wissen und überlege wo Aufholbedarf
 
 -   Bedarf an R-Unterstützung zu erfassen
 
-Umfrage in ILIAS, Deadline Sonntag 21.09., 23:55
+Umfrage in ILIAS, Deadline Sonntag 22.02., 23:55
 
 ::: notes
 Fragen zu Peer-Feedback (ob in von uns zugeteilten Gruppen oder ob präferenz für von uns zugteilten gruppen)

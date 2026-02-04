@@ -4,7 +4,7 @@ Author: Lars Schilling
 format:
   revealjs:
     css: styles/presentation_styles.css
-    footer: "R u Ready? HS2025 | Psychologie der Digialisierung"
+    footer: "R u Ready? FS2026 | Psychologie der Digialisierung"
     theme: default
     transition: slide
     slide-number: true
@@ -12,7 +12,7 @@ format:
 
 # R u Ready? Reprodzierbare Datenaufbereitung und -analyse mit R
 
-HS 2025<br><br><br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Aaron Friedli<br> **Tutor**: BSc. Lars Schilling<br><br><br><br><br> **1. Einheit**, 17.09.2025
+FS 2026<br><br><br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br><br><br> **1. Einheit**, 18.02.2026
 
 ```{r}
 #| label: setup
