@@ -1,6 +1,8 @@
 ---
 title: "Fehlermeldungen"
 format: html
+execute:
+  eval: false
 editor: 
   markdown: 
     wrap: 72
@@ -58,12 +60,10 @@ options(repos = c(CRAN = "https://cloud.r-project.org"))
 
 Möchte man die Einstellung dauerhaft behalten braucht es einen weiteren Schritt. Erst wird über die Console eine globale Einstellungsdatei von RStudio geöffnet:
 
-```{r}
-#| eval: false
-#| echo: true
-
+```r
 file.edit("~/.Rprofile")
 ```
+
 
 In diese Datei kann dann der Befehl zur expliziten Setzung der URL platziert werden. Diese Datei abspeichern und RStudio neu starten. Jetzt sollte `tinytex` von der korrekten URL abgerufen, gefunden und schlussendlich auch erfolgreich installiert werden können.
 
