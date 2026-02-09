@@ -3,17 +3,131 @@ title: "4 Statistik"
 format: html
 ---
 
-Fragen zu Statistik
+```{r, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+library(afex)
+penguins <- palmerpenguins::penguins
+penguins <- penguins %>%
+  tibble::rownames_to_column(var = "id")
 
-::: {.callout-note}
-Unabhängig von den konkreten Fragen kannst du [hier](https://methodenlehre.github.io/statistik-IV/) noch mal das Skript zu Statistik IV von Boris Mayer und Stefan Thoma] abrufen, welches insbesondere Themen zur Messwiederholung und mixed-ANOVAs abdeckt.
+dat_full <- read_csv("raw/dat_full.csv")
+
+dat_long <- dat_full |>
+      pivot_longer(
+        cols = c(pre1, pre4),
+        names_to = "time_rating",
+        values_to = "rating"
+      )
+
+```
+
+::: callout-note
+Unabhängig von den konkreten Fragen lässt sich [hier](https://methodenlehre.github.io/statistik-IV/) das Skript zu Statistik IV von Boris Mayer und Stefan Thoma abrufen, welches insbesondere Themen zur Messwiederholung und mixed-ANOVAs abdeckt. Bei Fragen kann zusätzlich die Methodenberatung kontaktiert werden!
 :::
+
+## Wie lässt sich bestimmen, wann welcher statistische Test angemessen ist?
+
+Der [Statistikbaum der UZH](https://www.methodenberatung.uzh.ch/de/datenanalyse_spss.html) bietet hierzu eine gute Übersicht. Aber auch er ersetzt leider keine tiefergehende Beschäftigung mit den Daten und dem Messdesign. Eine vollständige Antwort lässt sich hierauf leider nicht geben.
+
+## Was prüft eine One-way ANOVA?
+
+Die ANOVA prüft generell die Frage, ob die beobachtete Variation in den Daten größer ist, als durch Zufall zu erwarten wäre. Der zentrale Gedanke der ANOVA ist, dass Unterschiede zwischen Gruppen dann als bedeutsam gelten, wenn die Gruppenmittelwerte stark voneinander abweichen, während die Streuung innerhalb der Gruppen gering ist, sodass es unwahrscheinlich ist, dass diese Unterschiede nur durch Zufall entstanden sind.
+
+Dieses Verhältnis wird durch den F-Wert ausgedrückt:
+
+$F = \frac{\text{Varianz zwischen den Gruppen}}{\text{Varianz innerhalb der Gruppen}}$.
+
+**Die One-Way ANOVA beantwortet die Frage:**
+
+> *Unterscheiden sich mehr als zwei Gruppen in einer abhängigen Variable?*
+
+**Beispiel:**
+
+Beispielsweise wird untersucht, ob sich Pinguine in ihrer Schnabellänge zwischen mehreren Gruppen (z. B. Inseln) unterscheiden. Da mehr als zwei Gruppen verglichen werden, ist eine One-Way ANOVA angemessen.
+
+Da der p-Wert \< 0.05 ist, ist die ANOVA signifikant. Das bedeutet, dass sich mindestens zwei der Gruppen signifikant voneinander unterscheiden. Welche Gruppen sich konkret unterscheiden, kann jedoch erst mit Post-hoc-t-Tests überprüft werden.
+
+Das generalized `η²` (ges) gibt an, wie viel Varianz der abhängigen Variable durch den Faktor erklärt wird. In diesem Fall erklärt die Gruppenzugehörigkeit (z. B. Spezies) ca. 70 % der Varianz der Schnabellänge.
+
+```{r, echo = TRUE}
+model_1 <- aov_4(bill_length_mm ~ species + (1 |id), data = penguins)
+
+summary(model_1)
+```
+
+[🌐Erklärvideo ANOVA](https://www.youtube.com/watch?v=ITf4vHhyGpc)
+
+[🌐Erklärvideo ANOVA + t-Test](https://www.youtube.com/watch?v=4dIYRo5WsIo)
+
+[🌐Erklärvideo: **Using Linear Models for t tests and ANOVA, Clearly Explained!!!**](http://youtube.com/watch?v=R7xd624pR1A&t=338s)
+
+## Was prüft ein post hoc t-Test?
+
+Der Post-hoc t-Test ist die logische Konsequenz aus einer signifikanten ANOVA. Der t-Test prüft, ob sich die Mittelwerte zweier Gruppen in der abhängigen Variable unterscheiden.
+
+**Der post-hoc t-Test beantwortet die Frage:**
+
+> *Welche zwei Gruppen unterscheiden sich sich signifikant in der abhängigen Variable?*?\*
+
+**Beispiel:**
+
+Beispielsweise wird untersucht, ob sich Pinguine in ihrer Schnabellänge zwischen mehreren Gruppen (z. B. Inseln) unterscheiden. Eine ANOVA hat gezeigt, dass es signifikante Unterschiede gibt. Nun werden Post-hoc t-Tests durchgeführt, um herauszufinden zwischen welchen Gruppen diese signifikante Unterschiede genau vorkommen.
+
+Da es drei Spezies (Gentoo, Chinstrap, Adelie) gibt können drei verschiedene Gruppenvergleiche berechnet werden.
+
+Auf Basis von Stichprobendaten wird untersucht, ob sich Pinguine der Spezies Adelie und Chinstrap in ihrer Schnabellänge (bill_length_mm) unterscheiden. Das signifikante Ergebnis (p \< 0.05) spricht dafür, dass sich die mittlere Schnabellänge dieser beiden Gruppen auf Populationsebene unterscheidet.
+
+```{r, echo = TRUE}
+
+penguins_filtered <- penguins |>
+  filter(species != "Gentoo")
+
+t.test(bill_length_mm ~ species, data = penguins_filtered)
+
+```
+
+[🌐Erklärvideo ANOVA](https://www.youtube.com/watch?v=ITf4vHhyGpc)
+
+[🌐Erklärvideo ANOVA + t-Test](https://www.youtube.com/watch?v=4dIYRo5WsIo)
+
+[🌐Erklärvideo: **Using Linear Models for t tests and ANOVA, Clearly Explained!!!**](http://youtube.com/watch?v=R7xd624pR1A&t=338s)
+
+## Was prüft eine mixed-ANOVA?
+
+Die Mixed-ANOVA prüft generell die Frage, ob die beobachtete Variation in den Daten größer ist, als durch Zufall zu erwarten wäre.\
+Der zentrale Gedanke der Mixed-ANOVA besteht darin, dass Unterschiede dann als bedeutsam gelten, wenn sich die Mittelwerte sowohl **zwischen den Gruppen** (Between-Subjects-Faktor) als auch **über Messzeitpunkte bzw. Bedingungen hinweg** (Within-Subjects-Faktor) deutlich unterscheiden, während die Streuung innerhalb der jeweiligen Gruppen und Messwiederholungen gering ist.
+
+Unter diesen Voraussetzungen ist es unwahrscheinlich, dass die beobachteten Effekte und Interaktionen lediglich durch Zufall entstanden sind.
+
+Dieses Verhältnis wird durch den F-Wert ausgedrückt:
+
+$F = \frac{\text{Varianz zwischen den Gruppen}}{\text{Varianz innerhalb der Gruppen}}$.
+
+**Die mixed-ANOVA beantwortet die Frage:**
+
+> *Sind die Verläufe der abhängigen Variable über Messzeitpunkte bzw. Bedingungen hinweg zwischen den Gruppen unterschiedlich?*
+
+**Beispiel:**
+
+Die 2×3 ANOVA im Grinschgl et al. (2021) Paper beantwortet die folgenden Fragen:\
+Gibt es Unterschiede zwischen den Feedbackgruppen, gibt es Veränderungen über die Zeit (`Pre1` vs. `Pre4`), und unterscheiden sich diese zeitlichen Veränderungen zwischen den Gruppen (`above` vs. `control` vs. `below`)?
+
+```{r, echo = TRUE}
+mixed_anova <- aov_4(rating ~ group_all + (time_rating | code), data = dat_long)
+
+summary(mixed_anova)
+```
+
+Der signifikante Haupteffekt der Feedbackgruppe (`group_all`) zeigt, dass sich die mittleren Ratings zwischen den Gruppen unterscheiden, unabhängig vom Zeitpunkt der Messung.
+
+Der signifikante Interaktionseffekt zeigt, dass sich die Veränderung der Ratings über die Zeit zwischen den Feedbackgruppen unterscheidet. 👉Der Effekt der Zeit ist **nicht für alle Gruppen gleich.**
 
 ## Was ist das partielle η² und wie unterscheidet es sich von dem generalisierten η²?
 
 Das generalisierte und partielle η² sind beides Masse, welche den Anteil an erklärter Varianz einer abhängigen Variable angeben. Das generalisierte η² berechnet den Anteil der erklärten Varianz einer abhängigen Variable unter Einbezug der gesamten Varianz, also aller Effekte. Das partielle η² beachtet bei der Berechnung des Anteils an erklärter Varianz für die abhängige Variable nicht die gesamte Varianz, sondern nur jene, welche dem zuvor definierten Effekt zugeschrieben werden kann.
 
-::: {.callout-note}
+::: callout-note
 Weiterführende Informationen finden sich [hier](https://matheguru.com/stochastik/effektstarke.html).
 :::
 
@@ -23,11 +137,11 @@ Unter Sphärizität versteht man die Annahme, dass bei Messwiederholungen die Di
 
 ## Was macht eine Tukey-Korrektur und was sagt uns das Ergebnis?
 
-Die Tukey-Korrektur wird angewendet, um im Anschluss an eine signifikante ANOVA die Mittelwertsunterschiede der einzelnen Gruppen unter Kontrolle für multiples Testen einzeln zu untersuchen. Hierdurch wird eine Inflation der falsch-negativen Rate bzw. des p-Wertes vermieden. Bei Verwendung dieses Tests können die Ergebnisse der Mittelwertsvergleiche somit unmittelbar auf ihre Signifikanz hin bewertet werden.
+Die Tukey-Korrektur wird angewendet, um im Anschluss an eine signifikante ANOVA die Mittelwertsunterschiede der einzelnen Gruppen unter Kontrolle für multiples Testen einzeln zu untersuchen. Hierdurch wird eine Inflation der falsch-positiven Rate (α-Fehler) bzw. des p-Wertes vermieden. Bei Verwendung dieses Tests können die Ergebnisse der Mittelwertsvergleiche somit unmittelbar auf ihre Signifikanz hin bewertet werden.
 
 ## Wann benötigt die Berechnung einer ANOVA einen wide-Datensatz und wann benötigt die Berechnung einer ANOVA einen long-Datensatz?
 
-In welchem Format der Datensatz vor der Berechnung einer ANOVA vorliegen muss hängt von der verwendeten ANOVA-Funktion ab und kann nicht pauschal beantwortet werden. Grundsätzlich gilt aber, für eine ANOVA ohne Messwiederholung ist ein wide-Datensatz meist ausreichend. Die Funktion `aov_4()`, welche bei ANOVAs mit Messwiederholung verwendet werden kann, benötigt eine gesonderte Variable, welche den Zeitpunkt der Messung angibt, sprich das long-Format. Hier ein Beispiel wie die Umwandlug in ein long-Format und eine anschliessende Berechnung von einer ANOVA mit Messwiederholung aussehen könnte:
+In welchem Format der Datensatz vor der Berechnung einer ANOVA vorliegen muss hängt von der verwendeten ANOVA-Funktion ab und kann nicht pauschal beantwortet werden. Grundsätzlich gilt aber, für eine ANOVA ohne Messwiederholung ist ein wide-Datensatz meist ausreichend. Die Funktion `aov_4()`, welche bei ANOVAs mit Messwiederholung verwendet werden kann, benötigt eine gesonderte Variable, welche den Zeitpunkt der Messung angibt, sprich das long-Format. Hier ein Beispiel wie die Umwandlung in ein long-Format und eine anschliessende Berechnung von einer ANOVA mit Messwiederholung aussehen könnte:
 
 ```{r}
 #| echo: true
@@ -43,13 +157,13 @@ data_long <- data_wide |>
 afex::aov_4(value ~ treatment + (time | Personenidentifikationscode), data = data_long) # Beispiel mit(!) Messwiederholung
 ```
 
-::: {.callout-note}
+::: callout-note
 Für die Funktion `aov_4()` gibt es aus [Statistik-IV von Boris Mayer und Stefan Thoma](https://methodenlehre.github.io/statistik-IV/) noch tiefere und beispielhafte Ausführungen.
 :::
 
 ## Was wird bei einem Levene-Test berechnet bzw. geprüft?
 
-Der Levene-Test prüft die Varianzhomogenität zwischen Gruppen. Als Nullhypothese gilt hierbei, dass die Varianzen zwischen den Gruppen gleich sind. Als Alternativhypothese gilt, dass die Varianzen zwischen den Gruppen unterschiedlich sind. Dementsprechend besagt ein **signifikanter Levene-Test**, dass es Varianzunterschiede zwischen den Gruppen gibt und die **Annahme der Varianzhomogenität verworfen** werden muss.
+Der Levene-Test prüft die Varianzhomogenität der abhängigen Variablen zwischen Gruppen. Als Nullhypothese gilt hierbei, dass die Varianzen der abhängigen Variablen zwischen den Gruppen gleich sind. Als Alternativhypothese gilt, dass die Varianzen zwischen den Gruppen unterschiedlich sind. Dementsprechend besagt ein **signifikanter Levene-Test**, dass es Varianzunterschiede zwischen den Gruppen gibt und die **Annahme der Varianzhomogenität verworfen** werden muss.
 
 ## Wird ein Levene-Test für den between-Faktor berechnet und muss diese Berechnung für jede abhängige Variable einzeln gemacht werden?
 
@@ -57,12 +171,28 @@ Für beide Fragen gilt: Ja! Der Levene-Test vergleicht die Varianzen von mindest
 
 ## Ist vor der Berechnung einer ANOVA notwendigerweise ein Levene-Test durchzuführen?
 
-Die Durchführung eines Levene-Tests vor der ANOVA ist dann notwendig, wenn die Varianzhomogenität zwischen Gruppen nicht anderweitig ersichtlich ist. Zeigen die Daten beispielsweise gleich grosse Stichproben und normalverteilte Verteilungen der Werte innerhalb der Gruppen, dann kann von Varianzhomogenität auch ohne den Levene-Test ausgegangen werden. Auf alle Fälle sollte man **vor der Datenanalyse** festlegen, ob ein Levene Test berechnet wird oder nicht, Und gegebenenfalls ein Verfahren definieren für den Fall das die Varianzhomogenität nicht gegeben ist (z.B. ein nichtparametrisches Verfahren wie die Welch-ANOVA)
+Die Durchführung eines Levene-Tests vor der ANOVA ist dann notwendig, wenn die Varianzhomogenität zwischen Gruppen nicht anderweitig ersichtlich ist. Zeigen die Daten beispielsweise gleich grosse Stichproben und normalverteilte Verteilungen der Werte innerhalb der Gruppen, dann kann von Varianzhomogenität auch ohne den Levene-Test ausgegangen werden. **Vor der Datenanalyse** sollte festgelegt werden, ob ein Levene-Test berechnet wird oder nicht, und gegebenenfalls ein Verfahren definiert werden für den Fall, dass die Varianzhomogenität nicht gegeben ist (z.B. ein nichtparametrisches Verfahren wie die Welch-ANOVA).
 
 ## Welche Masse für Effektstärken werden üblicherweise bei einer ANOVA und einem (post-hoc) t-Test berichtet?
 
-Bei einer ANOVA wird im Rahmen des Seminars, sofern nicht anders verlangt, das Effektstärkemass η² berichtet. Bei (post-hoc) t-Tests wird im Rahmen des Seminars, sofern nicht anders verlangt, das Effektstärkemass von Cohens` d verwendet.
+Bei einer ANOVA wird im Rahmen des Seminars, sofern nicht anders verlangt, das Effektstärkemass η² oder partielles η² berichtet. Bei (post-hoc) t-Tests wird im Rahmen des Seminars, sofern nicht anders verlangt, das Effektstärkemass von Cohens\` d verwendet.
 
-## Bei der Analyse der internen Konsistenz mit der Funktion `alpha()` erscheint die Fehlermeldung: „Warnung: Some items were negatively correlated with the first principal component and probably should be reversed. To do this, run the function again with the 'check.keys=TRUE' option“. Was bedeutet diese Warnmeldung und kann man sie einfach ignorieren oder muss sie weiter berücksichtigt werden?
+## Bei der Analyse der internen Konsistenz mit der Funktion `alpha()` erscheint die Fehlermeldung: „Warnung: Some items were negatively correlated with the first principal component and probably should be reversed. To do this, run the function again with the 'check.keys=TRUE' option“. Was bedeutet diese Warnmeldung und kann sie einfach ignoriert oder muss sie weiter berücksichtigt werden?
 
 Diese Warnmeldung - in Verbindung mit der Funktion `alpha()` zur Berechnung der internen Konsistenz - weist darauf hin, dass ein Item invers codiert sein könnte, da es nur einen geringen oder sogar negativen Zusammenhang zu den anderen Items aufweist. Dies kann daran liegen, dass das Item den Versuchspersonen invers vorgelegt worden war und lediglich vergessen wurde, die Skala anschliessend erneut zu invertieren. Das Item kann aber auch in die „richtige“ Richtung codiert sein und die Kennwerte des Items erklären sich durch weitere Umstände wie beispielsweise eine kleine Stichprobe. Abhängig davon welcher Fall zutrifft müsste das Item vor der Berechnung der internen Konsistenz entweder noch invertiert oder die Warnmeldung kann ignoriert werden.
+
+## Wie wird Cohens d für eine ANOVA berechnet?
+
+Kurze Antwort: Gar nicht. Das Effektstärkemass einer ANOVA ist das partielle oder generelle η². Cohens d ist das Effektstärkemass für einen (post-hoc) t-Test und folgt dieser Formel: $d = \frac{M_1 - M_2}{SD_{pooled}}$.
+
+**Beispiel**:
+
+```{r}
+dat_full_below_above <- dat_full |> 
+  filter(group_all != "control")
+
+dat_full_below_above$group_all <- as.factor(dat_full_below_above$group_all)
+
+t.test(pre4 ~ group_all, data = dat_full_below_above, var.equal = TRUE)
+effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
+```

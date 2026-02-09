@@ -3,19 +3,39 @@ title: "2 Codebook"
 format: html
 ---
 
-Fragen zum Codebook
-
 ::: {.callout-note}
 Unabhängig von den konkreten Fragen und Antworten gilt: Das Codebook soll es fremden Wissenschaftler:innen aus der Psychologie ermöglichen die Studie und die Datenanalyse ohne weiteren Aufwand nachvollziehen zu können. Dafür sollte vor allem anderen auf die Vollständigkeit und Genauigkeit der Angaben geachtet werden.
 :::
 
+Die Gliederung mit Überschriften dient uns bei der Erstellung als Übersicht. Suche deine Frage am besten mit ctrl + F (MAC: Cmd +F) und dem passendesten Stichwort!
+
+# Umfang
+
+## Wird für das Codebook als Grundlage der Rohdatensatz oder der bereits bereinigte Datensatz verwendet?
+
+Für das Codebook wird der bearbeitete Datensatz als Grundlage genommen. Damit sollten im Codebook auch neu erstellte Variablen auftauchen. Sind nach allen Änderungen keine NAs mehr vorhanden, dann müssen diese auch nicht mehr aufgeführt werden. Zu kennzeichnen ist allerdings, wenn Variablen ursprünglich reverse codiert wurden und dies hin zum finalen Datensatz geändert wurde.
+
 ## Sollen im Codebook alle Variablen eines Datensatzes beschrieben werden oder nur diejenigen, welche auch im Rahmen der Analyse verwendet werden?
 
-Als Grundsatz gilt: Das Codebook soll fremden Wissenschaftler:innen aus der Psychologie dabei helfen ohne weiteren Aufwand eure Arbeit zu beurteilen und ggf. zu replizieren. Für eine Replikation würde eine genaue Beschreibung der von euch in der Analyse verwendeten Variablen ausreichend. Eine allgemeine Beurteilung ist aber erst dann vollständig möglich, wenn auch alle anderen Variablen umfangreich beschrieben sind. Deswegen müssen im Codebook alle Variablen eures Datensatzes beschrieben werden, auch jene, die in der Analyse nicht weiter Beachtung finden.
+Als Grundsatz gilt: Das Codebook soll fremden Wissenschaftler:innen aus der Psychologie dabei helfen, die Arbeit ohne weiteren Aufwand zu beurteilen und ggf. zu replizieren. Für eine Replikation ist eine genaue Beschreibung der in der Analyse verwendeten Variablen ausreichend. Eine allgemeine Beurteilung ist jedoch erst dann vollständig möglich, wenn auch alle anderen Variablen umfangreich beschrieben sind. Deswegen müssen im Codebook alle Variablen des Datensatzes beschrieben werden, auch jene, die in der Analyse nicht weiter Beachtung finden.
+
+## Welche Informationen sind für das Codebook relevant? Die [Studie von Grinschgl et al. (2020)](https://link.springer.com/article/10.1007/s00426-020-01435-9) und/oder die [Präregistrierung von Grinschgl et al. (2020)](https://osf.io/zrqxu/)?
+
+Für das Ausfüllen des Codebook sind beide Quellen relevant, die [Studie von Grinschgl et al. 2020](https://link.springer.com/article/10.1007/s00426-020-01435-9) und die [Präregistrierung zu Grinschgl et al. (2020)](https://osf.io/zrqxu/).
+
+## Wie ist vorzugehen, wenn zu manchen Dimensionen der Variable weder im Paper noch in der Präregistrierung genaue Angaben zu finden sind?
+
+Für den Fall, dass zu einer Angabe genaue Informationen fehlen, gibt es zwei Möglichkeiten. Zum einen kann sogenanntes „Reverse Engineering“ angewendet werden. Manche Informationen sind nirgendwo explizit angegeben, lassen sich aber beispielsweise anhand der vorhandenen Informationen schlussfolgern. Hierzu zählen etwa minimale und maximale Werte einer Skala, die mit hoher Wahrscheinlichkeit aus den Rohdaten ableitbar sind. Ebenso können logische oder plausible Annahmen herangezogen werden. Dies bedeutet nicht, dass in der ursprünglichen Studie tatsächlich so vorgegangen wurde, liefert jedoch einen sinnvollen Anhaltspunkt. Unabhängig vom gewählten Vorgehen muss dieses kenntlich gemacht werden, damit andere Personen mögliche Fehler in den Schlussfolgerungen oder Annahmen nachvollziehen können.
+
+## Sollen alle Messwiederholungen im Codebook einzeln aufgeführt werden oder soll es eine einzelne Variable für die Messwiederholung im Codebook geben?
+
+Daten und deren Analyse vertraut zu machen und diese zu replizieren. Angaben sollten daher vollständig und so exakt wie möglich sein. Abweichungen – wie beispielsweise Zusammenfassungen mehrerer Variablen – sind nur dann sinnvoll, wenn sich die einzelnen Variablen nicht voneinander unterscheiden und die Darstellung dadurch klarer wird.
+
+# Inhaltliche Fragen
 
 ## Sollten unter „questionnaire“ wirklich nur Fragebögen aufgelistet werden oder kann man hier auch die Namen möglicher kognitiver Tests angeben?
 
-Bei Angaben im Codebook sollte immer gelten: Sie erklären für unbeteiligte Wissenschaftler:innen aus der Psychologie mehr als das sie Verwirrung stiften. Unter „questionnaire“ auch die Namen von ggf. angewendeten kognitiven Tests anzugeben, unterstützt die Nachvollziehbarkeit und kann daher so gemacht werden.
+Bei Angaben im Codebook gilt grundsätzlich, dass diese für unbeteiligte Wissenschaftler:innen aus der Psychologie zur Klärung beitragen und keine Verwirrung stiften sollten. Unter „questionnaire“ auch die Namen ggf. eingesetzter kognitiver Tests anzugeben, unterstützt die Nachvollziehbarkeit und ist daher sinnvoll.
 
 ## Wo liegt der Unterschied zwischen „description“ und „Composition of item…“?
 
@@ -23,20 +43,8 @@ Bei „description“ geht es um eine kurze inhaltliche Beschreibung der Variabl
 
 ## Wann sind „response_labels“ zu verwenden und wann nicht?
 
-Die Labels der Antwortmöglichkeiten direkt zu benennen ist dann wichtig, wenn diese nicht logisch erschliessbar sind. Dies ist z.B. bei einer Likert-Skala der Fall, da diese unterschiedlich streng formuliert sein kann. Selbst wenn diese im Datenanalyseplan aufgeführt werden, ist es sicherer diese auch noch mal im Codebook zu erwähnen.
+Die Labels der Antwortmöglichkeiten explizit zu benennen ist insbesondere dann wichtig, wenn diese nicht logisch erschliessbar sind. Dies ist beispielsweise bei Likert-Skalen der Fall, da diese unterschiedlich formuliert sein können. Auch wenn die Skalen im Datenanalyseplan aufgeführt sind, erhöht eine zusätzliche Angabe im Codebook die Nachvollziehbarkeit.
 
 ## Was ist mit der Spalte „dimensions“ gemeint?
 
 Unter „dimensions“ soll das Konstrukt aufgeführt werden, welches sich hinter Items eines Fragebogens verbirgt (z.B. Item XY gehört zur dimension „Extraversion“ in einem Big 5 Fragebogen).
-
-## Wie soll man vorgehen, wenn zu manchen Dimensionen der Variable weder im Paper noch in der Präregistrierung genaue Angaben zu finden sind?
-
-Für den Fall, dass zu einer Angabe genaue Informationen fehlen, gibt es zwei Möglichkeiten. Zum einen kann man „reverse Engineering“ anwenden. Manche Informationen sind nirgendwo explizit angegeben, lassen sich aber beispielsweise anhand der gegebenen Informationen schlussfolgern. Hierzu zählen beispielsweise die minimalen und maximalen Werte einer Skala, welche mit einer hohen Wahrscheinlichkeit aus den Rohdaten ablesbar sind. Hierzu kann aber auch zählen, sich zu überlegen, was logisch oder mögliche Angaben sind. Das bedeutet nicht, dass in der ursprünglichen Studie auch tatsächlich so gearbeitet wurde, gibt aber trotzdem einen guten Anhaltspunkt. Unabhängig davon, wie man vorgeht, müsste dies kenntlich gemacht werden. Nur so können andere Personen mögliche Fehler in den Schlussfolgerungen oder Annahmen finden, anhand welcher die entsprechenden Informationen ergänzt wurden.
-
-## Welche Informationen sind für das Codebook relevant? Die [Studie von Grinschgl et al. (2020)](https://link.springer.com/article/10.1007/s00426-020-01435-9) und/oder die [Präregistrierung von Grinschgl et al. (2020)](https://osf.io/zrqxu/)?
-
-Für das Ausfüllen des Codebook sind beide Quellen relevant, die [Studie von Grinschgl et al. 2020](https://link.springer.com/article/10.1007/s00426-020-01435-9) und die [Präregistrierung zu Grinschgl et al. (2020)](https://osf.io/zrqxu/).
-
-## Sollen alle Messwiederholungen im Codebook einzeln aufgeführt werden oder soll es eine einzelne Variable für die Messwiederholung im Codebook geben?
-
-Prinzipiell gilt: Das Codebook soll es aussenstehenden möglichst einfach machen, sich mit den Daten und der Analyse der Daten vertraut zu machen und diese replizieren zu können. Daher gilt: Angaben sollten vollständig sein und so exakt wie möglich. Abweichungen – wie beispielsweise Zusammenfassungen mehrerer Variablen – sind demnach nur dann möglich und sinnvoll, wenn sich die einzelnen Variablen nicht voneinander unterscheiden und dies so klarer dargestellt werden kann.

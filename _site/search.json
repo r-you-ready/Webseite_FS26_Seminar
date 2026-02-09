@@ -1,0 +1,145 @@
+[
+  {
+    "objectID": "scripts/03_faq/endabgabe.html",
+    "href": "scripts/03_faq/endabgabe.html",
+    "title": "5 Abschlussprojekt",
+    "section": "",
+    "text": "Note\n\n\n\nLies dir neben den folgenden Fragen auch noch mal die allgemeinen Infos zum Abschlussprojekt unter “Leistungsnachweis” durch.\nDie Gliederung mit Überschriften dient uns bei der Erstellung als Übersicht. Suche deine Frage am besten mit ctrl + F (MAC: Cmd +F) und dem passendsten Stichwort!",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#darf-mit-generativer-ki-wie-beispielsweise-chatgpt-gearbeitet-werden-und-wie-ist-das-dann-zu-kennzeichnen",
+    "href": "scripts/03_faq/endabgabe.html#darf-mit-generativer-ki-wie-beispielsweise-chatgpt-gearbeitet-werden-und-wie-ist-das-dann-zu-kennzeichnen",
+    "title": "5 Abschlussprojekt",
+    "section": "Darf mit generativer KI wie beispielsweise ChatGPT gearbeitet werden und wie ist das dann zu kennzeichnen?",
+    "text": "Darf mit generativer KI wie beispielsweise ChatGPT gearbeitet werden und wie ist das dann zu kennzeichnen?\nWenn die generative KI lediglich zur Textkorrektur oder zur sprachlichen Verbesserung genutzt wird muss dies nicht angegeben werden. Wenn jedoch inhaltlich größere Teile direkt übernommen oder sich stark auf generierte Texte gestütz wird, dann muss die generative KI als Quelle gennant werden. Die Verantwortung für die Richtigkeit und Nachvollziehbarkeit der Inhalte liegt dabei immer bei der Person selbst. Tipps, wie die Verwendung von generativer KI bei Abschlussarbeiten angegeben werden kann, finden sich hier. Im Fall der Seminarabgabe wird am besten der Link zum Chat mit abgegeben.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#was-gibt-es-für-formatvorgaben-für-das-skript-schriftgrösse-fettmarkierungen-etc.",
+    "href": "scripts/03_faq/endabgabe.html#was-gibt-es-für-formatvorgaben-für-das-skript-schriftgrösse-fettmarkierungen-etc.",
+    "title": "5 Abschlussprojekt",
+    "section": "Was gibt es für Formatvorgaben für das Skript (Schriftgrösse, Fettmarkierungen etc.)?",
+    "text": "Was gibt es für Formatvorgaben für das Skript (Schriftgrösse, Fettmarkierungen etc.)?\nEs gibt keine exakten Formatvorgaben für das Skript. Vielmehr gilt: Das Skript sollte übersichtlich sein und keine ungewöhnlichen Formatierungen enthalten. Mit den Vorgaben von APA 7 ist das Skript sicher passend formatiert.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#welche-stilvorgaben-gibt-es-bei-der-erstellung-des-skripts-zu-beachten",
+    "href": "scripts/03_faq/endabgabe.html#welche-stilvorgaben-gibt-es-bei-der-erstellung-des-skripts-zu-beachten",
+    "title": "5 Abschlussprojekt",
+    "section": "Welche Stilvorgaben gibt es bei der Erstellung des Skripts zu beachten?",
+    "text": "Welche Stilvorgaben gibt es bei der Erstellung des Skripts zu beachten?\nDas Skript sollte sinnvolle Überschriften und eine sinnvolle Gliederung enthalten. Der Code sollte kommentiert sein, so dass die Auswahl von Funktionen und das Vorgehen begründet sind. Sofern LLMs oder andere externe Tools zur Hilfe herangezogen worden sind, muss dies angemerkt werden. Hierfür kann ggf. eine getrennte Kopie des Chatverlaufes eingereicht oder ein Link nach APA-Guidelines ergänzt werden.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#in-welcher-sprache-zeitform-perspektive-und-in-welchem-stil-soll-der-datenanalyseplan-geschrieben-werden",
+    "href": "scripts/03_faq/endabgabe.html#in-welcher-sprache-zeitform-perspektive-und-in-welchem-stil-soll-der-datenanalyseplan-geschrieben-werden",
+    "title": "5 Abschlussprojekt",
+    "section": "In welcher Sprache, Zeitform, Perspektive und in welchem Stil soll der Datenanalyseplan geschrieben werden?",
+    "text": "In welcher Sprache, Zeitform, Perspektive und in welchem Stil soll der Datenanalyseplan geschrieben werden?\nAlle für die Abgabe relevanten Unterlagen dürfen auf Englisch oder Deutsch eingereicht werden. Wichtig ist lediglich, dass die Unterlagen untereinander einer einheitlichen Sprache folgen. Als Zeitform gilt das Präsens. Der Datenanalyseplan ist in der Wir-Form und im wissenschaftlichen Stil zu verfassen.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#wie-umfangreich-sollen-die-kommentare-des-codes-im-skript-sein",
+    "href": "scripts/03_faq/endabgabe.html#wie-umfangreich-sollen-die-kommentare-des-codes-im-skript-sein",
+    "title": "5 Abschlussprojekt",
+    "section": "Wie umfangreich sollen die Kommentare des Codes im Skript sein?",
+    "text": "Wie umfangreich sollen die Kommentare des Codes im Skript sein?\nDie Funktionsweise von üblicher Syntax (wie beispielsweise dem Pipe Operator |&gt;) oder einer Funktion muss nicht kommentiert werden. Aber: Das Dokument muss für fremde Wissenschaftler:innen der Psychologie ohne weiteres nachvollziehbar sein. Bedeutet, Kommentare sollten das Vorgehen im Skript ausreichend begründen.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#sollen-im-skript-warn--undoder-fehlermeldungen-unterbunden-werden-oder-sichtbar-sein",
+    "href": "scripts/03_faq/endabgabe.html#sollen-im-skript-warn--undoder-fehlermeldungen-unterbunden-werden-oder-sichtbar-sein",
+    "title": "5 Abschlussprojekt",
+    "section": "Sollen im Skript Warn- und/oder Fehlermeldungen unterbunden werden oder sichtbar sein?",
+    "text": "Sollen im Skript Warn- und/oder Fehlermeldungen unterbunden werden oder sichtbar sein?\nDamit die Abgabe leichter kontrolliert werden kann, sollen die Warn- und Fehlermeldungen bitte sichtbar und nicht ausgeschaltet sein. Auch unabhängig von der Abgabe ist zu empfehlen die Meldungen sichtbar zu lassen. Das erleichtert Unbeteiligten die Analyse nachzuvollziehen und sie auf mögliche Fehler zu untersuchen.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#darf-im-skript-auch-noch-code-von-übungsaufgaben-vorhanden-sein",
+    "href": "scripts/03_faq/endabgabe.html#darf-im-skript-auch-noch-code-von-übungsaufgaben-vorhanden-sein",
+    "title": "5 Abschlussprojekt",
+    "section": "Darf im Skript auch noch Code von Übungsaufgaben vorhanden sein?",
+    "text": "Darf im Skript auch noch Code von Übungsaufgaben vorhanden sein?\nHier gilt der Grundsatz: Euer Skript, wie auch alle anderen Unterlagen, sollten für fremde Wissenschaftler:innen der Psychologie ohne weiteres nachvollziehbar sein. Code, welcher nicht im Zusammenhang mit der Endabgabe steht - und dementsprechend auch nicht im Datenanalyseplan erwähnt wird – würde nur vom wesentlichen Ablenken und soll daher nicht im Skript vorhanden sein.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#wie-exakt-sollen-die-tabellen-und-abbildungen-denen-aus-dem-paper-von-grinschgl-et-al.-2020-entsprechen",
+    "href": "scripts/03_faq/endabgabe.html#wie-exakt-sollen-die-tabellen-und-abbildungen-denen-aus-dem-paper-von-grinschgl-et-al.-2020-entsprechen",
+    "title": "5 Abschlussprojekt",
+    "section": "Wie exakt sollen die Tabellen und Abbildungen denen aus dem Paper von Grinschgl et al. (2020) entsprechen?",
+    "text": "Wie exakt sollen die Tabellen und Abbildungen denen aus dem Paper von Grinschgl et al. (2020) entsprechen?\nDie Tabellen und Abbildungen aus dem Originalpaper von Grinschgl et al. (2020) müssen nicht exakt repliziert werden. Wichtig ist allerdings, dass die Aussage der Abbildung bzw. der Tabelle korrekt ist und keine wichtigen Details ausgelassen werden.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#im-leistungsnachweis-steht-dass-eine-tabelle-oder-abbildung-nach-wahl-erstellt-werden-soll.-muss-es-sich-hierbei-um-eine-grafik-handeln-welche-auch-im-paper-von-grinschgl-et-al.-2020-vorhanden-ist",
+    "href": "scripts/03_faq/endabgabe.html#im-leistungsnachweis-steht-dass-eine-tabelle-oder-abbildung-nach-wahl-erstellt-werden-soll.-muss-es-sich-hierbei-um-eine-grafik-handeln-welche-auch-im-paper-von-grinschgl-et-al.-2020-vorhanden-ist",
+    "title": "5 Abschlussprojekt",
+    "section": "Im Leistungsnachweis steht, dass eine Tabelle oder Abbildung nach Wahl erstellt werden soll. Muss es sich hierbei um eine Grafik handeln, welche auch im Paper von Grinschgl et al. (2020) vorhanden ist?",
+    "text": "Im Leistungsnachweis steht, dass eine Tabelle oder Abbildung nach Wahl erstellt werden soll. Muss es sich hierbei um eine Grafik handeln, welche auch im Paper von Grinschgl et al. (2020) vorhanden ist?\nEs darf auch eine andere Grafik sein. Wichtig ist, dass die Grafik einen Mehrwert für die Darstellung der Ergebnisse der Datenanalyse bietet.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#soll-die-berechnung-von-cronbachs-alpha-aus-dem-paper-von-grinschgl-et-al.-2020-auch-durchgeführt-werden",
+    "href": "scripts/03_faq/endabgabe.html#soll-die-berechnung-von-cronbachs-alpha-aus-dem-paper-von-grinschgl-et-al.-2020-auch-durchgeführt-werden",
+    "title": "5 Abschlussprojekt",
+    "section": "Soll die Berechnung von Cronbachs Alpha aus dem Paper von Grinschgl et al. (2020) auch durchgeführt werden?",
+    "text": "Soll die Berechnung von Cronbachs Alpha aus dem Paper von Grinschgl et al. (2020) auch durchgeführt werden?\nNein, die Berechnung von Cronbachs-Alpha aus dem Paper von Grinschgl et al. (2020) ist nicht Teil des Abschlussprojekts.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#müssen-ausnahmslos-alle-resultate-im-ordner-dataoutputsresults-abgespeichert-werden",
+    "href": "scripts/03_faq/endabgabe.html#müssen-ausnahmslos-alle-resultate-im-ordner-dataoutputsresults-abgespeichert-werden",
+    "title": "5 Abschlussprojekt",
+    "section": "Müssen ausnahmslos alle Resultate im Ordner data/outputs/results abgespeichert werden?",
+    "text": "Müssen ausnahmslos alle Resultate im Ordner data/outputs/results abgespeichert werden?\nNein, nur jene Resultate, die aufgrund des Codes exportiert werden, müssen in diesem Ordner abgespeichert werden. Beispielsweise Ergebnisse von statistischen Tests werden nicht exportiert und müssen demnach auch nicht in irgendeiner Form in data/outputs/results vorhanden sein.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  },
+  {
+    "objectID": "scripts/03_faq/endabgabe.html#müssen-resultate-interpretiert-werden-und-wenn-ja-wie-müssen-diese-verschriftlicht-werden",
+    "href": "scripts/03_faq/endabgabe.html#müssen-resultate-interpretiert-werden-und-wenn-ja-wie-müssen-diese-verschriftlicht-werden",
+    "title": "5 Abschlussprojekt",
+    "section": "Müssen Resultate interpretiert werden und wenn ja, wie müssen diese verschriftlicht werden?",
+    "text": "Müssen Resultate interpretiert werden und wenn ja, wie müssen diese verschriftlicht werden?\nEs werden keine inhaltlichen Interpretationen der Ergebnisse gefordert. Kurze Zusammenfassungen der Resultate direkt nach den jeweiligen Codechunks können jedoch das Verständnis erleichtern und illustrieren, dass die Analysen korrekt gelesen werden könnten.\nZum Beispiel: The one-way ANOVA indicated that there were no significant group differences in this working memory performance measure, F(2, 156) = 0.07, p = 0.929, η² &lt; 0.01.",
+    "crumbs": [
+      "FAQ",
+      "5  Abschlussprojekt"
+    ]
+  }
+]
