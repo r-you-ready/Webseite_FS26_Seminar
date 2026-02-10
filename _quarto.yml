@@ -66,20 +66,20 @@ website:
       - href: hausuebungen.qmd
         text: "Hausübungen"
         contents:
-        - href: scripts/02_excercises/hausuebung_loesung_1.qmd
-          text: "Hausübung 1 - Mit Lösungen"
-        - href: scripts/02_excercises/hausuebung_loesung_2.qmd
-          text: "Hausübung 2 - Mit Lösungen"
-        - href: scripts/02_excercises/hausuebung_loesung_3.qmd
-          text: "Hausübung 3 - Mit Lösungen"
-        - text: "Muddiest Points"
+          - href: scripts/02_excercises/hausuebung_loesung_1.qmd
+            text: "Hausübung 1 - Mit Lösungen"
+          - href: scripts/02_excercises/hausuebung_loesung_2.qmd
+            text: "Hausübung 2 - Mit Lösungen"
+          - href: scripts/02_excercises/hausuebung_loesung_3.qmd
+            text: "Hausübung 3 - Mit Lösungen"
+      - text: "Muddiest Points"
         contents:
-        - href: scripts/04_misc/muddiest_points_1.qmd
-          text: "Muddiest Points 1"
-        - href: scripts/04_misc/muddiest_points_2.qmd
-          text: "Muddiest Points 2"
-        - href: scripts/04_misc/muddiest_points_3.qmd
-          text: "Muddiest Points 3"
+          - href: scripts/04_misc/muddiest_points_1.qmd
+            text: "Muddiest Points 1"
+          - href: scripts/04_misc/muddiest_points_2.qmd
+            text: "Muddiest Points 2"
+          - href: scripts/04_misc/muddiest_points_3.qmd
+            text: "Muddiest Points 3"
       - href: scripts/03_faq/faq.qmd
         text: "FAQ"
         contents:
