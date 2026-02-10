@@ -5,7 +5,7 @@ project:
 
 website:
   title: "R u Ready"
-  site-url: https://r-you-ready.github.io/Webseite_FS26_Seminar
+  site-url: https://r-you-ready.github.io/Webseite_FS26_Seminar/
   sidebar:
     style: floating
     search: true
