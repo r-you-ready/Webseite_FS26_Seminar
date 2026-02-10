@@ -1,8 +1,7 @@
 ---
-title: "Muddiest Points 1"
+title: "Muddiest Points"
 editor: visual
 format: html
 ---
 
-Hier werden die Resultate der Muddiest Points 1 hochgeladen.
-
+Hier werden die Resultate der Muddiest Points hochgeladen.
