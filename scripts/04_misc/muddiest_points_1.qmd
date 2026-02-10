@@ -1,0 +1,9 @@
+---
+title: "Muddiest Points 1"
+editor: visual
+format: html
+---
+
+::: callout-note
+Hier werden die Resultate der Muddiest Points 1 hochgeladen.
+:::
