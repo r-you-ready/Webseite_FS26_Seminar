@@ -72,7 +72,8 @@ website:
             text: "Hausübung 2 - Mit Lösungen"
           - href: scripts/02_excercises/hausuebung_loesung_3.qmd
             text: "Hausübung 3 - Mit Lösungen"
-      - text: "Muddiest Points"
+      - href: scripts/04_misc/muddiest_points.qmd
+        text: "Muddiest Points"
         contents:
           - href: scripts/04_misc/muddiest_points_1.qmd
             text: "Muddiest Points 1"
