@@ -1,6 +1,7 @@
 ---
 title: "LearnR - Shinyapp"
 toc: false
+draft: true
 ---
 
 Hier kannst du Übungen zu R lösen!
