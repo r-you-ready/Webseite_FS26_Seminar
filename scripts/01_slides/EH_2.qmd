@@ -27,7 +27,11 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Semesterplan
 
-![](../../images/Semesterplan_1.png){fig-align="center"}
+<embed 
+  src="../../PDFs/Syllabus.pdf" 
+  type="application/pdf"
+  style="width:100%; height:90vh;"
+>
 
 ::: notes
 Gibt es Fragen, die sich nach letzter Woche aufgetan haben?
