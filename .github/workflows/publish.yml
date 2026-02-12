@@ -88,7 +88,7 @@ jobs:
           pkgs <- readLines("ci-packages.txt", warn=FALSE)
 
           # HARD ADD: make sure this is installed
-          pkgs <- unique(c(pkgs, "palmerpenguins", "apaTables", "afex", "emmeans", "effectsize", "psych", "effsize", "skimr", "here", "styler"))
+          pkgs <- unique(c(pkgs, "palmerpenguins", "apaTables", "afex", "emmeans", "effectsize", "psych", "effsize", "skimr", "here", "styler", "tidyverse"))
 
           avail <- rownames(available.packages(repos=repos))
           to_install <- intersect(pkgs, avail)
