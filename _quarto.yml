@@ -49,8 +49,8 @@ website:
       - href: scripts/02_excercises/Übungen.qmd
         text: "Übungen zu den Einheiten"
         contents: 
-          - href: scripts/02_excercises/loesung_1.qmd
-            text: "Hands on - Block 1 (Woche 1 - 2) - Mit Musterlösungen"
+          - href: scripts/02_excercises/hands_on_1.qmd
+            text: "Hands on - Block 1 (Woche 1 - 2)"
           - href: scripts/02_excercises/loesung_2.qmd
             text: "Hands on - Block 2 (Woche 3 - 4) - Mit Musterlösungen"
           - href: scripts/02_excercises/loesung_3.qmd

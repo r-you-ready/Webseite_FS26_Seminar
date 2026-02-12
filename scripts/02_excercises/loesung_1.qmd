@@ -27,11 +27,11 @@ Und hier nochmal die Slides zur EH2:
 
 Installiere R und RStudio:
 
-1.  Installation von R – neueste Version 4.5.1: <https://stat.ethz.ch/CRAN/>
+1.  Installation von R – neueste Version 4.5.2: <https://stat.ethz.ch/CRAN/>
 
-2.  Installation von Rstudio (Version 2025.05.1): <https://posit.co/download/rstudio-desktop/>
+2.  Installation von Rstudio (Version 2026.01.06): <https://posit.co/download/rstudio-desktop/>
 
-Du weisst nicht was mit R auf sich hat? Hier ist eine Kurzerklärung: <https://methodenlehre.github.io/einfuehrung-in-R/>
+Du weisst nicht, was es mit R auf sich hat? Hier ist eine Kurzerklärung: <https://methodenlehre.github.io/einfuehrung-in-R/>
 
 ## Einstellungen
 
@@ -154,7 +154,7 @@ sqrt(146)
 
 ### Erste Zuweisungen/Variablen definieren
 
-1.  Weise den Wert 5 der Variable `x` zu mit dem Operator `<-`
+1.  Erstelle eine Variable `x` und weise ihr mit dem Zuweisungsoperator `<-` den Wert 5 zu.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -162,7 +162,7 @@ x <- 5
 ```
 :::
 
-2.  Weise eine beliebige Zahl der Variable `y` hinzu und dividiere dann `x` durch `y`. Speichere dieses Ergebnis in der Variable `z.`
+2.  Weise der Variable `y` eine beliebige Zahl zu. Teile anschliessend `x` (aus Aufgabe 1) durch `y` und speichere das Ergebnis in der Variable `z`.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -180,7 +180,7 @@ z <- x / y
 ```
 :::
 
-4.  Erstelle zwei Variablen: Eine mit deinem Vornamen und eine mit deinem Nachnamen. Solche "character" Variablen musst du in Anführungszeichen setzen `""`
+4.  Erstelle zwei Variablen: eine mit deinem Vornamen und eine mit deinem Nachnamen. Zeichenketten (character-Variablen) müssen in R in Anführungszeichen (`""`) gesetzt werden.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -189,7 +189,7 @@ nachname <- "Schilling"
 ```
 :::
 
-5.  Kombiniere deinen Vor- und Nachnamen zu deinem vollen Namen mittels `paste` . Speichere diese Variable als `voller_name`.
+5.  Kombiniere deinen Vor- und Nachnamen mithilfe der Funktion `paste` zu deinem vollen Namen. Speichere das Ergebnis in der Variable `voller_name`.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -199,7 +199,7 @@ voller_name <- paste(vorname, nachname)
 
 ### Vektoren definieren
 
-1.  Definiere einen Vektor «first_vector» mit den Zahlen 100, 80, 54, 73. Einen Vektor definiert man so: `first_vector <- c(...)`
+1.  Definiere einen Vektor `first_vector` mit den Zahlen 100, 80, 54 und 73. Verwende dazu die folgende Syntax: `first_vector <- c(...)`.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -250,7 +250,7 @@ Die wichtigsten Operatoren und Funktionen in R: <https://methodenlehre.github.io
 
 ### Logische Operatoren
 
-1.  Teste ob die Zahl 5 größer als 2 ist –\> TRUE or FALSE?
+1.  Teste, ob die Zahl 5 größer als 2 ist –\> TRUE or FALSE?
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -260,7 +260,7 @@ Die wichtigsten Operatoren und Funktionen in R: <https://methodenlehre.github.io
 TRUE, 5 ist grösser als 2.
 :::
 
-2.  Teste ob 6 ungleich 8 ist –\> TRUE or FALSE?
+2.  Teste, ob 6 ungleich 8 ist –\> TRUE or FALSE?
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -270,7 +270,7 @@ TRUE, 5 ist grösser als 2.
 TRUE, 6 und 8 sind ungleich.
 :::
 
-3.  Subtrahiere 80 von 50 und speichere das Ergebnis in einer Variable namens «diff_score».
+3.  Subtrahiere 80 von 50 und speichere das Ergebnis in einer Variable namens `diff_score`.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -278,7 +278,7 @@ diff_score <- 80 - 50
 ```
 :::
 
-4.  Berechne mit `abs()` den absoluten Wert von «diff_score» lassen dir diesen mit `print(diff_score)` in der Konsole ausgeben.
+4.  Berechne mit `abs()` den absoluten Wert von `diff_score`. Lasse dir diesen mit `print(diff_score)` in der Konsole ausgeben.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -307,15 +307,15 @@ diff_score_abs <- abs(diff_score)
 
 Informative Kommentare im Code sind elementar für die Nachvollziehbarkeit.
 
-1.  Schreibe einen Kommentar indem du ein `#` verwendest.
+1.  Schreibe einen Kommentar, indem du ein `#` verwendest.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
-# Hier ein Beipsiel für einen Kommentar, wie auch schon weiter oben mehrmals verwendet um die Lösungen davon zu hindern ausgeführt zu werden.
+# Hier ein Beipsiel für einen Kommentar. Wie auch schon weiter oben mehrmals verwendet, hindert dieser die Lösungen daran, ausgeführt zu werden.
 ```
 :::
 
-2.  Code der nach einem `#` steht wird nicht ausgeführt. Setze ein `#` vor eine Codezeile und führe sie aus und beobachte was passiert.
+2.  Code, der nach einem `#` steht, wird nicht ausgeführt. Setze ein `#` vor eine Codezeile, führe sie aus und beobachte, was passiert.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -451,7 +451,7 @@ nrow(my_penguins)
 
 Nutze verschiedene Befehle und vergleiche die Ergebnisse:
 
-Verwende die Hilfefunktion `?funktionsname` um dir zeigen zu lassen welche Argumente die Funktionen benötigen.
+Verwende die Hilfefunktion `?funktionsname` um dir zeigen zu lassen, welche Argumente die Funktionen benötigen.
 
 -   `head()`
 
@@ -500,7 +500,7 @@ summary(my_penguins)
 
 👉 Was sind die Unterschiede zwischen den Befehlen?
 
-Alle der Befehle sind dafür geeignet einen ersten schnellen Überblick über den Datensatz zu erhalten. `head()` gibt die ersten paar (Standardmässig 6) Zeilen des Datensatzes aus. `glimpse()` gibt für jede Spalte den Namen, Typ und ihren ersten Wert aus. `str()` gibt einen Überblick über die Dimensionen des Datensatzes, wie Anzahl an Spalten, Anzahl an Zeilen und über die Datentypen. `summary()` gibt eine statistische Zusammenfassung des Datensatzes, wie beispielsweise bei numerischen Variablen den minimalen Wert, maximalen Wert, Median und Mean oder bei faktoriellen Variablen die Anzahl an Faktorstufen und ihrer entsprechenden Häufigkeit. Mit `penguins` allein wird einfach das entsprechende Objekt aufgerufen (hier handelt es sich nicht um eine Funktion).
+Alle der Befehle sind dafür geeignet, einen ersten schnellen Überblick über den Datensatz zu erhalten. `head()` gibt die ersten paar (Standardmässig 6) Zeilen des Datensatzes aus. `glimpse()` gibt für jede Spalte den Namen, Typ und ihren ersten Wert aus. `str()` gibt einen Überblick über die Dimensionen des Datensatzes, wie Anzahl an Spalten, Anzahl an Zeilen und über die Datentypen. `summary()` gibt eine statistische Zusammenfassung des Datensatzes, wie beispielsweise bei numerischen Variablen den minimalen Wert, maximalen Wert, Median und Mean oder bei faktoriellen Variablen die Anzahl an Faktorstufen und ihrer entsprechenden Häufigkeit. Mit `penguins` allein wird einfach das entsprechende Objekt aufgerufen (hier handelt es sich nicht um eine Funktion).
 
 ### Datentypen überprüfen
 
@@ -578,7 +578,7 @@ species_numeric <- is.numeric(my_penguins$bill_depth_mm) # der genaue Name der V
 ```
 :::
 
--   Prüfe anschließend, ob diese neue Variable selbst ein logischer Vektor ist.
+-   Prüfe anschliessend, ob diese neue Variable selbst ein logischer Vektor ist.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -588,4 +588,4 @@ is.logical(species_numeric) # hier müsst ihr als Argument natürlich den von eu
 
 # Am Ende deiner Übungen - vergiss nicht dein Skript abzuspeichern! :-)
 
-Gib diesem einem Namen, der Maschinen und Mensch-lesbar ist, siehe Kapitel 6.1.3 hier: <https://r4ds.hadley.nz/workflow-scripts>
+Gib diesem einen Namen, der Maschinen und Mensch-lesbar ist, siehe Kapitel 6.1.3 hier: <https://r4ds.hadley.nz/workflow-scripts>

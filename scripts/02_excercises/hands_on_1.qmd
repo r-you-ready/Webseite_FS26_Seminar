@@ -26,11 +26,11 @@ Und hier die Slides zur EH2:
 
 Installiere R und RStudio:
 
-1.  Installation von R – neueste Version 4.5.1: <https://stat.ethz.ch/CRAN/>
+1.  Installation von R – neueste Version 4.5.2: <https://stat.ethz.ch/CRAN/>
 
-2.  Installation von RStudio (Version 2025.09.0): <https://posit.co/download/rstudio-desktop/>
+2.  Installation von RStudio (Version 2026.01.06): <https://posit.co/download/rstudio-desktop/>
 
-Du weisst nicht was mit R auf sich hat? Hier ist eine Kurzerklärung: <https://methodenlehre.github.io/einfuehrung-in-R/>
+Du weisst nicht, was es mit R auf sich hat? Hier ist eine Kurzerklärung: <https://methodenlehre.github.io/einfuehrung-in-R/>
 
 ## Einstellungen
 
@@ -109,19 +109,19 @@ Tipp: Pakete regelmässig updaten mit z.B. update.packages()
 
 ## Erste Zuweisungen/Variablen definieren
 
-1.  Weise den Wert 5 der Variable `x` zu mit dem Operator `<-`
+1.  Erstelle eine Variable `x` und weise ihr mit dem Zuweisungsoperator `<-` den Wert 5 zu.
 
-2.  Weise eine beliebige Zahl der Variable `y` zu und dividiere dann `x` durch `y`. Speichere dieses Ergebnis in der Variable `z`.
+2.  Weise der Variable `y` eine beliebige Zahl zu. Teile anschliessend `x` (aus Aufgabe 1) durch `y` und speichere das Ergebnis in der Variable `z`.
 
 3.  Schaue dir das Ergebnis in deinem Environment an. Lass dir das Ergebnis auch in der Konsole ausgeben. Das Environment findest du oben rechts, die Konsole ist unter deinem Skript.
 
-4.  Erstelle zwei Variablen: Eine mit deinem Vornamen und eine mit deinem Nachnamen. Solche "character" Variablen musst du in Anführungszeichen setzen `""`
+4.  Erstelle zwei Variablen: eine mit deinem Vornamen und eine mit deinem Nachnamen. Zeichenketten (character-Variablen) müssen in R in Anführungszeichen (`""`) gesetzt werden.
 
-5.  Kombiniere deinen Vor- und Nachnamen zu deinem vollen Namen mittels `paste` . Speichere diese Variable als `voller_name`.
+5.  Kombiniere deinen Vor- und Nachnamen mithilfe der Funktion `paste` zu deinem vollen Namen. Speichere das Ergebnis in der Variable `voller_name`.
 
 ## Vektoren definieren
 
-1.  Definiere einen Vektor «first_vector» mit den Zahlen 100, 80, 54, 73. Einen Vektor definiert man so: `first_vector <- c(...)`
+1.  Definiere einen Vektor `first_vector` mit den Zahlen 100, 80, 54 und 73. Verwende dazu die folgende Syntax: `first_vector <- c(...)`.
 
 2.  Wende den Befehl `boxplot()` auf deinen Vektor an
 
@@ -146,13 +146,13 @@ Die wichtigsten Operatoren und Funktionen in R: <https://methodenlehre.github.io
 
 ## Logische Operatoren
 
-1.  Teste ob die Zahl 5 größer als 2 ist –\> TRUE or FALSE?
+1.  Teste, ob die Zahl 5 größer als 2 ist –\> TRUE or FALSE?
 
-2.  Teste ob 6 ungleich 8 ist –\> TRUE or FALSE?
+2.  Teste, ob 6 ungleich 8 ist –\> TRUE or FALSE?
 
-3.  Subtrahiere 80 von 50 und speichere das Ergebnis in einer Variable namens «diff_score».
+3.  Subtrahiere 80 von 50 und speichere das Ergebnis in einer Variable namens `diff_score`.
 
-4.  Berechne mit `abs()` den absoluten Wert von «diff_score» lasse dir diesen mit `print(diff_score)` in der Konsole ausgeben.
+4.  Berechne mit `abs()` den absoluten Wert von `diff_score`. Lasse dir diesen mit `print(diff_score)` in der Konsole ausgeben.
 
 ### Logische Operatoren, z.B.
 
@@ -173,9 +173,9 @@ Die wichtigsten Operatoren und Funktionen in R: <https://methodenlehre.github.io
 
 Informative Kommentare im Code sind elementar für die Nachvollziehbarkeit.
 
-1.  Schreibe einen Kommentar indem du ein `#` verwendest.
+1.  Schreibe einen Kommentar, indem du ein `#` verwendest.
 
-2.  Code der nach einem `#` steht wird nicht ausgeführt. Setze ein `#` vor eine Codezeile und führe sie aus und beobachte was passiert.
+2.  Code, der nach einem `#` steht, wird nicht ausgeführt. Setze ein `#` vor eine Codezeile, führe sie aus und beobachte, was passiert.
 
 ### Benennung von Variablen
 
@@ -186,7 +186,7 @@ Einige wichtige Grundsätze dafür sind:
 
 -   Sie müssen mit einem Buchstaben beginnen und dürfen keine Leerzeichen enthalten.
 
--   Sonderzeichen und Großbuchstaben sollten vermieden werden.
+-   Sonderzeichen und Grossbuchstaben sollten vermieden werden.
 
 -   Keine Namen verwenden, die bereits für Funktionen reserviert sind (z. B. `mean()`).
 
@@ -206,7 +206,7 @@ In unserem Seminar verwenden wir den *snake_case*.
 
 ## Für fortgeschrittene R-Nutzer:innen
 
-1.  Speichere die beiden höchsten Werte aus «first_vector» in einer neuen Variable ab (Tipp: verwende `sort()` )
+1.  Speichere die beiden höchsten Werte aus `first_vector` in einer neuen Variable ab (Tipp: verwende `sort()` )
 
 2.  Erstelle einen Vektor mit Werten von 0-1000 in 10er Schritten (Tipp: suche nach der Funktion `seq()`
 
@@ -265,7 +265,7 @@ my_penguins <- penguins
 
 Nutze verschiedene Befehle und vergleiche die Ergebnisse:
 
-Verwende die Hilfefunktion `?funktionsname` um dir zeigen zu lassen welche Argumente die Funktionen benötigen.
+Verwende die Hilfefunktion `?funktionsname` um dir zeigen zu lassen, welche Argumente die Funktionen benötigen.
 
 -   `head()`
 
@@ -297,8 +297,8 @@ Verwende die Hilfefunktion `?funktionsname` um dir zeigen zu lassen welche Argum
 
 -   Gib die Antwort als logischen Wert aus (`TRUE` oder `FALSE`) und speichere sie in einer neuen Variable.
 
--   Prüfe anschließend, ob diese neue Variable selbst ein logischer Vektor ist.
+-   Prüfe anschliessend, ob diese neue Variable selbst ein logischer Vektor ist.
 
 # Am Ende deiner Übungen - vergiss nicht dein Skript abzuspeichern! :-)
 
-Gib diesem einem Namen, der Maschinen und Mensch-lesbar ist, siehe Kapitel 6.1.3 hier: <https://r4ds.hadley.nz/workflow-scripts>
+Gib diesem einen Namen, der Maschinen und Mensch-lesbar ist, siehe Kapitel 6.1.3 hier: <https://r4ds.hadley.nz/workflow-scripts>
