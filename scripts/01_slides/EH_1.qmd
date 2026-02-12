@@ -38,7 +38,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 -   Fabrikstrasse 8, Raum D 262\
 -   sandra.grinschgl\@unibe.ch\
 -   Sprechstunde nach Vereinbarung\
--   Fun Fact: ist fasziniert davon wie sich Schweizer:innen den Zahnarzt leisten können\
+-   Fun Fact: ist fasziniert davon, wie sich Schweizer:innen den Zahnarzt leisten können\
 :::
 
 ::: {.column width="30%"}
@@ -66,7 +66,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 :::
 
 ::: {.column width="20%"}
-![](../../images/aaron.jpg){fig-align="center"}
+![](../../images/laura.jpg){fig-align="center"}
 :::
 :::::
 
@@ -231,7 +231,7 @@ Kontinuierlicher Lernaufwand während dem Semester - Dafür keine Prüfung
 -   Kein "Schritt-für-Schritt Kochbuch" für die Analyse der Masterarbeit
 
 ::: notes
-Masterarbeit bleibt eine individuelle Leistung, und es gibt keine One-Size-Fits all Lösung. Das Seminar soll helfen die Grundlagen aufzufrischen die ihr für eine erfolgreiche Datenaufbereitung und Auswertung braucht.
+Masterarbeit bleibt eine individuelle Leistung, und es gibt keine One-Size-Fits all Lösung. Das Seminar soll helfen, die Grundlagen aufzufrischen, die ihr für eine erfolgreiche Datenaufbereitung und Auswertung braucht.
 :::
 
 ------------------------------------------------------------------------
@@ -240,9 +240,9 @@ Masterarbeit bleibt eine individuelle Leistung, und es gibt keine One-Size-Fits 
 
 -   Mitarbeit: 14 Punkte
 
--   Regelmässige Hausübungen: 7x, gesamt 40 Punkte
+-   Regelmässige Hausübungen: 8x, gesamt 32 Punkte
 
--   Abschlussprojekt: 46 Punkte
+-   Abschlussprojekt: 54 Punkte
 
     --\> Total 100 Punkte
 
@@ -289,9 +289,9 @@ Masterarbeit bleibt eine individuelle Leistung, und es gibt keine One-Size-Fits 
 
 ------------------------------------------------------------------------
 
-## Leistungsnachweis: Hausübungen (40 Punkte)
+## Leistungsnachweis: Hausübungen (32 Punkte)
 
--   7 Hausübungen - 4 oder 8 Punkte pro Hausübung
+-   8 Hausübungen - 4 oder 8 Punkte pro Hausübung
 
 -   Bewertungsrelevant: Auseinandersetzung mit dem Stoff/den aufgetragenen Aufgaben.
 
@@ -303,7 +303,7 @@ Bei Problemen die ihr nicht lösen könnt und keine Ressourcen findet, könnt ih
 
 ------------------------------------------------------------------------
 
-## Leistungsnachweis: Abschlussprojekt (46 Punkte)
+## Leistungsnachweis: Abschlussprojekt (54 Punkte)
 
 -   Vorgegebenes Paper; Individuelle, simulierte Datensätze
 
@@ -315,7 +315,7 @@ Bei Problemen die ihr nicht lösen könnt und keine Ressourcen findet, könnt ih
 
 Abgabe: Datenanalyseplan, Codebook, Datenfiles, Analyseskript(e) nach vorgegebener Ordnerstruktur
 
-**Deadline: TBD**
+**Deadline: 14.06.2026**
 
 -\> Weitere Informationen im Verlauf des Semesters
 
@@ -349,15 +349,11 @@ Wir sind hier um Fehler zu machen; auch bei uns ist vieles Trial-und-Error. Das 
 
 ------------------------------------------------------------------------
 
-## Syllabus (1)
+## Syllabus
 
-![](../../images/Semesterplan_1.png){fig-align="center"}
+<iframe src="../../PDFs/Syllabus.pdf" width="100%" height="600px">
 
-------------------------------------------------------------------------
-
-## Syllabus (2)
-
-![](../../images/Semesterplan_2.png){fig-align="center"}
+</iframe>
 
 ------------------------------------------------------------------------
 

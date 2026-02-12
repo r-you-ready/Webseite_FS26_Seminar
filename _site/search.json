@@ -141,5 +141,302 @@
       "FAQ",
       "5  Abschlussprojekt"
     ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#r-u-ready-reproduzierbare-datenaufbereitung-und--analyse",
+    "href": "scripts/01_slides/EH_1.html#r-u-ready-reproduzierbare-datenaufbereitung-und--analyse",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "R u Ready? Reproduzierbare Datenaufbereitung und -analyse",
+    "text": "R u Ready? Reproduzierbare Datenaufbereitung und -analyse\nFS 2026 LV-Leitung: Dr. Sandra Grinschgl / MSc. Laura Hirt Tutor: BSc. Lars Schilling1. Einheit, 18.02.2026",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#lv-leitung",
+    "href": "scripts/01_slides/EH_1.html#lv-leitung",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "LV-Leitung",
+    "text": "LV-Leitung\n\n\nDr. Sandra Grinschgl (sie/ihr)\n\nDozentur für «Mensch in digitaler Transformation»\n\nArbeitsbereich Psychologie der Digitalisierung\n\nFabrikstrasse 8, Raum D 262\n\nsandra.grinschgl@unibe.ch\n\nSprechstunde nach Vereinbarung\n\nFun Fact: ist fasziniert davon, wie sich Schweizer:innen den Zahnarzt leisten können",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#lv-leitung-2",
+    "href": "scripts/01_slides/EH_1.html#lv-leitung-2",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "LV-Leitung (2)",
+    "text": "LV-Leitung (2)\n\n\nLaura Hirt (sie/ihr) (MSc. Psychologie)\n\nLehrassistenz R you Ready / Methodenberatung\n\nFabrikstrasse 8, A263\n\nSprechstunde/Methodenberatung nach Vereinbarung\n\nlaura.hirt@unibe.ch\nWeiss nie, ob ich ‘R’ Englisch oder Deutsch aussprechen soll.",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#lv-leitung-3",
+    "href": "scripts/01_slides/EH_1.html#lv-leitung-3",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "LV-Leitung (3)",
+    "text": "LV-Leitung (3)\n\n\nLars Schilling (er/ihm)(BSc. Psychologie)\n\nTutor R you Ready\n\nFabrikstrasse 8, D266\n\nSprechstunde nach Vereinbarung\n\nlars.schilling@unibe.ch\nWundert sich noch immer über die pünktlichen Züge in der Schweiz",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#barrierefreiheit",
+    "href": "scripts/01_slides/EH_1.html#barrierefreiheit",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Barrierefreiheit!",
+    "text": "Barrierefreiheit!\nBitte melde dich auf einem für dich angemessenem Weg bei uns, wenn dir in dieser Lehrveranstaltung Barrieren begegnen, die auszugleichen sind.",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#pronomennamen",
+    "href": "scripts/01_slides/EH_1.html#pronomennamen",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Pronomen/Namen",
+    "text": "Pronomen/Namen\nBitte gebt uns auch Bescheid, falls wir euch falsch ansprechen!\n\nIllustration: Freepik",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#österreichisch-vs.-berndeutsch",
+    "href": "scripts/01_slides/EH_1.html#österreichisch-vs.-berndeutsch",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Österreichisch vs. Berndeutsch",
+    "text": "Österreichisch vs. Berndeutsch\nBitte gebt mir/uns auch Bescheid, solltet ihr etwas nicht verstehen! Seht es uns nach, falls wir etwas nicht verstehen und nachfragen!\n\n\n\n\n\nUhrturm Graz: Foto C. Stadler/Bwag\n\n\n\n\n\n\nFoto: https://en.wikipedia.org/wiki/Zytglogge#/media/File:Zytglogge_01.jpg",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#organisatorisches",
+    "href": "scripts/01_slides/EH_1.html#organisatorisches",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Organisatorisches",
+    "text": "Organisatorisches\n\n🕝 Immer Mittwochs um 12:15 (Gruppe Laura) / 16:15 (Gruppe Sandra)\n📍Fabrikstrasse 8, Raum B101\n💻 Eigener Laptop mit R-Studio notwendig\n📁Unterlagen auf ILIAS und Website\n📅 14 Einheiten\n🛫 Maximal 2 unentschuldigte Fehltermine\n\n\nKeine Pause - Selbstständig wenn nötig.",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#website-navigation-und-inhalte",
+    "href": "scripts/01_slides/EH_1.html#website-navigation-und-inhalte",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Website: Navigation und Inhalte",
+    "text": "Website: Navigation und Inhalte\n\nAuf Quarto Website:\n\nAlle Präsentationen\n\nAuch als PDF verfügbar (PDF-Mode)\n\nAlle Hands On Übungen\nFAQ\nAdministrative Infos, z. B. Details zum Leistungsnachweis\n\nAuf ILIAS\n\nDownloads:\n\nFiles\n\nUploads (d.h. Abgaben)\nForum für Fragen und Peer Feedback",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#themen-der-lehrveranstaltung",
+    "href": "scripts/01_slides/EH_1.html#themen-der-lehrveranstaltung",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Themen der Lehrveranstaltung",
+    "text": "Themen der Lehrveranstaltung\nZiele\n\nMethodenkenntnisse in R auffrischen & festigen\nTransfer von Statistik-Bachelorwissen auf Datenaufbereitung & -analyse\nErwerb konzeptueller & praktischer Kompetenzen\n\nAblauf\n\nDatenanalyseplan & Codebook\nR Basics\nReproduzierbare Datenaufbereitung (u.a. mit tidyverse)\nReproduzierbare Datenanalyse (u.a. mit tidyverse)\n\nFormat\n\nPräsenz: Input & Anwendung\nHausübungen & Abschlussprojekt\n\n\nKontinuierlicher Lernaufwand während dem Semester - Dafür keine Prüfung",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#lernziele",
+    "href": "scripts/01_slides/EH_1.html#lernziele",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Lernziele",
+    "text": "Lernziele\n\nKonzeptionell: Schritte der Datenaufbereitung und -analyse im Analyseplan begründen (WAS muss ich tun & WARUM)\nPraktisch: Reproduzierbare Datenaufbereitung (WIE Daten in ein analysierbares Format bringen)\nPraktisch: Reproduzierbare Datenanalyse (WIE Fragestellungen und Hypothesen testen)\n\nNach dem Seminar können Studierende\n\nGrundkenntnisse in R / RStudio anwenden\nNotwendige Schritte für reproduzierbare Datenaufbereitung und -analyse überblicken und praktisch umsetzen\nSelbständig neue Analyse-Herausforderungen bewältigen und passende Ressourcen nutzen",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#was-das-seminar-nicht-leisten-kann",
+    "href": "scripts/01_slides/EH_1.html#was-das-seminar-nicht-leisten-kann",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Was das Seminar nicht leisten kann:",
+    "text": "Was das Seminar nicht leisten kann:\n\nKeine Auffrischung der Statistikvorlesungen\nKein “Schritt-für-Schritt Kochbuch” für die Analyse der Masterarbeit\n\n\nMasterarbeit bleibt eine individuelle Leistung, und es gibt keine One-Size-Fits all Lösung. Das Seminar soll helfen, die Grundlagen aufzufrischen, die ihr für eine erfolgreiche Datenaufbereitung und Auswertung braucht.",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#leistungsbeurteilung",
+    "href": "scripts/01_slides/EH_1.html#leistungsbeurteilung",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Leistungsbeurteilung",
+    "text": "Leistungsbeurteilung\n\nMitarbeit: 14 Punkte\nRegelmässige Hausübungen: 8x, gesamt 32 Punkte\nAbschlussprojekt: 54 Punkte\n–&gt; Total 100 Punkte\nGenauere Informationen zum Leistungsnachweis hier: Leistungsnachweis Website\n–&gt; Update im Laufe des Semesters\nKontinuierliche Arbeit während dem Semester!\nAufwand: 5ECTS für erfolgreichen Abschluss des Seminars -&gt; +- 9h pro Woche\n\nECTS &lt;- 25 \n\nWochen_semester &lt;- 14\n\naufwand_semester &lt;- 5*ECTS\n\naufwand_pro_woche &lt;- mean(aufwand_semester/Wochen_semester)\n\naufwand_pro_woche\n\n[1] 8.928571",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#leistungsnachweis-mitarbeit-14-punkte",
+    "href": "scripts/01_slides/EH_1.html#leistungsnachweis-mitarbeit-14-punkte",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Leistungsnachweis: Mitarbeit (14 Punkte)",
+    "text": "Leistungsnachweis: Mitarbeit (14 Punkte)\n… kann unterschiedlich ausfallen zum Beispiel:\n\nWortmeldungen im Plenum\nAktive Teilnahme an den Hands On Sessions\nBeteiligung an Online-Foren & Error Hunt\n\nPunktevergabe:\n\n7 Punkte durch LV-Leitung\n7 Punkte durch Selbstevaluation",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#leistungsnachweis-hausübungen-32-punkte",
+    "href": "scripts/01_slides/EH_1.html#leistungsnachweis-hausübungen-32-punkte",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Leistungsnachweis: Hausübungen (32 Punkte)",
+    "text": "Leistungsnachweis: Hausübungen (32 Punkte)\n\n8 Hausübungen - 4 oder 8 Punkte pro Hausübung\nBewertungsrelevant: Auseinandersetzung mit dem Stoff/den aufgetragenen Aufgaben.\nKorrektheit zweitrangig!\n\n\nBei Problemen die ihr nicht lösen könnt und keine Ressourcen findet, könnt ihr euch auch ans Forum wenden und eure Frage posten.",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#leistungsnachweis-abschlussprojekt-54-punkte",
+    "href": "scripts/01_slides/EH_1.html#leistungsnachweis-abschlussprojekt-54-punkte",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Leistungsnachweis: Abschlussprojekt (54 Punkte)",
+    "text": "Leistungsnachweis: Abschlussprojekt (54 Punkte)\n\nVorgegebenes Paper; Individuelle, simulierte Datensätze\nDatenanalyseplan überarbeiten / ergänzen\nKontinuierliche Führung/Überarbeitung eines Codebooks\nReproduzierbare Datenaufbereitung und Analyse mit Quarto\n\nAbgabe: Datenanalyseplan, Codebook, Datenfiles, Analyseskript(e) nach vorgegebener Ordnerstruktur\nDeadline: 14.06.2026\n-&gt; Weitere Informationen im Verlauf des Semesters",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#fehlerkultur",
+    "href": "scripts/01_slides/EH_1.html#fehlerkultur",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Fehlerkultur",
+    "text": "Fehlerkultur\n\n“Ich verliere nie. Entweder ich gewinne oder ich lerne” - Nelson Mandela\n\n“Auch Umwege erweitern unseren Horizont” - Ernst Ferstl\n\n“Wege entstehen dadurch dass wir sie gehen” - Franz Kafka\n\n“Failure is not the opposite of Success, its part of it” - Karamo Brown in Queer Eye\n\n“Den grössten Fehler, den man im Leben machen kann, ist, immer Angst zu haben einen Fehler zu machen.” - Dietrich Bonhoeffer\n\nWir sind hier um Fehler zu machen; auch bei uns ist vieles Trial-und-Error. Das darf und soll auch so sein! Bei Hausübungen sind Fehler erlaubt! Es geht ums das Mitarbeiten und sich bemühen, dann kriegt man auch mit Fehlern die Punkte Klar machen, dass man laufend dran sein muss um zu Lernen & HÜs wichtig sind Auch ich selbst weiß vieles nicht auswendig, muss googlen…",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#syllabus",
+    "href": "scripts/01_slides/EH_1.html#syllabus",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Syllabus",
+    "text": "Syllabus",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#begleitende-literatur",
+    "href": "scripts/01_slides/EH_1.html#begleitende-literatur",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Begleitende Literatur",
+    "text": "Begleitende Literatur\n\nWickham, H., Cetinkaya-Rundel, & Grolemund, G., &. (2023). R for Data Science. O’Reilly Media. https://r4ds.hadley.nz/\nEllis, A., & Mayer, B. (2024). Einführung in R. https://methodenlehre.github.io/einfuehrung-in-R/\nWeitere nützliche Ressourcen:\n\nTidyverse cheat sheets https://posit.co/resources/cheatsheets/\nLuhmann, M. (2020). R für Einsteiger. Beltz.\n\nKurswebsite: FAQ und weitere Informationen",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#unterstützungsangebote",
+    "href": "scripts/01_slides/EH_1.html#unterstützungsangebote",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Unterstützungsangebote",
+    "text": "Unterstützungsangebote\n\nMit vorhanden Ressourcen arbeiten: Unterlagen aus dem Bachelor + Online-Ressourcen (auch LLMs)\nPeer Pairing für Präsenzeinheiten und Hausübungen\nOnline-Forum für Peer-to-Peer und Peer-to-Teacher Fragen; Mitarbeitspunkte für Code-Error-Hunt\nSprechstunde für «R Troubles» mit Lars –&gt; vor/nach/während den Einheiten + bei Bedarf\nErhebung & Besprechung der «Muddiest Points»\nMusterlösungen zu Übungen werden blockweise im Ebook ergänzt",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#bedarfsanalyse",
+    "href": "scripts/01_slides/EH_1.html#bedarfsanalyse",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Bedarfsanalyse",
+    "text": "Bedarfsanalyse\nBitte reflektiere das im Bachelor erworbene Wissen und überlege wo Aufholbedarf im Bezug auf die Datenaufbereitung und -analyse mit R besteht. Du kannst die zentralen Unterlagen des Bachelor-Studiums (z.B. zu den Statistikvorlesungen) im Ilias Kurs “Masterarbeit Psychologie” einsehen.\nAnonyme Umfrage um\n\nPräferenz für das Peer-Pairing zu erfragen\nVorkenntnisse zu erfassen\nBedarf an R-Unterstützung zu erfassen\n\nUmfrage in ILIAS, Deadline Sonntag 22.02., 23:55\n\nFragen zu Peer-Feedback (ob in von uns zugeteilten Gruppen oder ob präferenz für von uns zugteilten gruppen)",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#anwesenheit-prüfen-kennenlernen",
+    "href": "scripts/01_slides/EH_1.html#anwesenheit-prüfen-kennenlernen",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Anwesenheit prüfen / Kennenlernen",
+    "text": "Anwesenheit prüfen / Kennenlernen\n\nkurz Namen sagen und wo im Master (z.B. schon an Masterarbeit)\nfalls Zeit: Lebende Statistik, z.B. wie sehr Panik vor R/Datenanalyse (0 - 10), wie viele Kaffee heute schon getrunken",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#warum-r",
+    "href": "scripts/01_slides/EH_1.html#warum-r",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Warum R?",
+    "text": "Warum R?\n\nEs gibt viele Gründe die für R sprechen:\n\nR kann mehr\nR ist aktuell\nR ist ansprechbar\nR schläft nicht\nR ist nachgefragt\nR ist Open Source & somit kostenlos\n\nQuelle: Luhmann, 2019.\n\n\n\nR bietet viele funktionen die in programmen nicht vorhanden ist\nR wird auch ständig weiterentwicklet, auch mit funktionen die erst jahre später in andere programme übernommmen werdne\nR die programmierer einzelner packages sind oft erreichbar und antworten auch auf fragen usw.\nR R nutzer auf der ganzen welt, auch in sozialen medien unterwegs (z.B auch R-Ladies https://rladies.org/about-us/mission/)\nR ist nachgefragt, eröffnet jobmöglichkeiten in und ausserhalb der wissenschaft\n\nR erhöhrt auch die transparenz!! –&gt; Open science block nächste woche",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#jetzt-hands-on",
+    "href": "scripts/01_slides/EH_1.html#jetzt-hands-on",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Jetzt: Hands On!",
+    "text": "Jetzt: Hands On!\nÜbungen auf der Website!\n\nIn eigenem Tempo arbeiten, nicht stressen lassen!\nHelft euren Sitznachbar:innen\nMeldet euch bei uns!\nFür die sehr schnellen Personen —&gt; Bedarfsanalyse auf ILIAS.\n\n\nMit Block anfangen; Lars und ich gehen rum, und beantworten fragen. Wenn ihr nicht fertig werdet ist das kein Problem.",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#heute-haben-wir",
+    "href": "scripts/01_slides/EH_1.html#heute-haben-wir",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Heute haben wir…",
+    "text": "Heute haben wir…\n\nR bzw. RStudio und wichtige Pakte darin installiert\nUns mit der Oberfläche von R-Studio bekannt gemacht\nErste Operationen in R ausgeführt:\n\nEinfache Rechnungen\nErste Zuweisungen mit &lt;-\nVektoren erstellt\nErste Funktionen aufgerufen ( z.b. sum()",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#methodenberatung",
+    "href": "scripts/01_slides/EH_1.html#methodenberatung",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Methodenberatung",
+    "text": "Methodenberatung\nMethodenberatung",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
+  },
+  {
+    "objectID": "scripts/01_slides/EH_1.html#bis-nächste-woche",
+    "href": "scripts/01_slides/EH_1.html#bis-nächste-woche",
+    "title": "R u Ready? FS2026 | Psychologie der Digitalisierung - Einheit 1",
+    "section": "Bis nächste Woche!",
+    "text": "Bis nächste Woche!\n\nBedarfsanalyse auf ILIAS bis Sonntag ausfüllen!\nANONYM\n\nILIAS - Sitzung 1",
+    "crumbs": [
+      "Präsentationen",
+      "Einheit 1 - 17.09.2025"
+    ]
   }
 ]
