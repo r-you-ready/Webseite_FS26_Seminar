@@ -351,13 +351,11 @@ Wir sind hier um Fehler zu machen; auch bei uns ist vieles Trial-und-Error. Das 
 
 ## Syllabus
 
-<div style="background:#777; padding:30px; height:80vh; overflow:auto;">
-  <embed 
-    src="../../PDFs/Syllabus.pdf"
-    type="application/pdf"
-    style="width:100%; height:120vh; display:block;"
-  >
-</div>
+<embed 
+  src="../../PDFs/Syllabus.pdf" 
+  type="application/pdf"
+  style="width:100%; height:90vh;"
+>
 
 ------------------------------------------------------------------------
 
