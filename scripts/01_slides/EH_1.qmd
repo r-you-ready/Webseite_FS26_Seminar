@@ -16,7 +16,7 @@ format:
     smaller: true
     progress: true
     controls: true
-    embed-resources: true
+    scrollable: true
 ---
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse
@@ -351,11 +351,23 @@ Wir sind hier um Fehler zu machen; auch bei uns ist vieles Trial-und-Error. Das 
 
 ## Syllabus
 
-<embed 
-  src="../../PDFs/Syllabus.pdf" 
-  type="application/pdf"
-  style="width:100%; height:90vh;"
->
+<div style="
+  width:100%;
+  height:80vh;
+  background:#777;
+  padding:20px;
+  box-sizing:border-box;
+  border-radius:10px;
+  overflow:auto;
+">
+
+  <embed
+    src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
+
+</div>
 
 ------------------------------------------------------------------------
 
