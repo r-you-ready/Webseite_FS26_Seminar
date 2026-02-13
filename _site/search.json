@@ -438,5 +438,147 @@
       "Präsentationen",
       "Einheit 1 - 18.02.2026"
     ]
+  },
+  {
+    "objectID": "scripts/04_misc/front_page.html",
+    "href": "scripts/04_misc/front_page.html",
+    "title": "Einleitung",
+    "section": "",
+    "text": "In diesem E-Book findest du alle wichtigen Informationen zum Methodenseminar “R u Ready”. Du kannst hier u. a. die wöchentlichen Folien, Hands-On R Übungen, den Leistungsnachweis, und Frequently Asked Questions einsehen. Du kannst über die Unterkapitel (links) zu den entsprechenden Inhalten navigieren, oder auch die Suchfunktion oben links verwenden, um nach einem bestimmten Begriff zu suchen.\n\nHinweisboxen\nHier einen Überblick über die auf den Seiten enthaltenen Hinweisboxen:\n\n\n\n\n\n\nNote\n\n\n\nVertiefung: Hier geht es in die Tiefe.\n\n\n\n\n\n\n\n\nImportant\n\n\n\nWichtig: Dies ist eine wichtige Information.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nAchtung: Hier ist Vorsicht geboten.\n\n\n\n\n\n\n\n\nCaution\n\n\n\nVorsicht: Diese Information ist noch in Bearbeitung.\n\n\n\n\nSyllabus\n\n\n\n\n\n\nCaution\n\n\n\nVorsicht: Der Syllabus dient als grobe Richtlinie und kann angepasst werden, falls wir in einzelnen Einheiten mehr oder weniger Zeit benötigen.\n\n\n\n\nLetztes Update February 12, 2026 at 22:34",
+    "crumbs": [
+      "Einleitung"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html",
+    "href": "scripts/02_excercises/hands_on_1.html",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Bei Bedarf finden sich hier nochmal die Slides zur EH1:\n\n\n\n\nUnd hier die Slides zur EH2:\nDie Folien zur Einheit 2 werden kurz vor dem Termin hier hochgeschaltet.\n\n\n\nInstalliere R und RStudio:\n\nInstallation von R – neueste Version 4.5.2: https://stat.ethz.ch/CRAN/\nInstallation von RStudio (Version 2026.01.06): https://posit.co/download/rstudio-desktop/\n\nDu weisst nicht, was es mit R auf sich hat? Hier ist eine Kurzerklärung: https://methodenlehre.github.io/einfuehrung-in-R/\n\n\n\n\nRStudio öffnen & Einstellungen vornehmen: Unter «tools» –«global options» die unter 1.1. beschriebenen Einstellungen vornehmen:\nhttps://methodenlehre.github.io/einfuehrung-in-R/chapters/01-workflow.html\n\n\n\nNeues Skript öffnen & orientieren\n\n\n\n\nIm folgenden machen wir uns vertraut mit der Oberfläche von RStudio:\n\n\n\n\n\n\n\nSkript für Code-Eingabe sowie Kommentare\nKonsole für die Ausführung von Code -&gt; Teste einfache mathematische Operation in dieser; reproduziere diese mittels Skript\nRechts oben: Environment & History\nRechts unten: Files, Plots, Packages und Help Viewer\n\n\n\n\nTidyverse ist ein Meta-Paket, das mehrere Pakete umfasst\n\nPakete installieren (nur 1x notwendig) -&gt; führe diesen Code in der Konsole aus\n\ninstall.packages(\"tidyverse\")\n\nPaket laden (innerhalb des Skriptes, bei jedem Neustart von R notwendig)\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.2\n✔ purrr     1.2.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\nTipp: Pakete regelmässig updaten mit z.B. update.packages()\n\n\n\n\na. Nutze R als Taschenrechner\n\n123+456\n144*112\n10/3\nQuadriere 420\nZiehe die Quadratwurzel aus 146 mit der Funktion sqrt()\nBerechne den Rest der Division 10/3 mit dem Modulo Operator: %%\n\n\n\n\n\n\n\nZeichen\nBedeutung\n\n\n\n\n+\nAddition\n\n\n-\nSubstraktion\n\n\n*\nMultiplikation\n\n\n/\nDivision\n\n\nsqrt(x)\nQuadratwurzel\n\n\nabs(x)\nBetrag (absoluter Wert)\n\n\nx %% y\nModulo (x mod y) 5 %% 2 = 1\n\n\n^\nPotenz\n\n\n\n\n\n\n\n\nErstelle eine Variable x und weise ihr mit dem Zuweisungsoperator &lt;- den Wert 5 zu.\nWeise der Variable y eine beliebige Zahl zu. Teile anschliessend x (aus Aufgabe 1) durch y und speichere das Ergebnis in der Variable z.\nSchaue dir das Ergebnis in deinem Environment an. Lass dir das Ergebnis auch in der Konsole ausgeben. Das Environment findest du oben rechts, die Konsole ist unter deinem Skript.\nErstelle zwei Variablen: eine mit deinem Vornamen und eine mit deinem Nachnamen. Zeichenketten (character-Variablen) müssen in R in Anführungszeichen (\"\") gesetzt werden.\nKombiniere deinen Vor- und Nachnamen mithilfe der Funktion paste zu deinem vollen Namen. Speichere das Ergebnis in der Variable voller_name.\n\n\n\n\n\nDefiniere einen Vektor first_vector mit den Zahlen 100, 80, 54 und 73. Verwende dazu die folgende Syntax: first_vector &lt;- c(...).\nWende den Befehl boxplot() auf deinen Vektor an\nBerechne die Summe sum()und den Mittelwert mean() von deinem Vektor\nMultipliziere deinen Vektor mit *2 und schaue dir das Ergebnis an.\n\nDie wichtigsten Operatoren und Funktionen in R: https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html\n\n\n\n\n\nFunktion\nBedeutung\n\n\n\n\nmean(x, na.rm =FALSE)\nMittelwert\n\n\nsd(x)\nStandardabweichung\n\n\nvar(x)\nVarianz\n\n\nmedian(x)\nMedian\n\n\nsum(x)\nSumme\n\n\nmin(x)\nMinimalwert\n\n\nmax(x)\nMaximalwert\n\n\nrange(x)\nMinimal - und Maximalwert\n\n\n\n\n\n\n\n\nTeste, ob die Zahl 5 größer als 2 ist –&gt; TRUE or FALSE?\nTeste, ob 6 ungleich 8 ist –&gt; TRUE or FALSE?\nSubtrahiere 80 von 50 und speichere das Ergebnis in einer Variable namens diff_score.\nBerechne mit abs() den absoluten Wert von diff_score. Lasse dir diesen mit print(diff_score) in der Konsole ausgeben.\n\n\n\n\n\n\nZeichen\nBedeutung\n\n\n\n\n==\ngleich\n\n\n!=\nungleich\n\n\n&gt;\ngrösser\n\n\n&gt;=\ngrösser gleich\n\n\n&lt;\nkleiner\n\n\n&lt;=\nkleiner gleich\n\n\n|\nLogisches Oder\n\n\n&\nLogisches Und\n\n\n\n\n\n\n\n\n\nInformative Kommentare im Code sind elementar für die Nachvollziehbarkeit.\n\nSchreibe einen Kommentar, indem du ein # verwendest.\nCode, der nach einem # steht, wird nicht ausgeführt. Setze ein # vor eine Codezeile, führe sie aus und beobachte, was passiert.\n\n\n\n\nEs gibt verschiedene Konventionen, wie man Variablen benennen kann.\nEinige wichtige Grundsätze dafür sind:\n\nNamen können aus Buchstaben, Zahlen sowie den Zeichen _ oder . bestehen.\nSie müssen mit einem Buchstaben beginnen und dürfen keine Leerzeichen enthalten.\nSonderzeichen und Grossbuchstaben sollten vermieden werden.\nKeine Namen verwenden, die bereits für Funktionen reserviert sind (z. B. mean()).\nDer Name sollte den Inhalt der Variablen möglichst gut beschreiben → Reproduzierbarkeit; clarity instead of brevity.\nAm besten englische Bezeichnungen verwenden, um internationalen Standards zu folgen.\n\n👉 Mehr dazu\nÜbung:\n\nDefiniere eine neue Variable nach snake_case.\nDefiniere eine zweite Variable nach CamelCase.\n\nIn unserem Seminar verwenden wir den snake_case.\n\n\n\n\n\nSpeichere die beiden höchsten Werte aus first_vector in einer neuen Variable ab (Tipp: verwende sort() )\nErstelle einen Vektor mit Werten von 0-1000 in 10er Schritten (Tipp: suche nach der Funktion seq()\nZiehe zufällig eine Zahl aus diesem Vektor\nGeneriere einen Vektor, der aus 50 Wiederholungen der Zahl 3 besteht\n\nTipps zu diesen Aufgaben findest du bei Bedarf hier: https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html (Kapitel 2.1)\nTipp: Suche nach der Dokumentation der folgenden Funktionen: sort(), seq(), sample, rep().\nDie Dokumentation kannst du mittels ?Funktionsname aufrufen.\n\n\n\n\nnumeric vectors: werden in integer (ganze Zahlen) und double (reelle Zahlen) unterteilt, z.B.\nnumerical_vector &lt;- c(1, 2.5, 4)\ncharacter vectors: bestehen aus Zeichen, welche von Anführungszeichen umgeben werden, z.B.\ntext_vector &lt;- c(\"Hello\", \"World\")\nlogical vectors: Elemente dieses Typs können nur 3 Werte annehmen: TRUE, FALSE oder NA\nlog_vector &lt;- c(TRUE, FALSE, TRUE)\n\nVektoren müssen aus denselbsten Elementen bestehen, d.h. z.B. numeric und character können nicht gemischt werden. Vektoren werden meist mit c() erstellt.",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#installation-r-und-r-studio",
+    "href": "scripts/02_excercises/hands_on_1.html#installation-r-und-r-studio",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Installiere R und RStudio:\n\nInstallation von R – neueste Version 4.5.2: https://stat.ethz.ch/CRAN/\nInstallation von RStudio (Version 2026.01.06): https://posit.co/download/rstudio-desktop/\n\nDu weisst nicht, was es mit R auf sich hat? Hier ist eine Kurzerklärung: https://methodenlehre.github.io/einfuehrung-in-R/",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#einstellungen",
+    "href": "scripts/02_excercises/hands_on_1.html#einstellungen",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "RStudio öffnen & Einstellungen vornehmen: Unter «tools» –«global options» die unter 1.1. beschriebenen Einstellungen vornehmen:\nhttps://methodenlehre.github.io/einfuehrung-in-R/chapters/01-workflow.html\n\n\n\nNeues Skript öffnen & orientieren",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#rstudio-oberfläche",
+    "href": "scripts/02_excercises/hands_on_1.html#rstudio-oberfläche",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Im folgenden machen wir uns vertraut mit der Oberfläche von RStudio:\n\n\n\n\n\n\n\nSkript für Code-Eingabe sowie Kommentare\nKonsole für die Ausführung von Code -&gt; Teste einfache mathematische Operation in dieser; reproduziere diese mittels Skript\nRechts oben: Environment & History\nRechts unten: Files, Plots, Packages und Help Viewer",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#pakete-installieren-und-laden",
+    "href": "scripts/02_excercises/hands_on_1.html#pakete-installieren-und-laden",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Tidyverse ist ein Meta-Paket, das mehrere Pakete umfasst\n\nPakete installieren (nur 1x notwendig) -&gt; führe diesen Code in der Konsole aus\n\ninstall.packages(\"tidyverse\")\n\nPaket laden (innerhalb des Skriptes, bei jedem Neustart von R notwendig)\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.2\n✔ purrr     1.2.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\nTipp: Pakete regelmässig updaten mit z.B. update.packages()",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#operatoren-kennenlernen",
+    "href": "scripts/02_excercises/hands_on_1.html#operatoren-kennenlernen",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "a. Nutze R als Taschenrechner\n\n123+456\n144*112\n10/3\nQuadriere 420\nZiehe die Quadratwurzel aus 146 mit der Funktion sqrt()\nBerechne den Rest der Division 10/3 mit dem Modulo Operator: %%\n\n\n\n\n\n\n\nZeichen\nBedeutung\n\n\n\n\n+\nAddition\n\n\n-\nSubstraktion\n\n\n*\nMultiplikation\n\n\n/\nDivision\n\n\nsqrt(x)\nQuadratwurzel\n\n\nabs(x)\nBetrag (absoluter Wert)\n\n\nx %% y\nModulo (x mod y) 5 %% 2 = 1\n\n\n^\nPotenz",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#erste-zuweisungenvariablen-definieren",
+    "href": "scripts/02_excercises/hands_on_1.html#erste-zuweisungenvariablen-definieren",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Erstelle eine Variable x und weise ihr mit dem Zuweisungsoperator &lt;- den Wert 5 zu.\nWeise der Variable y eine beliebige Zahl zu. Teile anschliessend x (aus Aufgabe 1) durch y und speichere das Ergebnis in der Variable z.\nSchaue dir das Ergebnis in deinem Environment an. Lass dir das Ergebnis auch in der Konsole ausgeben. Das Environment findest du oben rechts, die Konsole ist unter deinem Skript.\nErstelle zwei Variablen: eine mit deinem Vornamen und eine mit deinem Nachnamen. Zeichenketten (character-Variablen) müssen in R in Anführungszeichen (\"\") gesetzt werden.\nKombiniere deinen Vor- und Nachnamen mithilfe der Funktion paste zu deinem vollen Namen. Speichere das Ergebnis in der Variable voller_name.",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#vektoren-definieren",
+    "href": "scripts/02_excercises/hands_on_1.html#vektoren-definieren",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Definiere einen Vektor first_vector mit den Zahlen 100, 80, 54 und 73. Verwende dazu die folgende Syntax: first_vector &lt;- c(...).\nWende den Befehl boxplot() auf deinen Vektor an\nBerechne die Summe sum()und den Mittelwert mean() von deinem Vektor\nMultipliziere deinen Vektor mit *2 und schaue dir das Ergebnis an.\n\nDie wichtigsten Operatoren und Funktionen in R: https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html\n\n\n\n\n\nFunktion\nBedeutung\n\n\n\n\nmean(x, na.rm =FALSE)\nMittelwert\n\n\nsd(x)\nStandardabweichung\n\n\nvar(x)\nVarianz\n\n\nmedian(x)\nMedian\n\n\nsum(x)\nSumme\n\n\nmin(x)\nMinimalwert\n\n\nmax(x)\nMaximalwert\n\n\nrange(x)\nMinimal - und Maximalwert",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#logische-operatoren",
+    "href": "scripts/02_excercises/hands_on_1.html#logische-operatoren",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Teste, ob die Zahl 5 größer als 2 ist –&gt; TRUE or FALSE?\nTeste, ob 6 ungleich 8 ist –&gt; TRUE or FALSE?\nSubtrahiere 80 von 50 und speichere das Ergebnis in einer Variable namens diff_score.\nBerechne mit abs() den absoluten Wert von diff_score. Lasse dir diesen mit print(diff_score) in der Konsole ausgeben.\n\n\n\n\n\n\nZeichen\nBedeutung\n\n\n\n\n==\ngleich\n\n\n!=\nungleich\n\n\n&gt;\ngrösser\n\n\n&gt;=\ngrösser gleich\n\n\n&lt;\nkleiner\n\n\n&lt;=\nkleiner gleich\n\n\n|\nLogisches Oder\n\n\n&\nLogisches Und",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#nachvollziehbarkeit-von-code",
+    "href": "scripts/02_excercises/hands_on_1.html#nachvollziehbarkeit-von-code",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Informative Kommentare im Code sind elementar für die Nachvollziehbarkeit.\n\nSchreibe einen Kommentar, indem du ein # verwendest.\nCode, der nach einem # steht, wird nicht ausgeführt. Setze ein # vor eine Codezeile, führe sie aus und beobachte, was passiert.\n\n\n\n\nEs gibt verschiedene Konventionen, wie man Variablen benennen kann.\nEinige wichtige Grundsätze dafür sind:\n\nNamen können aus Buchstaben, Zahlen sowie den Zeichen _ oder . bestehen.\nSie müssen mit einem Buchstaben beginnen und dürfen keine Leerzeichen enthalten.\nSonderzeichen und Grossbuchstaben sollten vermieden werden.\nKeine Namen verwenden, die bereits für Funktionen reserviert sind (z. B. mean()).\nDer Name sollte den Inhalt der Variablen möglichst gut beschreiben → Reproduzierbarkeit; clarity instead of brevity.\nAm besten englische Bezeichnungen verwenden, um internationalen Standards zu folgen.\n\n👉 Mehr dazu\nÜbung:\n\nDefiniere eine neue Variable nach snake_case.\nDefiniere eine zweite Variable nach CamelCase.\n\nIn unserem Seminar verwenden wir den snake_case.",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#für-fortgeschrittene-r-nutzerinnen",
+    "href": "scripts/02_excercises/hands_on_1.html#für-fortgeschrittene-r-nutzerinnen",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "Speichere die beiden höchsten Werte aus first_vector in einer neuen Variable ab (Tipp: verwende sort() )\nErstelle einen Vektor mit Werten von 0-1000 in 10er Schritten (Tipp: suche nach der Funktion seq()\nZiehe zufällig eine Zahl aus diesem Vektor\nGeneriere einen Vektor, der aus 50 Wiederholungen der Zahl 3 besteht\n\nTipps zu diesen Aufgaben findest du bei Bedarf hier: https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html (Kapitel 2.1)\nTipp: Suche nach der Dokumentation der folgenden Funktionen: sort(), seq(), sample, rep().\nDie Dokumentation kannst du mittels ?Funktionsname aufrufen.",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
+  },
+  {
+    "objectID": "scripts/02_excercises/hands_on_1.html#datentypen",
+    "href": "scripts/02_excercises/hands_on_1.html#datentypen",
+    "title": "Hands On 1",
+    "section": "",
+    "text": "numeric vectors: werden in integer (ganze Zahlen) und double (reelle Zahlen) unterteilt, z.B.\nnumerical_vector &lt;- c(1, 2.5, 4)\ncharacter vectors: bestehen aus Zeichen, welche von Anführungszeichen umgeben werden, z.B.\ntext_vector &lt;- c(\"Hello\", \"World\")\nlogical vectors: Elemente dieses Typs können nur 3 Werte annehmen: TRUE, FALSE oder NA\nlog_vector &lt;- c(TRUE, FALSE, TRUE)\n\nVektoren müssen aus denselbsten Elementen bestehen, d.h. z.B. numeric und character können nicht gemischt werden. Vektoren werden meist mit c() erstellt.",
+    "crumbs": [
+      "Übungen zu den Einheiten",
+      "Hands on - Block 1 (Woche 1 - 2)"
+    ]
   }
 ]
