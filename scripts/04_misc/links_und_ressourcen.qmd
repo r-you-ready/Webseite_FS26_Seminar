@@ -24,7 +24,7 @@ Auf dieser Seite finden sich die Links zu den Ressourcen, die wir im Rahmen dies
 
 -   📗 [Einführung in R – Methodenlehre Uni Bern (Andrew Ellis & Boris Mayer)](https://methodenlehre.github.io/einfuehrung-in-R/)
 
--   📘 [R for Data Science – Basics wie Import, Aufbereitung, Visualisierun](https://r4ds.hadley.nz/)g
+-   📘 [R for Data Science – Basics wie Import, Aufbereitung, Visualisierung](https://r4ds.hadley.nz/)
 
 -   📖 [R für Einsteiger – Maike Luhmann](https://www.beltz.de/index.php?id=1731)
 
