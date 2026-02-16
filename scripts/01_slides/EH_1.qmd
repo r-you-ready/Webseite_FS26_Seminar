@@ -86,11 +86,11 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 -   lars.schilling\@unibe.ch
 
--   Wundert sich noch immer über die pünktlichen Züge in der Schweiz
+-   Traut seinem mit RStudio selbstgeschriebenem Spotify-Wrapped nicht
 :::
 
 ::: {.column width="20%"}
-![](../../images/clipboard-1518257597.png){fig-align="center" width="267"}
+![](../../images/lars.jpg){fig-align="center" width="267"}
 :::
 :::::
 
