@@ -7,7 +7,7 @@ author:
 date: today
 ---
 
-In diesem E-Book findest du alle wichtigen Informationen zum Methodenseminar "R u Ready". Du kannst hier u. a. die wöchentlichen Folien, Hands-On R Übungen, den Leistungsnachweis, und Frequently Asked Questions einsehen. Du kannst über die Unterkapitel (links) zu den entsprechenden Inhalten navigieren, oder auch die Suchfunktion oben links verwenden, um nach einem bestimmten Begriff zu suchen.
+In diesem E-Book findest du alle wichtigen Informationen zum Methodenseminar "R u Ready". Du kannst hier u.a. die wöchentlichen Folien, Hands-On R Übungen, den Leistungsnachweis, und Frequently Asked Questions einsehen. Du kannst über die Unterkapitel (links) zu den entsprechenden Inhalten navigieren, oder auch die Suchfunktion oben links verwenden, um nach einem bestimmten Begriff zu suchen.
 
 # Hinweisboxen
 
