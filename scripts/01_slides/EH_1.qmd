@@ -23,6 +23,8 @@ format:
 
 FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**1. Einheit**, 18.02.2026
 
+![](images/ryouready_logo.png){fig-align="center" width="306"}
+
 <br>
 
 ------------------------------------------------------------------------
@@ -56,7 +58,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 -   Lehrassistenz R you Ready / Methodenberatung\
 
--   Fabrikstrasse 8, A263\
+-   Fabrikstrasse 8, Raum A 263\
 
 -   Sprechstunde/Methodenberatung nach Vereinbarung\
 
@@ -66,7 +68,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 :::
 
 ::: {.column width="20%"}
-![](../../images/laura.jpg){fig-align="center"}
+![](../../images/laura.jpg){fig-align="center" width="332"}
 :::
 :::::
 
@@ -108,7 +110,9 @@ Bitte melde dich auf einem für dich angemessenem Weg bei uns, wenn dir in diese
 
 Bitte gebt uns auch Bescheid, falls wir euch falsch ansprechen!
 
-![Illustration: Freepik](../../images/diversity.jpeg){fig-align="center"}
+![Illustration: Freepik](../../images/diversity.jpeg){fig-align="center" width="460"}
+
+Wir hoffen es ist für alle in Ordnung wenn wir uns Duzen!
 
 ------------------------------------------------------------------------
 
@@ -154,23 +158,23 @@ Keine Pause - Selbstständig wenn nötig.
 
     -   Alle Präsentationen
 
-        -   Auch als PDF verfügbar (PDF-Mode)
+        -   Auch als PDF verfügbar (PDF-Mode) –\> Download über "Drucken"
 
-    -   Alle Hands On Übungen
+    -   Alle Hands On Übungen & R Hausübungen
 
-    -   FAQ
+    -   Muddiest Points & FAQ
 
     -   Administrative Infos, z. B. Details zum Leistungsnachweis
 
 -   Auf **ILIAS**
 
-    -   Downloads:
-
-        -   Files
+    -   Downloads
 
     -   Uploads (d.h. Abgaben)
 
     -   Forum für Fragen und Peer Feedback
+
+    -   Umfragen
 
 ------------------------------------------------------------------------
 
@@ -201,7 +205,7 @@ Keine Pause - Selbstständig wenn nötig.
 -   Hausübungen & Abschlussprojekt
 
 ::: notes
-Kontinuierlicher Lernaufwand während dem Semester - Dafür keine Prüfung
+Kontinuierlicher Lernaufwand während dem Semester - dafür keine Prüfung
 :::
 
 ------------------------------------------------------------------------
@@ -244,7 +248,7 @@ Masterarbeit bleibt eine individuelle Leistung, und es gibt keine One-Size-Fits 
 
 -   Abschlussprojekt: 54 Punkte
 
-    --\> Total 100 Punkte
+    -\> Total 100 Punkte
 
 -   Genauere Informationen zum Leistungsnachweis hier: [Leistungsnachweis Website](https://r-you-ready.quarto.pub/leistungsnachweis.html)
 
@@ -295,7 +299,7 @@ Masterarbeit bleibt eine individuelle Leistung, und es gibt keine One-Size-Fits 
 
 -   Bewertungsrelevant: Auseinandersetzung mit dem Stoff/den aufgetragenen Aufgaben.
 
--   ***Korrektheit zweitrangig!***
+-   Korrektheit zweitrangig.
 
 ::: notes
 Bei Problemen die ihr nicht lösen könnt und keine Ressourcen findet, könnt ihr euch auch ans Forum wenden und eure Frage posten.
@@ -305,9 +309,9 @@ Bei Problemen die ihr nicht lösen könnt und keine Ressourcen findet, könnt ih
 
 ## Leistungsnachweis: Abschlussprojekt (54 Punkte)
 
--   Vorgegebenes Paper; Individuelle, simulierte Datensätze
+-   Vorgegebenes Paper aber individuelle, simulierte Datensätze
 
--   Datenanalyseplan überarbeiten / ergänzen
+-   Datenanalyseplan überarbeiten/ergänzen
 
 -   Kontinuierliche Führung/Überarbeitung eines Codebooks
 
@@ -337,11 +341,11 @@ Abgabe: Datenanalyseplan, Codebook, Datenfiles, Analyseskript(e) nach vorgegeben
 
 <br>
 
-*"Failure is not the opposite of Success, its part of it"* - Karamo Brown in Queer Eye
+*"Failure is not the opposite of success, its part of it"* - Karamo Brown in Queer Eye
 
 <br>
 
-*"Den grössten Fehler, den man im Leben machen kann, ist, immer Angst zu haben einen Fehler zu machen."* - Dietrich Bonhoeffer
+*"Den grössten Fehler, den man im Leben machen kann, ist, immer Angst zu haben einen Fehler zu machen"* - Dietrich Bonhoeffer
 
 ::: notes
 Wir sind hier um Fehler zu machen; auch bei uns ist vieles Trial-und-Error. Das darf und soll auch so sein! Bei Hausübungen sind Fehler erlaubt! Es geht ums das Mitarbeiten und sich bemühen, dann kriegt man auch mit Fehlern die Punkte Klar machen, dass man laufend dran sein muss um zu Lernen & HÜs wichtig sind Auch ich selbst weiß vieles nicht auswendig, muss googlen…
@@ -351,27 +355,23 @@ Wir sind hier um Fehler zu machen; auch bei uns ist vieles Trial-und-Error. Das 
 
 ## Syllabus
 
-<div style="
-  width:100%;
-  height:80vh;
-  background:#777;
-  padding:20px;
-  box-sizing:border-box;
-  border-radius:10px;
-  overflow:auto;
-">
+::: {style="
+width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
 
-  <embed
+```{=html}
+<embed
     src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
     type="application/pdf"
     style="width:100%; height:220vh; border:0; display:block; background:white;"
   >
-
-</div>
+```
+:::
 
 ------------------------------------------------------------------------
 
 ## Begleitende Literatur
+
+-   [Kurswebsite: FAQ und weitere Informationen](https://r-you-ready.quarto.pub)
 
 -   Wickham, H., Cetinkaya-Rundel, & Grolemund, G., &. (2023). R for Data Science. O’Reilly Media. <https://r4ds.hadley.nz/>
 
@@ -383,15 +383,11 @@ Wir sind hier um Fehler zu machen; auch bei uns ist vieles Trial-und-Error. Das 
 
     -   Luhmann, M. (2020). R für Einsteiger. Beltz.
 
--   [Kurswebsite: FAQ und weitere Informationen](https://r-you-ready.quarto.pub)
-
 ------------------------------------------------------------------------
 
 ## Unterstützungsangebote
 
 -   Mit vorhanden Ressourcen arbeiten: Unterlagen aus dem Bachelor + Online-Ressourcen (auch LLMs)
-
--   Peer Pairing für Präsenzeinheiten und Hausübungen
 
 -   Online-Forum für Peer-to-Peer und Peer-to-Teacher Fragen; Mitarbeitspunkte für Code-Error-Hunt
 
@@ -399,36 +395,30 @@ Wir sind hier um Fehler zu machen; auch bei uns ist vieles Trial-und-Error. Das 
 
 -   Erhebung & Besprechung der «Muddiest Points»
 
--   Musterlösungen zu Übungen werden blockweise im Ebook ergänzt
-
-------------------------------------------------------------------------
-
-## Bedarfsanalyse
-
-Bitte reflektiere das im Bachelor erworbene Wissen und überlege wo Aufholbedarf im Bezug auf die Datenaufbereitung und -analyse mit R besteht. Du kannst die zentralen Unterlagen des Bachelor-Studiums (z.B. zu den Statistikvorlesungen) im Ilias Kurs "Masterarbeit Psychologie" einsehen.
-
-**Anonyme Umfrage um**
-
--   Präferenz für das Peer-Pairing zu erfragen
-
--   Vorkenntnisse zu erfassen
-
--   Bedarf an R-Unterstützung zu erfassen
-
-Umfrage in ILIAS, Deadline Sonntag 22.02., 23:55
-
-::: notes
-Fragen zu Peer-Feedback (ob in von uns zugeteilten Gruppen oder ob präferenz für von uns zugteilten gruppen)
-:::
+-   Musterlösungen zu Übungen werden blockweise auf der Kurswebsite ergänzt
 
 ------------------------------------------------------------------------
 
 ## Anwesenheit prüfen / Kennenlernen
 
 ::: notes
-kurz Namen sagen und wo im Master (z.B. schon an Masterarbeit)
+Ja/Nein Fragen - bei Ja aufstehen:
 
-falls Zeit: Lebende Statistik, z.B. wie sehr Panik vor R/Datenanalyse (0 - 10), wie viele Kaffee heute schon getrunken
+-   Ich hatte schon mal Angst vor Statistik.
+
+-   Ich habe schon einmal R geöffnet.
+
+-   Ich glaube, ich bin „nicht der Programmier-Typ“.
+
+-   Ich vertraue KI bei methodischen Fragen.
+
+-   Ich freue mich auf dieses Seminar.
+
+    2te Runde:
+
+-   Namen sagen
+
+-   Wo im Master (zb schon an Masterarbeit)
 :::
 
 ------------------------------------------------------------------------
@@ -453,19 +443,19 @@ falls Zeit: Lebende Statistik, z.B. wie sehr Panik vor R/Datenanalyse (0 - 10), 
 
 ::: notes
 -   R bietet viele funktionen die in programmen nicht vorhanden ist
--   R wird auch ständig weiterentwicklet, auch mit funktionen die erst jahre später in andere programme übernommmen werdne
+-   R wird auch ständig weiterentwicklet, auch mit funktionen die erst jahre später in andere programme übernommmen werden
 -   R die programmierer einzelner packages sind oft erreichbar und antworten auch auf fragen usw.
 -   R R nutzer auf der ganzen welt, auch in sozialen medien unterwegs (z.B auch R-Ladies https://rladies.org/about-us/mission/)
 -   R ist nachgefragt, eröffnet jobmöglichkeiten in und ausserhalb der wissenschaft
 
-R erhöhrt auch die transparenz!! --\> Open science block nächste woche
+R erhöhrt auch die transparenz!! --\> Open science Block nächste Woche
 :::
 
 ------------------------------------------------------------------------
 
 ## Jetzt: Hands On!
 
-**Übungen auf der Website!**
+**Übungen auf der [Website](https://r-you-ready.github.io/Webseite_FS26_Seminar/scripts/02_excercises/hands_on_1.html)!**
 
 -   In eigenem Tempo arbeiten, nicht stressen lassen!
 
@@ -473,11 +463,27 @@ R erhöhrt auch die transparenz!! --\> Open science block nächste woche
 
 -   Meldet euch bei uns!
 
--   Für die sehr schnellen Personen —\> Bedarfsanalyse auf ILIAS.
+-   Für die sehr schnellen Personen —\> Bedarfsanalyse auf ILIAS (siehe Sitzung 1).
 
 ::: notes
-Mit Block anfangen; Lars und ich gehen rum, und beantworten fragen. Wenn ihr nicht fertig werdet ist das kein Problem.
+Mit Block anfangen; Lars und ich gehen rum, und beantworten Fragen. Wenn ihr nicht fertig werdet ist das kein Problem.
 :::
+
+------------------------------------------------------------------------
+
+## Bedarfsanalyse
+
+Bitte reflektiere das im Bachelor erworbene Wissen und überlege wo Aufholbedarf im Bezug auf die Datenaufbereitung und -analyse mit R besteht. Du kannst die zentralen Unterlagen des Bachelor-Studiums (z.B. zu den Statistikvorlesungen) im Ilias Kurs "Masterarbeit Psychologie" einsehen.
+
+**Anonyme Umfrage um**
+
+-   Präferenz für das Peer-Pairing zu erfragen
+
+-   Vorkenntnisse zu erfassen
+
+-   Bedarf an R-Unterstützung zu erfassen
+
+Umfrage in ILIAS, Deadline **Sonntag 22.02., 23:55**
 
 ------------------------------------------------------------------------
 
@@ -495,7 +501,9 @@ Mit Block anfangen; Lars und ich gehen rum, und beantworten fragen. Wenn ihr nic
 
     -   Vektoren erstellt
 
-    -   Erste Funktionen aufgerufen ( z.b. `sum()`
+-   Erste Funktionen aufgerufen ( z.b. `sum()`
+
+-\> Fortsetzung in EH 2
 
 ------------------------------------------------------------------------
 
@@ -509,6 +517,6 @@ Mit Block anfangen; Lars und ich gehen rum, und beantworten fragen. Wenn ihr nic
 
 ## Bis nächste Woche!
 
--   **Bedarfsanalyse auf ILIAS bis Sonntag ausfüllen!**
--   **ANONYM**
-    -   **ILIAS - Sitzung 1**
+-   Bedarfsanalyse auf ILIAS (Sitzung 1) bis Sonntag ausfüllen!
+
+    ![](images/ryouready_logo-01.png){width="268"}

@@ -4,19 +4,19 @@ title: "Hands On 1"
 
 # Hands On - Codings Basics (Einheiten 1 und 2)
 
-Bei Bedarf finden sich hier nochmal die Slides zur EH1:
+Bei Bedarf finden sich hier nochmal die Folien zu EH1:
 
 ::: {=html}
-<iframe src="../01_slides/EH_1.html"
-        width="100%"
-        height="500"
-        style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
+<iframe src="../01_slides/EH_1.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
+
+</iframe>
 :::
 
-Und hier die Slides zur EH2:
+Und hier die Folien zu EH2:
 
 *Die Folien zur Einheit 2 werden kurz vor dem Termin hier hochgeschaltet.*
 
+```{=html}
 <!--
 ::: {=html}
 <iframe src="../01_slides/EH_2.html"
@@ -26,7 +26,7 @@ Und hier die Slides zur EH2:
 </iframe>
 :::
 -->
-
+```
 
 ## Installation R und R-Studio
 
@@ -82,7 +82,7 @@ Tidyverse ist ein Meta-Paket, das mehrere Pakete umfasst[![https://www.tidyverse
     library(tidyverse)
     ```
 
-Tipp: Pakete regelmässig updaten mit z.B. update.packages()
+Tipp: Pakete regelmässig updaten mit z.B. `update.packages()`
 
 ## Operatoren kennenlernen
 
@@ -117,7 +117,7 @@ Tipp: Pakete regelmässig updaten mit z.B. update.packages()
 
 1.  Erstelle eine Variable `x` und weise ihr mit dem Zuweisungsoperator `<-` den Wert 5 zu.
 
-2.  Weise der Variable `y` eine beliebige Zahl zu. Teile anschliessend `x` (aus Aufgabe 1) durch `y` und speichere das Ergebnis in der Variable `z`.
+2.  Weise der Variable `y` eine beliebige Zahl zu. Teile anschliessend `x` durch `y` und speichere das Ergebnis in der Variable `z`.
 
 3.  Schaue dir das Ergebnis in deinem Environment an. Lass dir das Ergebnis auch in der Konsole ausgeben. Das Environment findest du oben rechts, die Konsole ist unter deinem Skript.
 
@@ -177,7 +177,7 @@ Die wichtigsten Operatoren und Funktionen in R: <https://methodenlehre.github.io
 
 ### Kommentare
 
-Informative Kommentare im Code sind elementar für die Nachvollziehbarkeit.
+Informative Kommentare im Code sind elementar für die Nachvollziehbarkeit einer Datenanalyse
 
 1.  Schreibe einen Kommentar, indem du ein `#` verwendest.
 
@@ -214,7 +214,7 @@ In unserem Seminar verwenden wir den *snake_case*.
 
 1.  Speichere die beiden höchsten Werte aus `first_vector` in einer neuen Variable ab (Tipp: verwende `sort()` )
 
-2.  Erstelle einen Vektor mit Werten von 0-1000 in 10er Schritten (Tipp: suche nach der Funktion `seq()`
+2.  Erstelle einen Vektor mit Werten von 0-1000 in 10er Schritten (Tipp: suche nach der Funktion `seq()`)
 
 3.  Ziehe zufällig eine Zahl aus diesem Vektor
 
@@ -222,7 +222,7 @@ In unserem Seminar verwenden wir den *snake_case*.
 
 Tipps zu diesen Aufgaben findest du bei Bedarf hier: <https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html> (Kapitel 2.1)
 
-Tipp: Suche nach der Dokumentation der folgenden Funktionen: `sort(), seq(), sample, rep().`
+Tipp: Suche nach der Dokumentation der folgenden Funktionen: `sort()`, `seq()`, `sample`, `rep()`.
 
 Die Dokumentation kannst du mittels `?Funktionsname` aufrufen.
 
