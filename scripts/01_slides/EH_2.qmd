@@ -55,8 +55,6 @@ Gibt es Fragen, die sich nach letzter Woche aufgetan haben?
 
 **16:15 (*N* = 19)**
 
-***Wie würdest du aktuell deine R-Kenntnisse einschätzen?***
-
 ![](../../images/EH_2_files/Bedarfsanalyse/R_Kenntnisse_1615.png){width="600"}
 
 ------------------------------------------------------------------------
@@ -185,7 +183,7 @@ Auswahl passender Tests
 
 ## Ergebnisse der Bedarfsanalyse (8)
 
-**Bei welchen Schritten in R **fühlst du dich sicher**, wenn du auch daran denkst, die im Bachelor erworbenen Unterlagen zu Hilfe zu ziehen?**
+**Bei welchen Schritten in R fühlst du dich sicher, wenn du auch daran denkst, die im Bachelor erworbenen Unterlagen zu Hilfe zu ziehen?**
 
 -   Basics (z.B. Vektoren zuweisen)
 
@@ -311,9 +309,9 @@ Menti nach Vormittagseinheit zurücksetzen
 
 ## Replikationskrise
 
-::::: columns
-::: column
-width="75%"
+::::: {.columns}
+
+::: {.column width="75%"}
 
 -   Ausgangspunkt: 9 Studien, die darauf hinweisen, dass Personen «in die Zukunft sehen können» (Bem , 2011)
 
@@ -321,16 +319,17 @@ width="75%"
 
 -   Ein Ergebnis: Primes, die nach der Antwort präsentiert werden, beeinflussen Bewertung der Antwort
 
--   Starke Kritik, v.a. was Methodik betrifft; gerade kontroverse,„unwahrscheinliche“ Hypothesen sollten durch strikte, konfirmatorische Analysen überprüft werden (Francis, 2012; LeBel & Peters, 2011; Wagenmakers et al., 2011)
+-   Starke Kritik v.a. was Methodik betrifft; gerade kontroverse,„unwahrscheinliche“ Hypothesen sollten durch strikte, konfirmatorische Analysen überprüft werden (Francis, 2012; LeBel & Peters, 2011; Wagenmakers et al., 2011)
 
--   Diverse gescheiterte Replikationsversuche (Galak et al., 2012; Ritchie et al., 2012; Robinson, 2011)
+- Diverse gescheiterte Replikationsversuche (Galak et al., 2012; Ritchie et al., 2012; Robinson, 2011)
+
 :::
 
-::: column
-width="25%"
+::: {.column width="25%"}
 
 ![](../../images/R_Bem.png){fig-align="right"}
 :::
+
 :::::
 
 ::: notes
