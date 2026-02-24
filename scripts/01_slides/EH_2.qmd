@@ -25,10 +25,9 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## Semesterplan
+## Syllabus
 
-::: {style="
-width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
 
 ```{=html}
 <embed
@@ -52,6 +51,7 @@ Gibt es Fragen, die sich nach letzter Woche aufgetan haben?
 ***Wie würdest du aktuell deine R-Kenntnisse einschätzen?***
 
 ![](../../images/EH_2_files/Bedarfsanalyse/R_Kenntnisse_1215.png){fig-align="left" width="600"}
+------------------------------------------------------------------------
 
 **16:15 (*N* = 19)**
 
@@ -185,7 +185,7 @@ Auswahl passender Tests
 
 ## Ergebnisse der Bedarfsanalyse (8)
 
-Bei welchen Schritten in R **fühlst du dich sicher**, wenn du auch daran denkst, die im Bachelor erworbenen Unterlagen zu Hilfe zu ziehen?
+**Bei welchen Schritten in R **fühlst du dich sicher**, wenn du auch daran denkst, die im Bachelor erworbenen Unterlagen zu Hilfe zu ziehen?**
 
 -   Basics (z.B. Vektoren zuweisen)
 
