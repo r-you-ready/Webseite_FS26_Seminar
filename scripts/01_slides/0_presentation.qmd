@@ -13,12 +13,10 @@ title: "Präsentationen"
 ---
 
 ## **Einheit 2 - 25.02.2026**
-<!--
+
 <iframe src="EH_2.html" width="100%" height="500px">
 
 </iframe>
--->
-*Die Slides werden vor der Sitzung freigeschaltet.*
 
 ---
 

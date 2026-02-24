@@ -14,19 +14,11 @@ Bei Bedarf finden sich hier nochmal die Folien zu EH1:
 
 Und hier die Folien zu EH2:
 
-*Die Folien zur Einheit 2 werden kurz vor dem Termin hier hochgeschaltet.*
-
-```{=html}
-<!--
 ::: {=html}
-<iframe src="../01_slides/EH_2.html"
-        width="100%"
-        height="500"
-        style="border:0; display:block; margin: 0 0 2rem 0;">
+<iframe src="../01_slides/EH_2.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
+
 </iframe>
 :::
--->
-```
 
 ## Installation R und R-Studio
 
@@ -208,9 +200,9 @@ Einige wichtige Grundsätze dafür sind:
 
 -   Definiere eine zweite Variable nach *CamelCase*.
 
-In unserem Seminar verwenden wir den *snake_case*.
+**In unserem Seminar verwenden wir den *snake_case*.**
 
-## Für fortgeschrittene R-Nutzer:innen
+## Fortgeschrittene Übungen
 
 1.  Speichere die beiden höchsten Werte aus `first_vector` in einer neuen Variable ab (Tipp: verwende `sort()` )
 
@@ -242,13 +234,13 @@ Die Dokumentation kannst du mittels `?Funktionsname` aufrufen.
 
 Vektoren müssen aus denselbsten Elementen bestehen, d.h. z.B. numeric und character können nicht gemischt werden. Vektoren werden meist mit `c()` erstellt.
 
-# Zusätzliche Übungen:
+# Zusätzliche Übungen (falls Zeit):
 
 ℹ️ **Hinweis:** Hilfestellungen zu den Übungen findest du [hier](https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html#datentypen).
 
 Nicht alle benötigten Funktionen sind explizit erwähnt. Nutze bei Bedarf eine Suchmaschine, um passende Befehle zu finden.
 
-**Überprüfen von Datentypen – palmerpenguins**
+### 1) Überprüfen von Datentypen – palmerpenguins
 
 Lade den öffentlich in R verfügbaren Datensatz *palmerpenguins* mit den folgenden Befehlen:
 
@@ -304,6 +296,56 @@ Verwende die Hilfefunktion `?funktionsname` um dir zeigen zu lassen, welche Argu
 -   Gib die Antwort als logischen Wert aus (`TRUE` oder `FALSE`) und speichere sie in einer neuen Variable.
 
 -   Prüfe anschliessend, ob diese neue Variable selbst ein logischer Vektor ist.
+
+### 2) Simulation eines Münzwurf-Experiments
+
+-   In dieser Aufgabe simulieren wir ein einfaches Zufallsexperiment: den Wurf einer fairen Münze.
+
+-   Wir definieren:
+
+    -   0 = Kopf
+    -   1 = Zahl
+    -   Bei einer fairen Münze ist die Wahrscheinlichkeit für Kopf und Zahl jeweils 50%.
+
+**1. Erstelle drei Vektoren:**
+
+-   Simuliere mit Hilfe der Funtion `sample()` drei unterschiedliche Experimente:
+
+    a)  50 zufällige Münzwürfe
+    b)  100 zufällige Münzwürfe
+    c)  1000 zufällige Münzwürfe
+
+-   Speichere die Ergebnisse jeweils in drei getrennten Variablen (z.B. coin_50, coin_100, coin_1000).
+
+👉 Tipp: Du möchtest zufällig aus den Werten 0 und 1 ziehen. Achte darauf, dass jede Ziehung unabhängig ist.
+
+**2. Inspiziere deine Vektoren:**
+
+-   Untersuche jeden der drei Vektoren:
+
+    -   Berechne den Mittelwert mit `mean()`
+    -   Berechne die Summe mit `sum()`
+    -   Wie viele Einsen (Zahlen) wurden jeweils gezogen?
+
+👉 Tipp: Der Mittelwert eines 0/1-Vektors entspricht dem Anteil der Einsen.
+
+**3. Vergleich mit dem erwarteten Wert:**
+
+-   Überlege dir: Wie gross ist der theoretisch erwartete Mittelwert bei einer fairen Münze? Warum?
+
+-   Berechne für jeden Vektor die Abweichung vom erwarteten Mittelwert.
+
+-   Speichere diese Abweichung jeweils in einer neuen Variable.
+
+👉 Der erwartete Mittelwert entspricht der Wahrscheinlichkeit für "1".
+
+**4. Interpretation:**
+
+-   Vergleiche die Abweichungen bei 50, 100 und 1000 Würfen. Was fällt dir auf?
+
+-   Wird die Abweichung mit zunehmender Anzahl Würfe grösser oder kleiner?
+
+-   Was könnte das mit dem Gesetz der grossen Zahlen zu tun haben?
 
 # Am Ende deiner Übungen - vergiss nicht dein Skript abzuspeichern! :-)
 
