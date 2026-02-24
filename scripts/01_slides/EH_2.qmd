@@ -46,16 +46,15 @@ Gibt es Fragen, die sich nach letzter Woche aufgetan haben?
 
 ## Ergebnisse der Bedarfsanalyse (1)
 
-**12:15 (*N* = 19)**
-
 ***Wie würdest du aktuell deine R-Kenntnisse einschätzen?***
 
+**12:15 (*N* = 19)**
+
 ![](../../images/EH_2_files/Bedarfsanalyse/R_Kenntnisse_1215.png){fig-align="left" width="600"}
-------------------------------------------------------------------------
 
 **16:15 (*N* = 19)**
 
-![](../../images/EH_2_files/Bedarfsanalyse/R_Kenntnisse_1615.png){width="600"}
+![](../../images/EH_2_files/Bedarfsanalyse/R_Kenntnisse_1615.png){fig-align="left" width="600"}
 
 ------------------------------------------------------------------------
 
