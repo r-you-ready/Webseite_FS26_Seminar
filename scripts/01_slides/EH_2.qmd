@@ -214,7 +214,7 @@ Wir werden versuchen unser "Programm" auf eure Needs abzustimmen - bitte gebt un
 
 -   Wofür: Feedback bei ausgewählten Einheiten, und sonstiges gegenseitiges Unterstützen wenn erwünscht
 
--   Vorgehen: Melden bis **Sonntag, 29.02.** **(ILIAS Forum**, siehe EH2) mit Namen des 2er Teams
+-   Vorgehen: Melden bis **Sonntag, 01.03.** **(ILIAS Forum**, siehe EH2) mit Namen des 2er Teams
 
 -   Ansonsten: Zufällige Zuteilung am Montag - Kennenlernen in der nächsten Einheit \<3
 
@@ -346,6 +346,10 @@ Sammlung im Plenum von möglichen Gründen für diese Replikationskrise
     -   *p*-hacking -\> 22.0% Lebenszeit Prävalenz
 
     -   Extremfall: Betrug
+    
+------------------------------------------------------------------------
+
+## Gründe für die Replikationskrise, z. B.:
 
 -   **Biases:**
 
@@ -604,6 +608,10 @@ Erlaubt Ergebnisse zu überprüfen; erhöht die Glaubwürdigkeit an Forschung; s
 
 -   Leichte Modifikationen für unser Seminar; Vorlage auf ILIAS unter «Abschlussprojekt» -\> ZIP-Ordner
 
+::: notes
+Hier kurz demonstrieren, wo sie die entsprechenden Daten finden auf Ilias im zip-Ordner
+:::
+
 ------------------------------------------------------------------------
 
 ## Datenanalyseplan - (Modifizierte) Fragen
@@ -683,7 +691,7 @@ Erlaubt Ergebnisse zu überprüfen; erhöht die Glaubwürdigkeit an Forschung; s
     -   Fragen zur nächsten Einheit mitbringen
     -   Sprechstunde Lars
 -   Hands-On Übungen fertig machen (Musterlösungen nächste Woche)
--   Peer-Pairings melden, **Deadline 29.02.2026**
+-   Peer-Pairings melden, **Deadline 01.03.2026**
 
 ------------------------------------------------------------------------
 
