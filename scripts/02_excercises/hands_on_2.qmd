@@ -173,18 +173,47 @@ Um ein Skript reproduzierbar zu gestalten – was eignet sich besser: relative P
 
 ## Import
 
+Bevor wir Daten analysieren können, müssen wir sie in R einlesen.
+
+Die entsprechenden Datensätze liegen im ZIP-Dokument bereits vor und müssen nicht separat heruntergeladen werden. Arbeiten wir aus dem R-Projekt dieses Ordners aus, können wir die Dokumente einfach mit einem relativen Pfad adressieren.
+
+Dabei sind drei Dinge zentral:
+
+-   das richtige **Dateiformat**
+-   das passende **Trennzeichen**
+-   ein korrekter (relativer) **Dateipfad innerhalb des Projekts**
+
+In diesem Seminar arbeiten wir hauptsächlich mit `.csv`- und `.xlsx`-Dateien. Wir werden und mehrere Möglichkeiten anschauen, wie man diese einlesen kann.
+
 👉 [Kapitel 3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
 
-[Cheatsheat Datenimport](https://rstudio.github.io/cheatsheets/html/data-import.html) mit `readr`
+👉 [Cheatsheat Datenimport mit `readr`](https://rstudio.github.io/cheatsheets/html/data-import.html)
 
-### Einlesen via Oberfläche
+#### Wichtiger erster Schritt
 
--   Stelle sicher, dass du das Metapaket **tidyverse** geladen hast (`library(tidyverse)`) (siehe Hands-On 1).\
-    Wir verwenden Funktionen aus den Packages **readr** und **readxl**, die Teil des Tidyverse sind.
+Stelle sicher, dass das Metapaket **tidyverse** geladen ist: (`library(tidyverse)`) (siehe Hands-On 1).\
 
-In diesem Seminar arbeiten wir mit csv und xslx Dateien. Wie werden uns mehere Arten und Weisen anschauen wie man diese einlesen kann.
+Wir verwenden Funktionen aus den Paketen:
 
-Beim Einlesen von Daten ist ein wichtiger Faktor, mich welchem Trennzeichen (Delimiter) die Werte von einander getrennt werden.
+    - **readr** (für .csv)
+    - **readxl** (für .xlsx)
+    
+Beide sind Teil des Tidyverse und zentrale Werkzeuge für sauberen und reproduzierbaren Datenimport.
+
+### Einlesen via Oberfläche (Point & Click)
+
+Gerade zu Beginn kann die Import-Oberfläche von RStudio hilfreich sein.
+
+#### Delimiter verstehen
+
+CSV-Dateien enthalten Werte, die durch ein bestimmtes Zeichen getrennt sind, den sogenannten Delimiter.
+
+Typische Delimiter sind:
+
+    - , (Komma)
+    - ; (Semikolon)
+
+Wenn das falsche Trennzeichen gewählt wird, landet der gesamte Inhalt der Datei in einer einzigen Spalte.
 
 Auszug aus [Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.html): Die Funktionen read_delim und read_csv:
 
@@ -192,51 +221,93 @@ Auszug aus [Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.h
 
 `read_csv()` ist eine Spezialisierung von `read_delim()`, die automatisch Komma als Trennzeichen verwendet, während man bei `read_delim()` das gewünschte Trennzeichen selbst angeben muss.
 
--   Importiere die Datei `"data_mmq.csv"` über die Point & Klick-Oberfläche von RStudio. Verwende dafür "From Text (readr)"
+**Übung: data_mmq.csv importieren**
 
-![](../../images/import.png)
+1. Importiere die Datei `"data_mmq.csv"` über die Point & Klick-Oberfläche von RStudio. Verwende dafür "From Text (readr)"
 
-```         
--   Tipp: Klicke auf **Environment** → **Import Dataset** → wähle die `"readr"`-Funktion.
--   Schaue dir den Datensatz an: Mit welchem Trennzeichen sind die Daten getrennt?
--   ![](../../images/clipboard-4280669528.png)
-    -   Stelle in der Oberfläche `"Delimiter"` auf das passende Trennzeichen. Was verändert sich?
--   Betrachte den Code, den die Oberfläche generiert. Versuche den Pfad im Kontext von Projekten zu verstehen.
-    -   Wenn du im Projekt gearbeitet hast, sollte bei dir der Code etwa so aussehen: `data_mmq <- read_delim("data/raw/data_mmq.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)`
-    -   Wenn du nicht im Projekt gearbeite hättest, wie würde dann der Dateipfad aussehen?
--   Wenn du den Code via Klick-Oberfläche eingelesen hast, wirst du den ausgeführten Code in der Konsole sehen. Kopiere diesen in dein Skript, so dass du ihn in Zukunft wiederverwenden und anpassen kannst.
--   Schaue dir die eingelesenen Daten mit `View(data_mmq)` an. Wenn du alles richtig gemacht hast, ist in jeder Zelle nur ein Wert.
-```
+    1.1. Environment -> Import Dataset -> From Text (readr)
+    ![](../../images/import.png)
+    
+    1.2. Schau dir den Datensatz an: Mit welchem Trennzeichen sind die Daten getrennt?
+    ![](../../images/delimiter.png)
+    
+    1.3. Stelle in der Oberfläche `"Delimiter"` auf das passende Trennzeichen. Was verändert sich in der Vorschau?
+    
+**Ganz wichtig: Der erzeugte Code**
+
+Die Oberfläche ist nur ein Hilfsmittel.
+Entscheidend ist der **Code**, der dabei generiert wird.
+
+Wenn du im Projekt arbeitest, sollte der Code ungefähr so aussehen:
+
+![](../../images/hands_on_2/code.png)
+
+Achte besonders auf den Pfad: `"data/raw/data_mmq.csv"`
+
+    - Das ist ein relativer Pfad innerhalb des Projekts.
+    
+**Code ins Skript übernehmen**
+
+Wenn du den Code via Klick-Oberfläche eingelesen hast, wirst du den ausgeführten Code in der Konsole sehen.
+
+👉 Kopiere diesen in dein Skript, damit du ihn in Zukunft wiederverwenden und anpassen kannst.
+
+**Daten kontrollieren**
+
+Überprüfe die eingelesenen Daten mit `View(data_mmq)`.
+
+Wenn alles korrekt ist, befindet sich in jeder Zelle genau ein Wert.
 
 ### Einlesen via Code
 
+Langfristig solltest du Daten **direkt per Code** einlesen - ohne Klick-Oberfläche.
+
 #### .CSV Dateien
 
--   Versuche, weitere CSV-Datensätze einzulesen: `data_cb`, `data_cvstm`, `data_pct`, `data_vp`.\
-    Suche dafür eine geeignete Funktion zum Einlesen von `.csv`.
+Lies nun weitere CSV-Datensätze ein: 
 
-    -   Verwende den von R-Studio generierten Code, und passe ihn an um einen weiteren Datensatz einzulesen (z.B. indem du den Filenamen veränderst).
+    - `data_cb`
+    - `data_cvstm`
+    - `data_pct`
+    - `data_vp`
 
--   Korrigiere diesen Code und lies damit die Datei `data_vp` ein (überprüfe den Pfad und den Delimiter)
+Verwende dafür eine geeignete Funktion aus dem Paket `readr`.
 
-```{r, eval=FALSE, echo=TRUE}
-data_vp <- read_delim("/raw/data_vp.csv", 
-    delim = ",")
-```
+👉 Tipp: Nutze den zuvor generierten Code und passe nur Variablennamen, Dateinamen und ggf. Delimiter an.
 
 #### .XSLX Dateien
 
--   Einige Dateien liegen im `.xlsx`-Format.
+Einige Dateien liegen im Excel-Format (`.xlsx`) vor.
 
-    -   Verwende dafür das Paket **readxl** und die Funktion `read_excel()`. Tipp: Installiere und lade das Paket zunächst.
-    -   Nutze die Hilfefunktion (`?read_excel`) für Infos zur Funktion oder schaue dir das [Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.html) an
-    -   Versuche, die Datensätze `data_ratings` und `data_strategies` einzulesen.
+Dafür verwenden wir das Paket **readxl** und die Funktion `read_excel()`.
 
--   Am Ende solltest du die **7 verschiedene Datensätze** in deinem Environment sehen.
+-   Tipp: Installiere und lade das Paket zunächst.
+
+-   Lies damit die Datensätze:
+
+    - `data_ratings`
+    - `data_strategies`
+    
+👉 Achte auch hier darauf, einen relativen Pfad innerhalb des Projektes zu verwenden.
+
+-   Nutze bei Unsicherheiten `?read_excel` oder das Cheatsheet.
+  
+**Ziel**
+
+Am Ende solltest du **7 verschiedene Datensätze** in deinem Environment sehen.
 
 ::: {.callout-note collapse="true" title="Vertiefung"}
-👉Für das Einlesen anderer Arten von Datensätzen (z.B. SPSS Dateien), siehe [Kapitel 3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
+👉Für das Einlesen weiterer Dateiforate (z.B. SPSS-Dateien), siehe [Kapitel 3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
 :::
+
+
+#### Kontext: Warum genau diese sieben Datensätze?
+
+Die sieben eingelesenen Dateien sind die Rohdatensätze, die wir für die Reanalyse des Papers von *Grinschgl et al. (2020)* benötigen.
+
+Diese Datensätze enthalten sämtliche erhobenenen Variablen der Studie, auf denen alle späteren Analysen aufbauen.
+
+👉 Im nächsten Schritt werden wir diese Datensätze systematisch zusammenführen (mergen), um eine gemeinsame Analysegrundlage zu schaffen.
 
 # Daten mergen
 
