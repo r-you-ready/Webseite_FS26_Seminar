@@ -13,11 +13,15 @@ Bei Bedarf finden sich hier nochmal die Slides zu Einheit 3:
 
 Und hier die Slides zu Einheit 4:
 
+Die Folien zu EH4 werden kurz vor dem Termin hochgeladen.
+
+<!--
 ::: {=html}
 <iframe src="../01_slides/EH_4.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
 
 </iframe>
 :::
+-->
 
 # Lernziele dieses Hands-On-Blocks
 
@@ -37,38 +41,74 @@ Und hier die Slides zu Einheit 4:
 
 ### Was sind R-Projekte?
 
-👉 [Kapitel 6.2 R4DS](https://r4ds.hadley.nz/workflow-scripts.html#projects)
+👉 [Kapitel 6.2 in R for Data Science](https://r4ds.hadley.nz/workflow-scripts.html#projects)
 
-Ein **R-Projekt** ist eine Projektdatei (`.Rproj`), die du in RStudio anlegst.\
-Wenn du ein Projekt öffnest:
+Ein **R-Projekt** ist eine Projektdatei mit der Endung (`.Rproj`), die du in RStudio anlegst oder öffnest.\
 
--   RStudio setzt automatisch das **Working Directory (Arbeitsverzeichnis)** auf den Ordner, in dem `.Rproj` liegt.\
+Wenn du ein Projekt öffnest, passiert Folgendes automatisch:
+
+-   RStudio setzt das **Working Directory (Arbeitsverzeichnis)** auf den Ordner, in dem die `.Rproj`-Datei liegt.\
 -   Alle Dateien, Skripte, Daten und Ergebnisse, die du in diesem Ordner ablegst, gehören logisch zu diesem Projekt.\
--   Man kann es sich vorstellen wie einen „Container“ für ein Forschungsprojekt, eine Hausarbeit oder ein Analysepaket.\
--   Du kannst entweder ein neues Projekt erstellen oder ein bestehendes Projekt öffnen.
+-   Du arbeitest in einer klar definierten, geschlossenen Umgebung.\
+-   Du kannst entweder ein neues Projekt erstellen oder ein bestehendes Projekt öffnen.\
 
-👉 In RStudio siehst du oben rechts, in welchem Projekt du dich gerade befindest. In diesem Screenshot ist noch kein Projekt geöffnet.
+Du kannst dir ein Projekt wie einen **Container** für ein Forschungsprojekt vorstellen. Alles, was zu einer Analyse gehört, liegt gebündelt an einem Ort.
+
+Das ist besonders wichtig für:
+
+    - Seminararbeiten
+    - Reanalysen
+    - Masterarbeiten
+    - Kollaborative Projekte
+    
+#### Warum sollte man immer mit Projekten arbeiten?
+
+Viele typische Probleme in R entstehen dadurch, dass kein Projekt verwendet wird:
+
+-   Das Working Directory ist falsch gesetzt.
+-   Skripte funktionieren nur auf dem eigenen Laptop.
+-   Dateien werden an unterschiedlichen Orten gespeichert.
+-   Analysen sind schwer reproduzierbar.
+
+R-Projekte verhindern genau diese Probleme.
+
+👉 In der wissenschaftlichen Praxis ist das Arbeiten mit Projekten Standard, weil es die **Reproduzierbarkeit und Struktur** von Analysen deutlich verbessert.
+
+#### Woran erkennst du, ob ein Projekt geöffnet ist?
+
+Oben rechts in RStudio siehst du den Namen des aktuellen Projekts.
+
+In diesem Screenshot ist noch kein Projekt geöffnet (Project: (None)). Wenn ein Projekt aktiv ist, wird dort der entsprechende Projektname angezeigt.
 
 ![](../../images/EH3/Project.png)
 
 **Übung:**\
-Im Ordner *Grinschgl2020* liegt bereits eine `.Rproj`-Datei. Öffne sie und überprüfe oben rechts in RStudio, ob du dich im richtigen Projekt befindest. Du kannst zukünftig immer auf das Projekt klicken wenn du die Analyseskripte dazu öffnen willst.
+
+Im ZIP-Ordner zum Abschlussprojekt, den wir letzte Woche gemeinsam von Ilias heruntergeladen haben (inklusive Datenanalyseplan und Codebook), haben wir für euch bereits eine `.Rproj`-Datei angelegt.
+Diese befindet sich im Ordner *Grinschgl2020*.
+
+1. Öffne diese Datei.
+2. Überprüfe oben rechts in RStudio, ob das richtige Projekt aktiv ist.
+3. Schliesse RStudio und öffne es erneut über die `.Rproj`-Datei.
+
+👉 Gewöhne dir an, Analysen immer über die Projektdatei zu starten.
+
 
 ::: {.callout-note collapse="true" title="Bei Fehlermeldungen:"}
 „Achtung! Bei Mac-Usern kann es teilweise zu Problemen mit den Berechtigungen kommen. Falls dir beim Öffnen diese Fehlermeldung angezeigt wird:“
 
-![](../../images/Hands%20on%202/Screenshot%202025-10-01%20at%2012.01.56.png)
+![](../../images/hands_on_2/error_project.png)
 
 Die Lösung besteht darin, die Berechtigungen für den Ordner anzupassen. Dafür gehst du auf den ‚r_you_ready‘-Ordner und öffnest das Menü mit ‚Get Info‘.
 
-![](../../images/Hands%20on%202/Screenshot%202025-10-01%20at%2013.10.23.png)
+![](../../images/hands_on_2/help_error_project.png)
 
 Die Berechtigungen passt du an, indem du auf das Schloss unten rechts klickst, dein Passwort eingibst und bei deinem Account ‚Read & Write‘ auswählst. Anschliessend klickst du auf die drei Punkte im Kreis und führst ‚Apply to enclosed items…‘ aus. Danach solltest du die vollen Berechtigungen haben.
 :::
 
-**Projekt erstellen**
+**Eigenes Projekt erstellen**
 
-Falls du in Zukunft ein Projekt erstellen willst (z.B. für deine Masterarbeit): 👉[Kapitel 6.2](https://r4ds.hadley.nz/workflow-scripts.html#projects)
+Wenn du zukünftig ein eigenes Projekt anlegen möchtest (z.B. für deine Masterarbeit): 👉[Kapitel 6.2 in R for Data Science](https://r4ds.hadley.nz/workflow-scripts.html#projects)
 
 ------------------------------------------------------------------------
 
