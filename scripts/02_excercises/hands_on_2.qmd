@@ -84,7 +84,7 @@ In diesem Screenshot ist noch kein Projekt geöffnet (Project: (None)). Wenn ein
 
 **Übung:**\
 
-Im ZIP-Ordner zum Abschlussprojekt, den wir letzte Woche gemeinsam von Ilias heruntergeladen haben (inklusive Datenanalyseplan und Codebook), haben wir für euch bereits eine `.Rproj`-Datei angelegt.
+Im ZIP-Ordner zum Abschlussprojekt, den wir letzte Woche gemeinsam von ILIAS heruntergeladen haben (inklusive Datenanalyseplan und Codebook), haben wir für euch bereits eine `.Rproj`-Datei angelegt.
 Diese befindet sich im Ordner *Grinschgl2020*.
 
 1. Öffne diese Datei.
@@ -133,7 +133,7 @@ Wenn jemand anderes dieses Skript ausführt, wird dieser Pfad nicht existieren.
 
 #### Relative Pfade
 
--   Ein **relativer Pfad** beschreiben den Weg zu einer Datei ausgehend vom *aktuellen Arbeitsverzeichnis*.
+-   Ein **relativer Pfad** beschreibt den Weg zu einer Datei ausgehend vom *aktuellen Arbeitsverzeichnis*.
 
 -   Wenn du mit einem R-Projekt arbeitest, ist das Working Directory automatisch der Projektordner.
 
@@ -165,7 +165,7 @@ sein.
 
 Absolute Pfade verhindern dies; relative Pfade ermöglichen es.
 
-**❓Reflexionsfrage:*
+**❓Reflexionsfrage:**
 
 Um ein Skript reproduzierbar zu gestalten – was eignet sich besser: relative Pfade oder absolute Pfade? Aus welchen Gründen?
 
@@ -183,11 +183,11 @@ Dabei sind drei Dinge zentral:
 -   das passende **Trennzeichen**
 -   ein korrekter (relativer) **Dateipfad innerhalb des Projekts**
 
-In diesem Seminar arbeiten wir hauptsächlich mit `.csv`- und `.xlsx`-Dateien. Wir werden und mehrere Möglichkeiten anschauen, wie man diese einlesen kann.
+In diesem Seminar arbeiten wir hauptsächlich mit `.csv`- und `.xlsx`-Dateien. Wir werden uns mehrere Möglichkeiten anschauen, wie man diese einlesen kann.
 
 👉 [Kapitel 3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
 
-👉 [Cheatsheat Datenimport mit `readr`](https://rstudio.github.io/cheatsheets/html/data-import.html)
+👉 [Cheatsheet Datenimport mit `readr`](https://rstudio.github.io/cheatsheets/html/data-import.html)
 
 #### Wichtiger erster Schritt
 
@@ -275,7 +275,7 @@ Verwende dafür eine geeignete Funktion aus dem Paket `readr`.
 
 👉 Tipp: Nutze den zuvor generierten Code und passe nur Variablennamen, Dateinamen und ggf. Delimiter an.
 
-#### .XSLX Dateien
+#### .XLSX Dateien
 
 Einige Dateien liegen im Excel-Format (`.xlsx`) vor.
 
@@ -297,9 +297,8 @@ Dafür verwenden wir das Paket **readxl** und die Funktion `read_excel()`.
 Am Ende solltest du **7 verschiedene Datensätze** in deinem Environment sehen.
 
 ::: {.callout-note collapse="true" title="Vertiefung"}
-👉Für das Einlesen weiterer Dateiforate (z.B. SPSS-Dateien), siehe [Kapitel 3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
+👉Für das Einlesen weiterer Dateiformate (z.B. SPSS-Dateien), siehe [Kapitel 3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
 :::
-
 
 #### Kontext: Warum genau diese sieben Datensätze?
 
@@ -313,48 +312,116 @@ Diese Datensätze enthalten sämtliche erhobenenen Variablen der Studie, auf den
 
 ***Wird in EH4 noch genauer erklärt - aber probiere auch gerne schon vorab!***
 
-Nun haben wir 7 verschiedene Datensätze in unserem Enviornment. Da wir jedoch mit dem kompletten Datensatz arbeiten wollen, ist es sinnvoll diese Datensätze zu einem zu verbinden. Jedoch müssen dafür mehrere Dinge beachtet werden: Sind die Daten in der gleichen Reihenfolge (z.B. geordnet nach Identifier (z.B. `code` in `data_mmq`).
+Nun befinden sich sieben separate Rohdatensätze in deinem Environment.
 
-**Mögliche Funktionen:** z. B. `cbind()` aus Base R oder `full_join()` aus dem Tidyverse.
+Diese Datensätze enthalten unterschiedliche Teile der Studie (z.B. Performanzdaten, Ratings, Strategien).
 
-## Aufgaben
+Für die Reanalyse benötigen wir jedoch **einen gemeinsamen Gesamtdatensatz**, in dem alle Variablen pro Versuchsperson zusammengeführt sind.
 
-### Füge alle 7 Datensätze mit `cbind()` zusammen und schaue dir das Ergebnis an.
+Das bedeutet: Wir müssen die einzelnen Datensätze korrekt miteinander verbinden.
+
+#### Warum ist das nicht trivial?
+
+Damit Datensätze korrekt zusammengeführt werden können, muss klar sein:
+
+    - Welche Zeile gehört zu welcher Versuchsperson?
+    - Gibt es eine eindeutige Identifikationsvariable?
+    
+In unseren Datensätzen ist diese Schlüsselvariable: **code**
+
+## 1. Naiver Ansatz: `cbind()`
+
+`cbind()` fügt Datensätze einfach spaltenweise nebeneinander.
+
+👉 Wichtig: Es wird dabei **nicht überprüft**, ob die Zeilen inhaltlich zusammenpassen! Es wird also nicht kontrolliert, ob die Werte jeweils von derselben Person stammen oder nicht.
+
+**Aufgabe**
+
+Füge alle 7 Datensätze mit der Funktion `cbind()` zusammen.
 
 -   Was fällt dir auf?\
--   Hinweis: Die Datensätze werden einfach nebeneinander „geklebt“, ohne inhaltlich abgeglichen zu werden.\
--   Reflektiere: Macht das Sinn? Was sind die Gefahren, Daten auf diese Art zu mergen?
 
-------------------------------------------------------------------------
+    - Stimmen die Personen wirklich überein?\
+    - Was passiert, wenn die Reihenfolge unterschiedlich ist?\
+    - Was passiert, wenn eine Person in einem Datensatz fehlt?\
 
-### Versuche es nun mit `full_join()`.
 
-Full_join verbindet zwei Datensätze anhand einer Schlüsselvariable, so dass alle Zeilen aus beiden Datensätzen erhalten bleiben. Die Schlüsselvariable ist essentiell dafür dass die Datensätze richtig verbunden werden (Anordnung der Variablen), und grenzt sich dadurch von Funktionen wie `cbind()` ab.
+💡 Reflektiere:
+Macht das Sinn? Welche Gefahr entsteht, wenn Daten nur positionsbasiert zusammengefügt werden?
+
+#### Zentrale Einsicht
+`cbind()` basiert auf Positionen (Zeile 1 in Datensatz 1 + Zeile 1 in Datensatz 2 + Zeile in Datensatz 3 usw.)
+
+Wenn die Reihenfolge der Personen nicht exakt identisch ist, entstehen falsche Zuordnungen - und damit auch inhaltlich falsche Analysen.
+
+👉 Solche Fehler sind besonders gefährlich, weil sie oft nicht sofort auffallen!
+
+## 2. Sauberer Ansatz: `full_join()`
+
+`full_join()` verbindet Datensätze anhand einer **Schlüsselvariable**.
+
+Hier:
+
+    -`by = "code"`
+    
+Das bedeutet:
+
+    - Personen werden über ihren Identifikationscode zusammengeführt.
+    - Die Reihenfolge der Zeilen spielt keine Rolle.
+    - Alle Fälle aus beiden Datensätzen bleiben erhalten.
 
 ![](../../images/join.gif){width="307"}
+**Aufgabe**
 
--   Lege eine gemeinsame Variable als Schlüssel fest, hier: `by = "code"`.
+-   Füge nun alle 7 Datensätze mit `full_join()` zu einem Gesamtdatensatz zusammen.
+-   Nenne diesen `dat_full`
 
--   Füge nun alle 7 Datensätze zu einem zusammen, nenne diesen `dat_full`
+    -   **Achtung:** `full_join()` funktioniert immer nur mit zwei Datensätzen gleichzeitig
+    -   Du musst die Funktion also mehrfach anwenden, um alle 7 Datensätze zusammenzuführen.
 
-    -   **Achtung:** `full_join()` funktioniert immer nur mit 2 Datensätzen gleichzeitig 👉 du musst es also mehrfach anwenden, um alle 7 Datensätze zusammenzuführen.
-
-    -   Hinweis: Im Datensatz `data_pct` heißt die Code-Variable leicht anders. Verwende deshalb `by = c("code_all" = "code")`.
+    👉  Hinweis: Im Datensatz `data_pct` heisst die Code-Variable leicht anders. Verwende deshalb `by = c("code_all" = "code")`.
 
 ------------------------------------------------------------------------
 
 ### Inspiziere deinen zusammengefügten Datensatz "dat_full"
 
--   🔍Überprüfe: Wie viele Zeilen und Spalten hat dein Datensatz? Verwende: `ncol()` , `nrow()`, `dim()`
-    -   Stimmt die Anzahl der Zeilen mit der Anzahl der Versuchspersonen aus dem Paper überein?
--   👀Verschaffe dir eine Überblick über deinen Datensatz mit den Funktionen, die wir schon im letzten Hands On getestet haben:
+Ein korrekt gemergter Datensatz muss logisch überprüft werden.
+
+#### Struktur prüfen
+
+Überprüfe: Wie viele Zeilen und Spalten hat dein Datensatz?
+
+    - `nrow(dat_full)`
+    - `ncol(dat_full)`
+    - `dim(dat_full)`
+
+-    Entspricht die Zeilenanzahl der Anzahl der Versuchspersonen im Paper?
+-    Ist die Spaltenanzahl plausibel?
+
+#### Überblick verschaffen
+
+👀Verschaffe dir eine Überblick über deinen Datensatz mit den Funktionen, die wir schon im letzten Hands On getestet haben:
+
     -   Lasse dir die Variablenamen ausgeben mit `names()`
     -   `head()`
     -   `glimpse()`
     -   `str()`
     -   `dat_full`
     -   `summary()`
+    
 -   Gibt es redundante oder doppelte Variablen?
+-   Gibt es auffällige NA-Muster?
+-   Wirken die Werte plausibel?
+
+#### Warum dieser Schritt zentral ist?
+
+Die Qualität der gesamten Reanalyse hängt davon ab, ob die Datensätze korrekt zusammengeführt wurden.
+
+Ein falsches Mergen führt zu:
+
+    - falschen Zuordnungen von Variablen
+    - verzerrten Analysen
+    - inhaltlich falschen Schlussfolgerungen
 
 **Auf einzelne Werte zugreiffen:**
 
@@ -370,52 +437,130 @@ Full_join verbindet zwei Datensätze anhand einer Schlüsselvariable, so dass al
 
 # Daten speichern
 
-### Speichere `dat_full` in deinem Ordner `"data"` als CSV-Datei ab
+Nachdem wir die sieben Rohdatensätze korrekt zusammengeführt haben, liegt nun unser vollständiger Analyse-Datensatz `dat_full` im Environment.
 
-Verwende dafür die Funktion `write.csv()`. Du musst zwei Argumente angeben: Welcher Datensatz aus deinem Environment gespeichert werden soll und unter welchem Pfad (inklusive Dateiname) er abgelegt wird. Bei Unklarheiten schaue dir das [Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.html) oder die Hilfefunktion an. Überprüfe nach dem speichern, ob dein Datensatz im richtigen Ordner zu finden ist.
+Damit wir:
 
-👉 Für diesen Datensatz sollt ihr anschließend das **Codebook** erstellen.
+    - reproduzierbar arbeiten,
+    - Zwischenschritte dokumentieren,
+    - und nicht jedes Mal neu mergen müssen,
+    
+speichern wir den Datensatz nun dauerhaft ab.
+
+**Aufgabe**
+
+Speichere `dat_full` als CSV-Datei in deinem Projektordner, genauer im Ordner:
+
+`"data/processed"`
+
+Verwende dafür die Funktion `write.csv()`. 
+
+Du musst dabei zwei zentrale Argumente angeben:
+
+    - Welches Objekt gespeichert werden soll
+    - Unter welchem Pfad (inkl. Dateiname) es abgelegt wird
+    
+Bei Unklarheiten schaue dir das [Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.html) oder die Hilfefunktion an.
+
+-    Überprüfe nach dem Speichern, ob dein Datensatz im richtigen Ordner zu finden und der Dateiname korrekt ist.
+-    Lässt sich die Datei erneut einlesen?
+
+
+👉 Für diesen zusammengeführten Datensatz werdet ihr anschliessend das **Codebook** erstellen für die Abschlussarbeit.
 
 ------------------------------------------------------------------------
 
 # Coding Basics: Funktionen
 
-👉[Kapitel 2.4: Calling Functions](https://r4ds.hadley.nz/workflow-basics.html)
+👉 [Kapitel 2.4: Calling Functions](https://r4ds.hadley.nz/workflow-basics.html)  
+👉 [Kapitel 2.3: Funktionen aufrufen](https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html#funktionen-aufrufen)
 
-👉[Kapitel 2.3: Funktionen aufrufen](https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html#funktionen-aufrufen)
+Wir haben in diesen Übungen bereits einige Funktionen verwendet (z.B. `sum()` oder `sort()`).  
+Eine Funktion besteht aus:
 
-Wir haben in diesen Übungen bereits einige Funktionen verwendet (z. B. `sum()` oder `sort()`). Funktionen bestehen aus einem Namen und Argumenten. In diesem Beispiel wird die Funktion `sort()` aufgerufen. Die Argumente, die dafür benötigt werden, sind `first_vector` und `decreasing = TRUE`. Die meisten Funktionen haben *Defaults*, also Argumente mit einer Voreinstellung. Wenn man diese nicht verändern möchte, müssen sie nicht explizit angegeben werden. `sort()` hat als Default `decreasing = FALSE`. Deswegen müssen wir, um die höchsten Werte des Vektors zu bestimmen, diesen Default umstellen. Argumente ohne Defaults müssen zwingend angegben werden).
+-    einem **Funktionsnamen**
+-    **Argumenten**, die der Funktion übergeben werden
 
-Die Defaults von Funktionen lassen sich über die Hilfefunktion nachschauen. Diese kann entweder im Tab *Help* geöffnet werden oder direkt über die Konsole mit `?Funktionsname`.
+Viele Funktionen besitzen **Defaults** (Voreinstellungen).  
+Wenn du diese nicht verändern möchtest, musst du sie nicht explizit angeben.
+
+Die Defaults findest du in der Hilfe:
+-    im Tab *Help*
+-    oder in der Konsole mit `?Funktionsname` (z.B. `?sort`)
+
+
+`sort()` hat als Default `decreasing = FALSE`. Deswegen müssen wir, um die höchsten Werte des Vektors zu bestimmen, diesen Default umstellen. Argumente ohne Defaults müssen zwingend angegeben werden).
 
 ```{r}
 first_vector <- c(22342, 4, 5, 6, 7, 23234, 342, 342)
+
 highest_values_1 <- sort(first_vector)[1:2]
-highest_values <- sort(first_vector, decreasing = TRUE)[1:2]
+highest_values   <- sort(first_vector, decreasing = TRUE)[1:2]
 ```
+
+---
+
+## Argumente mit und ohne Namen
 
 Bei vielen Funktionen werden die **Namen der Argumente** weggelassen.
 
-Welche Argumente werden hier übergeben? Schreibe die Funktion mit den vollständigen Argumentnamen aus:
+Wenn Argumente **nicht benannt** werden, ist die Reihenfolge entscheidend.  
+Wenn du Argumente explizit benennst, kannst du die Reihenfolge frei wählen.
 
-```{r}
- seq(-4, 11, 3)
+### Aufgabe 1
+
+Welche Argumente werden hier übergeben?  
+Schreibe die Funktion mit vollständigen Argumentnamen aus.
+
+```{r eval=FALSE}
+seq(-4, 11, 3)
 ```
 
-Wenn die Argumente nicht explizit benannt werden, ist die Reihenfolge entscheidend. Wenn du die Argumente explizit angibst, kannst du die Reihenfolge frei wählen.
+*Tipp: `?seq`*
 
--   Korrigiere diesen Code: Ergänze die Argumentnamen, sodass eine Sequenz von 3 bis 12 in 2er-Schritten erstellt wird. Belasse dabei die Reihenfolge der Zahlen.
+---
 
-```{r, eval=FALSE, echo=TRUE}
+### Aufgabe 2
+
+Korrigiere diesen Code so, dass eine Sequenz von **3 bis 12 in 2er-Schritten** erstellt wird.  
+Belasse dabei die Reihenfolge der Zahlen.
+
+```{r eval=FALSE}
 seq(2, 12, 3)
 ```
 
-ℹ️Manche Funktionen sind in mehreren Paketen beinhaltet, sowie wie z.B. die Funktion `filter()`. Um die Funktion definitiv aus einem bestimmten Paket zu verwenden, muss man das Paket dazu schreiben: `dyplr::filter()`
+---
 
-## Tab Completion:
+## Funktionen aus bestimmten Paketen
+
+Manche Funktionen existieren in mehreren Paketen (z.B. `filter()`).  
+Um sicher die richtige Version zu verwenden:
+
+```{r eval=FALSE}
+dplyr::filter()
+```
+
+---
+
+## Tab Completion
 
 Eine nützliche Funktion von RStudio ist die **Tab Completion**. Wenn du eine Funktion aufrufst und die Tabulator-Taste drückst, erscheint ein Menü mit den möglichen Argumenten, die du angeben kannst. Probiere es mit der Funktion `mean()`. Das funktioniert auch für Funktionen aus Paketen, wenn du diese mit `::` auswählst, zum Beispiel: `readr::`.
 
+Tippe z.B.:
+
+```{r eval=FALSE}
+mean(
+```
+
+Drücke dann die **Tab-Taste**, um mögliche Argumente anzeigen zu lassen.
+
+Das funktioniert auch mit:
+
+```{r eval=FALSE}
+readr::
+```
+
+---
 ## Weitere Tasten und Tastenkürzel:
 
 👉[Kapitel 1.4.6](https://methodenlehre.github.io/einfuehrung-in-R/chapters/01-workflow.html#tasten)
@@ -436,9 +581,9 @@ In RStudio benötigen wir häufig Zeichen, die wir im Alltag kaum verwenden. Da 
 
 -   `` ` `` Backtick (Gravis – vor allem für Code Chunks, selten manuell einzugeben)
 
-## Verschachtelte Funktionen:
+## Verschachtelte Funktionen
 
-ℹ️Es ist zwar möglich, mehrere Funktionen ineinander zu verschachteln. Dies kann jedoch schnell zu Verwirrung führen und den Code unnötig unübersichtlich machen. Verschachtelte Funktionen werden von innen nach aussen ausgeführt.
+ℹ️Es ist zwar möglich, mehrere Funktionen ineinander zu verschachteln. Dies kann jedoch schnell zu Verwirrung führen und den Code unnötig unübersichtlich machen. Verschachtelte Funktionen werden **von innen nach aussen** ausgeführt.
 
 ❓Stelle dir hier die Frage: Was wird genau gerundet? Die einzelnen Elemente des Vektors oder der errechnet Durchschnitt?
 
@@ -448,38 +593,61 @@ print(mean(round(first_vector)))
 
 ❗Aufgabe: Zerlege die Verschatelte Funktion in ihre Teilschritte.
 
+```{r eval=FALSE}
+# Schritt 1:
+# ...
+
+# Schritt 2:
+# ...
+
+# Schritt 3:
+# ...
+```
+
+---
+
 # Style Conventions
 
-Korrigiere diesen Code so dass er
+Korrigiere diesen Code so, dass er:
 
--   Fehlerfrei läuft
+- fehlerfrei läuft
+- leserlich ist
+- keine wichtigen Funktionsnamen überschreibt
 
--   Leserlicher ist: Beachte dafür
-
-    -   Naming Conventions
-
-    -   Weitere Style Vorgaben (z.B. Leerzeichen)
-
-```{r, eval=FALSE, echo=TRUE}
-
+```{r eval=FALSE}
 Französischschul_NotenSemesester -<(4,5, 6,5,4,  3)
 mean <-mean(Französichschul_NotenSemsester
 print  ( mittelwert)
-
 ```
 
--   Installiere das Package `styler` mit `install.packages()` und lade es. `styler` hat eine sogenannte "Wrapper-Funktion", die du unter "Addins" aufrufen kannst (evtl. musst du R vor dem Laden neu starten). Verwende den Default-Style (tidyverse).
+---
+
+## Code automatisch formatieren mit `styler`
+
+Installiere das Package `styler` mit `install.packages()` und lade es. `styler` hat eine sogenannte "Wrapper-Funktion", die du unter "Addins" aufrufen kannst (evtl. musst du R vor dem Laden neu starten). Verwende den Default-Style (tidyverse).
 
 ![](../../images/styler.png)
 
--   Versuche mit der `Styler` -Funktion diesen Code zu leserlicher zu machen (markiere den Code und wähle *Style selection*). (Du musst diesen ggplot Code nicht verstehen - wir kommen dazu in einer späteren Einheit noch.)
+```{r eval=FALSE}
+install.packages("styler")
+library(styler)
+```
 
-```{r, eval=FALSE}
+---
+
+### Aufgabe
+
+Versuche mit der `Styler` -Funktion, diesen Code zu leserlicher zu machen (markiere den Code und wähle *Style selection*). (Du musst diesen ggplot Code nicht verstehen - wir kommen dazu in einer späteren Einheit noch):
+
+```{r eval=FALSE}
 library(ggplot2)
 library(palmerpenguins)
 
 ggplot(penguins,aes(x=flipper_length_mm,y=body_mass_g,color=species))+geom_point()+labs(x="flipper",Y="MASS")+theme_minimal()
-
 ```
 
-# Am Ende deiner Übungen - vergiss nicht dein Skript abzuspeichern! :-)
+---
+
+# Am Ende deiner Übungen
+
+✅ Speichere dein Skript ab.
