@@ -114,16 +114,30 @@ Wenn du zukünftig ein eigenes Projekt anlegen möchtest (z.B. für deine Master
 
 ### Absolute vs. relative Pfade
 
--   **Absolute Pfade** beschreiben den vollständigen Weg zu einer Datei, ausgehend vom Wurzelverzeichnis *deines* Computers.
+Wenn du in R eine Datei einliest, musst du angeben, **wo** diese Datei liegt.
+
+Diesen "Weg" zur Datei nennt man einen **Pfad**.
+
+Dabei unterscheidet man zwei Arten von Pfaden:
+
+#### Absolute Pfade
+
+-   Ein **absoluter Pfad** beschreibt den vollständigen Weg zu einer Datei, ausgehend vom Wurzelverzeichnis *deines* Computers.
 
     🔴 Nachteil: Sie sind oft sehr lang und funktionieren nur auf deinem Rechner.\
 
     -   Beispiel (Windows):\
         `C:\Users\maxmustermann\Dokumente\r_you_ready\Grinschgl2020\data\raw\Beispieldatei.csv`
+        
+Wenn jemand anderes dieses Skript ausführt, wird dieser Pfad nicht existieren.
 
--   **Relative Pfade** beschreiben den Ort einer Datei relativ zum *aktuellen Arbeitsverzeichnis*.
+#### Relative Pfade
 
-    🟢 Vorteil: Sie sind kürzer und funktionieren auf jedem Rechner, solange die Projektstruktur gleich bleibt.\
+-   Ein **relativer Pfad** beschreiben den Weg zu einer Datei ausgehend vom *aktuellen Arbeitsverzeichnis*.
+
+-   Wenn du mit einem R-Projekt arbeitest, ist das Working Directory automatisch der Projektordner.
+
+    🟢 Vorteil: Sie sind kürzer, übersichtlicher und funktionieren auf jedem Rechner, solange die Projektstruktur gleich bleibt.\
 
     -   Beispiel:
 
@@ -132,10 +146,26 @@ Wenn du zukünftig ein eigenes Projekt anlegen möchtest (z.B. für deine Master
         -   relativer Pfad:
 
         ```         
-        data/raw/Beispieldatei.csv
+        data/raw/Beispieldatei.csv              # relativer Pfad
+      
+        read_csv("data/raw/Beispieldatei.csv")  # Einlesen der Datei in R
         ```
 
-**❓Beantworte für dich selbst:**
+Solange die Projektstruktur gleich bleibt, funktioniert dieser Code auf jedem Computer.
+
+#### Warum ist das wichtig?
+
+In der wissenschaftlichen Praxis sollen Analysen:
+
+    - nachvollziehbar
+    - überprüfbar
+    - reproduzierbar
+
+sein.
+
+Absolute Pfade verhindern dies; relative Pfade ermöglichen es.
+
+**❓Reflexionsfrage:*
 
 Um ein Skript reproduzierbar zu gestalten – was eignet sich besser: relative Pfade oder absolute Pfade? Aus welchen Gründen?
 
