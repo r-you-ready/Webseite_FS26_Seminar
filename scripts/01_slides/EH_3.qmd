@@ -25,16 +25,6 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## Achtung
-
-❗[Neue Website Domain](https://r-you-ready.github.io/HS2025/front_page.html) ❗
-
-<https://r-you-ready.github.io/HS2025/front_page.html>
-
-**Link wurde in Ilias wurde aktualisiert**
-
-------------------------------------------------------------------------
-
 ## Fragen zum Datenanalyseplan:
 
 ![](../../images/EH_2_files/fragen.png)
@@ -49,23 +39,44 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 -   Gibt es noch Unklarheiten?
 
--   **Musterlösungen ab jetzt online für Block 1!**
+-   **Musterlösungen online für Block 1!**
 
 ------------------------------------------------------------------------
 
 ## Heute:
 
-<embed 
-  src="../../PDFs/Syllabus.pdf" 
-  type="application/pdf"
-  style="width:100%; height:90vh;"
->
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
+
+```{=html}
+<embed
+    src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
+```
+:::
 
 ------------------------------------------------------------------------
 
 ## Peer-Pairings
 
-**siehe Liste auf Ilias**
+**12.15 (Liste auch auf Ilias)**
+
+   ![](../../images/Peer_Gruppe_1215.png)
+
+
+::: notes
+Liste zeigen, Namen aufrufen und zusammensetzen lassen
+:::
+
+------------------------------------------------------------------------
+
+## Peer-Pairings
+
+**16.15 (Liste auch auf Ilias)**
+
+   ![](../../images/Peer_Gruppe_1615.png)
+
 
 ::: notes
 Liste zeigen, Namen aufrufen und zusammensetzen lassen
@@ -79,7 +90,7 @@ Liste zeigen, Namen aufrufen und zusammensetzen lassen
 
 ::::: columns
 ::: {.column width="70%"}
-### *Warum Datenmanagemen*t:
+### *Warum Datenmanagement?*:
 
 -   Datenflut in der Forschung
 -   Risiken ohne gutes Management
@@ -191,18 +202,18 @@ Liste zeigen, Namen aufrufen und zusammensetzen lassen
 [Psych-DS](https://psychds-docs.readthedocs.io/en/latest/guides/1_getting_started/)
 
 ::: notes
-Hier auch Ordner und Files die wir für unsere Zwecke nicht verwenden werden. Z.B. Github Files, sind zwar gut für Version Control und ein wichtiges Tool, aber würde den Rahmen sprengen.
+Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z.B. Github Files, sind zwar gut für Version Control und ein wichtiges Tool, aber würde den Rahmen sprengen.
 :::
 
 ------------------------------------------------------------------------
 
 ## Psych-DS für unsere Zwecke:
 
--   Leicht Abgeändertes Format für unser Seminar
+-   Leicht abgeändertes Format für unser Seminar
 
-    -   Macht es leichter für uns die Abgaben zu kontrollieren
+    -   Macht es leichter für uns, die Abgaben zu kontrollieren
 
--   Hilft euch eine übersichtliche Ordnerstruktur zu behalten
+-   Hilft euch, eine übersichtliche Ordnerstruktur zu behalten
 
 ------------------------------------------------------------------------
 
@@ -238,7 +249,7 @@ Hier auch Ordner und Files die wir für unsere Zwecke nicht verwenden werden. Z.
 
 ## Psychdsish & Styler
 
--   **📦 Packages** welche helfen sollen Psych-DS Struktur & Stylevorgaben leichter einzuhalten.
+-   **📦 Packages** welche helfen sollen, Psych-DS Struktur & Stylevorgaben leichter einzuhalten.
 
 -   Für Masterarbeiten: [Psychdsish](https://github.com/ianhussey/psychdsish?tab=readme-ov-file)
 
@@ -246,7 +257,7 @@ Hier auch Ordner und Files die wir für unsere Zwecke nicht verwenden werden. Z.
 
 -   **🥅 Ziel**: Einhaltung von Standards erleichtern
 
--   **👗Styler**: Funktion um "unschön" formatierten Code leserlicher zu machen. 👉 Hands On!
+-   **👗Styler**: Funktion, um "unschön" formatierten Code leserlicher zu machen. 👉 Hands On!
 
 ------------------------------------------------------------------------
 
@@ -256,15 +267,15 @@ Hier auch Ordner und Files die wir für unsere Zwecke nicht verwenden werden. Z.
 
 -   Er muss mit Buchstaben begonnen werden und darf keine Leerzeichen beinhalten
 
--   Sonderzeichen und Großbuchstaben sollten vermieden werden Keine Namen verwenden, die schon an Funktionen vergeben sind (z.B. `mean()`)
+-   Sonderzeichen und Grossbuchstaben sollten vermieden werden; Keine Namen verwenden, die schon an Funktionen vergeben sind (z.B. `mean()`)
 
--   Empfehlung für einen leserlichen Code: snake_case
+-   Empfehlung für leserlichen Code: snake_case
 
 -   Name soll Variable inhaltlich bestmöglich beschreiben
 
 -   Reproduzierbarkeit; „clarity instead of brevity“
 
--   Benennung am besten in Englisch um internationalen Standards zu folgen
+-   Benennung am besten in Englisch, um internationalen Standards zu folgen
 
 -   Kommentierung von R-Code mit \#
 
@@ -282,11 +293,11 @@ Hier auch Ordner und Files die wir für unsere Zwecke nicht verwenden werden. Z.
 
     -   Vor und nach Zuweisungen: `x<-sum(1+2)` vs `x <- sum(1 + 2)`
 
-    -   Aber nicht vor und nach sich öffnenden oder schließenden Klammern oder Anführungszeichen
+    -   Aber nicht vor und nach sich öffnenden oder schliessenden Klammern oder Anführungszeichen
 
     -   Nach Kommas (aber nicht davor)
 
-    -   Weitere Leerzeichen erlaubt wenn die Leserlichkeit erhöht wird (z.B. bei Einrückungen)
+    -   Weitere Leerzeichen erlaubt, wenn die Leserlichkeit erhöht wird (z.B. bei Einrückungen)
 
 -   Verwendung des Pipe Operators (`%>%` oder **`|>`** ) –\> Erklärung folgt in kommenden Wochen!
 
@@ -302,7 +313,7 @@ Hier auch Ordner und Files die wir für unsere Zwecke nicht verwenden werden. Z.
                                           arguments = "long words and sentences") #–> good
     ```
 
--   Styler: Funktion die Code automatisch in dieses Format bringt. 👉 Hands On!
+-   Styler: Funktion, die Code automatisch in dieses Format bringt. 👉 Hands On!
 
 ------------------------------------------------------------------------
 
@@ -340,13 +351,17 @@ Hier auch Ordner und Files die wir für unsere Zwecke nicht verwenden werden. Z.
 
 -   Variablennamen in Codebook sollen identisch zu Variablennamen in Datensatz sein
 
--   Variable muss ausführlich genug beschrieben sein, sodass andere Personen es nachvollziehen können
+<!-- -->
+
+-   Variable muss ausführlich genug beschrieben sein, sodass andere Personen sie nachvollziehen können
+
+------------------------------------------------------------------------
 
 ## Codebook: Vorlage
 
 -   Kann in verschiedenen Formaten erstellt werden (Word, Excel, ect.)
 
--   Excel-Vorlage für das Seminar (siehe ZIP Datei Abschlussprojekt)
+-   Excel-Vorlage für das Seminar (siehe ZIP-Datei Abschlussprojekt)
 
 -   Beispiel: "Example_Codebook" - Ordner
 
@@ -378,7 +393,7 @@ Buch von Pennington kann man bei Bedarf in Bib oder bei Sandra ausborgen
 
 -   Basierend auf Horstmann et al. (2020)
 
--   Abgabe bis EH6 (22.10) über ILIAS und via Email an Peer-Partner:in
+-   Abgabe bis EH6 (25.03.) über ILIAS und via Email an Peer-Partner:in
 
 -   Danach Peer Feedback
 
@@ -396,7 +411,7 @@ Buch von Pennington kann man bei Bedarf in Bib oder bei Sandra ausborgen
 
 ------------------------------------------------------------------------
 
-## Reproduzierbare Auswertung: Grundsätze
+## Reproduzierbare Auswertung (R-Skripte): Grundsätze
 
 -   Digitale Rohdaten
 
@@ -426,20 +441,20 @@ Buch von Pennington kann man bei Bedarf in Bib oder bei Sandra ausborgen
 
 ... Psych-DS als einen Standard kennengelernt
 
-…Style-Empfehlungen für R Code besprochen
+... Style-Empfehlungen für R Code besprochen
 
-…die Gründe für und den Aufbau von einem Codebook besprochen
+... die Gründe für und den Aufbau von einem Codebook besprochen
 
-…Datensätze in R importiert
+... Datensätze in R importiert
 
-…diese gemerged und exportiert (Fortsetzung in EH 4)
+... diese gemerged und exportiert (Fortsetzung in EH 4)
 
 ------------------------------------------------------------------------
 
 ## Hausübungen
 
--   Codebook erstellen bis **Mi 22.10.2025**
--   Reminder: Datenanalyseplan bis **Mi 08.10.2025**
+-   Codebook erstellen bis **Mi, 25.03.2026**
+-   Reminder: Datenanalyseplan bis **Mi, 11.03.2026**
 
 ------------------------------------------------------------------------
 

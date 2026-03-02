@@ -1,0 +1,22 @@
+---
+title: "Projekte"
+date: today
+---
+
+Die Grundidee einer robusten, reproduzierbaren Analyse ist ein sauberer, wiederholbarer und **skriptbasierter Workflow**. Hierunter versteht sich, dass jegliche Schritte der Datenanalyse in einem Skript dokumentiert sind und mit einem einzigen Befehl ausgeführt werden können. Dies ermöglicht es, die Analyse jederzeit zu reproduzieren und zu überprüfen, ob die Ergebnisse konsistent sind.
+
+Wichtig für einen reproduzierbaren und skriptbasierten Workflow sind **Rohdaten**. Rohdaten beziehen sich auf Materialien, die nach einem Verlust nicht wiederhergestellt werden könnten (beispielsweise ausgefüllte Fragebögen). Die meisten Analysen müssen mehrmals angepasst werden bevor sie wie gewünscht funktionieren. Je einfacher, schneller und robuster der Prozess der Wiederholung abläuft, umso reproduzierbarer ist der skriptbasierte Workflow.
+
+Um einen skriptbasierten Workflow mit Grundlage eurer Rohdaten zu erstellen, könnt ihr folgende Schritte befolgen:
+
+- Zu Beginn werden die Rohdaten kopiert und jegliche Analysen werden immer nur mit den Kopien durchgeführt. So bleibt die Integrität der Originaldaten erhalten und es können jederzeit neue Analysen gestartet werden, ohne die Rohdaten selbst zu gefährden.
+
+- Alle Schritte der Datenanalyse, von der Datenbereinigung über die Transformation bis hin zur Visualisierung, sollten in einem Skript dokumentiert werden und nicht manuell vorgenommen werden.
+
+- Die resultierenden Daten sollten separat von den Rohdaten gespeichert werden, um Verwechslungen zu vermeiden und notfalls die Rohdaten erneut verwenden zu können.
+
+- Skripte können in thematische Blöcke unterteilt werden, beispielsweise ein Skript zur Bereinigung der Daten, ein weiteres zur Analyse der Daten und ein letztes zum Erstellen von Plots oder Tabellen.
+
+::: callout-important
+**Wichtig:** Bitte achte auf die Vorgaben, welche wir im Rahmen unseres Seminars machen. Möglicherweise verlangen wir, dass nur ein einziges Skript eingereicht wird!
+:::
