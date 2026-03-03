@@ -16,7 +16,6 @@ format:
     progress: true
     controls: true
     embed-resources: true
-draft: true
 ---
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
@@ -28,6 +27,10 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 ## Fragen zum Datenanalyseplan:
 
 ![](../../images/EH_2_files/fragen.png)
+
+::: notes
+jetzt auch auf Homepage unter "Hausübungen" ergänzt
+:::
 
 ------------------------------------------------------------------------
 
@@ -41,12 +44,22 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 -   **Musterlösungen online für Block 1!**
 
+    ::: notes
+    zeigen:\
+    R Oberfläche
+
+    Erklärung zu Paketen\
+    \
+    Variable zuweisen mit \<- und nicht =\
+    Vektoren mit c() für combine\
+    3 Arten von Vektoren
+    :::
+
 ------------------------------------------------------------------------
 
 ## Heute:
 
 ::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
-
 ```{=html}
 <embed
     src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
@@ -62,11 +75,10 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 **12.15 (Liste auch auf Ilias)**
 
-   ![](../../images/Peer_Gruppe_1215.png)
-
+![](../../images/Peer_Gruppe_1215.png)
 
 ::: notes
-Liste zeigen, Namen aufrufen und zusammensetzen lassen
+Liste zeigen, Namen aufrufen und zusammensetzen lassen - zumindest später bei Hands On wenn sie wollen
 :::
 
 ------------------------------------------------------------------------
@@ -75,8 +87,7 @@ Liste zeigen, Namen aufrufen und zusammensetzen lassen
 
 **16.15 (Liste auch auf Ilias)**
 
-   ![](../../images/Peer_Gruppe_1615.png)
-
+![](../../images/Peer_Gruppe_1615.png)
 
 ::: notes
 Liste zeigen, Namen aufrufen und zusammensetzen lassen
@@ -93,7 +104,7 @@ Liste zeigen, Namen aufrufen und zusammensetzen lassen
 ### *Warum Datenmanagement?*:
 
 -   Datenflut in der Forschung
--   Risiken ohne gutes Management
+-   Risiken ohne gutes Management (z.B. keine Möglichkeit zur Replikation & Reproduktion)
 
 ### Ziele von Datenmanagement:
 
@@ -104,6 +115,8 @@ Liste zeigen, Namen aufrufen und zusammensetzen lassen
 -   Reproduzierbarkeit
 
 -   Nachhaltigkeit und Transparenz
+
+    **-\> gute wissenschaftliche Praxis**
 :::
 
 ::: {.column width="30%"}
@@ -111,7 +124,9 @@ Liste zeigen, Namen aufrufen und zusammensetzen lassen
 :::
 :::::
 
-### 
+::: notes
+Link zu letzter Einheit - Forschungsdatenmanagement gehört zu guter wissenschaftlicher Praxis
+:::
 
 ------------------------------------------------------------------------
 
@@ -121,7 +136,7 @@ Liste zeigen, Namen aufrufen und zusammensetzen lassen
 ::: {.column width="70%"}
 ### **Standards & Vorgaben:**
 
--   Fair Prinzipien
+-   FAIR Prinzipien
 
 -   Data Management Plan (SNF)
 
@@ -215,6 +230,8 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
 
 -   Hilft euch, eine übersichtliche Ordnerstruktur zu behalten
 
+    --\> Ordner "R_You_Ready"
+
 ------------------------------------------------------------------------
 
 ## Psych-DS: Wichtigste Grundsätze
@@ -223,7 +240,7 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
 
     -   Die Rohdatenfiles werden nicht bearbeitet!
 
-    -   Der aufbereitete Datensatz -\> data/processed
+    -   Aufbereitete Datensätze -\> data/processed
 
 -   Codebook in Ordner "data"
 
@@ -233,13 +250,13 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
 
     -   Aufbereitungsschritte im Skript "processing"
 
-    -   Analyse (mit dem processed datensatz) im Skript "analysis"
+    -   Analyse (mit den aufbereiteten Datensätzen) im Skript "analysis"
 
 -   Keine Redundanzen!
 
     -   Keine redundanten Dateien
 
-    -   Keine redundanten Pakete (Nur Pakete laden, die auch verwendet werden).
+    -   Skripte: Keine redundanten Pakete (nur Pakete laden, die auch verwendet werden), Aufarbeitungsschritte & Analysen.
 
     ::: notes
     Bewertungsrelevant für die Abschlussarbeit
@@ -247,7 +264,7 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
 
 ------------------------------------------------------------------------
 
-## Psychdsish & Styler
+## Psychdsish 
 
 -   **📦 Packages** welche helfen sollen, Psych-DS Struktur & Stylevorgaben leichter einzuhalten.
 
@@ -257,23 +274,21 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
 
 -   **🥅 Ziel**: Einhaltung von Standards erleichtern
 
--   **👗Styler**: Funktion, um "unschön" formatierten Code leserlicher zu machen. 👉 Hands On!
-
 ------------------------------------------------------------------------
 
-## Wiederholung: Benennung von Variablen ect. in R
+## Wiederholung: Benennung von Variablen etc. in R
 
 -   Namen können aus Buchstaben, Zahlen und Zeichen (\_ oder .) bestehen
 
 -   Er muss mit Buchstaben begonnen werden und darf keine Leerzeichen beinhalten
 
--   Sonderzeichen und Grossbuchstaben sollten vermieden werden; Keine Namen verwenden, die schon an Funktionen vergeben sind (z.B. `mean()`)
+-   Sonderzeichen und Grossbuchstaben sollten vermieden werden; keine Namen verwenden, die schon an Funktionen vergeben sind (z.B. `mean()`, `data()`)
 
--   Empfehlung für leserlichen Code: snake_case
+-   Empfehlung für leserlichen Code: **snake_case**
 
 -   Name soll Variable inhaltlich bestmöglich beschreiben
 
--   Reproduzierbarkeit; „clarity instead of brevity“
+-   Reproduzierbarkeit: „clarity instead of brevity“
 
 -   Benennung am besten in Englisch, um internationalen Standards zu folgen
 
@@ -282,6 +297,8 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
     -   Text nach \# wird ignoriert (für 1 Zeile)
 
     -   Neue Zeilen müssen wieder mit \# beginnen
+
+    -   Alternative: R Notebooks, Markdown oder Quarto –\> EH5
 
 ------------------------------------------------------------------------
 
@@ -313,7 +330,7 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
                                           arguments = "long words and sentences") #–> good
     ```
 
--   Styler: Funktion, die Code automatisch in dieses Format bringt. 👉 Hands On!
+-   **👗**`styler`: Funktion, die Code automatisch in dieses Format bringt. 👉 Hands On!
 
 ------------------------------------------------------------------------
 
@@ -327,11 +344,19 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
 
 🔢 **Struktur:** Benenne Dateien so, dass sie auch mit der Standard-Sortierung von Ordnern sinnvoll angeordnet werden. Ein bewährter Ansatz ist, mit Zahlen zu beginnen, um eine logische Reihenfolge abzubilden.
 
+z.B.
+
+01_processing
+
+02_descriptive_analyses
+
+03_inferential_analyses
+
 ------------------------------------------------------------------------
 
 ## Codebook
 
--   Naive Personen sollen Datensatz nachvollziehen können (Reproduzierbarkeit & Zusatzanalysen)
+-   Naive Personen sollen Datensatz nachvollziehen können (Reproduzierbarkeit!)
 
 -   Beinhaltet eine Liste und Beschreibung aller Variablen, z.B.
 
@@ -359,7 +384,7 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
 
 ## Codebook: Vorlage
 
--   Kann in verschiedenen Formaten erstellt werden (Word, Excel, ect.)
+-   Kann in verschiedenen Formaten erstellt werden (Word, Excel, etc.)
 
 -   Excel-Vorlage für das Seminar (siehe ZIP-Datei Abschlussprojekt)
 
@@ -403,23 +428,15 @@ Buch von Pennington kann man bei Bedarf in Bib oder bei Sandra ausborgen
 
 ------------------------------------------------------------------------
 
-## Beispiel Codebook BFI
-
-**Demo Beispiel:**
-
--   Wir fügen nun live einige Variablen in das Codebook ein. Versucht die Schritte nachzuvollziehen und stellt Fragen bei Unklarheiten.
-
-------------------------------------------------------------------------
-
 ## Reproduzierbare Auswertung (R-Skripte): Grundsätze
 
 -   Digitale Rohdaten
 
--   Skript soll den gesamten Weg von den Rohdaten bis hin zu den Ergebnissen dokumentieren
+-   Skripte (processing & analyses) sollen den gesamten Weg von den Rohdaten bis hin zu den Ergebnissen dokumentieren
 
 -   Wenn man euren Code auf den Rohdaten laufen lässt, sollte man (fehlerfrei) zu den Ergebnissen kommen
 
--   Skript ist kommentiert und sinnvoll gegliedert
+-   Skripte sind kommentiert und sinnvoll gegliedert
 
 ------------------------------------------------------------------------
 
@@ -453,8 +470,9 @@ Buch von Pennington kann man bei Bedarf in Bib oder bei Sandra ausborgen
 
 ## Hausübungen
 
+-   Datenanalyseplan bis **Mi, 11.03.2026**
+
 -   Codebook erstellen bis **Mi, 25.03.2026**
--   Reminder: Datenanalyseplan bis **Mi, 11.03.2026**
 
 ------------------------------------------------------------------------
 

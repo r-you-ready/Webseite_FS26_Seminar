@@ -1,17 +1,16 @@
 ---
 title: "Hausübung: Datenanalyseplan (Reanalyse)"
 format: html
-draft: true
 ---
 
 # Hausübung: Datenanalyseplan (Reanalyse)
 
 Im Methodenseminar **„R you Ready? Reproduzierbare Datenaufbereitung und –analyse in R“ (FS 2026)** erstellt ihr einen Datenanalyseplan zur Reanalyse einer bereits publizierten Studie.
 
-Ihr arbeitet mit der Studie von **Grinschgl et al. (2020)**. Diese Studie wurde bereits durchgeführt und veröffentlicht. Die Originaldaten liegen vor. Später erhaltet ihr zusätzlich simulierte Datensätze zur gleichen Studie.
+Ihr arbeitet mit der Studie von **Grinschgl et al. (2020)**. Diese Studie wurde bereits durchgeführt und veröffentlicht. Die Originaldaten liegen vor. (Später erhaltet ihr zusätzlich simulierte Datensätze zur gleichen Studie für euer Abschlussprojekt).
 
 Eure Aufgabe besteht **nicht** darin, eine neue Studie zu planen.\
-Eure Aufgabe besteht darin, die im Artikel beschriebenen Analysen möglichst exakt zu replizieren und systematisch zu überprüfen, ob sich die publizierten Ergebnisse reproduzieren lassen.
+Eure Aufgabe besteht darin, die im Artikel beschriebenen Analysen möglichst exakt zu reproduzieren und systematisch zu überprüfen, ob sich die publizierten Ergebnisse erneut so finden lassen.
 
 Der Datenanalyseplan wird deshalb konsequent aus der Perspektive einer **Reanalyse** verfasst.
 
@@ -25,7 +24,7 @@ Dort findet ihr:
 
 -   *Grinschgl et al. (2020)* – Originalversion (ohne Kommentare)\
 -   *Grinschgl et al. (2020)* – Version mit Kommentaren\
--   Preregistration zur Studie (OSF)\
+-   Preregistration zur Studie (OSF) \[kein optimales Beispiel, an einigen Stellen zu knapp!\]\
 -   Vorlage für den Datenanalyseplan (nach van den Akker et al., 2021)\
 -   Tutorial zur Preregistration von Sekundärdatenanalysen (van den Akker et al., 2021)
 
@@ -52,7 +51,7 @@ Sie dient als **Orientierungshilfe**, ersetzt jedoch nicht die eigenständige An
 
 **Wichtig**: In den Kommentaren findet sich auch ein Hinweis zu einer Analyse, die nicht repliziert werden muss! -\> "Offloading strategies"
 
-### Die Preregistration (OSF)
+### Die Präregistrierung (OSF)
 
 Die Preregistration enthält zusätzliche Informationen zu:
 
@@ -92,13 +91,13 @@ Eine aussenstehende Person sollte euren Plan lesen und exakt verstehen können, 
 
 **Abgabe: 11.03.2026 (4 Punkte)**
 
-Bis zum 11.03.2026 erstellt ihr einen vollständigen Datenanalyseplan auf Basis:
+Bis zum 11.03.2026 erstellt ihr einen Datenanalyseplan auf Basis:
 
 -   der publizierten Studie\
 -   der dort beschriebenen Daten\
 -   der berichteten Analysen
 
-Ab dem 18.03.2026 erhaltet ihr:
+Ab dem 11.03.2026 erhaltet ihr:
 
 -   eine Musterlösung\
 -   Peer-Feedback von eurer/eurem Partner:in (4 Punkte)
@@ -111,7 +110,7 @@ Ihr überarbeitet euren Plan auf Basis dieses Feedbacks. Diese überarbeitete Ve
 
 **Hierzu folgen genaue Informationen zu einem späteren Zeitpunkt!**
 
-Für das Abschlussprojekt erhaltet ihr simulierte Datensätze zur gleichen Studie.
+Für das Abschlussprojekt erhaltet ihr simulierte Datensätze zur gleichen Studie. (Jede/r Studierende erhält individuelle Datensätze.)
 
 Eure Aufgabe besteht darin, die Analysen von Grinschgl et al. (2020) auf Basis dieser simulierten Daten zu reproduzieren.
 
@@ -123,7 +122,7 @@ Da sich die Datengrundlage ändert, müsst ihr euren ursprünglichen Datenanalys
 -   data exclusion\
 -   data identifiers
 
-Die angepasste Version wird im Rahmen der Abschlussarbeit eingereicht.
+Die angepasste Version wird im Rahmen des Abschlussprojekts eingereicht.
 
 Wichtig: Alle im Datenanalyseplan beschriebenen Analyseschritte müssen später auch tatsächlich in eurem R-Skript umgesetzt werden.
 
