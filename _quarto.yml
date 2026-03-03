@@ -52,7 +52,7 @@ website:
           - href: scripts/02_excercises/loesung_1.qmd
             text: "Hands on - Block 1 (Woche 1 - 2) - mit Musterlösungen"
           - href: scripts/02_excercises/hands_on_2.qmd
-            text: "Hands on - Block 2 (Woche 3 - 4)
+            text: "Hands on - Block 2 (Woche 3 - 4)"
           - href: scripts/02_excercises/loesung_3.qmd
             text: "Hands on - Block 3 (Woche 5 - 6) - Mit Musterlösungen"
           - href: scripts/02_excercises/loesung_4.qmd
@@ -67,7 +67,7 @@ website:
         text: "Hausübungen"
         contents:
           - href: scripts/02_excercises/datenanalyseplan.qmd
-            text: Datenanalyseplan (11.03.26)
+            text: "Datenanalyseplan (11.03.26)"
           - href: scripts/02_excercises/hausuebung_loesung_1.qmd
             text: "Hausübung 1 - Mit Lösungen"
           - href: scripts/02_excercises/hausuebung_loesung_2.qmd

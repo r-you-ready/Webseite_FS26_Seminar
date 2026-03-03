@@ -264,7 +264,7 @@ Hier auch Ordner und Files, die wir für unsere Zwecke nicht verwenden werden. Z
 
 ------------------------------------------------------------------------
 
-## Psychdsish 
+## Psychdsish
 
 -   **📦 Packages** welche helfen sollen, Psych-DS Struktur & Stylevorgaben leichter einzuhalten.
 
