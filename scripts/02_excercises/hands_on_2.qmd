@@ -1,7 +1,8 @@
 ---
-title: "Hands On – Coding Basics (Einheiten 3 und 4)"
-editor: visual
+title: "Hands On 2"
 ---
+
+# Hands On - Coding Basics (Einheiten 3 und 4)
 
 Bei Bedarf finden sich hier nochmal die Slides zu Einheit 3:
 
@@ -310,7 +311,7 @@ Diese Datensätze enthalten sämtliche erhobenenen Variablen der Studie, auf den
 
 # Daten mergen
 
-***Wird in EH4 noch genauer erklärt - aber probiere auch gerne schon vorab!***
+***ℹ️ Vertiefung: In Einheit 4 werden wir das Mergen systematisch behandeln. Hier geht es darum, ein erstes Gefühl für das Problem zu bekommen.***
 
 Nun befinden sich sieben separate Rohdatensätze in deinem Environment.
 
@@ -371,6 +372,7 @@ Das bedeutet:
     - Alle Fälle aus beiden Datensätzen bleiben erhalten.
 
 ![](../../images/join.gif){width="307"}
+
 **Aufgabe**
 
 -   Füge nun alle 7 Datensätze mit `full_join()` zu einem Gesamtdatensatz zusammen.
@@ -380,8 +382,6 @@ Das bedeutet:
     -   Du musst die Funktion also mehrfach anwenden, um alle 7 Datensätze zusammenzuführen.
 
     👉  Hinweis: Im Datensatz `data_pct` heisst die Code-Variable leicht anders. Verwende deshalb `by = c("code_all" = "code")`.
-
-------------------------------------------------------------------------
 
 ### Inspiziere deinen zusammengefügten Datensatz "dat_full"
 
@@ -433,8 +433,6 @@ Ein falsches Mergen führt zu:
 
 -   Greife auf die **ersten 10 Werte der Variable `"question1"`** zu. Verwende dazu den `$`-Operator in Kombination mit dem Bereichsoperator `1:10`.
 
-------------------------------------------------------------------------
-
 # Daten speichern
 
 Nachdem wir die sieben Rohdatensätze korrekt zusammengeführt haben, liegt nun unser vollständiger Analyse-Datensatz `dat_full` im Environment.
@@ -468,8 +466,6 @@ Bei Unklarheiten schaue dir das [Cheatsheet](https://rstudio.github.io/cheatshee
 
 👉 Für diesen zusammengeführten Datensatz werdet ihr anschliessend das **Codebook** erstellen für die Abschlussarbeit.
 
-------------------------------------------------------------------------
-
 # Coding Basics: Funktionen
 
 👉 [Kapitel 2.4: Calling Functions](https://r4ds.hadley.nz/workflow-basics.html)  
@@ -498,8 +494,6 @@ highest_values_1 <- sort(first_vector)[1:2]
 highest_values   <- sort(first_vector, decreasing = TRUE)[1:2]
 ```
 
----
-
 ## Argumente mit und ohne Namen
 
 Bei vielen Funktionen werden die **Namen der Argumente** weggelassen.
@@ -518,8 +512,6 @@ seq(-4, 11, 3)
 
 *Tipp: `?seq`*
 
----
-
 ### Aufgabe 2
 
 Korrigiere diesen Code so, dass eine Sequenz von **3 bis 12 in 2er-Schritten** erstellt wird.  
@@ -529,8 +521,6 @@ Belasse dabei die Reihenfolge der Zahlen.
 seq(2, 12, 3)
 ```
 
----
-
 ## Funktionen aus bestimmten Paketen
 
 Manche Funktionen existieren in mehreren Paketen (z.B. `filter()`).  
@@ -539,8 +529,6 @@ Um sicher die richtige Version zu verwenden:
 ```{r eval=FALSE}
 dplyr::filter()
 ```
-
----
 
 ## Tab Completion
 
@@ -560,7 +548,6 @@ Das funktioniert auch mit:
 readr::
 ```
 
----
 ## Weitere Tasten und Tastenkürzel:
 
 👉[Kapitel 1.4.6](https://methodenlehre.github.io/einfuehrung-in-R/chapters/01-workflow.html#tasten)
@@ -604,8 +591,6 @@ print(mean(round(first_vector)))
 # ...
 ```
 
----
-
 # Style Conventions
 
 Korrigiere diesen Code so, dass er:
@@ -620,8 +605,6 @@ mean <-mean(Französichschul_NotenSemsester
 print  ( mittelwert)
 ```
 
----
-
 ## Code automatisch formatieren mit `styler`
 
 Installiere das Package `styler` mit `install.packages()` und lade es. `styler` hat eine sogenannte "Wrapper-Funktion", die du unter "Addins" aufrufen kannst (evtl. musst du R vor dem Laden neu starten). Verwende den Default-Style (tidyverse).
@@ -633,8 +616,6 @@ install.packages("styler")
 library(styler)
 ```
 
----
-
 ### Aufgabe
 
 Versuche mit der `Styler` -Funktion, diesen Code zu leserlicher zu machen (markiere den Code und wähle *Style selection*). (Du musst diesen ggplot Code nicht verstehen - wir kommen dazu in einer späteren Einheit noch):
@@ -645,8 +626,6 @@ library(palmerpenguins)
 
 ggplot(penguins,aes(x=flipper_length_mm,y=body_mass_g,color=species))+geom_point()+labs(x="flipper",Y="MASS")+theme_minimal()
 ```
-
----
 
 # Am Ende deiner Übungen
 
