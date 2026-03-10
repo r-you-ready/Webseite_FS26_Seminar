@@ -71,6 +71,7 @@ Je nachdem, welchen Anbieter ihr nutzen möchtet, müsst ihr dessen chat als neu
 
 ```{r}
 library(ellmer)
+library(chattr)
 
 # Für Claude (Anthropic)
 # Benötigt die Umgebungsvariable: ANTHROPIC_API_KEY
