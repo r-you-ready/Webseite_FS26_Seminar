@@ -26,6 +26,8 @@ Auf dieser Seite finden sich die Links zu den Ressourcen, die wir im Rahmen dies
 
 -   📘 [R for Data Science – Basics wie Import, Aufbereitung, Visualisierung](https://r4ds.hadley.nz/)
 
+-   📊 [Data Visualization in R – A Practical Introduction (Kieran Healy)](https://socviz.co)
+
 -   📖 [R für Einsteiger – Maike Luhmann](https://www.beltz.de/index.php?id=1731)
 
 -   📊 [Psychometrics in Exercises using R and RStudio – EFA, CFA, SEM](https://bookdown.org/markhoff/psychometrics_in_exercises/)

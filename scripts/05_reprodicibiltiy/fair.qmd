@@ -10,7 +10,7 @@ Um Forschungsergebnisse transparenter und nachvollziehbarer zu machen, gibt es d
 1.  **Findable**: Software sollte für Mensch und Maschiene leicht auffindbar sein. Ausserdem sollte Software einen klar zuordbaren Identifer besitzen
 
     Die verwendete Version von R und RStudio kann über die Funktion `sessionInfo()` abgefragt werden. So können dritte genau nachvollziehen, welche Versionen der Software verwendet wurden. Über die offiziellen Stellen von CRAN (für R) und Posit (für RStudio) können diese dann recherchiert werden.
-    
+
 ```{r, eval = FALSE}
 sessionInfo()
 ```
@@ -26,5 +26,5 @@ sessionInfo()
 4.  **Reusable**: Software sollte so gestaltet sein, dass sie von anderen Forschern leicht wiederverwendet werden kann. Hierzu gehört, dass sie verständlich dokumentiert ist, auf ihr aufbauend Modifizierungen vorgenommen werden können oder sie in eine andere Software integrierbar ist.
 
     In Quarto geschriebene Dateien enden auf .qmd und sind somit auch von anderen Programmen lessbar. Packages in R haben, sofern sie auf der offiziellen Website von [CRAN](https://cran.rstudio.com/) gelistet sind, immer auch eine ausführliche Dokumentation.
-    
+
 Achte unabhängig von der Software, die du verwendest, darauf, dass du die FAIR-Prinzipien so gut wie möglich umsetzt. So kannst du sicherstellen, dass deine Forschungsergebnisse transparent und nachvollziehbar sind und von dritten leicht wiederverwendet werden können.
