@@ -1,6 +1,6 @@
 ---
 title: "Codestyle"
-date:today
+date: today
 ---
 
 ```{r, include = FALSE}
