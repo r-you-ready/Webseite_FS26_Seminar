@@ -235,15 +235,16 @@ diese einlesen kann.
 Stelle sicher, dass das Metapaket **tidyverse** geladen ist:
 (`library(tidyverse)`) (siehe Hands-On 1).
 
-Wir verwenden Funktionen aus den Paketen:
+Wir verwenden Funktionen aus folgenden Paketen:
 
 ```         
-- **readr** (für .csv)
-- **readxl** (für .xlsx)
+- **readr** (für .csv-Dateien)
+- **readxl** (für .xlsx-Dateien)
 ```
 
-Beide sind Teil des Tidyverse und zentrale Werkzeuge für sauberen und
-reproduzierbaren Datenimport.
+`readr` ist Teil von tidyverse, während `readxl` ein separates, aber kompatibles Paket aus dem tidyverse-Ökosystem ist und bei Bedarf zusätzlich geladen werden muss: (`library(readxl)`).
+
+Beide Pakete sind zentrale Werkzeuge für einen sauberen und reproduzierbaren Datenimport in R.
 
 #### Delimiter verstehen
 
@@ -474,9 +475,18 @@ Das bedeutet:
     -   Du musst die Funktion also mehrfach anwenden, um alle 7
         Datensätze zusammenzuführen.
 
-    👉 Hinweis: Im Datensatz `data_pct` heisst die Code-Variable leicht
-    anders. Verwende deshalb `by = c("code_all" = "code")`.
-
+    👉 Hinweis: Im Datensatz `data_pct` heisst die ID-Variable der Versuchspersonen leicht
+    anders ("code_all" anstelle von "code"). Wenn du diesen Datensatz mit den anderen Datensätzen
+    zusammenführst, musst du deshalb beim Join angeben, welche Variablen zusammengehören.
+  
+    Verwende deshalb `by = c("code_all" = "code")`.
+    
+    Das bedeutet:
+    Die Variable `code_all` aus `data_pct` entspricht der Variable `code` im anderen Datensatz.
+    
+    ⚠️ Wichtig: Die Reihenfolge der beiden Argumente hängt davon ab, welcher Datensatz links bzw. rechts
+    im `full_join()` steht.
+    
 ### Inspiziere deinen zusammengefügten Datensatz "dat_full"
 
 Ein korrekt gemergter Datensatz muss logisch überprüft werden.
