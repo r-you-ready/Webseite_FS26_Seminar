@@ -21,7 +21,7 @@ draft: true
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
 
-FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**4. Einheit**, 11.04.2026
+FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**4. Einheit**, 11.03.2026
 
 ------------------------------------------------------------------------
 
@@ -33,11 +33,15 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Heute:
 
-<embed 
-  src="../../PDFs/Syllabus.pdf" 
-  type="application/pdf"
-  style="width:100%; height:90vh;"
->
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
+```{=html}
+<embed
+    src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
+```
+:::
 
 ------------------------------------------------------------------------
 
@@ -53,25 +57,35 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Daten einlesen
 
--   Code immer im Skript abspeichern!
+1.  **Code immer im Skript speichern**
 
--   Ausführung alleine in der Konsole reicht nicht
+-   Alle Schritte beim Einlesen von Daten gehören ins R-Skript
 
--   Bei Einlesen über Environment, Code in Skript kopieren!
+-   Nur so ist der Analyseprozess nachvollziehbar und reproduzierbar
+
+2.  **Code nicht nur in der Konsole ausführen**
+
+-   Code in der Konsole wird nicht gespeichert
+
+-   Analysen lassen sich später nicht mehr reproduzieren
+
+3.  **Beim Einlesen über das Environment (-\> mit Code empfohlen)**
+
+-   Wenn Daten über *Import Dataset* eingelesen werden, muss der generierte Code ins Skript kopiert werden. Sonst ist der Import nicht dokumentiert.
 
 ------------------------------------------------------------------------
 
 ## Plenum: **Wie funktionieren Joins?**
 
 ::: notes
-Fragen wie weit man letzte Einheit gekommen ist, ggf. zuerst weiter arbeiten lassen
+Fragen, wie weit man letzte Einheit gekommen ist, ggf. zuerst weiter arbeiten lassen
 :::
 
 -   `cbind()` vs. `full_join()`
 
 -   `cbind()` verbindet Datensätze spaltenweise – warum ist das suboptimal?
 
--   `full_join()` Nimmt alle Variablen aus beiden Datensätzen. Um die Datensätze korrekt zu verbinden musst du einen *Schlüssel* festlegen.
+-   `full_join()` nimmt alle Variablen aus beiden Datensätzen. Die Verbindung erfolgt über eine oder mehrere **gemeinsame Schlüsselvariable(n) (z.B. ID)**, die in beiden Datensätzen vorhanden ist/sind.
 
 ![](../../images/clipboard-2597715273.gif){fig-align="center" width="238"}
 
@@ -81,7 +95,7 @@ Fragen wie weit man letzte Einheit gekommen ist, ggf. zuerst weiter arbeiten las
 
 **Was ist der Schlüssel?**
 
-Eine gemeinsame Variable die in beiden Datensätzen vorhanden ist, mit der RStudio erkennen kann welche Werte miteinander verbunden werden müssen.
+Eine gemeinsame Variable (z.B. **CODE**), die in beiden Datensätzen vorkommt und über die die Datensätze miteinander verbunden werden.
 
 ```{r, echo = FALSE}
 
@@ -105,6 +119,8 @@ Iterativer Prozess: immer für 2 Datensätze bis man dat_full mit allen 7 Datens
 
 ## Beispiel
 
+`full_join()` kombiniert beide Datensätze über die Variable `id` und behält **alle IDs aus beiden Tabellen**. Fehlt zu einer ID eine Information, wird der entsprechende Wert mit `NA` ergänzt.
+
 ```{r echo=TRUE}
 df1 <- data.frame(id = c(1, 2, 3),
                   name = c("Anna", "Ben", "Chris"))
@@ -116,12 +132,18 @@ full_join(df1, df2, by = "id")
 
 ```
 
+::: notes
+ID 1 kommt nur in df1 vor → score aus Datensatz 2 = NA ID 4 kommt nur in df2 vor → name aus Datensatz 1 = NA
+
+Es werden aus beiden Datensätzen alle Variablen genommen. Die Schlüsselvariable ist in diesem Beispiel die Variable id. Da nicht in beiden Datensätzen alle id's vorkommen (in df1 kommen nur 1,2 und 3 vor; in df2 2, 3 und 4), fehlen für diese jeweils die Angaben der anderen Variable. Diese fehlenden Werte werden bei einem full_join() automatisch mit NAs ergänzt.
+:::
+
 ------------------------------------------------------------------------
 
 ## Unterschiede zwischen den diversen Joins:
 
 ::: notes
-Behält gemeinsame Zeilen bei
+inner_join() behält im Gegensatz zu full_join() nur solche Beobachtungen, die in beiden Datensätzen vorkommen. Beobachtung 3 und 4 werden also ausgeschlossen. So werden nur Beobachtungen oder VPN beibehalten, welche in jedem Datensatz enthalten sind.
 :::
 
 ![](../../images/EH_4/inner-join.gif){fig-align="center"}
@@ -131,7 +153,7 @@ Behält gemeinsame Zeilen bei
 ## Unterschiede zwischen den diversen Joins:
 
 ::: notes
-Behält gemeinsame + Zeilen von linken Datensatz bei
+left_join() verbindet zwei Datensätze über eine Schlüsselvariable (z. B. id) und behält alle Beobachtungen aus dem linken Datensatz. Fehlende Werte aus dem rechten Datensatz werden mit NA ergänzt.
 :::
 
 ![](../../images/EH_4/left-join.gif){fig-align="center"}
@@ -141,7 +163,7 @@ Behält gemeinsame + Zeilen von linken Datensatz bei
 ## Unterschiede zwischen den diversen Joins:
 
 ::: notes
-Behält gemeinsame + Zeilen von rechten Datensatz bei
+right_join() verbindet zwei Datensätze über eine Schlüsselvariable (z. B. id) und behält alle Beobachtungen aus dem rechten Datensatz. Fehlende Werte aus dem linken Datensatz werden mit NA ergänzt.
 :::
 
 ![](../../images/EH_4/right-join.gif){fig-align="center"}
@@ -151,7 +173,7 @@ Behält gemeinsame + Zeilen von rechten Datensatz bei
 ## Unterschiede zwischen den diversen Joins:
 
 ::: notes
-Behält gemeinsame Zeilen, aber nur Inhalte von Datensatz x bei
+semi_join() filtert den linken Datensatz anhand einer Schlüsselvariable und behält nur Beobachtungen, für die es eine passende Beobachtung im rechten Datensatz gibt. Es werden keine neuen Variablen hinzugefügt.
 :::
 
 ![](../../images/EH_4/semi-join.gif){fig-align="center"}
@@ -160,67 +182,90 @@ Behält gemeinsame Zeilen, aber nur Inhalte von Datensatz x bei
 
 ## Check-in:
 
--   Nun sollte jede/r einen Datensatz *dat_full* haben, der alle 7 Einzeldatensätze beinhaltet mit **159** **Versuchspersonen (= Zeilen) und 36 Variablen (= Spalten).**
+-   Nun sollte jede/r einen Datensatz *dat_full* haben, der alle 7 Einzeldatensätze beinhaltet mit:
+
+    -   **159** **Versuchspersonen (= Zeilen)**
+
+    -   **und 36 Variablen (= Spalten).**
 
 -   Checkt mit euren Peer-Partner:innen/Sitznachbar:innen!
 
 -   Mit diesem Datensatz werden wir die Analysen von Grinschgl et al. (2020) durchführen.
 
--   Zu diesem Datensatz sollt ihr bis zum **22.10.** den ersten Entwurf für das Codebook schreiben!
+-   Zu diesem Datensatz sollt ihr bis zum **25.03.** den ersten Entwurf für das Codebook schreiben!
 
 ------------------------------------------------------------------------
 
-## Fehlererkennung in R
+## Fehlererkennung in R (1)
 
-***Der Code läuft nicht. Wie könnt ihr vorgehen um den Fehler zu identifizieren und beheben?***
+***Der Code läuft nicht! Wie könnt ihr vorgehen, um den Fehler zu identifizieren und beheben?***
 
--   Lies die **Fehlermeldung!**
+1️⃣ **Fehlermeldung lesen**
 
 ![](../../images/EH_4/Fehlermeldungen.png){width="477"}
 
-Überprüfe:
+2️⃣ **Typische Ursachen prüfen**
 
-✅Tippfehler
+✅ Tippfehler
 
-✅Klammern
+✅ Fehlende Klammern
 
-✅Syntaxfehler
+✅ Syntaxfehler
 
-✅Datentypen
+✅ Falsche Datentypen
 
-✅Pakete
+✅ Fehlende Pakete
 
-Googeln hilft oft weiter!\
+------------------------------------------------------------------------
 
-Fehlermeldungen lassen sich einfacher googeln, wenn R auf Englisch eingestellt ist:
+## Fehlererkennung in R (2)
+
+### Wenn ihr nicht weiterkommt
+
+🔎 Fehlermeldung googeln
+
+Fehlermeldungen lassen sich besser googeln, wenn R auf Englisch eingestellt ist:
 
 -   👉`Sys.setenv(LANGUAGE = "en")`
 -   oft ist es auch hilfreich, das Betriebssystem anzugeben: `sessionInfo()`
 
-::: notes
-:::
-
 ------------------------------------------------------------------------
 
-## Fehlererkennung in R – Tipps
+## Fehlerdiagnose in R – Tipps
 
--   `class()` / `str()` zur Objektprüfung 👉
+1️⃣ **Objekttyp prüfen**
 
-    ```         
-    In mean.default(x) : argument is not numeric or logical: returning NA
-    ```
+-   `class()` / `str()`, um den Datentyp zu prüfen
 
--   Funktionen schrittweise testen
+    -   Beispiel: `mean()` funktioniert nur mit numerischen und logischen Daten
 
--   Argumente weglassen → Fehlerquelle finden
+        ```         
+        In mean.default(x) : argument is not numeric or logical: returning NA
+        ```
 
--   Zwischenergebnisse mit `print()`
+2️⃣ **Code schrittweise ausführen**
+
+3️⃣ **Argumente einzeln testen**
+
+-   Durch das Weglassen einzelner Argumente kann die Fehlerquelle identifiziert werden
+
+4️⃣ **Zwischenergebnisse ausgeben (`print()`)**
 
 ------------------------------------------------------------------------
 
 ## Code Diagnostik:
 
 ![](../../images/EH_4/Code%20Diagnostik.png){fig-align="center"}
+
+::: notes
+RStudio kann viele Fehler automatisch erkennen und anzeigen:
+
+-   zeigt mögliche Fehler direkt im Skript an
+
+-   warnt bei undefinierten Variablen oder falschen Argumenten
+
+-   hilft, Probleme früh zu entdecken
+:::
 
 ------------------------------------------------------------------------
 
@@ -229,9 +274,9 @@ Fehlermeldungen lassen sich einfacher googeln, wenn R auf Englisch eingestellt i
 ![](../../images/EH_4/Hinweise_R.png){fig-align="center"}
 
 ::: notes
-Fehlermeldungen: Die Information vor dem Doppelpunkt gibt uns an, in welcher Funktion der Fehler steckt; die Information nach dem Doppelpunkt gibt Aufschluss über die Art des Fehlers. Zweiteres ist für die Fehlersuche (zumeist) von großer Bedeutung.
+Fehlermeldungen: Die Information vor dem Doppelpunkt gibt uns an, in welcher Funktion der Fehler steckt; die Information nach dem Doppelpunkt gibt Aufschluss über die Art des Fehlers. Zweiteres ist für die Fehlersuche (zumeist) von großer Bedeutung.
 
-Wenn ein oder mehrere Zeichen überflüssig sind bzw. fehlen, dann bekommt man Unerwartete(s) '...' in "..." ausgegeben. Hierbei teilt uns die Meldung mit, wo der Fehler liegt: In den Anführungszeichen "..." wird nur ein Teil des Codes ausgegeben und der Fehler ist zumeist das zuletzt ausgegebene Zeichen (oder es liegt unmittelbar davor).  z.B. daten\[2\]
+Wenn ein oder mehrere Zeichen überflüssig sind bzw. fehlen, dann bekommt man Unerwartete(s) '...' in "..." ausgegeben. Hierbei teilt uns die Meldung mit, wo der Fehler liegt: In den Anführungszeichen "..." wird nur ein Teil des Codes ausgegeben und der Fehler ist zumeist das zuletzt ausgegebene Zeichen (oder es liegt unmittelbar davor).  z.B. daten\[2\]
 :::
 
 ------------------------------------------------------------------------
@@ -245,6 +290,8 @@ Wenn ein oder mehrere Zeichen überflüssig sind bzw. fehlen, dann bekommt man�
 -   [Psyteacher](https://psyteachr.github.io/AITutoR/) AI Tutor
 
 -   [R for Data Science](https://r4ds.hadley.nz/) (Basics wie Import, Aufbereitung, Visualisierung)
+
+-   [Data Visualization in R](https://socviz.co)
 
 -   [Psychometrics in Exercises using R and RStudio](https://bookdown.org/annabrown/psychometricsR/) (Psychometrische Analysen wie EFA, CFA, SEM)
 
@@ -262,20 +309,20 @@ Wenn ein oder mehrere Zeichen überflüssig sind bzw. fehlen, dann bekommt man�
 
 ## Large Language Models & Datenanalyse
 
--   Modelle wie ChatGPT
+-   Modelle wie **ChatGPT**
 
--   Berechnen Wahrscheinlichkeiten für Wörter und erzeugen dadurch Text, der menschlich wirkt.
+-   Berechnen **Wortwahrscheinlichkeiten** und erzeugen daraus Text
 
--   ABER:
+-   **ABER:**
 
-    -   Verstehen keine Bedeutung
+    -   Verstehen **keine Bedeutung**
 
-    -   Wissen nicht was inhaltlich korrekt ist
+    -   Können **nicht beurteilen, was inhaltlich korrekt ist**
 
-![](../../images/EH_4/mentimeter_qr_code.png){fig-align="center" width="300"}
+![](../../images/menti_llm_eh4.png){fig-align="center" width="300"}
 
 ::: notes
-Für welche Aufgaben nutzt du LLMs im Analyseprozess?
+**1) Für welche Aufgaben nutzt du LLMs im Analyseprozess?**
 :::
 
 ------------------------------------------------------------------------
@@ -284,7 +331,7 @@ Für welche Aufgaben nutzt du LLMs im Analyseprozess?
 
 ![](../../images/EH_4/Vibecoding.png){fig-align="center"}
 
-👉KI in natürlicher Sprache prompten ohne den generierten Code zu prüfen oder zu verstehen.
+👉KI in natürlicher Sprache prompten, ohne den generierten Code zu prüfen oder zu verstehen.
 
 ::: notes
 **Vibe Coding** bedeutet, dass Nutzer\*innen mit **KI-Codegeneratoren (z. B. ChatGPT, GitHub Copilot)** Programme schreiben, indem sie **nur Zielbeschreibungen in natürlicher Sprache eingeben**, ohne den generierten Code wirklich zu verstehen oder gründlich zu überprüfen.\
@@ -296,17 +343,17 @@ Es ist also **intuitives, versuchsorientiertes „Codieren nach Gefühl“**, be
 
 ## Gefahren von Vibe coding
 
-![](../../images/EH_4/mentimeter_qr_code.png){fig-align="center" width="351"}
+![](../../images/menti_chancen_risiken.png){fig-align="center" width="351"}
 
 ::: notes
-Welche Chancen und Risiken siehst du bei der Nutzung von LLMs bei der Datenanalyse?
+**2) Welche Chancen und Risiken siehst du bei der Nutzung von LLMs bei der Datenanalyse?**
 :::
 
 ------------------------------------------------------------------------
 
 ## KI - LLMs (ChatGPT, Copilot, Rtutor)
 
-💚 **Vorteile**
+✔️ **Vorteile**
 
 -   Generieren schnell viel Code
 
@@ -322,11 +369,11 @@ Welche Chancen und Risiken siehst du bei der Nutzung von LLMs bei der Datenanaly
 
 ------------------------------------------------------------------------
 
-💔 **Nachteile**
+❌ **Risiken/Nachteile**
 
 -   Unreflektiert Code übernehmen → Lerneffekt sinkt
 
--   Keine Garantie für Korrektheit → Code kann plausibel wirken, aber methodisch unangemessen sein.
+-   Keine Garantie für Korrektheit → Code kann plausibel wirken, aber methodisch unangemessen sein
 
 -   Overreliance / Cognitive Offloading → Reduziertes Verständnis dessen, was man tut
 
@@ -350,26 +397,26 @@ Welche Chancen und Risiken siehst du bei der Nutzung von LLMs bei der Datenanaly
 
 ## Sinnvolle Nutzung von KI im Datenanalyseprozess:
 
--   **💚Sinnvoll: Unterstützend – nicht ersetzend**
+✔️ **Sinnvoll: Unterstützend – nicht ersetzend**
 
-    -   Kontrolle einfacher Fehler (Klammern, Typos)
-    -   Erklärung von Code und Syntax
-    -   Hilfe bei Fehlersuche (Debugging)
-    -   Kommentierung und Dokumentation
+-   Kontrolle einfacher Fehler (Klammern, Typos)
+-   Erklärung von Code und Syntax
+-   Hilfe bei Fehlersuche (Debugging)
+-   Kommentierung und Dokumentation
 
--   **💔Nicht sinnvoll: Ersatz statt Unterstützung**
+❌ **Nicht sinnvoll: Ersatz statt Unterstützung**
 
-    -   Generierung ganzer Analyse-Skripte
+-   Generierung ganzer Analyse-Skripte
 
-    -   Automatische Auswahl von Methoden oder Tests
+-   Automatische Auswahl von Methoden oder Tests
 
-    -   Interpretation statistischer Ergebnisse durch KI
+-   Interpretation statistischer Ergebnisse durch KI
 
-    -   Erstellung kompletter Berichte oder Diskussionen
+-   Erstellung kompletter Berichte oder Diskussionen
 
-    -   Hochladen sensibler Daten
+-   Hochladen sensibler Daten
 
-    -   Unkritisches Übernehmen von Output
+-   Unkritisches Übernehmen von Output
 
 ------------------------------------------------------------------------
 
@@ -407,15 +454,15 @@ Welche Chancen und Risiken siehst du bei der Nutzung von LLMs bei der Datenanaly
 
 ------------------------------------------------------------------------
 
-## Peer Feedback zum Datenanalyseplan
+## Peer-Feedback zum Datenanalyseplan
 
-📋To Do's:
+📋 To Do's:
 
 -   Musterlösung anschauen! (siehe Ordner Abschlussprojekt auf Ilias)
 
--   Datenanalyseplan des Partners/der Partnerin bis 15.10. durchschauen und kommentieren (am besten mit Word oder PDF Kommentaren)
+-   Datenanalyseplan des Partners/der Partnerin bis am **18.03.** durchschauen und kommentieren (am besten mit Word oder PDF Kommentaren)
 
--   Upload auf Ilias mit Kommentaren+ Weitergabe an Partner:in per Email
+-   Upload auf Ilias mit Kommentaren + Weitergabe an Partner:in per Email
 
 -   Auch persönliches Feedback erwünscht 👉 selbstorganisiert
 
@@ -427,11 +474,11 @@ Welche Chancen und Risiken siehst du bei der Nutzung von LLMs bei der Datenanaly
 
 ## Peer Feedback zum Datenanalyseplan
 
--   Klarheit und Verständlichkeit (z.B. sind alle Begriffe und Konzepte ausreichend erklärt? Gibt es verwirrende oder unklare Formulierungen?)
+-   **Klarheit und Verständlichkeit** (z.B. sind alle Begriffe und Konzepte ausreichend erklärt? Gibt es verwirrende oder unklare Formulierungen?)
 
--   Vollständigkeit (z.B. wurden alle notwendigen Fragen ausreichend beantwortet? Fehlen Informationen?)
+-   **Vollständigkeit** (z.B. wurden alle notwendigen Fragen ausreichend beantwortet? Fehlen Informationen?)
 
--   Reproduzierbarkeit (Ist der Plan so formuliert, dass er von einer anderen Person nachvollzogen und reproduziert werden kann?)
+-   **Reproduzierbarkeit** (Ist der Plan so formuliert, dass er von einer anderen Person nachvollzogen und reproduziert werden kann?)
 
 ------------------------------------------------------------------------
 
@@ -463,7 +510,7 @@ Welche Chancen und Risiken siehst du bei der Nutzung von LLMs bei der Datenanaly
 
 ------------------------------------------------------------------------
 
-## Abfrage Muddiest Points
+## Abfrage Muddiest Points I
 
 -   Denke an die bisher besprochenen Inhalte zurück – was ist dir unklar geblieben? Was sollten wir noch einmal besprechen?
 
@@ -471,17 +518,17 @@ Welche Chancen und Risiken siehst du bei der Nutzung von LLMs bei der Datenanaly
 
 -   Notiere bitte max. drei konkrete Punkte. Falls du Vorschläge/Ideen zur Aufarbeitung dieser Punkte hast, gib diese auch gerne an.
 
--   Umfrage auf ILIAS (siehe EH 4) bis **Sonntag 12.10. 23:55**
+-   Umfrage auf ILIAS (siehe EH 4) bis **Sonntag 15.03. 23:55**
 
 ------------------------------------------------------------------------
 
 ## Zusammenfassung der To Do's
 
--   Muddiest Points Umfrage bis Sonntag 23:55
+-   Muddiest Points Umfrage bis Sonntag, 15.03. (23:55)
 
--   Peer Feedback Datenanalyseplan bis Mittwoch
+-   Peer-Feedback Datenanalyseplan bis Mittwoch, 18.03.
 
--   Selbstständiges Durcharbeiten des Hands On Block 2 bis Mittwoch
+-   Selbstständiges Durcharbeiten des Hands On Block 2 bis Mittwoch, 18.03.
 
 ------------------------------------------------------------------------
 
