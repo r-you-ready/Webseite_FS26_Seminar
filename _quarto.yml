@@ -74,6 +74,8 @@ website:
             text: "Hausübung 2 - Mit Lösungen"
           - href: scripts/02_excercises/hausuebung_loesung_3.qmd
             text: "Hausübung 3 - Mit Lösungen"
+      - href: wettbewerb_cheatsheet.qmd
+        text: "Wettbewerb: R-Cheatsheet"
       - href: scripts/04_misc/muddiest_points.qmd
         text: "Muddiest Points"
         contents:

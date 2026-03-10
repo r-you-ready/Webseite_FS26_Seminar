@@ -3,7 +3,7 @@ title: "Wettbewerb: Erstelle dein eigenes R-Cheatsheet"
 editor: visual
 ---
 
-Im Rahmen des Seminars habt ihr die Möglichkeit, freiwillig an einem kleinen Wettbewerb teilzunehmen und dabei **Extrapunkte für eure Abschlussbewertung** zu sammeln.
+Im Rahmen des Seminars habt ihr die Möglichkeit, freiwillig an einem kleinen Wettbewerb teilzunehmen und dabei **Extrapunkte für eure Bewertung** zu sammeln.
 
 Die Aufgabe besteht darin, auf Basis einer **Cheatsheet-Vorlage** ein eigenes **R-Cheatsheet** zu erstellen. Die entsprechende Vorlage findet ihr auf **ILIAS**.
 
@@ -15,9 +15,9 @@ Die Aufgabe besteht darin, auf Basis einer **Cheatsheet-Vorlage** ein eigenes **
 
 Das Ziel dieser Übung ist es, euch dazu zu motivieren, euch i**ntensiv mit den im Seminar behandelten R-Befehlen und Analyseprozessen auseinanderzusetzen.** Durch die Erstellung eines eigenen Cheatsheets fasst ihr wichtige Funktionen, Workflows und Beispiele kompakt zusammen.
 
-Idealerweise entsteht dabei ein DOkument, das euch auch **langfristig nützlich** ist, z.B.:
+Idealerweise entsteht dabei ein Dokument, das euch auch **langfristig nützlich** ist, z.B.:
 
--   bei zukünftigen Projekten
+-   bei zukünftigen (Forschungs-)Projekten
 
 -   bei Datenanalysen im Studium
 
@@ -27,19 +27,17 @@ Ihr dürft selbstverständlich auch **R-Befehle oder Methoden integrieren, die n
 
 Ziel ist es, dass ihr am Ende ein **persönliches Nachschlagwerk** erstellt, das euch bei der Arbeit mit R unterstützt.
 
+Beispiele für Cheatsheets findet ihr [hier](https://posit.co/resources/cheatsheets/).
+
 ------------------------------------------------------------------------
 
 # Teilnahme und Extrapunkte
 
 Die Teilnahme am Wettbewerb ist **freiwillig**.
 
-Wichtig:
-
-Auch **ohne Teilnahme** kann die **maximale Punktzahl im Seminar erreicht werden!**
-
 Wenn ihr ein Cheatsheet einreicht und dieses die Mindestkriterien erfüllt, erhaltet ihr **bereits für die Teilnahme am Wettbewerb 2 Extrapunkte.**
 
-Am Ende des Semesters wählt ihr zusätzlich das **überzeugendste und nützlichste Cheatsheet.** Die Person mit dem besten Cheatsheet erhält **weitere 2 Extrapunkte.**
+Am Ende des Semesters wählt der gesamte Kurs zusätzlich das **überzeugendste und nützlichste Cheatsheet.** Die Person mit dem besten Cheatsheet erhält **weitere 2 Extrapunkte.**
 
 ➡️ Maximal können also **4 Extrapunkte** erreicht werden.
 
@@ -47,7 +45,7 @@ Am Ende des Semesters wählt ihr zusätzlich das **überzeugendste und nützlich
 
 # Mindestkriterien
 
-Damit ein Cheatsheet für den Wettbewerb berücksichtigt werden kann, muss es folgende Kriterien erfüllen:
+Damit ein Cheatsheet für den Wettbewerb berücksichtigt werden kann (und mind. 2 Punkte bekommt), muss es folgende Mindestkriterien erfüllen:
 
 1.  **Strukturierte Gliederung**
 
@@ -67,7 +65,7 @@ Das Cheatsheet sollte klar strukturiert sein, z.B. mit Abschnitten wie:
 
 2.  **R-Code mit kurzen Erklärungen**
 
-Der Code sollte nicht nur aufgelistet werden, sondern jeweils mit kurzen Mini-Erklärungen versehen sein, sodass klar wird, was der Code macht und wann er verwendet wird.
+Der Code sollte nicht nur aufgelistet werden, sondern jeweils mit Mini-Erklärungen versehen sein, sodass klar wird, was der Code macht und wann er verwendet wird.
 
 3.  **Praktischer Nutzen**
 
