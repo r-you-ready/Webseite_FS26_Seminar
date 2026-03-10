@@ -522,6 +522,46 @@ Es ist also **intuitives, versuchsorientiertes „Codieren nach Gefühl“**, be
 
 ------------------------------------------------------------------------
 
+## Wettbewerb: Erstelle dein eigenes R-Cheatsheet
+
+🎯 **Ziel**
+
+Erstelle auf Basis der Vorlage (ILIAS) ein eigenes **R-Cheatsheet** mit wichtigen Befehlen, Beispielen und kurzen Erklärungen.
+
+💡 **Idee**
+
+Ein persönliches Nachschlagewerk für **R-Workflows, Funktionen und Analysen;** auch nützlich für spätere Projekte oder die Masterarbeit.
+
+⭐ **Extrapunkte**
+
+-   **2 Punkte** für Teilnahme (bei erfüllten Mindestkriterien)
+
+-   **+2 Punkte** für das beste Cheatsheet (Abstimmung im Seminar)
+
+    -\> maximal 4 Extrapunkte
+
+📋 **Mindestkriterien**
+
+-   klare Struktur (z.B. Datenimport, Visualisierung, Modelle...)
+
+-   R-Code mit kurzen Erklärungen
+
+-   praktisch nutzbar für andere
+
+-   visuell ansprechend
+
+📅 **Abgabe**
+
+EH13 (20.05.)
+
+🗳 **Abstimmung**
+
+EH14 (27.05.)
+
+⚠️ Teilnahme **freiwillig** - auch ohne Teilnahme ist die Maximalpunktzahl im Seminar erreichbar!
+
+------------------------------------------------------------------------
+
 ## Zusammenfassung der To Do's
 
 -   Muddiest Points Umfrage bis Sonntag, 15.03. (23:55)
