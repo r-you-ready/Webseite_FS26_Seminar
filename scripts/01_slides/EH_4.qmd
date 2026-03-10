@@ -16,7 +16,6 @@ format:
     progress: true
     controls: true
     embed-resources: true
-draft: true
 ---
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
@@ -268,7 +267,43 @@ Wenn ein oder mehrere Zeichen überflüssig sind bzw. fehlen, dann bekommt man U
 
 ------------------------------------------------------------------------
 
-Beispiel Cheatsheet und Info Wettbewerb @Laura
+## Wettbewerb: Erstelle dein eigenes R-Cheatsheet
+
+🎯 **Ziel**
+
+Erstelle auf Basis der Vorlage (ILIAS) ein eigenes R-Cheatsheet mit wichtigen Befehlen, Beispielen und kurzen Erklärugen.
+
+💡 **Idee**
+
+Ein persönliches Nachschlagewerk für R-Workflows, Funktionen und Analysen; auch nützlich für spätere Projekte und/oder die Masterarbeit.
+
+⭐ **Extrapunkte**
+
+-   2 Punkte für Teilnahme (bei erfüllten Mindestkriterien)
+
+-   +2 Punkte für das beste Cheatsheet (Abstimmung im Seminar)
+
+-\> maximal 4 Extrapunkte!
+
+📋 **Mindestkriterien**
+
+-   klare Struktur (z.B. Datenimport, Visualisierung, Modelle...)
+
+-   R-Code mit kurzen Erklärungen
+
+-   praktisch nutzbar für andere
+
+-   visuell ansprechend
+
+📅 **Abgabe**
+
+EH13 (20.05.)
+
+🗳 **Abstimmung**
+
+EH14 (27.05.)
+
+⚠️ **Teilnahme freiwillig!**
 
 ------------------------------------------------------------------------
 
@@ -464,46 +499,6 @@ Es ist also intuitives, versuchsorientiertes „Codieren nach Gefühl“, bei de
 -   Notiere bitte max. drei konkrete Punkte. Falls du Vorschläge/Ideen zur Aufarbeitung dieser Punkte hast, gib diese auch gerne an.
 
 -   Umfrage auf ILIAS (siehe EH 4) bis **Sonntag 15.03. 23:55**
-
-------------------------------------------------------------------------
-
-## Wettbewerb: Erstelle dein eigenes R-Cheatsheet
-
-🎯 **Ziel**
-
-Erstelle auf Basis der Vorlage (ILIAS) ein eigenes **R-Cheatsheet** mit wichtigen Befehlen, Beispielen und kurzen Erklärungen.
-
-💡 **Idee**
-
-Ein persönliches Nachschlagewerk für **R-Workflows, Funktionen und Analysen;** auch nützlich für spätere Projekte und/oder die Masterarbeit.
-
-⭐ **Extrapunkte**
-
--   **2 Punkte** für Teilnahme (bei erfüllten Mindestkriterien)
-
--   **+2 Punkte** für das beste Cheatsheet (Abstimmung im Seminar)
-
-    -\> maximal 4 Extrapunkte
-
-📋 **Mindestkriterien**
-
--   klare Struktur (z.B. Datenimport, Visualisierung, Modelle...)
-
--   R-Code mit kurzen Erklärungen
-
--   praktisch nutzbar für andere
-
--   visuell ansprechend
-
-📅 **Abgabe**
-
-EH13 (20.05.)
-
-🗳 **Abstimmung**
-
-EH14 (27.05.)
-
-⚠️ Teilnahme **freiwillig**
 
 ------------------------------------------------------------------------
 

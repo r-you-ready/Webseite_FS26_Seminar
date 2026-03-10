@@ -29,12 +29,10 @@ title: "Präsentationen"
 ---
 
 ## **Einheit 4 - 11.03.2026**
-<!--
+
 <iframe src="EH_4.html" width="100%" height="500px">
 
 </iframe>
--->
-*Die Slides werden vor der Sitzung freigeschaltet.*
 
 ---
 
