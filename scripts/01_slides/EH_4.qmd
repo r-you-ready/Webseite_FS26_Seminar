@@ -311,22 +311,6 @@ EH14 (27.05.)
 
 ------------------------------------------------------------------------
 
-## Github CoPilot in R
-
-::: {.absolute top="50%" left="33%" style="font-size: 3em;"}
-**LIVE DEMO**
-:::
-
-------------------------------------------------------------------------
-
-## LLM-Interface in R
-
-::: {.absolute top="50%" left="33%" style="font-size: 3em;"}
-**LIVE DEMO**
-:::
-
-------------------------------------------------------------------------
-
 ## Large Language Models & Datenanalyse
 
 -   Modelle wie **ChatGPT**
@@ -345,6 +329,28 @@ EH14 (27.05.)
 Für welche Aufgaben nutzt du LLMs im Analyseprozess?
 :::
 
+## Github CoPilot in R
+
+::: {.absolute top="50%" left="33%" style="font-size: 3em;"}
+**LIVE DEMO**
+:::
+
+------------------------------------------------------------------------
+
+## LLM-Interface in R
+
+::: {.absolute top="50%" left="33%" style="font-size: 3em;"}
+**LIVE DEMO**
+:::
+
+------------------------------------------------------------------------
+
+## Code-based LLMs in R
+
+::: {.absolute top="50%" left="33%" style="font-size: 3em;"}
+**LIVE DEMO**
+:::
+
 ------------------------------------------------------------------------
 
 ## Vibe coding
@@ -361,7 +367,7 @@ Es ist also intuitives, versuchsorientiertes „Codieren nach Gefühl“, bei de
 
 ------------------------------------------------------------------------
 
-## KI - LLMs (ChatGPT, Copilot, Rtutor)
+## KI - LLMs (Copilot, Llama, Rtutor)
 
 ✔️ **Vorteile**
 
@@ -413,6 +419,8 @@ Es ist also intuitives, versuchsorientiertes „Codieren nach Gefühl“, bei de
 -   Erklärung von Code und Syntax
 -   Hilfe bei Fehlersuche (Debugging)
 -   Kommentierung und Dokumentation
+
+------------------------------------------------------------------------
 
 ❌ **Nicht sinnvoll: Ersatz statt Unterstützung**
 

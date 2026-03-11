@@ -84,11 +84,18 @@ library(httr2)
 api_key <- Sys.getenv("GROQ_API_KEY")
 
 resp <- request("https://api.groq.com/openai/v1/chat/completions") |> 
-  req_headers(Authorization = paste("Bearer", api_key))  |> 
+  req_headers(Authorization = paste("Bearer", api_key)) |> 
   req_body_json(list(
     model = "llama-3.3-70b-versatile",
-    messages = list(list(role = "user", content = "Erkläre kurz RStudio."))
-  ))  |> 
+    # Hier fügen wir den System Prompt VOR die User-Frage
+    messages = list(
+      list(role = "system", content = "Du bist ein R-Tutor in einem Masterseminar."),
+      list(role = "user", content = "Schreibe ein Gedicht zu RStudio")
+    ),
+    # Zusätzliche Parameter
+    temperature = 0.0,   # Kreativität: 0.0 ist deterministisch, 2.0 ist kreativ
+    max_tokens = 1000     # Maximale Länge der Antwort in Tokens ≈ Wörtern
+  )) |> 
   req_perform()
 
 answer <- resp_body_json(resp)$choices[[1]]$message$content
