@@ -267,7 +267,7 @@ Wenn ein oder mehrere Zeichen überflüssig sind bzw. fehlen, dann bekommt man U
 
 ------------------------------------------------------------------------
 
-## Wettbewerb: Erstelle dein eigenes R-Cheatsheet
+## Wettbewerb: Erstelle dein eigenes R-Cheatsheet (1)
 
 🎯 **Ziel**
 
@@ -284,6 +284,10 @@ Ein persönliches Nachschlagewerk für R-Workflows, Funktionen und Analysen; auc
 -   +2 Punkte für das beste Cheatsheet (Abstimmung im Seminar)
 
 -\> maximal 4 Extrapunkte!
+
+------------------------------------------------------------------------
+
+## Wettbewerb: Erstelle dein eigenes R-Cheatsheet (2)
 
 📋 **Mindestkriterien**
 
