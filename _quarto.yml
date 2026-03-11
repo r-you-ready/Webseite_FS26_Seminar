@@ -63,7 +63,7 @@ website:
             text: "Hands on - Block 6 (Woche 11 - 12) - Mit Musterlösungen"
           - href: scripts/02_excercises/loesung_7.qmd
             text: "Hands on - Block 7 (Woche 13)"
-      - href: scripts/02_exercises/hausuebungen.qmd
+      - href: hausuebungen.qmd
         text: "Hausübungen"
         contents:
           - href: scripts/02_excercises/datenanalyseplan.qmd
@@ -106,8 +106,8 @@ website:
       - href: scripts/04_misc/links_und_ressourcen.qmd
         text: "Links und Ressourcen"
         contents:
-          - href: scripts/04_misc/ChatGPT.qmd
-            text: "ChatGPT in RStudio"
+          - href: scripts/04_misc/LLMs.qmd
+            text: "LLMs in RStudio"
           - href: scripts/04_misc/Memes.qmd
             text: "Memes :)"
       - href: scripts/04_misc/leistungsnachweis.qmd
