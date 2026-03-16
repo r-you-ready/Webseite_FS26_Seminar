@@ -18,3 +18,14 @@ Besonders mächtig ist die Verbindung von einem **skriptbasierten Workflow** mit
 ::: callout-note
 Eine Anleitung zur einmaligen Einrichtung von Git, GitHub und der Verbindung zwischen beiden findest du [hier](https://happygitwithr.com/). Bei Fragen zur Einrichtung oder zur Nutzung von Git und GitHub kannst du dich auch gerne an uns wenden!
 :::
+
+### Ideen zur Erweiterung:
+
+- Erweiterung auf andere Programmiersprachen wie Python oder Julia
+- Erläuterung von .gitignore
+- Containerumgebung(?)
+- Erläuterung von inline-Code für Resultatinterpretation
+- Generierung von Plots und Tabellen direkt in R (bzw. anderen Sprachen)
+- seeds
+- Modularisierung von Skripten oder im Skript durch Funktionen
+- renv(?)

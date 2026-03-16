@@ -68,6 +68,8 @@ website:
         contents:
           - href: scripts/02_excercises/datenanalyseplan.qmd
             text: "Datenanalyseplan (11.03.26)"
+          - href: scripts/02_excercises/peer_feedback_datenanalyseplan.qmd
+            text: "Peer-Feedback Datenanalyseplan (18.03.26)"
           - href: scripts/02_excercises/hausuebung_loesung_1.qmd
             text: "Hausübung 1 - Mit Lösungen"
           - href: scripts/02_excercises/hausuebung_loesung_2.qmd

@@ -9,6 +9,8 @@ GitHub-Copilot ist ein KI-gestütztes Tool, das von GitHub entwickelt wurde, um 
 
 Ist der Pro-Account eingerichtet und bestätigt, kann der Copilot über *Tools --\> Global Options --\> Copilot* und das dortige Einloggen in den Account aktiviert und an entsprechender Stelle auch wieder abgestellt werden.
 
+Vorschlag von Copilot:
+
 # Chat-Interface
 
 Anstatt das Chat-Interface von Large Langauge Models (LLMs) im Browser zu verwenden ist es auch möglich sich dieses in RStudio einzubinden. Hier wird das am Beispiel von Metas Open-Source Modell *llama-3.3-70b-versatile* gezeigt:
@@ -89,12 +91,12 @@ resp <- request("https://api.groq.com/openai/v1/chat/completions") |>
     model = "llama-3.3-70b-versatile",
     # Hier fügen wir den System Prompt VOR die User-Frage
     messages = list(
-      list(role = "system", content = "Du bist ein R-Tutor in einem Masterseminar."),
-      list(role = "user", content = "Schreibe ein Gedicht zu RStudio")
+      list(role = "system", content = "Du bist eine Versuchsperson in einem psychologischen Experiment. Du beantwortest die Fragen so ehrlich wie möglich. Antworte auf einer Likert-Skala von 1-5."),
+      list(role = "user", content = "Wie gerne stehst du morgens früh auf?")
     ),
     # Zusätzliche Parameter
-    temperature = 0.0,   # Kreativität: 0.0 ist deterministisch, 2.0 ist kreativ
-    max_tokens = 1000     # Maximale Länge der Antwort in Tokens ≈ Wörtern
+    temperature = 2.0,   # Kreativität: 0.0 ist deterministisch, 2.0 ist kreativ
+    max_tokens = 10     # Maximale Länge der Antwort in Tokens ≈ Wörtern
   )) |> 
   req_perform()
 
