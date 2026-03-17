@@ -5,6 +5,7 @@ format:
   revealjs:
     title-slide-attributes:
       data-visibility: hidden
+    theme: [default, ../../custom.scss]
     transition: slide
     slide-number: true
     logo: /images/unibe.png
@@ -15,7 +16,6 @@ format:
     progress: true
     controls: true
     embed-resources: true
-draft: true
 ---
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
@@ -50,7 +50,7 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
 ------------------------------------------------------------------------
 
-## Muddiest Points I: Live-Demonstration Codebook
+## Live-Demonstration Codebook
 
 -   Wie genau soll das Codebook bearbeitet werden?
 
@@ -62,7 +62,7 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
 ------------------------------------------------------------------------
 
-## Muddiest Points I: Datenanalyseplan
+## Datenanalyseplan
 
 **Research Questions:** Für jede RQ auch ein "Statistical Model"
 
@@ -78,6 +78,12 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
     -   👉 One-way ANOVA für Trial Dauer
 
+------------------------------------------------------------------------
+
+## Datenanalyseplan (2)
+
+**Research Questions:** Für jede RQ auch ein "Statistical Model"
+
 -   Explorativ: Gibt es Unterschiede zwischen den Gruppen in Bezug auf den Glauben in ihre generellen Gedächtnisfähigkeiten?
 
     -   👉 *One-way ANOVA für MMQ*
@@ -88,7 +94,7 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
 ------------------------------------------------------------------------
 
-## Muddiest Points I: Datenanalyseplan (2)
+## Datenanalyseplan (3)
 
 **Hypothesen**
 
@@ -102,7 +108,7 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
 ------------------------------------------------------------------------
 
-## Muddiest Points I: Datenanalyseplan (3)
+## Datenanalyseplan (4)
 
 **Abhängige Variablen/Measured Variables:**
 
@@ -120,6 +126,12 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
     -   Dauer der ersten Öffnung (Mittelwert aus 20 Trials). 
 
+------------------------------------------------------------------------
+
+## Datenanalyseplan (5)
+
+**Abhängige Variablen/Measured Variables:**
+
 -   **Leistung im Pattern Copy Task:**
 
     -   (für RQ3) - Trial Dauer (Mittelwert aus 20 Trials)
@@ -134,7 +146,7 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
 ------------------------------------------------------------------------
 
-## Muddiest Points I: Datenanalyseplan (4)
+## Datenanalyseplan (6)
 
 **Analyses - Statistical Models**
 
@@ -152,10 +164,15 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
 ## Muddiest Points I: Sonstige Fragen
 
-<iframe src="../../PDFs/Muddiest_Points_I.pdf" width="100%" height="600px">
-
-</iframe>
-
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
+```{=html}
+<embed
+    src="../../PDFs/Muddiest_Points_I.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
+```
+:::
 ------------------------------------------------------------------------
 
 ## Fragen Hands On Block 2?
@@ -165,7 +182,7 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 ::: notes
 -   Mergen / Full_join
 
--   Styler
+-   Funktionen, Tastenkombinationen, Styler –\> wenn noch nicht gemacht heute nachholen
 :::
 
 ------------------------------------------------------------------------
@@ -218,7 +235,10 @@ Live vorzeigen, wie die Oberfläche von Quarto aussieht.
 
 ## Bis nächstes Mal:
 
--   Abgabe Codebook (ILIAS und Peer–Partner:innen) bis zum **25.03.2026**
+-   Datenanalyseplan:
+    -   Peer Feedback selbstständig anschauen und Datenanalyseplan überarbeiten
+    -   Bei Fragen oder für weitere Feedback -\> selbsständig auf uns zu kommen
+-   Abgabe **Codebook** (ILIAS und Peer–Partner:innen) bis zum **25.03.2026**
 
 **Reminder Instruktionen:**
 
@@ -227,5 +247,3 @@ Live vorzeigen, wie die Oberfläche von Quarto aussieht.
 -   Vorlage ist auf Englisch, kann aber auch auf Deutsch ausgefüllt werden (selbes gilt für Datenanalyseplan)
 
 -   Basierend auf Horstmann et al. (2020)
-
-------------------------------------------------------------------------

@@ -33,7 +33,7 @@ Und hier die Slides zu Einheit 6 (werden kurz vor EH 6 ergänzt):
 
 -   Ebenso kannst du ausgehend vom Arbeitsverzeichnis des Projektes auch Dateien einlesen, z.B.: `dat_pct <- read.delim("data/raw/data_pct.csv", delim = ";")`
 
--   **Ergänzung**: Um sicherzustellen die Dateien ausgehend vom Arbeitsverzeichnis des Projektes zu lesen kannst du die Funktion `here` aus dem gleichnamigen package `here::` verwenden, z.B. `dat_pct <- read.csv(here::here("data", "raw", "dat.full.csv"))`. Die Funktion geht immer vom Ordner der Projektdatei aus und baut dann anhand der beliebig vielen angegebenen Argumente selbstständig den passenden Pfad zum Einlesen einer Datei.
+-   **Ergänzung**: Um sicherzustellen die Dateien ausgehend vom Arbeitsverzeichnis des Projektes zu lesen kannst du die Funktion `here` aus dem gleichnamigen Package `here::` verwenden, z.B. `dat_pct <- read.csv(here::here("data", "raw", "dat.full.csv"))`. Die Funktion geht immer vom Ordner der Projektdatei aus und baut dann anhand der beliebig vielen angegebenen Argumente selbstständig den passenden Pfad zum Einlesen einer Datei. Wir empfehlen dir für dein Abschlussprojekt mit `here()` zu arbeiten.
 
 -   Mehrere Datensätze könnten mit `full_join()` "gemerged" werden
 
