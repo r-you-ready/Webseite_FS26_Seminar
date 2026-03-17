@@ -162,17 +162,8 @@ Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
 ------------------------------------------------------------------------
 
-## Muddiest Points I: Sonstige Fragen
+## {data-background-iframe="../../PDFs/Muddiest_Points_I.pdf#view=FitH&navpanes=0&toolbar=0" data-background-interactive=""}
 
-::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
-```{=html}
-<embed
-    src="../../PDFs/Muddiest_Points_I.pdf#view=FitH&navpanes=0&toolbar=0"
-    type="application/pdf"
-    style="width:100%; height:220vh; border:0; display:block; background:white;"
-  >
-```
-:::
 ------------------------------------------------------------------------
 
 ## Fragen Hands On Block 2?
