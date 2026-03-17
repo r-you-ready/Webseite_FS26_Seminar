@@ -51,8 +51,8 @@ website:
         contents: 
           - href: scripts/02_excercises/loesung_1.qmd
             text: "Hands on - Block 1 (Woche 1 - 2) - mit Musterlösungen"
-          - href: scripts/02_excercises/hands_on_2.qmd
-            text: "Hands on - Block 2 (Woche 3 - 4)"
+          - href: scripts/02_excercises/loesung_2.qmd
+            text: "Hands on - Block 2 (Woche 3 - 4) - mit Musterlösungen"
           - href: scripts/02_excercises/loesung_3.qmd
             text: "Hands on - Block 3 (Woche 5 - 6) - Mit Musterlösungen"
           - href: scripts/02_excercises/loesung_4.qmd
