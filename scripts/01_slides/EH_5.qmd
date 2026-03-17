@@ -26,39 +26,69 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Heute:
 
-<embed 
-  src="../../PDFs/Syllabus.pdf" 
-  type="application/pdf"
-  style="width:100%; height:90vh;"
->
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
+```{=html}
+<embed
+    src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
+```
+:::
 
 ------------------------------------------------------------------------
 
-## Muddiest Points Umfrage:
+## Muddiest Points I: Inhalte
 
-<iframe src="../../PDFs/Muddiest_Points_1.pdf" width="100%" height="600px">
+Eure Fragen und Anmerkungen liessen sich in folgende 3 Blöcke einteilen:
 
-</iframe>
+1.  Fragen zum Codebook
 
-------------------------------------------------------------------------
+2.  Fragen zum Datenanalyseplan
 
-## Muddiest Points Datenanalyseplan
-
-**Research Questions:** ➡️ Für jede RQ auch ein "Statistical Model"
-
--   Beeinflusst Fake-Performance Feedback die metakognitiven Überzeugungen der Versuchspersonen (im Sinne von subj. Leistungseinschätzungen) über ihre Arbeitsgedächtnisleistung? 👉 *2x3 ANOVA der subj. Leistungseinschätzungen*
-
--   Gibt es Unterschiede zwischen den Gruppen bezüglich des Offloading-Verhaltens im Pattern Copy Task? 👉 *One-way ANOVA für jede Offloading-Variable (3x)*
-
--   Explorativ: Gibt es Unterschiede zwischen den Gruppen bezüglich der Leistung im Pattern Copy Task? 👉 One-way ANOVA für Trial Dauer
-
--   Explorativ: Gibt es Unterschiede zwischen den Gruppen in Bezug auf den Glauben in ihre generellen Gedächtnisfähigkeiten? 👉 *One-way ANOVA für MMQ*
-
--   Gibt es Unterschiede zwischen den Gruppen bezüglich ihrer Gedächtnisleistung im Feature Switch Detection Task? 👉 *One-way ANOVA für Arbeitsgedächtnisleistung*
+3.  Sonstige Fragen
 
 ------------------------------------------------------------------------
 
-## Muddiest Points Datenanalyseplan (2)
+## Muddiest Points I: Live-Demonstration Codebook
+
+-   Wie genau soll das Codebook bearbeitet werden?
+
+-   Wo findet man die entsprechenden Angaben?
+
+-   Wofür kann man das dann nutzen?
+
+-\> Gemeinsames Einfügen einer Variable
+
+------------------------------------------------------------------------
+
+## Muddiest Points I: Datenanalyseplan
+
+**Research Questions:** Für jede RQ auch ein "Statistical Model"
+
+-   Beeinflusst Fake-Performance Feedback die metakognitiven Überzeugungen der Versuchspersonen (im Sinne von subj. Leistungseinschätzungen) über ihre Arbeitsgedächtnisleistung?
+
+    -   👉 *2x3 ANOVA der subj. Leistungseinschätzungen*
+
+-   Gibt es Unterschiede zwischen den Gruppen bezüglich des Offloading-Verhaltens im Pattern Copy Task?
+
+    -   👉 *One-way ANOVA für jede Offloading-Variable (3x)*
+
+-   Explorativ: Gibt es Unterschiede zwischen den Gruppen bezüglich der Leistung im Pattern Copy Task?
+
+    -   👉 One-way ANOVA für Trial Dauer
+
+-   Explorativ: Gibt es Unterschiede zwischen den Gruppen in Bezug auf den Glauben in ihre generellen Gedächtnisfähigkeiten?
+
+    -   👉 *One-way ANOVA für MMQ*
+
+-   Gibt es Unterschiede zwischen den Gruppen bezüglich ihrer Gedächtnisleistung im Feature Switch Detection Task?
+
+    -   👉 *One-way ANOVA für Arbeitsgedächtnisleistung*
+
+------------------------------------------------------------------------
+
+## Muddiest Points I: Datenanalyseplan (2)
 
 **Hypothesen**
 
@@ -72,7 +102,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## Muddiest Points Datenanalyseplan (3)
+## Muddiest Points I: Datenanalyseplan (3)
 
 **Abhängige Variablen/Measured Variables:**
 
@@ -104,7 +134,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## Muddiest Points Datenanalyseplan (4)
+## Muddiest Points I: Datenanalyseplan (4)
 
 **Analyses - Statistical Models**
 
@@ -120,7 +150,17 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
+## Muddiest Points I: Sonstige Fragen
+
+<iframe src="../../PDFs/Muddiest_Points_I.pdf" width="100%" height="600px">
+
+</iframe>
+
+------------------------------------------------------------------------
+
 ## Fragen Hands On Block 2?
+
+![](../../images/EH_2_files/fragen.png){fig-align="center"}
 
 ::: notes
 -   Mergen / Full_join
@@ -147,7 +187,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
     📱Slides und [Shinyapps](https://gallery.shinyapps.io/064-telephones-by-region/?_gl=1z7uznf_gaMTQ1NzEyMzY1My4xNzU4MTAwOTM3_ga_2C0WZ1JHG0*czE3NjA0MjU5MzYkbzgkZzAkdDE3NjA0MjU5MzgkajU4JGwwJGgw)
 
 ::: notes
-Live vorzeigen wie die Oberfläche von Quarto aussieht.
+Live vorzeigen, wie die Oberfläche von Quarto aussieht.
 
 -   Quarto erstellen
 
@@ -160,9 +200,15 @@ Live vorzeigen wie die Oberfläche von Quarto aussieht.
 
 ------------------------------------------------------------------------
 
+## Selbstständiges Arbeiten: Hands on Block 3
+
+------------------------------------------------------------------------
+
 ## Was haben wir heute gemacht?
 
 -   Offene Fragen (*Muddiest Points*) aufgegriffen
+
+-   Live-Demonstration **Codebook**
 
 -   Wichtigste Punkte im **Datenanalyseplan** besprochen
 
@@ -172,7 +218,7 @@ Live vorzeigen wie die Oberfläche von Quarto aussieht.
 
 ## Bis nächstes Mal:
 
--   Abgabe Codebook (ILIAS und Peer–Partner:innen) bis zum **22.10.2025**
+-   Abgabe Codebook (ILIAS und Peer–Partner:innen) bis zum **25.03.2026**
 
 **Reminder Instruktionen:**
 
