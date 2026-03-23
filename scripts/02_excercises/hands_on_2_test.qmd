@@ -1,10 +1,17 @@
 ---
 title: "Hands On 2"
+filters:
+  - conditional_content
+show_solutions: false
 ---
 
-```{r, include = FALSE}
+::: {.content-visible when-meta="show_solutions"}
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, include = TRUE}
 library(tidyverse)
 ```
+:::
+:::
 
 # Hands On - Laden, mergen und Syntax (Einheiten 3 und 4)
 

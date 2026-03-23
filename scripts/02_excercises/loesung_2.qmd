@@ -766,7 +766,7 @@ Ein falsches Mergen führt zu:
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
-dat_full[,1]
+dat_full[1,1]
 ```
 :::
 
@@ -775,7 +775,7 @@ dat_full[,1]
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
-dat_full[,1:15]
+dat_full[1,1:15]
 ```
 :::
 
