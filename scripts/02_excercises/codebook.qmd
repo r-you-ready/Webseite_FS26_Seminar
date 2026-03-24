@@ -3,9 +3,9 @@ title: "Hausübung: Codebook"
 editor: visual
 ---
 
-Im Methodenseminar „R you Ready? Reproduzierbare Datenaufbereitung und –analyse in R“ (FS 2026) erstellt ihr ein **Codebook für euren finalen Datensatz (dat_full)**.
+Im Methodenseminar „R you Ready? Reproduzierbare Datenaufbereitung und –analyse in R“ erstellt ihr ein **Codebook für euren finalen Datensatz (dat_full)**.
 
-Das Codebook ist Teil eures Analyseprojekts und dokumentiert systematisch alle Variablen, die ihr im Rahmen eurer Datenaufbereitung erstellt und in euren Analysen verwendet. Das Codebook bezieht sich **ausschliesslich auf euren finalen Datensatz (dat_full) und nicht auf die Rohdaten der Einzeldatensätze**.
+Das Codebook ist Teil eures Analyseprojekts und dokumentiert alle Variablen, im Datensatz beinhaltet sind und die ihr im Rahmen eurer Datenaufbereitung erstellt. Das Codebook bezieht sich **ausschliesslich auf euren finalen Datensatz (dat_full) und nicht auf die Rohdaten der Einzeldatensätze**.
 
 ------------------------------------------------------------------------
 
@@ -72,7 +72,7 @@ Für die Bewertung ist insbesondere wichtig:
 
 -   **Abgabe bis EH6 (25.03.2026)**
 
--   Upload über **ILIAS**
+-   Upload über **ILIAS als Excel Datei**
 
 -   Zusätzlich Versand an eure/n **Peer-Partner:in**
 

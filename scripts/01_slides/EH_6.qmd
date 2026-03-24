@@ -16,7 +16,6 @@ format:
     progress: true
     controls: true
     embed-resources: true
-draft: true
 ---
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
@@ -27,37 +26,75 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Heute:
 
-<embed 
-  src="../../PDFs/Syllabus.pdf" 
-  type="application/pdf"
-  style="width:100%; height:90vh;"
->
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
+```{=html}
+<embed
+    src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
+```
+:::
 
 ------------------------------------------------------------------------
 
 ## Quarto
 
-Wir arbeiten ab jetzt immer in Quarto Dateien!
+-   Wir arbeiten ab jetzt immer in **Quarto Dateien** (und im Projektordner)
 
-Falls das Rendern nicht klappt -\> meldet euch!
+-   Vorteil: Code, Ergebnisse und Beschreibung/Interpretation sind an einem Ort
+
+    -\> **Nachvollziehbar & reproduzierbar**
+
+-   Falls das Rendern nicht klappt → meldet euch!
+
+-   Bei Problemen mit Word und PDF Datein: im Terminal `quarto install tinytex`
+
+------------------------------------------------------------------------
+
+## Verschiedene Datentypen
+
+-   In R gibt es verschiedene Datentypen mit unterschiedlichen Eigenschaften
+
+-   Der Datentyp bestimmt, wie Daten gespeichert und verarbeitet werden können
+
+**Wichtige Datentypen im Überblick:**
+
+-   Vektoren
+
+-   Faktoren
+
+-   Matrizen
+
+-   Listen
+
+-   Data Frames
 
 ------------------------------------------------------------------------
 
 ## Datentypen: Vektoren
 
--   Vektoren
+-   Vektoren sind der grundlegende Datentyp in R
 
-    -   Numerische Vektoren (umfasst integer und double)
+-   Ein Vektor ist eine Sammlung von Elementen gleichen Typs
 
-    -   Character Vektoren
+👉 Wichtig: Alle Elemente müssen den gleichen Datentyp (z.B. numeric) haben
 
-    -   Logische Vektoren
+**Typen von Vektoren:**
 
-Vektoren sind eine Menge von Elementen. Vermischung von Elementen nicht möglich.
+-   Numerisch (Zahlen; umfasst *integer* und *double*)
 
-Erstellung meistens mit "`c`" (für combine/concatenate)
+-   Character (Text)
 
-Beispiele:
+-   Logisch (TRUE / FALSE)
+
+------------------------------------------------------------------------
+
+## Datentypen: Vektoren (2)
+
+**Erstellung von Vektoren:**
+
+-   meist mit "`c`" (*combine / concatenate*)
 
 ```{r echo = TRUE}
 numeric_vector <- c(5, 4, 5)
@@ -65,7 +102,9 @@ character_vector <- c("Frau", "Mann","Non-Binär")
 logical_vector <- c(TRUE, FALSE, TRUE)
 ```
 
-Ein Vektor mit nur einem Element nennen wir einen Skalar
+**Sonderfall:**
+
+-   Ein Vektor mit nur einem Element = Skalar
 
 ```{r echo = TRUE}
 x <- 5
@@ -81,11 +120,9 @@ double: zahlen mit kommastellen –\> Steht für double precision (wegen 64bit)
 
 ------------------------------------------------------------------------
 
-## Datentypen: Vektoren (2)
+## Datentypen: Vektoren (3)
 
-Wenn Typen jedoch trotzdem vermischt werden, werden alle Elemente in denselben Typ umgewandelt – auch dann, wenn sie einzeln betrachtet eigentlich nicht zu diesem Typ gehören würden.
-
-Attribute von Vektoren können zum Beispiel mit `typeof()`, `length()` oder `attributes()` eingesehen werden.
+Werde Typen jedoch trotzdem vermischt, werden alle Elemente in denselben Typ umgewandelt – auch dann, wenn sie einzeln betrachtet eigentlich nicht zu diesem Typ gehören würden.
 
 **Beispiel:**
 
@@ -95,20 +132,25 @@ class(vermischter_vektor)
 class(vermischter_vektor[1])
 ```
 
+Attribute von Vektoren können zum Beispiel mit `typeof()`, `length()` oder `attributes()` eingesehen werden.
+
 ------------------------------------------------------------------------
 
 ## Datentypen: Faktoren
 
-**Kategoriale bzw. nominale Variablen** werden in R als **Faktoren** gespeichert (`factor`-Datentyp).\
-Ein Faktor ordnet den Kategorien sogenannte *Levels* zu, die intern als Zahlen gespeichert werden.
+**Faktoren = kategoriale Variablen in R** (z.B. Geschlecht, Versuchsbedingung)
 
-🎯 **Wichtig für statistische Analysen mit kategorialen Daten** (z. B. ANOVA)
+**Aufbau eines Faktors:**
+
+-   Kategorien (*Levels*)
+
+-   Intern als Zahlen gespeichert (→ keine inhaltliche Bedeutung)
+
+🎯 **Wichtig für statistische Analysen mit kategorialen Daten** (z.B. ANOVA, Regression)
 
 -   Faktoren sorgen dafür, dass R Kategorien korrekt interpretiert – also **nicht** als Text oder numerische Werte.
 
 -   Sie ermöglichen das **Festlegen einer Referenzkategorie**, die für Vergleiche in statistischen Modellen relevant ist.
-
--   Typische Beispiele für Faktoren sind **Geschlecht** oder **Versuchsbedingung**.
 
 ::: notes
 Die Referenzkategorie spielt bei der ANOVA keine Rolle für den Gesamttest (F-Test). Bei z.B. einer linearen Regression, legt die Referenzkategorie fest welche Gruppe als Basis für den Vergleich dient.
@@ -118,7 +160,7 @@ Die Referenzkategorie spielt bei der ANOVA keine Rolle für den Gesamttest (F-Te
 
 ## Datentypen: Faktoren (2)
 
-**Beispiel: Geschlecht als Faktorstufen**
+**Beispiel: Geschlecht mit Faktorstufen**
 
 ```{r, echo = TRUE}
 geschlecht <- c("male", "female", "nonbinary", "female", "male","nonbinary")
@@ -149,9 +191,88 @@ In Grinschgl2020 werden group_all als Faktor bestimmt, und nach der transformati
 
 ------------------------------------------------------------------------
 
-## Datentypen: Listen (1)
+## Datentypen: Matrizen
 
-Eine Liste ist ein flexibles Datenobjekt, das Elemente **unterschiedlicher Typen enthalten kann** (z. B. Zahlen, Zeichen, Vektoren, Dataframes, andere Listen).
+**Matrix = zweidimensionale Datenstruktur**
+
+-   besteht aus **Zeilen** und **Spalten**
+
+-   alle Elemente haben den **gleichen Datenyp**
+
+**Wichtige Idee:**
+
+👉 Eine Matrix ist eigentlich ein **Vektor mit Dimensionen**
+
+**Erstellung einer Matrix:**
+
+```{r, echo = TRUE}
+v <- 1:20
+dim(v) <- c(2, 10) # Als Attribut des Vektors
+v
+```
+
+```{r, echo = TRUE}
+attributes(v)    # zeigt die Dimensionen
+```
+
+::: notes
+Dim ist hier keine Funktion sondern ein Attribut.
+:::
+
+------------------------------------------------------------------------
+
+## Datentypen: Matrizen (2)
+
+**Erstellen und Zugriff**
+
+**Erstellung mit** `matrix()`
+
+```{r, echo = TRUE}
+m <- matrix(1:20, nrow = 2, ncol = 10)
+```
+
+👉 Standard: Werte werden **spaltenweise eingefügt**
+
+**Zugriff auf Elemente:**
+
+`m[Zeile, Spalte]`
+
+```{r, echo=TRUE, results='hide'}
+m[2, 4]
+m[2, 1:5]
+```
+
+**Frage:**
+
+Welche Werte ergeben sich hier?
+
+***🤔*** Ist der Datensatz `dat_full` eine **Matrix?**
+
+::: notes
+-   Zweite Zeile, 4te Spalte –\> 8
+
+-   2, 4, 6, 8, 10. -\> Zweite Zeile, erste bis 5te spalte.
+:::
+
+------------------------------------------------------------------------
+
+## Datentypen: Listen
+
+**Listen = flexible Datenstruktur in R**
+
+-   Eine Liste kann **Elemente unterschiedlicher Typen** enthalten (z.B. Zahlen, Text, Vektoren, Data Frames, andere Listen)
+
+**Unterschied zu Vektoren:**
+
+-   Vektoren → nur ein Datentyp
+
+-   Listen → mehrere Datentypen möglich
+
+------------------------------------------------------------------------
+
+## Datentypen: Listen (2)
+
+**Erstellung mit `list()`:**
 
 ```{r, echo = TRUE}
 my_list <- list(
@@ -164,166 +285,179 @@ my_list <- list(
 my_list
 ```
 
-## --- Datentypen: Listen (2)
+------------------------------------------------------------------------
 
-**Auf Listen zugreifen:**
+## Datentypen: Listen (3)
 
-Mit **\[ \]** 👉 gibt einen Element der Liste zurück
+**Zugriff auf Listenelemente**
+
+Mit **`[ ]`** → gibt eine Teilliste zurück
 
 ```{r, echo = TRUE}
 my_list[1]
 ```
 
--   Mit **\[\[ \]\]**
+👉 Ergebnis bleibt eine **Liste**
+
+-   Mit **`[[ ]]`** → gibt den Inhalt zurück
 
 ```{r, echo=TRUE}
 
 my_list[[3]]
 my_list[[3]][2]
-
-
 ```
 
--   Mit **\$**
-
-```{r, echo = TRUE}
-my_list$info
-my_list$info[2]
-
-```
+👉 Ergebnis ist das **eigentliche Element** (z.B. Vektor)
 
 ------------------------------------------------------------------------
 
-## Datentypen: Listen (2)
+## Datentypen: Listen (4)
 
-**Listen Elemente hinzufügen**
+-   Mit **`$`** → Zugriff über Namen
+
+```{r, echo = TRUE}
+my_list$info
+my_list$info$student
+```
+
+👉 besonders praktisch bei benannten Listen
+
+------------------------------------------------------------------------
+
+## Datentypen: Listen (5)
+
+**Elemente hinzufügen**
+
+Neues Element hinzufügen mit `[[ ]]`:
 
 ```{r, echo = TRUE}
 my_list[[5]] <- 42
 my_list
-
 ```
 
 ------------------------------------------------------------------------
 
-## Datentypen: Matrizen
+## Datentypen: Listen (6)
 
-**Eine Matrix** ist eine **zweidimensionale Datenstruktur**:
-
--   Sie besteht aus **Zeilen** und **Spalten**.
-
--   Alle Elemente müssen vom **gleichen Datentyp** sein (z. B. nur numerisch).
-
--   Eine Matrix kann zum Beispiel aus einem **Vektor** erstellt werden, dem anschließend **Dimensionen** (Zeilen und Spalten) zugewiesen werden.
-
-**Beispiel:**
+Alternativ mit Namen
 
 ```{r, echo = TRUE}
-v <- 1:20
-dim(v) <- c(2, 10) #Argumente: 
-v
+my_list$new_value <- 42
+my_list
 ```
 
-```{r, echo = TRUE}
-attributes(v)
-```
+**Allgemeines Prinzip:**
 
-::: notes
-Dim ist hier keine Funktion sondern ein Attribut.
-:::
+-   Listen können **beliebig erweitert werden**
 
-------------------------------------------------------------------------
-
-## Datentypen: Matrizen (2)
-
-**Erstellen von Matrizen**
-
-**Beispiel:**
-
--   Matrix mit den Zahlen 1–20, 2 Zeilen und 10 Spalten, die Werte werden **spaltenweise** eingefügt.
-
-```{r, echo = TRUE}
-m <- matrix(1:20, nrow = 2, ncol = 10, byrow = FALSE)
-```
-
-Auf einzelne Elemente einer Matrix greift man mit eckigen Klammern zu: `matrix_name[zeile, spalte]`
-
-**Welche Werte sollten hier rauskommen?**
-
-```{r, echo=TRUE, results='hide'}
-m[2, 4]
-m[2, 1:5]
-```
-
-***🤔*** Ist der Datensatz `dat_full` eine **Matrix?**
-
-::: notes
--   Zweite Zeile, 4te Spalte –\> 8
-
--   2, 4, 6, 8, 10. -\> Zweite Zeile, erste bis 5te spalte.
-:::
+-   neue Elemente werden über einen **Index oder Namen** hinzugefügt
 
 ------------------------------------------------------------------------
 
 ## Datentypen: Data Frames
 
--   Sind tabellarisch aufgebaut
+**Data Frame = tabellarische Datenstruktur**
 
--   Spalten können unterschiedliche Datentypen enthalten
+-   besteht aus **Zeilen und Spalten**
 
--   Jede Spalte gleich lang (ggf, auffüllen mit NAs)
+-   jede Spalte ist ein **Vektor**
 
-👉 Ist meistens das Format in dem wir Daten speichern und verarbeiten.
+**Wichtige Eigenschaften:**
 
-Wenn wir Datensätze einlesen, werden diese als Data Frames in R repräsentiert.
+-   Spalten können unterschiedliche Datentypen haben
+
+-   alle Spalte gleich lang (ggf. auffüllen mit NAs)
+
+**Warum Data Frames wichtig sind:**
+
+-   Standardformat für Daten in R
+
+-   Datensätze werden beim Einlesen meist als **Data Frame** gespeichert
 
 ------------------------------------------------------------------------
 
 ## Datentypen: Data Frames (2)
 
--   **Data Frame erstellen**
+**Erstellen und Zugriff**
+
+**Erstellung eines Data Frames:**
 
 ```{r, echo=TRUE}
-
-bundesrät_innen <- data.frame(
+bundesraet_innen <- data.frame(
   vorname = c("Elisabeth", "Martin", "Ignazio"),
   alter = c(62, 63, 65),
   partei = c("SP", "Mitte", "FDP"),
   graue_haare = c(TRUE, TRUE, FALSE)
 )
+```
 
-head(bundesrät_innen)
+**Data Frame anzeigen:**
 
-bundesrät_innen$graue_haare
+```{r, echo=TRUE}
+head(bundesraet_innen)
+```
+
+**Zugriff auf Spalten:**
+
+```{r, echo=TRUE}
+bundesraet_innen$graue_haare
 ```
 
 ------------------------------------------------------------------------
 
-## Datentypen: Dataframes (3)
+## Datentypen: Data Frames (3)
 
--   **Auf Elemente zugreifen**
+**Arbeiten mit Data Frames**
+
+1.  **Zugriff auf Elemente und Spalten**
 
 ```{r echo = TRUE}
-bundesrät_innen[3,"grauhaarig"]
-bundesrät_innen$alter
-
+bundesraet_innen[3,"graue_haare"] #Zugriff mittels Position im Data Frame
+bundesraet_innen$alter #Zugriff über Spaltennamen
 ```
 
--   **Filtern / Auswählen**
+2.  **Filtern von Daten**
 
 ```{r echo = TRUE}
 library(tidyverse)
-brs_unter_63 <- filter(bundesrät_innen, alter < 63)
+
+brs_unter_63 <- filter(bundesraet_innen, alter < 63)
 head(brs_unter_63)
 
+#Alternative mit Base R
+brs_unter_63 <- subset(bundesraet_innen, bundesraet_innen$alter < 63)
+head(brs_unter_63)
 ```
 
--   **Modifizieren**
+------------------------------------------------------------------------
+
+## Datentypen: Data Frames (4)
+
+3.  **Neue Variablen erstellen**
 
 ```{r echo = TRUE}
-bundesrät_innen$alter_in_10_jahren <- bundesrät_innen$alter + 10
-head(bundesrät_innen)
+bundesraet_innen$alter_in_10_jahren <- bundesraet_innen$alter + 10
+head(bundesraet_innen)
 ```
+
+------------------------------------------------------------------------
+
+## Datentypen: Überblick
+
+<div style="font-size: 0.75em;">
+| Struktur | Eigenschaften | Beispiel-Inhalt |
+|------------------------|------------------------|------------------------|
+| **Vektor** | \- Enthält Elemente **eines** Datentyps<br>- Grundbaustein in R | `c(1, 2, 3)` oder `c("Anna", "Ben")` |
+| **Liste** | \- Kann verschiedene Datentypen enthalten<br>- Elemente können unterschiedlich lang sein | Zahlenvektor, Textvektor, logischer Vektor in einer Liste |
+| **Matrix** | \- Enthält nur **einen** Datentyp<br>- Hat feste Dimensionen (Zeilen, Spalten) | 3x3-Matrix mit Zahlen 1–9 |
+| **Data Frame** | \- Tabellarisch aufgebaut<br>- Spalten können unterschiedliche Datentypen enthalten<br>- Jede Spalte gleich lang | Tabelle mit Name (Character), Alter (Numeric), Studiert (Logical) |
+</div>
+
+***👉*** **Merksatz:**\
+**Vektor** = einfachste Struktur, ein Datentyp\
+**Liste** = flexibel, verschiedene Datentypen\
+**Matrix** = „Zahlenrechteck“, ein Datentyp\
+**Data Frame** = Tabelle, Spalten können unterschiedliche Datentypen haben
 
 ------------------------------------------------------------------------
 
@@ -335,9 +469,9 @@ head(bundesrät_innen)
 
     -   Faktoren
 
-    -   Listen
-
     -   Matrizen
+
+    -   Listen
 
     -   Dataframes
 
@@ -345,12 +479,10 @@ head(bundesrät_innen)
 
 ## Bis nächstes Mal:
 
--   Peer-Feedback: Codebook
+-   Peer-Feedback: Codebook:
 
--   To Do‘s: Codebook des Partners/der Partnerin bis EH7 durchschauen und kommentieren (am besten mit Excel Kommentar-Funktion oder Notizen in zusätzlicher Datei) 👉 sind ALLE Variablen mit ausreichens Detail beschrieben?
+    Codebook des Partners/der Partnerin bis EH7 durchschauen und kommentieren (am besten mit Excel Kommentar-Funktion oder Notizen in zusätzlicher Datei) 👉 sind ALLE Variablen mit ausreichend Detail beschrieben?
 
--   Upload auf Ilias mit Kommentaren + Weitergabe an Partner:in Auch persönliches Feedback erwünscht 👉 selbstorganisiert
-
-**Selbständigkeit: Wir geben kein Feedback, bei Fragen auf uns zukommen (Forum, Sprechstunde etc. nutzen)**
+-   Upload auf Ilias mit Kommentaren + Weitergabe an Partner:in. Auch persönliches Feedback erwünscht 👉 selbstorganisiert
 
 -   Hands On Block 3 abschliessen!
