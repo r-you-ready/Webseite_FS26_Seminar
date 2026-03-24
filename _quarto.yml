@@ -83,7 +83,7 @@ website:
       - href: scripts/04_misc/muddiest_points.qmd
         text: "Muddiest Points"
         contents:
-          - href: scripts/04_misc/muddiest_points_1.qmd
+          - href: PDFs/Muddiest_Points_I.pdf
             text: "Muddiest Points 1"
           - href: scripts/04_misc/muddiest_points_2.qmd
             text: "Muddiest Points 2"
