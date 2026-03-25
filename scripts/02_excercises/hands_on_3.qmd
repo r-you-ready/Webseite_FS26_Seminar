@@ -11,16 +11,13 @@ Bei Bedarf findest du hier nochmals die Slides zu Einheit 5:
 </iframe>
 :::
 
-Und hier die Slides zu Einheit 6 (werden kurz vor EH 6 ergänzt):
+Und hier die Slides zu Einheit 6:
 
 ```{=html}
-<!--
-::: {=html}
+
 <iframe src="../01_slides/EH_6.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
 
 </iframe>
-:::
--->
 ```
 
 # Wiederholung Hands On Block 2:
@@ -206,7 +203,7 @@ Kategoriale bzw. nominale Variablen werden in R als **Faktoren** gespeichert (`f
 Bevor wir mit den Übungen starten, ein Überblick über die Unterschiede:
 
 | Struktur | Eigenschaften | Beispiel-Inhalt |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **Vektor** | \- Enthält Elemente **eines** Datentyps<br>- Grundbaustein in R | `c(1, 2, 3)` oder `c("Anna", "Ben")` |
 | **Liste** | \- Kann verschiedene Datentypen enthalten<br>- Elemente können unterschiedlich lang sein | Zahlenvektor, Textvektor, logischer Vektor in einer Liste |
 | **Matrix** | \- Enthält nur **einen** Datentyp<br>- Hat feste Dimensionen (Zeilen, Spalten) | 3x3-Matrix mit Zahlen 1–9 |
