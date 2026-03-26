@@ -1,8 +1,8 @@
 ---
-title: "Lösung 2"
-editor: 
-  markdown: 
-    wrap: 72
+title: "Hands On – Coding Basics (Einheiten 3 und 4)"
+filters:
+  - conditional_content
+show_solutions: true
 ---
 
 ```{r, include = FALSE}
@@ -315,6 +315,7 @@ ausgeführten Code in der Konsole sehen.
 👉 Kopiere diesen in dein Skript, damit du ihn in Zukunft
 wiederverwenden und anpassen kannst.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, include=TRUE, eval=TRUE}
 data_mmq <- read_delim("data/raw/data_mmq.csv",
@@ -323,6 +324,7 @@ data_mmq <- read_delim("data/raw/data_mmq.csv",
                        trim_ws = TRUE)
 ```
 :::
+::::
 
 **Daten kontrollieren**
 
@@ -351,6 +353,7 @@ Verwende dafür eine geeignete Funktion aus dem Paket `readr`.
 👉 Tipp: Nutze den zuvor generierten Code und passe nur Variablennamen,
 Dateinamen und ggf. Delimiter an.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, include=TRUE, eval=TRUE}
 # install.packages("readr") # den Code führst du einmalig in deiner Console aus
@@ -366,6 +369,7 @@ data_pct <- read_delim("data/raw/data_pct.csv", ";")
 data_vp <- read_delim("data/raw/data_vp.csv" , ";")
 ```
 :::
+::::
 
 #### .XLSX Dateien
 
@@ -385,6 +389,7 @@ zu verwenden.
 -   Nutze bei Unsicherheiten `?read_excel` oder das
     [Cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf).
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, include=TRUE, eval=TRUE}
 # install.packages("readxl") # den Code führst du einmalig in deiner Console aus
@@ -397,6 +402,7 @@ data_ratings <- read_excel("data/raw/data_ratings.xlsx") # erstellt über RStudi
 data_strategies <- read_excel("data/raw/data_strategies.xlsx") # kopiert und angepasst
 ```
 :::
+::::
 
 **Ziel**
 
@@ -462,11 +468,13 @@ von derselben Person stammen oder nicht.
 
 Füge alle 7 Datensätze mit der Funktion `cbind()` zusammen.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, include=TRUE, eval=TRUE}
 dat_cbind <- cbind(data_cb, data_cvstm, data_pct, data_vp, data_ratings, data_strategies)
 ```
 :::
+::::
 
 -   Was fällt dir auf?\
 
@@ -477,6 +485,7 @@ dat_cbind <- cbind(data_cb, data_cvstm, data_pct, data_vp, data_ratings, data_st
 💡 Reflektiere: Welche Gefahr entsteht, wenn Daten nur positionsbasiert
 zusammengefügt werden?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 Es entsteht die Gefahr, Erhebungen von unterschiedlichen Personen zu
 vermischen. Angenommen alle Messungen wurden in zwei Datensätze
@@ -489,6 +498,7 @@ Zeilen sind gemischt einer und einer anderen Versuchsperson zugeordnet.
 Um dies zu vermeiden, muss vor dem "Kleben" sichergestellt sein, dass
 die Zeilen über die Datensätze hinweg einheitlich sind.
 :::
+::::
 
 #### Zentrale Einsicht
 
@@ -547,6 +557,7 @@ Das bedeutet:
     ⚠️ Wichtig: Die Reihenfolge der beiden Argumente hängt davon ab,
     welcher Datensatz links bzw. rechts im `full_join()` steht.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, include=TRUE, eval=TRUE}
 # Sukzessive über Paare mergen
@@ -610,6 +621,7 @@ Beachtet, bei unseren sieben Datensätzen haben wir hiermit lediglich ein
 wenig effizienter gearbeitet. Dieser Ansatz wäre aber auch für beliebig
 mehr Datensätze anwendbar und würde sich dann umso mehr lohnen!
 :::
+::::
 
 ### Inspiziere deinen zusammengefügten Datensatz "dat_full"
 
@@ -621,31 +633,38 @@ Ein korrekt gemergter Datensatz muss logisch überprüft werden.
 
 -   `nrow(dat_full)`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 nrow(dat_full)
 ```
 :::
+::::
 
 -   `ncol(dat_full)`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 ncol(dat_full)
 ```
 :::
+::::
 
 -   `dim(dat_full)`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 dim(dat_full)
 ```
 :::
+::::
 
 -   Entspricht die Zeilenanzahl der Anzahl der Versuchspersonen im
     Paper?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 Die Zeilenanzahl von 159 entspricht der im Paper berichteten finalen
 Stichprobe nach Aussschluss von unvollständigen und ungültigen
@@ -654,15 +673,18 @@ Spaltenanzahl der einzelnen Datensätze minus der Anzahl der Datensätze
 (die ID-Variable fällt aus jedem neu hinzugefügten Datensatz weg) plus
 einer einzelnen Spalte für die bestehen bleibende ID-Variable.
 :::
+::::
 
 -   Ist die Spaltenanzahl plausibel?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 Die Spaltenanzahl von 36 ergibt sich durch die Summe der Spaltenanzahl
 der einzelnen Datensätze minus der Anzahl der Datensätze (die
 ID-Variable fällt aus jedem neu hinzugefügten Datensatz weg) plus einer
 einzelnen Spalte für die bestehen bleibende ID-Variable.
 :::
+::::
 
 #### Überblick verschaffen
 
@@ -671,54 +693,67 @@ Funktionen, die wir schon im letzten Hands On getestet haben:
 
 -   Lasse dir die Variablenamen ausgeben mit `names()`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 names(dat_full)
 ```
 :::
+::::
 
 -   `head()`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 head(dat_full)
 ```
 :::
+::::
 
 -   `glimpse()`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 glimpse(dat_full)
 ```
 :::
+::::
 
 -   `str()`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 str(dat_full)
 ```
 :::
+::::
 
 -   `dat_full`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 dat_full
 ```
 :::
+::::
 
 -   `summary()`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 summary(dat_full)
 ```
 :::
+::::
 
 -   Gibt es redundante oder doppelte Variablen?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 Idealerweise gibt es keine doppelten Variablen. Falls doch, dann sind
 diese meist auf Fehler beim full_join() zurückzuführen. Beinhalten beide
@@ -727,23 +762,28 @@ als Schlüssel unter `by` angegeben, dann werden beide in den gemergten
 Datensatz aufgenommen und die alten Spaltennamen werden mit mit .x und
 .y ergänzt.
 :::
+::::
 
 -   Gibt es auffällige NA-Muster?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 Da wir keine NAs in die sieben Rohdaten sollten auch im gemergten
 `dat_full`keine solche Werte vorhanden sein. Dies kann über
 `sum(is.na(dat_full))` überprüft werden
 :::
+::::
 
 -   Wirken die Werte plausibel?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 Hierzu sind die einzelnen Spalten auf ihre minimalen, maximalen und
 üblichen Werte mit den jeweils zu erwarteten abzugleichen.
 Beispielsweise dürften Spalten wie `vp_propcorrect` per Definition
 keinen Wert grösser als 1 aufweisen.
 :::
+::::
 
 #### Warum dieser Schritt zentral ist?
 
@@ -764,39 +804,47 @@ Ein falsches Mergen führt zu:
     Klammern. Der erste Wert in der Klammer steht für die Zeile, der
     zweite für die Spalte.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 dat_full[1,1]
 ```
 :::
+::::
 
 -   Greife auf die Werte der **Spalten 1–15 in der ersten Zeile** zu.
     Verwende wieder eckige Klammern und den Bereichsoperator `1:15`.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 dat_full[1,1:15]
 ```
 :::
+::::
 
 -   Lasse dir alle Werte der Variable `"mean_rl_all"` ausgeben. Auf
     Variablen greifst du mit `$` zu.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 dat_full$mean_rl_all
 ```
 :::
+::::
 
 -   Greife auf die **ersten 10 Werte der Variable `"question1"`** zu.
     Verwende dazu den `$`-Operator in Kombination mit dem
     Bereichsoperator `1:10`.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 dat_full$question1[1:10]
 ```
 :::
+::::
 
 # Daten speichern
 
@@ -838,6 +886,7 @@ oder die Hilfefunktion an.
     zu finden und der Dateiname korrekt ist.
 -   Lässt sich die Datei erneut einlesen?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE, include=TRUE}
 # speichern
@@ -867,6 +916,7 @@ andernfalls ausweichen auf die alternative Funktion des Tidyverse:
 readr::write_csv(dat_full, "data/processed/dat_full.csv")
 ```
 :::
+::::
 
 👉 Für diesen zusammengeführten Datensatz werdet ihr das **Codebook**
 erstellen.
@@ -923,11 +973,13 @@ seq(-4, 11, 3)
 
 *Tipp: `?seq`*
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r include=TRUE, eval=TRUE}
 seq(from = -4, to = 11, by = 3)
 ```
 :::
+::::
 
 ### Aufgabe 2
 
@@ -939,11 +991,13 @@ Belasse dabei die Reihenfolge der Zahlen.
 seq(2, 12, 3)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, include=TRUE, eval=TRUE}
 seq(3, 12, 2)
 ```
 :::
+::::
 
 ## Funktionen aus bestimmten Paketen
 
@@ -1033,6 +1087,7 @@ print(mean(round(first_vector)))
 # ...
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, include=TRUE, eval=TRUE}
 # Schritt 1:
@@ -1047,6 +1102,7 @@ print(fst_vec_round_mean)
 # print() ist in R nicht zwingend notwendig, sofern das auszugebene Objekt in der Environment vorliegt
 ```
 :::
+::::
 
 # Style Conventions
 
@@ -1062,6 +1118,7 @@ mean <-mean(Französichschul_NotenSemsester
 print  ( mittelwert)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r include=TRUE, eval=TRUE}
 Französischschul_NotenSemester <- c(4, 5, 6, 5, 4, 3)
@@ -1069,6 +1126,7 @@ mittelwert <- mean(Französischschul_NotenSemester)
 print(mittelwert)
 ```
 :::
+::::
 
 ## Code automatisch formatieren mit `styler`
 
@@ -1097,6 +1155,7 @@ library(palmerpenguins)
 ggplot(penguins,aes(x=flipper_length_mm,y=body_mass_g,color=species))+geom_point()+labs(x="flipper",Y="MASS")+theme_minimal()
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r include=TRUE, eval=TRUE}
 library(palmerpenguins)
@@ -1107,6 +1166,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
   theme_minimal()
 ```
 :::
+::::
 
 # Am Ende deiner Übungen
 
