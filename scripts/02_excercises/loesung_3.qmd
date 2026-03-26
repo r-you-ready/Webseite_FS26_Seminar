@@ -2,7 +2,7 @@
 title: "Hands On – Coding Basics (Einheiten 5 und 6)"
 filters:
   - conditional_content
-show_solutions: true
+show_solutions: false
 ---
 
 Bei Bedarf findest du hier nochmals die Slides zu Einheit 5:
