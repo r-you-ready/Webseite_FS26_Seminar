@@ -96,6 +96,8 @@ head(select(filter(penguins, species == "Adelie"), species, bill_length_mm))
 head(select(filter(penguins, species == "Adelie"), species, bill_length_mm))
 ```
 
+<br>
+
 ✅ **Mit Pipe: Schritt für Schritt lesbar (`|>` oder `%>%`)**
 
 ```{r, echo= TRUE , results = 'hide'}
@@ -135,6 +137,8 @@ penguins |>
 
 👉 **Beispiel**
 
+<br>
+
 ```{r, echo= TRUE , results = 'hide'}
 penguins |> filter(species == "Adelie")
 ```
@@ -152,6 +156,8 @@ filter(penguins, species == "Adelie")
 -   `%>%` aus magrittr (tidyverse)
 
 -   `|>` in Base R
+
+<br>
 
 👉 **Zweck:**
 
@@ -219,6 +225,8 @@ penguins |>
 -   select() wählt **Spalten (Variablen)** aus einem Datensatz aus
 -   Die Zeilen bleiben unverändert
 
+<br>
+
 💡 **Merke:**
 
 -   `filter()` → wählt Zeilen (Beobachtungen)
@@ -249,6 +257,8 @@ penguins |>
 
 -   alle anderen Spalten werden entfernt
 
+<br>
+
 👉 **Ergebnis:**
 
 -   Der Datensatz enthält nur noch diese drei Spalten
@@ -266,6 +276,8 @@ penguins |>
 ```
 
 Wählt alle Spalten, deren Name mit `"bill"` beginnt
+
+<br>
 
 👉 **Ergebnis:**
 
@@ -288,6 +300,8 @@ penguins |>
 -   `-` bedeutet: diese Spalten **entfernen**
 
 -   alle anderen Spalten bleiben erhalten
+
+<br>
 
 👉 **Ergebnis:**
 
@@ -331,10 +345,13 @@ penguins |>
 
 ```{r, echo=TRUE}
 penguins |> 
-  summarie(
+  summarize(
     mean_bill_length = mean(bill_length_mm, na.rm = TRUE),
     mean_flipper_length = mean(flipper_length_mm, na.rm = TRUE)
+  )
 ```
+
+<br>
 
 👉 **Ergebnis:** Eine Tabelle mit einer Zeile und den beiden berechneten Kennwerten
 
@@ -381,6 +398,8 @@ penguins |>
 -   Wird oft genutzt, um **berechnete Spalten** hinzuzufügen (z.B. `bill_to_flipper_ratio`)
 
 -   Die Berechnung erfolgt zeilenweise (jede Zeile bekommt ihren eigenen Wert)
+
+<br>
 
 ```{r, echo=TRUE}
 penguins_upgraded <- penguins |> 
@@ -488,21 +507,15 @@ penguins |>
 
 -   Pipe (`|>` oder `%>%`) verbindet mehrere Schritte
 
-<br>
-
 🔍 **Daten auswählen**
 
 -   `filter()` → Zeilen (Beobachtungen)
 
 -   `select()` → Spalten (Variablen)
 
-<br>
-
 🧮 **Daten verändern**
 
 -   `mutate()` → neue Variablen erstellen
-
-<br>
 
 📊 **Daten zusammenfassen**
 
@@ -519,5 +532,3 @@ penguins |>
 -   Alle Instruktionen auf der Website
 
 -   Danach Feedback von uns
-
-------------------------------------------------------------------------
