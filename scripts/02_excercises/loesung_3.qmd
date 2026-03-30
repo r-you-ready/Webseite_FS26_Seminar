@@ -15,12 +15,12 @@ Bei Bedarf findest du hier nochmals die Slides zu Einheit 5:
 
 Und hier die Slides zu Einheit 6:
 
-```{=html}
+::: {=html}
 
 <iframe src="../01_slides/EH_6.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
 
 </iframe>
-```
+:::
 
 # Wiederholung Hands On Block 2:
 
