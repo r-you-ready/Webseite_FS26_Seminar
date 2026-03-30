@@ -1,7 +1,10 @@
 project:
   type: website
+  pre-render:
+    - Rscript copy_files.R
   resources:
     - PDFs
+    - scripts/02_excercises/downloads/*.qmd
 
 website:
   title: "R u Ready"

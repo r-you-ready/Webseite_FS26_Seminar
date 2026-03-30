@@ -2,7 +2,16 @@
 title: "Hands On – Tidy & Transform / Analyze (Einheiten 9 und 10)"
 editor: visual
 bibliography: references.bib
+filters:
+  - conditional_content
+show_solutions: false
 draft: true
+format:
+  html:
+    code-tools:
+       source: downloads/loesung_5_solution.qmd
+       toggle: false
+       caption: "Download der Lösungsdatei"
 ---
 
 ```{r, echo = TRUE, results = 'hide', message = FALSE, warning = FALSE}
@@ -364,7 +373,7 @@ alpha(mmq_vars)
 ## Streudiagramme/Scatterplots & weitere Datenverteilungen
 
 | **Geom** | **Funktion** | **Einsatzbereich** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | geom_point() | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) |
 | geom_line() | Liniendiagramm | Werteverlauf über kontinuierliche x-Achse darstellen |
 | geom_bar() | Balkendiagramm | Häufigkeiten oder Aggregationen für Kategorien (x = Gruppe) |

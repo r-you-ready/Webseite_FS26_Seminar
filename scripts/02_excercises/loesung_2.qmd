@@ -3,7 +3,14 @@ title: "Hands On – Coding Basics (Einheiten 3 und 4)"
 filters:
   - conditional_content
 show_solutions: true
+format:
+  html:
+    code-tools:
+       source: downloads/loesung_2_solution.qmd
+       toggle: false
+       caption: "Download der Lösungsdatei" 
 ---
+
 
 ```{r, include = FALSE}
 library(tidyverse)
@@ -35,8 +42,7 @@ Und hier die Slides zu Einheit 4:
 
 ✅Datensätze in R importieren, inspizieren und speichern
 
-✅Datensätze mit `cbind()` und `full_join()` mergen und Vor- und
-Nachteile reflektieren
+✅Datensätze mit `cbind()` und `full_join()` mergen und Vor- und Nachteile reflektieren
 
 ✅Funktionen und ihre Argumente (inkl. Defaults) nutzen
 
@@ -46,25 +52,18 @@ Nachteile reflektieren
 
 ### Was sind R-Projekte?
 
-👉 [Kapitel 6.2 in R for Data
-Science](https://r4ds.hadley.nz/workflow-scripts.html#projects)
+👉 [Kapitel 6.2 in R for Data Science](https://r4ds.hadley.nz/workflow-scripts.html#projects)
 
-Ein **R-Projekt** ist eine Projektdatei mit der Endung (`.Rproj`), die
-du in RStudio anlegst oder öffnest.\
+Ein **R-Projekt** ist eine Projektdatei mit der Endung (`.Rproj`), die du in RStudio anlegst oder öffnest.\
 
 Wenn du ein Projekt öffnest, passiert Folgendes automatisch:
 
--   RStudio setzt das **Working Directory (Arbeitsverzeichnis)** auf den
-    Ordner, in dem die `.Rproj`-Datei liegt.\
--   Alle Dateien, Skripte, Daten und Ergebnisse, die du in diesem Ordner
-    ablegst, gehören logisch zu diesem Projekt.\
+-   RStudio setzt das **Working Directory (Arbeitsverzeichnis)** auf den Ordner, in dem die `.Rproj`-Datei liegt.\
+-   Alle Dateien, Skripte, Daten und Ergebnisse, die du in diesem Ordner ablegst, gehören logisch zu diesem Projekt.\
 -   Du arbeitest in einer klar definierten, geschlossenen Umgebung.\
--   Du kannst entweder ein neues Projekt erstellen oder ein bestehendes
-    Projekt öffnen.\
+-   Du kannst entweder ein neues Projekt erstellen oder ein bestehendes Projekt öffnen.\
 
-Du kannst dir ein Projekt wie einen **Container** für ein
-Forschungsprojekt vorstellen. Alles, was zu einer Analyse gehört, liegt
-gebündelt an einem Ort.
+Du kannst dir ein Projekt wie einen **Container** für ein Forschungsprojekt vorstellen. Alles, was zu einer Analyse gehört, liegt gebündelt an einem Ort.
 
 Das ist besonders wichtig für:
 
@@ -77,13 +76,11 @@ Das ist besonders wichtig für:
 
 #### Warum sollte man mit Projekten arbeiten?
 
-Viele typische Probleme in R entstehen dadurch, dass kein Projekt
-verwendet wird:
+Viele typische Probleme in R entstehen dadurch, dass kein Projekt verwendet wird:
 
 -   Das Working Directory ist falsch gesetzt.
 -   Skripte funktionieren nur auf dem eigenen Laptop.
--   Dateien werden an unterschiedlichen Orten gespeichert -\> kein
-    nachvollziehbares Forschungsdatenmanagement.
+-   Dateien werden an unterschiedlichen Orten gespeichert -\> kein nachvollziehbares Forschungsdatenmanagement.
 -   Analysen sind schwer reproduzierbar.
 
 R-Projekte verhindern genau diese Probleme.
@@ -92,18 +89,13 @@ R-Projekte verhindern genau diese Probleme.
 
 Oben rechts in RStudio siehst du den Namen des aktuellen Projekts.
 
-In diesem Screenshot ist noch kein Projekt geöffnet (Project: (None)).
-Wenn ein Projekt aktiv ist, wird dort der entsprechende Projektname
-angezeigt.
+In diesem Screenshot ist noch kein Projekt geöffnet (Project: (None)). Wenn ein Projekt aktiv ist, wird dort der entsprechende Projektname angezeigt.
 
 ![](../../images/EH3/Project.png)
 
 **Übung:**
 
-Im ZIP-Ordner zum Abschlussprojekt, den ihr von ILIAS heruntergeladen
-habt (inklusive Datenanalyseplan und Codebook), haben wir für euch
-bereits eine `.Rproj`-Datei angelegt. Diese befindet sich im Ordner
-*Grinschgl2020*.
+Im ZIP-Ordner zum Abschlussprojekt, den ihr von ILIAS heruntergeladen habt (inklusive Datenanalyseplan und Codebook), haben wir für euch bereits eine `.Rproj`-Datei angelegt. Diese befindet sich im Ordner *Grinschgl2020*.
 
 1.  Öffne diese Datei.
 2.  Überprüfe oben rechts in RStudio, ob das richtige Projekt aktiv ist.
@@ -112,36 +104,26 @@ bereits eine `.Rproj`-Datei angelegt. Diese befindet sich im Ordner
 👉 Gewöhne dir an, Analysen immer über die Projektdatei zu starten.
 
 ::: {.callout-note collapse="true" title="Bei Fehlermeldungen:"}
-„Achtung! Bei Mac-User:innen kann es zu Problemen mit den Berechtigungen
-kommen. Falls dir beim Öffnen diese Fehlermeldung angezeigt wird:“
+„Achtung! Bei Mac-User:innen kann es zu Problemen mit den Berechtigungen kommen. Falls dir beim Öffnen diese Fehlermeldung angezeigt wird:“
 
 ![](../../images/hands_on_2/error_project.png)
 
-Die Lösung besteht darin, die Berechtigungen für den Ordner anzupassen.
-Dafür gehst du auf den ‚r_you_ready‘-Ordner und öffnest das Menü mit
-‚Get Info‘.
+Die Lösung besteht darin, die Berechtigungen für den Ordner anzupassen. Dafür gehst du auf den ‚r_you_ready‘-Ordner und öffnest das Menü mit ‚Get Info‘.
 
 ![](../../images/hands_on_2/help_error_project.png)
 
-Die Berechtigungen passt du an, indem du auf das Schloss unten rechts
-klickst, dein Passwort eingibst und bei deinem Account ‚Read & Write‘
-auswählst. Anschliessend klickst du auf die drei Punkte im Kreis und
-führst ‚Apply to enclosed items…‘ aus. Danach solltest du die vollen
-Berechtigungen haben.
+Die Berechtigungen passt du an, indem du auf das Schloss unten rechts klickst, dein Passwort eingibst und bei deinem Account ‚Read & Write‘ auswählst. Anschliessend klickst du auf die drei Punkte im Kreis und führst ‚Apply to enclosed items…‘ aus. Danach solltest du die vollen Berechtigungen haben.
 :::
 
 **Eigenes Projekt erstellen**
 
-Wenn du zukünftig ein eigenes Projekt anlegen möchtest (z.B. für deine
-Masterarbeit): 👉[Kapitel 6.2 in R for Data
-Science](https://r4ds.hadley.nz/workflow-scripts.html#projects)
+Wenn du zukünftig ein eigenes Projekt anlegen möchtest (z.B. für deine Masterarbeit): 👉[Kapitel 6.2 in R for Data Science](https://r4ds.hadley.nz/workflow-scripts.html#projects)
 
 ------------------------------------------------------------------------
 
 ### Absolute vs. relative Pfade
 
-Wenn du in R eine Datei einliest, musst du angeben, **wo** diese Datei
-liegt.
+Wenn du in R eine Datei einliest, musst du angeben, **wo** diese Datei liegt.
 
 Diesen "Weg" zur Datei nennt man einen **Pfad**.
 
@@ -149,28 +131,22 @@ Dabei unterscheidet man zwei Arten von Pfaden:
 
 #### Absolute Pfade
 
--   Ein **absoluter Pfad** beschreibt den vollständigen Weg zu einer
-    Datei, ausgehend vom Wurzelverzeichnis *deines* Computers.
+-   Ein **absoluter Pfad** beschreibt den vollständigen Weg zu einer Datei, ausgehend vom Wurzelverzeichnis *deines* Computers.
 
-    🔴 Nachteil: Sie sind oft sehr lang und funktionieren nur auf deinem
-    Rechner.
+    🔴 Nachteil: Sie sind oft sehr lang und funktionieren nur auf deinem Rechner.
 
     -   Beispiel (Windows):\
         `C:\Users\maxmustermann\Dokumente\r_you_ready\Grinschgl2020\data\raw\Beispieldatei.csv`
 
-Wenn jemand anderes dieses Skript ausführt, wird dieser Pfad nicht
-existieren.
+Wenn jemand anderes dieses Skript ausführt, wird dieser Pfad nicht existieren.
 
 #### Relative Pfade
 
--   Ein **relativer Pfad** beschreibt den Weg zu einer Datei ausgehend
-    vom *aktuellen Arbeitsverzeichnis*.
+-   Ein **relativer Pfad** beschreibt den Weg zu einer Datei ausgehend vom *aktuellen Arbeitsverzeichnis*.
 
--   Wenn du mit einem R-Projekt arbeitest, ist das Working Directory
-    automatisch der Projektordner.
+-   Wenn du mit einem R-Projekt arbeitest, ist das Working Directory automatisch der Projektordner.
 
-    🟢 Vorteil: Sie sind kürzer, übersichtlicher und funktionieren auf
-    jedem Rechner, solange die Projektstruktur gleich bleibt.
+    🟢 Vorteil: Sie sind kürzer, übersichtlicher und funktionieren auf jedem Rechner, solange die Projektstruktur gleich bleibt.
 
     -   Beispiel:
 
@@ -184,8 +160,7 @@ existieren.
         read_csv("data/raw/Beispieldatei.csv")  # Einlesen der Datei in R
         ```
 
-Solange die Projektstruktur gleich bleibt, funktioniert dieser Code auf
-jedem Computer.
+Solange die Projektstruktur gleich bleibt, funktioniert dieser Code auf jedem Computer.
 
 #### Warum ist das wichtig?
 
@@ -207,10 +182,7 @@ Absolute Pfade verhindern dies; relative Pfade ermöglichen es.
 
 Bevor wir Daten analysieren können, müssen wir sie in R einlesen.
 
-Die entsprechenden Datensätze liegen im ZIP-Dokument bereits vor und
-müssen nicht separat heruntergeladen werden. Arbeiten wir aus dem
-R-Projekt dieses Ordners aus, können wir die Dokumente einfach mit einem
-relativen Pfad adressieren.
+Die entsprechenden Datensätze liegen im ZIP-Dokument bereits vor und müssen nicht separat heruntergeladen werden. Arbeiten wir aus dem R-Projekt dieses Ordners aus, können wir die Dokumente einfach mit einem relativen Pfad adressieren.
 
 Dabei sind drei Dinge zentral:
 
@@ -218,20 +190,15 @@ Dabei sind drei Dinge zentral:
 -   das passende **Trennzeichen**
 -   ein korrekter (relativer) **Dateipfad innerhalb des Projekts**
 
-In diesem Seminar arbeiten wir hauptsächlich mit `.csv`- und
-`.xlsx`-Dateien. Wir werden uns mehrere Möglichkeiten anschauen, wie man
-diese einlesen kann.
+In diesem Seminar arbeiten wir hauptsächlich mit `.csv`- und `.xlsx`-Dateien. Wir werden uns mehrere Möglichkeiten anschauen, wie man diese einlesen kann.
 
-👉 [Kapitel
-3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
+👉 [Kapitel 3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
 
-👉 [Cheatsheet Datenimport mit
-`readr`](https://rstudio.github.io/cheatsheets/html/data-import.html)
+👉 [Cheatsheet Datenimport mit `readr`](https://rstudio.github.io/cheatsheets/html/data-import.html)
 
 #### Wichtige erste Schritte
 
-Stelle sicher, dass das Metapaket **tidyverse** geladen ist:
-(`library(tidyverse)`) (siehe Hands-On 1).
+Stelle sicher, dass das Metapaket **tidyverse** geladen ist: (`library(tidyverse)`) (siehe Hands-On 1).
 
 Wir verwenden Funktionen aus folgenden Paketen:
 
@@ -240,17 +207,13 @@ Wir verwenden Funktionen aus folgenden Paketen:
 - **readxl** (für .xlsx-Dateien)
 ```
 
-`readr` ist Teil von tidyverse, während `readxl` ein separates, aber
-kompatibles Paket aus dem tidyverse-Ökosystem ist und bei Bedarf
-zusätzlich geladen werden muss: (`library(readxl)`).
+`readr` ist Teil von tidyverse, während `readxl` ein separates, aber kompatibles Paket aus dem tidyverse-Ökosystem ist und bei Bedarf zusätzlich geladen werden muss: (`library(readxl)`).
 
-Beide Pakete sind zentrale Werkzeuge für einen sauberen und
-reproduzierbaren Datenimport in R.
+Beide Pakete sind zentrale Werkzeuge für einen sauberen und reproduzierbaren Datenimport in R.
 
 #### Delimiter verstehen
 
-CSV-Dateien enthalten Werte, die durch ein bestimmtes Zeichen getrennt
-sind, den sogenannten Delimiter.
+CSV-Dateien enthalten Werte, die durch ein bestimmtes Zeichen getrennt sind, den sogenannten Delimiter.
 
 Typische Delimiter sind:
 
@@ -259,43 +222,31 @@ Typische Delimiter sind:
 - ; (Semikolon)
 ```
 
-Wenn das falsche Trennzeichen gewählt wird, landet der gesamte Inhalt
-der Datei in einer einzigen Spalte.
+Wenn das falsche Trennzeichen gewählt wird, landet der gesamte Inhalt der Datei in einer einzigen Spalte.
 
-Auszug aus
-[Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.html):
-Die Funktionen read_delim und read_csv:
+Auszug aus [Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.html): Die Funktionen read_delim und read_csv:
 
 ![](../../images/cheat.png)
 
-`read_csv()` ist eine Spezialisierung von `read_delim()`, die
-automatisch Komma als Trennzeichen verwendet, während man bei
-`read_delim()` das gewünschte Trennzeichen selbst angeben muss.
+`read_csv()` ist eine Spezialisierung von `read_delim()`, die automatisch Komma als Trennzeichen verwendet, während man bei `read_delim()` das gewünschte Trennzeichen selbst angeben muss.
 
 ### Einlesen via Oberfläche (Point & Click)
 
-Gerade zu Beginn kann die Import-Oberfläche im Environement von RStudio
-hilfreich sein.
+Gerade zu Beginn kann die Import-Oberfläche im Environement von RStudio hilfreich sein.
 
 **Übung: data_mmq.csv importieren**
 
-1.  Importiere die Datei `"data_mmq.csv"` über die Point &
-    Klick-Oberfläche Im Environment von RStudio. Verwende dafür "From
-    Text (readr)"
+1.  Importiere die Datei `"data_mmq.csv"` über die Point & Klick-Oberfläche Im Environment von RStudio. Verwende dafür "From Text (readr)"
 
-    1.1. Environment -\> Import Dataset -\> From Text (readr)
-    ![](../../images/import.png)
+    1.1. Environment -\> Import Dataset -\> From Text (readr) ![](../../images/import.png)
 
-    1.2. Schau dir den Datensatz an: Mit welchem Trennzeichen sind die
-    Daten getrennt? ![](../../images/delimiter.png)
+    1.2. Schau dir den Datensatz an: Mit welchem Trennzeichen sind die Daten getrennt? ![](../../images/delimiter.png)
 
-    1.3. Stelle in der Oberfläche `"Delimiter"` auf das passende
-    Trennzeichen. Was verändert sich in der Vorschau?
+    1.3. Stelle in der Oberfläche `"Delimiter"` auf das passende Trennzeichen. Was verändert sich in der Vorschau?
 
 **Wichtig: Der erzeugte Code**
 
-Die Oberfläche ist nur ein Hilfsmittel. Entscheidend ist der **Code**,
-der dabei generiert wird.
+Die Oberfläche ist nur ein Hilfsmittel. Entscheidend ist der **Code**, der dabei generiert wird.
 
 Wenn du im Projekt arbeitest, sollte der Code ungefähr so aussehen:
 
@@ -309,11 +260,9 @@ Achte besonders auf den Pfad: `"data/raw/data_mmq.csv"`
 
 **Code ins Skript übernehmen**
 
-Wenn du den Code via Klick-Oberfläche eingelesen hast, wirst du den
-ausgeführten Code in der Konsole sehen.
+Wenn du den Code via Klick-Oberfläche eingelesen hast, wirst du den ausgeführten Code in der Konsole sehen.
 
-👉 Kopiere diesen in dein Skript, damit du ihn in Zukunft
-wiederverwenden und anpassen kannst.
+👉 Kopiere diesen in dein Skript, damit du ihn in Zukunft wiederverwenden und anpassen kannst.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
@@ -334,8 +283,7 @@ Wenn alles korrekt ist, befindet sich in jeder Zelle genau ein Wert.
 
 ### Einlesen via Code
 
-Langfristig solltest du Daten **direkt per Code** einlesen können - ohne
-Klick-Oberfläche.
+Langfristig solltest du Daten **direkt per Code** einlesen können - ohne Klick-Oberfläche.
 
 #### .CSV Dateien
 
@@ -350,8 +298,7 @@ Lies nun weitere CSV-Datensätze ein:
 
 Verwende dafür eine geeignete Funktion aus dem Paket `readr`.
 
-👉 Tipp: Nutze den zuvor generierten Code und passe nur Variablennamen,
-Dateinamen und ggf. Delimiter an.
+👉 Tipp: Nutze den zuvor generierten Code und passe nur Variablennamen, Dateinamen und ggf. Delimiter an.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
@@ -375,19 +322,16 @@ data_vp <- read_delim("data/raw/data_vp.csv" , ";")
 
 Einige Dateien liegen im Excel-Format (`.xlsx`) vor.
 
-Dafür verwenden wir das Paket **readxl** und die Funktion `read_excel()`
-(Teil des Tidyverse).
+Dafür verwenden wir das Paket **readxl** und die Funktion `read_excel()` (Teil des Tidyverse).
 
 -   Lies damit die Datensätze:
 
     -   `data_ratings`
     -   `data_strategies`
 
-👉 Achte auch hier darauf, einen relativen Pfad innerhalb des Projektes
-zu verwenden.
+👉 Achte auch hier darauf, einen relativen Pfad innerhalb des Projektes zu verwenden.
 
--   Nutze bei Unsicherheiten `?read_excel` oder das
-    [Cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf).
+-   Nutze bei Unsicherheiten `?read_excel` oder das [Cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf).
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
@@ -406,44 +350,31 @@ data_strategies <- read_excel("data/raw/data_strategies.xlsx") # kopiert und ang
 
 **Ziel**
 
-Am Ende solltest du **7 verschiedene Datensätze** in deinem Environment
-sehen.
+Am Ende solltest du **7 verschiedene Datensätze** in deinem Environment sehen.
 
 ::: {.callout-note collapse="true" title="Vertiefung"}
-👉Für das Einlesen weiterer Dateiformate (z.B. SPSS-Dateien), siehe
-[Kapitel
-3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
+👉Für das Einlesen weiterer Dateiformate (z.B. SPSS-Dateien), siehe [Kapitel 3.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/03-data_frames.html#daten-importieren)
 :::
 
 #### Kontext: Warum genau diese sieben Datensätze?
 
-Die sieben eingelesenen Dateien sind die Rohdatensätze, die wir für die
-Reanalyse des Papers von *Grinschgl et al. (2020)* benötigen.
+Die sieben eingelesenen Dateien sind die Rohdatensätze, die wir für die Reanalyse des Papers von *Grinschgl et al. (2020)* benötigen.
 
-Diese Datensätze enthalten sämtliche erhobenenen Variablen der Studie,
-auf denen alle späteren Analysen aufbauen.
+Diese Datensätze enthalten sämtliche erhobenenen Variablen der Studie, auf denen alle späteren Analysen aufbauen.
 
-👉 Im nächsten Schritt werden wir diese Datensätze systematisch
-zusammenführen (mergen), um eine gemeinsame Analysegrundlage zu
-schaffen.
+👉 Im nächsten Schritt werden wir diese Datensätze systematisch zusammenführen (mergen), um eine gemeinsame Analysegrundlage zu schaffen.
 
 # Daten mergen
 
-***ℹ️ Vertiefung: In Einheit 4 werden wir das Mergen systematisch
-behandeln. Hier geht es darum, ein erstes Gefühl für das Problem zu
-bekommen.***
+***ℹ️ Vertiefung: In Einheit 4 werden wir das Mergen systematisch behandeln. Hier geht es darum, ein erstes Gefühl für das Problem zu bekommen.***
 
 Nun befinden sich sieben separate Rohdatensätze in deinem Environment.
 
-Diese Datensätze enthalten unterschiedliche Teile der Studie (z.B.
-Performanzdaten, Ratings, Strategien).
+Diese Datensätze enthalten unterschiedliche Teile der Studie (z.B. Performanzdaten, Ratings, Strategien).
 
-Für die Reanalyse benötigen wir jedoch **einen gemeinsamen
-Gesamtdatensatz**, in dem alle Variablen pro Versuchsperson
-zusammengeführt sind.
+Für die Reanalyse benötigen wir jedoch **einen gemeinsamen Gesamtdatensatz**, in dem alle Variablen pro Versuchsperson zusammengeführt sind.
 
-Das bedeutet: Wir müssen die einzelnen Datensätze korrekt miteinander
-verbinden.
+Das bedeutet: Wir müssen die einzelnen Datensätze korrekt miteinander verbinden.
 
 #### Warum ist das nicht trivial?
 
@@ -460,9 +391,7 @@ In unseren Datensätzen ist diese Schlüsselvariable: **code**
 
 `cbind()` fügt Datensätze einfach spaltenweise nebeneinander.
 
-👉 Wichtig: Es wird dabei **nicht überprüft**, ob die Zeilen inhaltlich
-zusammenpassen! Es wird also nicht kontrolliert, ob die Werte jeweils
-von derselben Person stammen oder nicht.
+👉 Wichtig: Es wird dabei **nicht überprüft**, ob die Zeilen inhaltlich zusammenpassen! Es wird also nicht kontrolliert, ob die Werte jeweils von derselben Person stammen oder nicht.
 
 **Aufgabe**
 
@@ -482,34 +411,21 @@ dat_cbind <- cbind(data_cb, data_cvstm, data_pct, data_vp, data_ratings, data_st
     -   Was passiert, wenn die Reihenfolge unterschiedlich ist?\
     -   Was passiert, wenn eine Person in einem Datensatz fehlt?\
 
-💡 Reflektiere: Welche Gefahr entsteht, wenn Daten nur positionsbasiert
-zusammengefügt werden?
+💡 Reflektiere: Welche Gefahr entsteht, wenn Daten nur positionsbasiert zusammengefügt werden?
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
-Es entsteht die Gefahr, Erhebungen von unterschiedlichen Personen zu
-vermischen. Angenommen alle Messungen wurden in zwei Datensätze
-aufgeteilt. In einem Datensatz befinden sich die ersten zwei Messungen,
-im anderen Datensatz die letzten beiden Messungen. Die Reihenfolge der
-Personen im Datensatz ist vermischt. Werden die Datensätze jetzt
-zusammengefügt, indem die Spalten hintereinandergeklebt werden, so
-gehört nicht mehr strikt jede Zeile zu einer Versuchsperson, sondern
-Zeilen sind gemischt einer und einer anderen Versuchsperson zugeordnet.
-Um dies zu vermeiden, muss vor dem "Kleben" sichergestellt sein, dass
-die Zeilen über die Datensätze hinweg einheitlich sind.
+Es entsteht die Gefahr, Erhebungen von unterschiedlichen Personen zu vermischen. Angenommen alle Messungen wurden in zwei Datensätze aufgeteilt. In einem Datensatz befinden sich die ersten zwei Messungen, im anderen Datensatz die letzten beiden Messungen. Die Reihenfolge der Personen im Datensatz ist vermischt. Werden die Datensätze jetzt zusammengefügt, indem die Spalten hintereinandergeklebt werden, so gehört nicht mehr strikt jede Zeile zu einer Versuchsperson, sondern Zeilen sind gemischt einer und einer anderen Versuchsperson zugeordnet. Um dies zu vermeiden, muss vor dem "Kleben" sichergestellt sein, dass die Zeilen über die Datensätze hinweg einheitlich sind.
 :::
 ::::
 
 #### Zentrale Einsicht
 
-`cbind()` basiert auf Positionen (Zeile 1 in Datensatz 1 + Zeile 1 in
-Datensatz 2 + Zeile in Datensatz 3 usw.)
+`cbind()` basiert auf Positionen (Zeile 1 in Datensatz 1 + Zeile 1 in Datensatz 2 + Zeile in Datensatz 3 usw.)
 
-Wenn die Reihenfolge der Personen nicht exakt identisch ist, entstehen
-falsche Zuordnungen - und damit auch inhaltlich falsche Analysen.
+Wenn die Reihenfolge der Personen nicht exakt identisch ist, entstehen falsche Zuordnungen - und damit auch inhaltlich falsche Analysen.
 
-👉 Solche Fehler sind besonders gefährlich, weil sie oft nicht sofort
-auffallen!
+👉 Solche Fehler sind besonders gefährlich, weil sie oft nicht sofort auffallen!
 
 ## 2. Sauberer Ansatz: `full_join()`
 
@@ -533,29 +449,20 @@ Das bedeutet:
 
 **Aufgabe**
 
--   Füge nun alle 7 Datensätze mit `full_join()` zu einem
-    Gesamtdatensatz zusammen.
+-   Füge nun alle 7 Datensätze mit `full_join()` zu einem Gesamtdatensatz zusammen.
 
 -   Nenne diesen `dat_full`
 
-    -   **Achtung:** `full_join()` funktioniert immer nur mit zwei
-        Datensätzen gleichzeitig
-    -   Du musst die Funktion also mehrfach anwenden, um alle 7
-        Datensätze zusammenzuführen.
+    -   **Achtung:** `full_join()` funktioniert immer nur mit zwei Datensätzen gleichzeitig
+    -   Du musst die Funktion also mehrfach anwenden, um alle 7 Datensätze zusammenzuführen.
 
-    👉 Hinweis: Im Datensatz `data_pct` heisst die ID-Variable der
-    Versuchspersonen leicht anders ("code_all" anstelle von "code").
-    Wenn du diesen Datensatz mit den anderen Datensätzen zusammenführst,
-    musst du deshalb beim Join angeben, welche Variablen
-    zusammengehören.
+    👉 Hinweis: Im Datensatz `data_pct` heisst die ID-Variable der Versuchspersonen leicht anders ("code_all" anstelle von "code"). Wenn du diesen Datensatz mit den anderen Datensätzen zusammenführst, musst du deshalb beim Join angeben, welche Variablen zusammengehören.
 
     Verwende deshalb `by = c("code_all" = "code")`.
 
-    Das bedeutet: Die Variable `code_all` aus `data_pct` entspricht der
-    Variable `code` im anderen Datensatz.
+    Das bedeutet: Die Variable `code_all` aus `data_pct` entspricht der Variable `code` im anderen Datensatz.
 
-    ⚠️ Wichtig: Die Reihenfolge der beiden Argumente hängt davon ab,
-    welcher Datensatz links bzw. rechts im `full_join()` steht.
+    ⚠️ Wichtig: Die Reihenfolge der beiden Argumente hängt davon ab, welcher Datensatz links bzw. rechts im `full_join()` steht.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
@@ -585,11 +492,7 @@ dat_full <- full_join(data_cb, data_cvstm, by = "code") |>
   full_join(data_mmq, by = "code")
 ```
 
-**Vertiefung**: Viele von euch hatten uns nach einem effizienteren Weg
-gefragt, alle Datensätze in einem Schritt zu mergen. Das ist anhand
-einer selbstgeschriebenen Funktion in Kombination mit reduce() möglich.
-Hier die entsprechende Funktion (bei Fragen hierzu wendet euch gerne an
-uns):
+**Vertiefung**: Viele von euch hatten uns nach einem effizienteren Weg gefragt, alle Datensätze in einem Schritt zu mergen. Das ist anhand einer selbstgeschriebenen Funktion in Kombination mit reduce() möglich. Hier die entsprechende Funktion (bei Fragen hierzu wendet euch gerne an uns):
 
 ```{r, include=TRUE, eval=TRUE}
 merge_multiple_dfs <- function(df_list, by_column) {
@@ -598,10 +501,7 @@ merge_multiple_dfs <- function(df_list, by_column) {
 }
 ```
 
-Damit die Funktion einwandfrei funktioniert müssen noch die Namen aller
-ID-Variablen vereinheitlicht werden. Ausserdem muss eine Liste mit allen
-Namen der Datensätze definiert werden, welche die Funktion einbziehen
-soll:
+Damit die Funktion einwandfrei funktioniert müssen noch die Namen aller ID-Variablen vereinheitlicht werden. Ausserdem muss eine Liste mit allen Namen der Datensätze definiert werden, welche die Funktion einbziehen soll:
 
 ```{r, include=TRUE, eval=TRUE}
 data_pct <- data_pct |> 
@@ -610,16 +510,13 @@ data_pct <- data_pct |>
 list_of_dfs <- list(data_cb, data_cvstm, data_mmq, data_pct, data_ratings, data_strategies, data_vp)
 ```
 
-Dann kann die Funktion auf die Liste mit den jeweiligen Datensätzen
-angewendet werden:
+Dann kann die Funktion auf die Liste mit den jeweiligen Datensätzen angewendet werden:
 
 ```{r, include=TRUE, eval=TRUE}
 dat_full <- merge_multiple_dfs(list_of_dfs, "code")
 ```
 
-Beachtet, bei unseren sieben Datensätzen haben wir hiermit lediglich ein
-wenig effizienter gearbeitet. Dieser Ansatz wäre aber auch für beliebig
-mehr Datensätze anwendbar und würde sich dann umso mehr lohnen!
+Beachtet, bei unseren sieben Datensätzen haben wir hiermit lediglich ein wenig effizienter gearbeitet. Dieser Ansatz wäre aber auch für beliebig mehr Datensätze anwendbar und würde sich dann umso mehr lohnen!
 :::
 ::::
 
@@ -661,17 +558,11 @@ dim(dat_full)
 :::
 ::::
 
--   Entspricht die Zeilenanzahl der Anzahl der Versuchspersonen im
-    Paper?
+-   Entspricht die Zeilenanzahl der Anzahl der Versuchspersonen im Paper?
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
-Die Zeilenanzahl von 159 entspricht der im Paper berichteten finalen
-Stichprobe nach Aussschluss von unvollständigen und ungültigen
-Antworten. Die Spaltenanzahl von 36 ergibt sich durch die Summe der
-Spaltenanzahl der einzelnen Datensätze minus der Anzahl der Datensätze
-(die ID-Variable fällt aus jedem neu hinzugefügten Datensatz weg) plus
-einer einzelnen Spalte für die bestehen bleibende ID-Variable.
+Die Zeilenanzahl von 159 entspricht der im Paper berichteten finalen Stichprobe nach Aussschluss von unvollständigen und ungültigen Antworten. Die Spaltenanzahl von 36 ergibt sich durch die Summe der Spaltenanzahl der einzelnen Datensätze minus der Anzahl der Datensätze (die ID-Variable fällt aus jedem neu hinzugefügten Datensatz weg) plus einer einzelnen Spalte für die bestehen bleibende ID-Variable.
 :::
 ::::
 
@@ -679,17 +570,13 @@ einer einzelnen Spalte für die bestehen bleibende ID-Variable.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
-Die Spaltenanzahl von 36 ergibt sich durch die Summe der Spaltenanzahl
-der einzelnen Datensätze minus der Anzahl der Datensätze (die
-ID-Variable fällt aus jedem neu hinzugefügten Datensatz weg) plus einer
-einzelnen Spalte für die bestehen bleibende ID-Variable.
+Die Spaltenanzahl von 36 ergibt sich durch die Summe der Spaltenanzahl der einzelnen Datensätze minus der Anzahl der Datensätze (die ID-Variable fällt aus jedem neu hinzugefügten Datensatz weg) plus einer einzelnen Spalte für die bestehen bleibende ID-Variable.
 :::
 ::::
 
 #### Überblick verschaffen
 
-👀Verschaffe dir eine Überblick über deinen Datensatz mit den
-Funktionen, die wir schon im letzten Hands On getestet haben:
+👀Verschaffe dir eine Überblick über deinen Datensatz mit den Funktionen, die wir schon im letzten Hands On getestet haben:
 
 -   Lasse dir die Variablenamen ausgeben mit `names()`
 
@@ -755,12 +642,7 @@ summary(dat_full)
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
-Idealerweise gibt es keine doppelten Variablen. Falls doch, dann sind
-diese meist auf Fehler beim full_join() zurückzuführen. Beinhalten beide
-Datensätze Spalten mit einem identsichen Namen und diesen werden nicht
-als Schlüssel unter `by` angegeben, dann werden beide in den gemergten
-Datensatz aufgenommen und die alten Spaltennamen werden mit mit .x und
-.y ergänzt.
+Idealerweise gibt es keine doppelten Variablen. Falls doch, dann sind diese meist auf Fehler beim full_join() zurückzuführen. Beinhalten beide Datensätze Spalten mit einem identsichen Namen und diesen werden nicht als Schlüssel unter `by` angegeben, dann werden beide in den gemergten Datensatz aufgenommen und die alten Spaltennamen werden mit mit .x und .y ergänzt.
 :::
 ::::
 
@@ -768,9 +650,7 @@ Datensatz aufgenommen und die alten Spaltennamen werden mit mit .x und
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
-Da wir keine NAs in die sieben Rohdaten sollten auch im gemergten
-`dat_full`keine solche Werte vorhanden sein. Dies kann über
-`sum(is.na(dat_full))` überprüft werden
+Da wir keine NAs in die sieben Rohdaten sollten auch im gemergten `dat_full`keine solche Werte vorhanden sein. Dies kann über `sum(is.na(dat_full))` überprüft werden
 :::
 ::::
 
@@ -778,17 +658,13 @@ Da wir keine NAs in die sieben Rohdaten sollten auch im gemergten
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
-Hierzu sind die einzelnen Spalten auf ihre minimalen, maximalen und
-üblichen Werte mit den jeweils zu erwarteten abzugleichen.
-Beispielsweise dürften Spalten wie `vp_propcorrect` per Definition
-keinen Wert grösser als 1 aufweisen.
+Hierzu sind die einzelnen Spalten auf ihre minimalen, maximalen und üblichen Werte mit den jeweils zu erwarteten abzugleichen. Beispielsweise dürften Spalten wie `vp_propcorrect` per Definition keinen Wert grösser als 1 aufweisen.
 :::
 ::::
 
 #### Warum dieser Schritt zentral ist?
 
-Die Qualität der gesamten Reanalyse hängt davon ab, ob die Datensätze
-korrekt zusammengeführt wurden.
+Die Qualität der gesamten Reanalyse hängt davon ab, ob die Datensätze korrekt zusammengeführt wurden.
 
 Ein falsches Mergen führt zu:
 
@@ -800,9 +676,7 @@ Ein falsches Mergen führt zu:
 
 **Auf einzelne Werte zugreifen:**
 
--   Greife auf den **ersten Wert der ersten Spalte** zu: Verwende eckige
-    Klammern. Der erste Wert in der Klammer steht für die Zeile, der
-    zweite für die Spalte.
+-   Greife auf den **ersten Wert der ersten Spalte** zu: Verwende eckige Klammern. Der erste Wert in der Klammer steht für die Zeile, der zweite für die Spalte.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
@@ -812,8 +686,7 @@ dat_full[1,1]
 :::
 ::::
 
--   Greife auf die Werte der **Spalten 1–15 in der ersten Zeile** zu.
-    Verwende wieder eckige Klammern und den Bereichsoperator `1:15`.
+-   Greife auf die Werte der **Spalten 1–15 in der ersten Zeile** zu. Verwende wieder eckige Klammern und den Bereichsoperator `1:15`.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
@@ -823,8 +696,7 @@ dat_full[1,1:15]
 :::
 ::::
 
--   Lasse dir alle Werte der Variable `"mean_rl_all"` ausgeben. Auf
-    Variablen greifst du mit `$` zu.
+-   Lasse dir alle Werte der Variable `"mean_rl_all"` ausgeben. Auf Variablen greifst du mit `$` zu.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
@@ -834,9 +706,7 @@ dat_full$mean_rl_all
 :::
 ::::
 
--   Greife auf die **ersten 10 Werte der Variable `"question1"`** zu.
-    Verwende dazu den `$`-Operator in Kombination mit dem
-    Bereichsoperator `1:10`.
+-   Greife auf die **ersten 10 Werte der Variable `"question1"`** zu. Verwende dazu den `$`-Operator in Kombination mit dem Bereichsoperator `1:10`.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
@@ -848,9 +718,7 @@ dat_full$question1[1:10]
 
 # Daten speichern
 
-Nachdem wir die sieben Rohdatensätze korrekt zusammengeführt haben,
-liegt nun unser vollständiger Analyse-Datensatz `dat_full` im
-Environment.
+Nachdem wir die sieben Rohdatensätze korrekt zusammengeführt haben, liegt nun unser vollständiger Analyse-Datensatz `dat_full` im Environment.
 
 Damit wir:
 
@@ -864,8 +732,7 @@ speichern wir den Datensatz nun dauerhaft ab.
 
 **Aufgabe**
 
-Speichere `dat_full` als CSV-Datei in deinem Projektordner, genauer im
-Ordner:
+Speichere `dat_full` als CSV-Datei in deinem Projektordner, genauer im Ordner:
 
 `"data/processed"`
 
@@ -878,12 +745,9 @@ Du musst dabei zwei zentrale Argumente angeben:
 - Unter welchem Pfad (inkl. Dateiname) es abgelegt wird
 ```
 
-Bei Unklarheiten schaue dir das
-[Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.html)
-oder die Hilfefunktion an.
+Bei Unklarheiten schaue dir das [Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-import.html) oder die Hilfefunktion an.
 
--   Überprüfe nach dem Speichern, ob dein Datensatz im richtigen Ordner
-    zu finden und der Dateiname korrekt ist.
+-   Überprüfe nach dem Speichern, ob dein Datensatz im richtigen Ordner zu finden und der Dateiname korrekt ist.
 -   Lässt sich die Datei erneut einlesen?
 
 :::: {.content-visible when-meta="show_solutions"}
@@ -896,21 +760,7 @@ write.csv(dat_full, "data/processed/dat_full.csv", row.names = FALSE)
 dat_full_processed <- read.csv("data/processed/dat_full.csv")
 ```
 
-Bei vielen trat beim abspeichern (und darauf folgenden Laden) auf, dass
-ganz links eine neue Spalte im Datensatz ergänzt wurde. Diese war auch
-noch identisch mit der ID-Variable, welche zuvor ganz links im Datensatz
-vorhanden war. Diese Doppelung ist reiner Zufall. Das eigentliche
-Problem: Implizit beinhalten Dataframes in R ganz links noch den
-Reihenindex. Vor jeder Zeile steht also eigentlich noch eine 1 in der
-ersten Reihe, eine 2 in der zweiten usw. Die Funktion write.csv() möchte
-diese Information auch abspeichern und erstellt daher für diese eine
-weitere Spalte. Da der Dataframe für diese Indizes aber keinen
-Spaltennamen hat, wird in der csv keiner abgelegt (vor dem ersten "," in
-der ersten Zeile ist nichts definiert). Beim Einlesen ergänzt R dann
-automatisch einen Spaltennamen. Es gibt hier zwei mögliche Lösungen.
-Entweder wie oben das Argument `row.names = FALSE` setzen. Dieses
-hindert `write.csv` daran die Indizes mit abzuspeichern. Oder
-andernfalls ausweichen auf die alternative Funktion des Tidyverse:
+Bei vielen trat beim abspeichern (und darauf folgenden Laden) auf, dass ganz links eine neue Spalte im Datensatz ergänzt wurde. Diese war auch noch identisch mit der ID-Variable, welche zuvor ganz links im Datensatz vorhanden war. Diese Doppelung ist reiner Zufall. Das eigentliche Problem: Implizit beinhalten Dataframes in R ganz links noch den Reihenindex. Vor jeder Zeile steht also eigentlich noch eine 1 in der ersten Reihe, eine 2 in der zweiten usw. Die Funktion write.csv() möchte diese Information auch abspeichern und erstellt daher für diese eine weitere Spalte. Da der Dataframe für diese Indizes aber keinen Spaltennamen hat, wird in der csv keiner abgelegt (vor dem ersten "," in der ersten Zeile ist nichts definiert). Beim Einlesen ergänzt R dann automatisch einen Spaltennamen. Es gibt hier zwei mögliche Lösungen. Entweder wie oben das Argument `row.names = FALSE` setzen. Dieses hindert `write.csv` daran die Indizes mit abzuspeichern. Oder andernfalls ausweichen auf die alternative Funktion des Tidyverse:
 
 ```{r, eval=TRUE, include=TRUE}
 readr::write_csv(dat_full, "data/processed/dat_full.csv")
@@ -918,33 +768,25 @@ readr::write_csv(dat_full, "data/processed/dat_full.csv")
 :::
 ::::
 
-👉 Für diesen zusammengeführten Datensatz werdet ihr das **Codebook**
-erstellen.
+👉 Für diesen zusammengeführten Datensatz werdet ihr das **Codebook** erstellen.
 
 # Coding Basics: Funktionen
 
-👉 [Kapitel 2.4: Calling
-Functions](https://r4ds.hadley.nz/workflow-basics.html)\
-👉 [Kapitel 2.3: Funktionen
-aufrufen](https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html#funktionen-aufrufen)
+👉 [Kapitel 2.4: Calling Functions](https://r4ds.hadley.nz/workflow-basics.html)\
+👉 [Kapitel 2.3: Funktionen aufrufen](https://methodenlehre.github.io/einfuehrung-in-R/chapters/02-R-language.html#funktionen-aufrufen)
 
-Wir haben in unseren Übungen bereits einige Funktionen verwendet (z.B.
-`sum()` oder `sort()`).\
+Wir haben in unseren Übungen bereits einige Funktionen verwendet (z.B. `sum()` oder `sort()`).\
 Eine Funktion besteht aus:
 
 -   einem **Funktionsnamen**
 -   **Argumenten**, die der Funktion übergeben werden
 
 Viele Funktionen besitzen **Defaults** (Voreinstellungen).\
-Wenn du diese nicht verändern möchtest, musst du sie nicht explizit
-angeben.
+Wenn du diese nicht verändern möchtest, musst du sie nicht explizit angeben.
 
-Die Defaults findest du in der Hilfe: - im Tab *Help* - oder in der
-Konsole mit `?Funktionsname` (z.B. `?sort`)
+Die Defaults findest du in der Hilfe: - im Tab *Help* - oder in der Konsole mit `?Funktionsname` (z.B. `?sort`)
 
-`sort()` hat als Default `decreasing = FALSE`. Deswegen müssen wir, um
-die höchsten Werte des Vektors zu bestimmen, diesen Default umstellen.
-Argumente ohne Defaults müssen zwingend angegeben werden.
+`sort()` hat als Default `decreasing = FALSE`. Deswegen müssen wir, um die höchsten Werte des Vektors zu bestimmen, diesen Default umstellen. Argumente ohne Defaults müssen zwingend angegeben werden.
 
 ```{r}
 first_vector <- c(22342, 4, 5, 6, 7, 23234, 342, 342)
@@ -957,10 +799,8 @@ highest_values   <- sort(first_vector, decreasing = TRUE)[1:2]
 
 Bei vielen Funktionen werden die **Namen der Argumente** weggelassen.
 
-Wenn Argumente **nicht benannt** werden, ist die Reihenfolge
-entscheidend.\
-Wenn du Argumente explizit benennst, kannst du die Reihenfolge frei
-wählen.
+Wenn Argumente **nicht benannt** werden, ist die Reihenfolge entscheidend.\
+Wenn du Argumente explizit benennst, kannst du die Reihenfolge frei wählen.
 
 ### Aufgabe 1
 
@@ -983,8 +823,7 @@ seq(from = -4, to = 11, by = 3)
 
 ### Aufgabe 2
 
-Korrigiere diesen Code so, dass eine Sequenz von **3 bis 12 in
-2er-Schritten** erstellt wird.\
+Korrigiere diesen Code so, dass eine Sequenz von **3 bis 12 in 2er-Schritten** erstellt wird.\
 Belasse dabei die Reihenfolge der Zahlen.
 
 ```{r eval=FALSE}
@@ -1002,8 +841,7 @@ seq(3, 12, 2)
 ## Funktionen aus bestimmten Paketen
 
 Manche Funktionen existieren in mehreren Paketen (z.B. `filter()`).\
-Um sicher die richtige Version zu verwenden, gib auch das entsprechende
-Paket an:
+Um sicher die richtige Version zu verwenden, gib auch das entsprechende Paket an:
 
 ```{r eval=FALSE}
 dplyr::filter()
@@ -1011,11 +849,7 @@ dplyr::filter()
 
 ## Tab Completion
 
-Eine nützliche Funktion von RStudio ist die **Tab Completion**. Wenn du
-eine Funktion aufrufst und die Tabulator-Taste drückst, erscheint ein
-Menü mit den möglichen Argumenten, die du angeben kannst. Probiere es
-mit der Funktion `mean()`. Das funktioniert auch für Funktionen aus
-Paketen, wenn du diese mit `::` auswählst, zum Beispiel: `readr::`.
+Eine nützliche Funktion von RStudio ist die **Tab Completion**. Wenn du eine Funktion aufrufst und die Tabulator-Taste drückst, erscheint ein Menü mit den möglichen Argumenten, die du angeben kannst. Probiere es mit der Funktion `mean()`. Das funktioniert auch für Funktionen aus Paketen, wenn du diese mit `::` auswählst, zum Beispiel: `readr::`.
 
 Tippe z.B.:
 
@@ -1033,42 +867,29 @@ readr::
 
 ## Weitere Tasten und Tastenkürzel:
 
-👉[Kapitel
-1.4.6](https://methodenlehre.github.io/einfuehrung-in-R/chapters/01-workflow.html#tasten)
+👉[Kapitel 1.4.6](https://methodenlehre.github.io/einfuehrung-in-R/chapters/01-workflow.html#tasten)
 
-In RStudio benötigen wir häufig Zeichen, die wir im Alltag kaum
-verwenden. Da wir nicht alle mit dem gleichen Betriebssystem
-(Mac/Windows) und auch nicht mit identischen Tastaturen arbeiten, können
-wir keine einheitlichen Angaben machen, wo sich diese Zeichen genau
-befinden. Versuche daher, die folgenden Zeichen auf deiner eigenen
-Tastatur zu finden:
+In RStudio benötigen wir häufig Zeichen, die wir im Alltag kaum verwenden. Da wir nicht alle mit dem gleichen Betriebssystem (Mac/Windows) und auch nicht mit identischen Tastaturen arbeiten, können wir keine einheitlichen Angaben machen, wo sich diese Zeichen genau befinden. Versuche daher, die folgenden Zeichen auf deiner eigenen Tastatur zu finden:
 
 -   `[ ]` Square brackets (eckige Klammern)
 
 -   `{ }` Curly brackets (geschweifte Klammern)
 
--   `$` Dollar sign (Dollarzeichen – wird für das Auswählen von
-    Variablen benötigt)
+-   `$` Dollar sign (Dollarzeichen – wird für das Auswählen von Variablen benötigt)
 
 -   `#` Hash (Rautezeichen – für Kommentare in R-Skripten)
 
--   `~` Tilde (für Modellnotationen in R; brauchen wir v.a. am Ende des
-    Semesters bei den Analysen)
+-   `~` Tilde (für Modellnotationen in R; brauchen wir v.a. am Ende des Semesters bei den Analysen)
 
 -   `|` Vertical bar (senkrechter Strich – als logischer Operator)
 
--   `` ` `` Backtick (Gravis – vor allem für Code Chunks, selten manuell
-    einzugeben)
+-   `` ` `` Backtick (Gravis – vor allem für Code Chunks, selten manuell einzugeben)
 
 ## Verschachtelte Funktionen
 
-ℹ️Es ist zwar möglich, mehrere Funktionen ineinander zu verschachteln.
-Dies kann jedoch schnell zu Verwirrung führen und den Code unnötig
-unübersichtlich machen. Verschachtelte Funktionen werden **von innen
-nach aussen** ausgeführt.
+ℹ️Es ist zwar möglich, mehrere Funktionen ineinander zu verschachteln. Dies kann jedoch schnell zu Verwirrung führen und den Code unnötig unübersichtlich machen. Verschachtelte Funktionen werden **von innen nach aussen** ausgeführt.
 
-❓Stelle dir hier die Frage: Was wird genau gerundet? Die einzelnen
-Elemente des Vektors oder der errechnet Durchschnitt?
+❓Stelle dir hier die Frage: Was wird genau gerundet? Die einzelnen Elemente des Vektors oder der errechnet Durchschnitt?
 
 ```{r}
 print(mean(round(first_vector)))
@@ -1130,10 +951,7 @@ print(mittelwert)
 
 ## Code automatisch formatieren mit `styler`
 
-Installiere das Package `styler` mit `install.packages()` und lade es.
-`styler` hat eine sogenannte "Wrapper-Funktion", die du unter "Addins"
-aufrufen kannst (evtl. musst du R vor dem Laden neu starten). Verwende
-den Default-Style (tidyverse).
+Installiere das Package `styler` mit `install.packages()` und lade es. `styler` hat eine sogenannte "Wrapper-Funktion", die du unter "Addins" aufrufen kannst (evtl. musst du R vor dem Laden neu starten). Verwende den Default-Style (tidyverse).
 
 ![](../../images/styler.png)
 
@@ -1144,10 +962,7 @@ library(styler)
 
 ### Aufgabe
 
-Versuche mit der `Styler` -Funktion, diesen Code zu leserlicher zu
-machen (markiere den Code und wähle *Style selection*). (Du musst diesen
-ggplot Code nicht verstehen - wir kommen dazu in einer späteren Einheit
-noch):
+Versuche mit der `Styler` -Funktion, diesen Code zu leserlicher zu machen (markiere den Code und wähle *Style selection*). (Du musst diesen ggplot Code nicht verstehen - wir kommen dazu in einer späteren Einheit noch):
 
 ```{r eval=FALSE}
 library(palmerpenguins)
