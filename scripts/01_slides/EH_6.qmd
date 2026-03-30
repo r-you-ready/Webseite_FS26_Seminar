@@ -444,14 +444,14 @@ head(bundesraet_innen)
 
 ## Datentypen: Überblick
 
-<div style="font-size: 0.75em;">
+::: {style="font-size: 0.75em;"}
 | Struktur | Eigenschaften | Beispiel-Inhalt |
 |------------------------|------------------------|------------------------|
 | **Vektor** | \- Enthält Elemente **eines** Datentyps<br>- Grundbaustein in R | `c(1, 2, 3)` oder `c("Anna", "Ben")` |
 | **Liste** | \- Kann verschiedene Datentypen enthalten<br>- Elemente können unterschiedlich lang sein | Zahlenvektor, Textvektor, logischer Vektor in einer Liste |
 | **Matrix** | \- Enthält nur **einen** Datentyp<br>- Hat feste Dimensionen (Zeilen, Spalten) | 3x3-Matrix mit Zahlen 1–9 |
 | **Data Frame** | \- Tabellarisch aufgebaut<br>- Spalten können unterschiedliche Datentypen enthalten<br>- Jede Spalte gleich lang | Tabelle mit Name (Character), Alter (Numeric), Studiert (Logical) |
-</div>
+:::
 
 ***👉*** **Merksatz:**\
 **Vektor** = einfachste Struktur, ein Datentyp\
