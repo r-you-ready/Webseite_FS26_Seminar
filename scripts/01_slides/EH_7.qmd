@@ -48,7 +48,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ::: {style="font-size: 0.75em;"}
 | Struktur | Eigenschaften | Beispiel-Inhalt |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | **Vektor** | \- Enthält Elemente **eines** Datentyps - Grundbaustein in R | `c(1, 2, 3)` oder `c("Anna", "Ben")` |
 | **Liste** | \- Kann verschiedene Datentypen enthalten - Elemente können unterschiedlich lang sein | Zahlenvektor, Textvektor, logischer Vektor in einer Liste |
 | **Matrix** | \- Enthält nur **einen** Datentyp - Hat feste Dimensionen (Zeilen, Spalten) | 3x3-Matrix mit Zahlen 1–9 |

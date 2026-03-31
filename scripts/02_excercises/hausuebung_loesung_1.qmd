@@ -25,7 +25,7 @@ library(here)
 
 -   Versuche beim Lösen der Aufgaben darauf zu achten, dass du sie **reproduzierbar** gestaltest. Am Ende der Aufgabe **renderst du dein Skript**.
 
--   Die **Abgabe** besteht dann aus deinem Skript sowie dem gerenderten Skript als **HTML- oder PDF-Datei**.
+-   Die **Abgabe** besteht dann aus deinem .qmd Skript sowie dem gerenderten Skript als **HTML- oder PDF-Datei**.
 
 ```{r}
 #| label: download-data
@@ -50,9 +50,11 @@ Wir arbeiten für die Übungen mit diesem Datensatz. Dieser wurde simuliert und 
 
 Nutze die **dplyr**-Funktionen, die wir kennengelernt haben, um die folgenden Aufgaben zu bearbeiten.
 
-**Tipp:** In einigen Variablen gibt es fehlende Werte (*missings*). Die Bearbeitung dieser Werte erfolgt erst in **Aufgabe 2**. Verwende, falls nötig, das Argument `na.rm = TRUE`.
+**Tipp:** In einigen Variablen gibt es fehlende Werte (*missings*). Die Bearbeitung dieser Werte erfolgt erst in **Aufgabe 2**. Verwende, falls nötig, das Argument `na.rm = TRUE`, sodass fehlende Werte bei deinen Berechnungen exkludiert werden.
 
 **Aufgaben**
+
+-   Lese den Datensatz ein und schaue ihn dir mit `View(datensatz)` an.
 
 -   Benenne die Variable *Ort* in *Postleitzahl* um.
 
@@ -79,7 +81,7 @@ data <- select(data, - Ort_2)
 :::
 ::::
 
--   Personen, die nicht volljährig sind, dürfen nicht an der Studie teilnehmen und müssen ausgeschlossen werden.
+-   Personen, die nicht volljährig sind, müssen aus dem Datensatz ausgeschlossen werden.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
@@ -103,7 +105,7 @@ data <- data |>
 :::
 ::::
 
--   Welche Variablen sollten Faktoren (kategoriale Variablen) sein? Wandle sie in Faktoren um
+-   Welche Variablen sollten Faktoren (kategoriale Variablen) sein? Wandle sie in Faktoren um.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
@@ -207,7 +209,7 @@ rangliste
 
 Führe die folgenden Schritte durch:
 
--   Untersuche den Datensatz auf fehlende Werte. Wie viele fehlende Werte gibt es insgesamt, und in welchen Variablen treten sie auf
+-   Untersuche den Datensatz auf fehlende Werte. Wie viele fehlende Werte gibt es insgesamt, und in welchen Variablen treten sie auf?
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
@@ -222,7 +224,7 @@ colSums(is.na(data))
 :::
 ::::
 
--   Einige **Personen** haben keine Angabe zu ihrer Geschlechtsidentität gemacht. Ersetze diese **fehlenden Werte (NAs)** durch *"Keine Angabe"*. Nutze dafür die Funktion `mutate()` und `replace_na().` Beachte: Gender wurde bereits als Faktor definiert, muss aber erneut zu einem Character transformiert werden.
+-   Einige **Personen** haben keine Angabe zu ihrer Geschlechtsidentität gemacht. Ersetze diese **fehlenden Werte (NAs)** durch *"Keine Angabe"*. Nutze dafür die Funktion `mutate()` und `replace_na().` Beachte: Gender wurde bereits als Faktor definiert und muss für diese Umwandlung zu einem Character transformiert werden.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
@@ -313,7 +315,7 @@ Die negativ formulierten Items enden alle mit `_r` (für reverse). Pole diese It
 
 Suche dir eine dplyr Funktion, welche helfen kann alle Variablen auszuwählen welche mit `_r` aufhören.
 
-💡***Tipp: Ähnlich wie starts_with***
+💡***Tipp: Ähnlich wie**`starts_with`*
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
@@ -348,7 +350,6 @@ data_reversed <- data_numeric |>
 ```
 :::
 ::::
-
 
 -   **Berechnung der Big-Five-Skalen**
 
@@ -392,8 +393,7 @@ cor.test(
 :::
 ::::
 
-
--   Berechne die **Durchschnittswerte**, **Standardabweichungen** und **Mediane** der Big-Five-Faktoren Extraversion und Offenheit, unterteilt nach der **Geschlechtsangabe**.
+-   Berechne die **Durchschnittswerte**, **Standardabweichungen** und **Mediane** der Big-Five-Faktoren Extraversion und Offenheit, getrennt nach Geschlechtsidentität.
 
 :::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
@@ -418,6 +418,8 @@ data_summary
 :::
 ::::
 
--   Rendere dein Skript!
+-   Rendere dein Skript als HTML oder PDF Datei!
 
 **Gib dein Skript und deine gerenderte Datei als ZIP (Dateinaname: vorname_nachname_hausübung_1.ZIP) auf ILIAS ab.**
+
+Nach Abgabe, bekommt ihr von uns individuelles Feedback.
