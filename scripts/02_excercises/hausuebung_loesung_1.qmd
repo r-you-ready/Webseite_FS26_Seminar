@@ -4,7 +4,7 @@ editor: visual
 filters:
   - conditional_content
 show_solutions: false
-draft: true
+draft: false
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE}

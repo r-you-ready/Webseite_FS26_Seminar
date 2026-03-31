@@ -82,7 +82,7 @@ website:
           - href: scripts/02_excercises/peer_feedback_codebook.qmd
             text: "Peer-Feedback Codebook (01.04.26)"
           - href: scripts/02_excercises/hausuebung_loesung_1.qmd
-            text: "Hausübung 1 - Mit Lösungen"
+            text: "R Übung I (22.04.26)"
           - href: scripts/02_excercises/hausuebung_loesung_2.qmd
             text: "Hausübung 2 - Mit Lösungen"
           - href: scripts/02_excercises/hausuebung_loesung_3.qmd
