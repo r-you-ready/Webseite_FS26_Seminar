@@ -1,11 +1,8 @@
+# Jeweils ergänzen mit den entsprechenden Files
 files <- c(
   "loesung_1.qmd",
   "loesung_2.qmd",
-  "loesung_3.qmd",
-  "loesung_4.qmd",
-  "loesung_5.qmd",
-  "loesung_6.qmd",
-  "loesung_7.qmd"
+  "loesung_3.qmd"
 )
 
 for (f in files) {

@@ -16,7 +16,6 @@ format:
     progress: true
     controls: true
     embed-resources: true
-draft: true
 ---
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R

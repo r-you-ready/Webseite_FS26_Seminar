@@ -5,13 +5,9 @@ bibliography: references.bib
 filters:
   - conditional_content
 show_solutions: false
-draft: true
+draft: false
 format:
-  html:
-    code-tools:
-       source: downloads/loesung_4_solution.qmd
-       toggle: false
-       caption: "Download der Lösungsdatei"
+  html
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE}
