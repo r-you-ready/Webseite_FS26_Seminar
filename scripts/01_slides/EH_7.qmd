@@ -216,7 +216,7 @@ penguins |>
 
 ------------------------------------------------------------------------
 
-## dplyr: filter()
+## dplyr: filter_out()
 
 Alternative (ggf. Update von `dplyr` notwendig):
 
