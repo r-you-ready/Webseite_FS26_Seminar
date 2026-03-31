@@ -41,7 +41,11 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Fragen zu Hands On Block 3?
 
-![](../../images/EH_7/Bild1.png){fig-align="center"}
+![](../../images/EH_7/Bild1.png){fig-align="center" width="411"}
+
+------------------------------------------------------------------------
+
+RECAP Hands On Block 3
 
 ------------------------------------------------------------------------
 
@@ -69,26 +73,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## Pipe-Operator
-
-### Warum wird Code schnell unübersichtlich?
-
-❌ **Verschachtelter Code:**
-
-```{r, echo= TRUE , results = 'hide'}
-library(palmerpenguins)
-library(tidyverse)
-
-head(select(filter(penguins, species == "Adelie"), species, bill_length_mm))
-```
-
-👉 Wo beginnt die Ausführung dieses Codes?
-
-------------------------------------------------------------------------
-
-## Pipe-Operator (2)
-
-### Von verschachtelt zu lesbar
+## Pipe-Operator - Code lesbarer gestalten
 
 ❌ **Verschachtelter Code (schwer lesbar)**
 
@@ -111,7 +96,7 @@ penguins |>
 
 ------------------------------------------------------------------------
 
-## Pipe-Operator (3)
+## Pipe-Operator
 
 ### Wie funktioniert die Pipe?
 
@@ -121,7 +106,7 @@ penguins |>
 
 ------------------------------------------------------------------------
 
-## Pipe-Operator (4)
+## Pipe-Operator
 
 ### Was macht die Pipe genau?
 
@@ -151,29 +136,9 @@ filter(penguins, species == "Adelie")
 
 ------------------------------------------------------------------------
 
-## Pipe-Operator (5)
-
--   `%>%` aus magrittr (tidyverse)
-
--   `|>` in Base R
-
-<br>
-
-👉 **Zweck:**
-
--   Macht Code lesbarer und verständlicher
-
--   Erlaubt Schritt-für-Schritt Verarbeitung
-
-::: notes
-Unterschiede zwischen den beiden Pipes: Unterschiedliche Platzhalter, native pipe etwas schneller. Für uns spielt der Unterschied keine Rolle.
-:::
-
-------------------------------------------------------------------------
-
 ## Daten transformieren mit dplyr
 
-👉 dplyr bietet zentrale Funktionen für die Datenverarbeitung
+👉 `dplyr` bietet zentrale Funktionen für die Datenverarbeitung
 
 👉 Diese Funktionen lassen sich ideal mit der Pipe kombinieren
 
@@ -192,22 +157,6 @@ Unterschiede zwischen den beiden Pipes: Unterschiedliche Platzhalter, native pip
 ## dplyr: filter()
 
 -   filter() wählt **Zeilen/Beobachtungen (rows)** basierend auf Bedingungen
-
--   Nur Zeilen mit TRUE bleiben erhalten
-
-```{r, eval= FALSE}
-species == "Gentoo"
-```
-
-👉 ergibt für jede Zeile:
-
-![](/images/EH_7/filter_logik.png){fig-align="center"}
-
-👉 filter() behält nur TRUE-Zeilen
-
-------------------------------------------------------------------------
-
-## dplyr: filter()
 
 ```{r, echo= TRUE}
 
@@ -235,14 +184,6 @@ penguins |>
 
 ------------------------------------------------------------------------
 
-## dplyr: select()
-
-![](../../images/EH_7/select.png){fig-align="center"}
-
-👉 Nur die ausgewählten Spalten bleiben erhalten; die Beobachtungen bleiben gleich
-
-------------------------------------------------------------------------
-
 ## dplyer: select ()
 
 ### Bestimmte Spalten direkt auswählen
@@ -255,7 +196,7 @@ penguins |>
 
 -   `species`, `island` und `bill_length_mm` bleiben erhalten
 
--   alle anderen Spalten werden entfernt
+-   alle anderen Spalten werden entfernt, die Zeilen bleiben gleich
 
 <br>
 
@@ -309,6 +250,41 @@ penguins |>
 
 ------------------------------------------------------------------------
 
+## dplyr: mutate()
+
+-   `mutate()` erstellt neue Variablen (Spalten),
+
+-   oder verändert bestehende Variablen
+
+<br>
+
+👉 Alle Zeilen des ursprünglichen Datensatzes werden behalten
+
+👉 Neue Spalten werden aus bestehenden Variablen berechnet
+
+------------------------------------------------------------------------
+
+## dplyr: mutate()
+
+-   Wird oft genutzt, um **berechnete Spalten** hinzuzufügen (z.B. `bill_to_flipper_ratio`)
+
+-   Die Berechnung erfolgt zeilenweise (jede Zeile bekommt ihren eigenen Wert)
+
+<br>
+
+```{r, echo=TRUE} penguins_upgraded <- penguins |>    mutate(     bill_to_flipper_ratio = bill_length_mm / flipper_length_mm,     body_mass_kg = body_mass_g / 1000   )  head(penguins_upgraded, n = 3)}
+```
+
+------------------------------------------------------------------------
+
+## dplyr: mutate()
+
+![](../../images/EH_7/mutate.png)
+
+👉 Zeilenweise Berechnung, ohne dabei die Originalvariablen zu verändern
+
+------------------------------------------------------------------------
+
 ## dplyr: summarize()
 
 -   `summarize()` fasst Daten zu **Kennwerten** zusammen
@@ -323,7 +299,7 @@ penguins |>
 
 -   Median (`median()`)
 
--   Minimum/Maximum (`min()`, `max()`)
+-   Standardabweichung (`sd()`)
 
 <br>
 
@@ -354,100 +330,6 @@ penguins |>
 <br>
 
 👉 **Ergebnis:** Eine Tabelle mit einer Zeile und den beiden berechneten Kennwerten
-
-------------------------------------------------------------------------
-
-## dplyr: summarize()
-
-### `summarize()` mit und ohne Gruppierung
-
-👉 Ohne `group_by()`
-
--   Kennwerte für den gesamten Datensatz
-
-<br>
-
-👉 Mit `group_by()`
-
--   Kennwerte pro Gruppe
-
-```{r, echo=TRUE}
-penguins |>
-  group_by(species) |>
-  summarize(mean_body_mass = mean(body_mass_g, na.rm = TRUE))
-```
-
-------------------------------------------------------------------------
-
-## dplyr: mutate()
-
--   `mutate()` erstellt neue Variablen (Spalten),
-
--   oder verändert bestehende Variablen
-
-<br>
-
-👉 Alle Zeilen des ursprünglichen Datensatzes werden behalten
-
-👉 Neue Spalten werden aus bestehenden Variablen berechnet
-
-------------------------------------------------------------------------
-
-## dplyr: mutate()
-
--   Wird oft genutzt, um **berechnete Spalten** hinzuzufügen (z.B. `bill_to_flipper_ratio`)
-
--   Die Berechnung erfolgt zeilenweise (jede Zeile bekommt ihren eigenen Wert)
-
-<br>
-
-```{r, echo=TRUE}
-penguins_upgraded <- penguins |> 
-  mutate(
-    bill_to_flipper_ratio = bill_length_mm / flipper_length_mm,
-    body_mass_kg = body_mass_g / 1000
-  )
-
-head(penguins_upgraded, n = 3)
-```
-
-------------------------------------------------------------------------
-
-## dplyr: mutate()
-
-![](../../images/EH_7/mutate.png)
-
-👉 Zeilenweise Berechnung, ohne dabei die Originalvariablen zu verändern
-
-------------------------------------------------------------------------
-
-## dplyr: group_by()
-
--   `group_by()` teilt die Daten in **Gruppen** auf (z.B. nach `species`)
-
--   Die Daten selbst werden nicht verändert, sondern intern als gruppiert markiert
-
-<br>
-
-👉 Es verändert nur, wie nachfolgende Funktionen arbeiten
-
-------------------------------------------------------------------------
-
-## dplyr: group_by()
-
-### Was macht `group_by()` wirklich?
-
--   `group_by()` alleine verändert das Ergebnis nicht sichtbar
-
--   Jedoch werden nachfolgende Funktionen pro Gruppe ausgeführt
-
-<br>
-
-💡 **Beispiel:**
-
--   ohne `group_by()` → ein Mittelwert über alle Daten
-
--   mit `group_by()` → ein Mittelwert pro Gruppe
 
 ------------------------------------------------------------------------
 
@@ -532,3 +414,7 @@ penguins |>
 -   Alle Instruktionen auf der Website
 
 -   Danach Feedback von uns
+
+-   16:15 Gruppe: am 15.04 kommt Laura statt Sandra!
+
+    ***Schöne Osterfeiertage!***

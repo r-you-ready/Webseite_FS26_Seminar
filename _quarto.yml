@@ -5,6 +5,10 @@ project:
   resources:
     - PDFs
     - scripts/02_excercises/downloads/*.qmd
+  render:
+    - "*.qmd"
+    - "scripts/**/*.qmd"
+    - "!scripts/02_excercises/downloads/*.qmd"
 
 website:
   title: "R u Ready"
