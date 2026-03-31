@@ -45,7 +45,36 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-RECAP Hands On Block 3
+## Wiederholung: Datentypen
+
+::: {style="font-size: 0.75em;"}
+| Struktur | Eigenschaften | Beispiel-Inhalt |
+|------------------------|------------------------|------------------------|
+| **Vektor** | \- Enthält Elemente **eines** Datentyps - Grundbaustein in R | `c(1, 2, 3)` oder `c("Anna", "Ben")` |
+| **Liste** | \- Kann verschiedene Datentypen enthalten - Elemente können unterschiedlich lang sein | Zahlenvektor, Textvektor, logischer Vektor in einer Liste |
+| **Matrix** | \- Enthält nur **einen** Datentyp - Hat feste Dimensionen (Zeilen, Spalten) | 3x3-Matrix mit Zahlen 1–9 |
+| **Data Frame** | \- Tabellarisch aufgebaut - Spalten können unterschiedliche Datentypen enthalten<br>- Jede Spalte gleich lang | Tabelle mit Name (Character), Alter (Numeric), Studiert (Logical) |
+:::
+
+------------------------------------------------------------------------
+
+## Wiederholung
+
+-   Faktoren definieren, z.B. `dat_full$group <- factor(dat_full$group, levels = c("above", "below", "control")` oder `dat_full$group <- as.factor(dat_full$group`
+
+    --\> müssen wir bei jedem Öffnen von R/beim Einlesen von Datensätzen wieder machen
+
+-   Matritzen erstellen mit `matrix()`
+
+-   Listen erstellen mit `list()`
+
+-   Data Frame ersellen mit `data.frame()`
+
+    -   Zugriff auf Spalten mit `$` –\> heute besprechen wir Alternativen dazu
+
+::: notes
+bei factor() kann die Reihenfolge der levels festgelegt werden (aber geht auch automatisch), bei as.factor immer automatisch
+:::
 
 ------------------------------------------------------------------------
 
@@ -78,6 +107,8 @@ RECAP Hands On Block 3
 ❌ **Verschachtelter Code (schwer lesbar)**
 
 ```{r, echo= TRUE , results = 'hide'}
+library(tidyverse)
+library(palmerpenguins)
 head(select(filter(penguins, species == "Adelie"), species, bill_length_mm))
 ```
 
@@ -103,6 +134,8 @@ penguins |>
 ![](../../images/EH_7/Piper.png)
 
 👉 Das Ergebnis wird jeweils an die nächste Funktion weitergegeben
+
+siehe auch [Kapitel 4.2](https://methodenlehre.github.io/einfuehrung-in-R/chapters/04-tidyverse.html)
 
 ------------------------------------------------------------------------
 
@@ -136,42 +169,70 @@ filter(penguins, species == "Adelie")
 
 ------------------------------------------------------------------------
 
-## Daten transformieren mit dplyr
+## Daten transformieren mit `dplyr`
 
 👉 `dplyr` bietet zentrale Funktionen für die Datenverarbeitung
+
+👉 Teil des `tidyverse`
 
 👉 Diese Funktionen lassen sich ideal mit der Pipe kombinieren
 
 ::: {style="display: flex; justify-content: center; gap: 50px;"}
-<img src="/images/EH_7/images.jpg" alt="Image 1" width="45%"/> <img src="/images/EH_7/Functions.png" alt="Image 2" width="45%"/>
+<img src="../../images/EH_7/images.jpg" alt="Image 1" width="45%"/> <img src="/images/EH_7/Functions.png" alt="Image 2" width="45%"/>
 :::
 
-------------------------------------------------------------------------
-
-## dplyr: filter()
-
-![](/images/EH_7/filter.png){fig-align="center"}
+siehe auch [Kapitel 4.4](https://methodenlehre.github.io/einfuehrung-in-R/chapters/04-tidyverse.html#data-wrangling-dplyr)
 
 ------------------------------------------------------------------------
 
 ## dplyr: filter()
 
--   filter() wählt **Zeilen/Beobachtungen (rows)** basierend auf Bedingungen
+![](../../images/EH_7/filter.png){fig-align="center"}
 
-```{r, echo= TRUE}
+------------------------------------------------------------------------
+
+## dplyr: filter()
+
+-   `filter()` wählt **Zeilen/Beobachtungen (rows)** basierend auf Bedingungen
+
+```{r, echo = TRUE}
 
 penguins |>
   filter(species == "Gentoo") |>
-  head()
+  head(n = 4)
 ```
 
 👉 Ergebnis: Nur Gentoo-Pinguine bleiben übrig
+
+<br>
+
+```{r, echo = TRUE}
+
+penguins |>
+  filter(species != "Gentoo") |>
+  head(n = 4)
+```
+
+👉 Ergebnis: Alle Pinguine ausser Gentoo bleiben übrig
+
+------------------------------------------------------------------------
+
+## dplyr: filter()
+
+Alternative (ggf. Update von `dplyr` notwendig):
+
+```{r, echo = TRUE}
+
+penguins |>
+  filter_out(species == "Gentoo") |>
+  head()
+```
 
 ------------------------------------------------------------------------
 
 ## dplyr: select()
 
--   select() wählt **Spalten (Variablen)** aus einem Datensatz aus
+-   `select()` wählt **Spalten (Variablen)** aus einem Datensatz aus
 -   Die Zeilen bleiben unverändert
 
 <br>
@@ -184,7 +245,7 @@ penguins |>
 
 ------------------------------------------------------------------------
 
-## dplyer: select ()
+## dplyr: select ()
 
 ### Bestimmte Spalten direkt auswählen
 
@@ -208,9 +269,9 @@ penguins |>
 
 ## dplyr: select()
 
-### Spalten mit Hilfsfunktionen auswählen
+### Spalten mit Hilfsfunktionen auswählen, z.B.
 
-```{r, echo= TRUE}
+```{r, echo = TRUE}
 penguins |> 
   select(starts_with("bill")) |>
   head(n = 3)
@@ -225,6 +286,25 @@ Wählt alle Spalten, deren Name mit `"bill"` beginnt
 -   `bill_length_mm`
 
 -   `bill_depth_mm`
+
+------------------------------------------------------------------------
+
+## dplyr: select()
+
+### Spalten mit Hilfsfunktionen auswählen, z.B.
+
+**Weitere Möglichkeiten**, z.B.: `ends_with()`, `contains()`, `where(is.numeric)`
+
+Wenn man das Gegenteil erzielen will:
+
+```{r, echo = TRUE}
+
+penguins |> 
+  select(!starts_with("bill")) |>
+  head(n = 3)
+```
+
+👉 **Ergebnis:** alle Spalten, die nicht mit "bill" starten
 
 ------------------------------------------------------------------------
 
@@ -272,7 +352,12 @@ penguins |>
 
 <br>
 
-```{r, echo=TRUE} penguins_upgraded <- penguins |>    mutate(     bill_to_flipper_ratio = bill_length_mm / flipper_length_mm,     body_mass_kg = body_mass_g / 1000   )  head(penguins_upgraded, n = 3)}
+```{r, echo = TRUE}
+penguins_upgraded <- penguins |>    
+  mutate(bill_to_flipper_ratio = bill_length_mm / flipper_length_mm, 
+         body_mass_kg = body_mass_g / 1000) 
+
+head(penguins_upgraded, n = 3)
 ```
 
 ------------------------------------------------------------------------
@@ -341,7 +426,7 @@ penguins |>
 
 ## dplyr: group_by()
 
-### `group_by()` und `summarize()`
+`group_by()` und `summarize()`
 
 ```{r, echo=TRUE}
 grouped_summary <- penguins |> 
@@ -403,7 +488,7 @@ penguins |>
 
 -   `summarize()` → Kennwerte
 
--   `group_by()` → pro Gruppe
+-   `group_by()` → Funktionen pro Gruppe anwenden
 
 ------------------------------------------------------------------------
 
