@@ -59,7 +59,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Wiederholung
 
--   Faktoren definieren, z.B. `dat_full$group <- factor(dat_full$group, levels = c("above", "below", "control")` oder `dat_full$group <- as.factor(dat_full$group`
+-   Faktoren definieren, z.B. `dat_full$group <- factor(dat_full$group, levels = c("above", "below", "control")` oder `dat_full$group <- as.factor(dat_full$group)`
 
     --\> müssen wir bei jedem Öffnen von R/beim Einlesen von Datensätzen wieder machen
 

@@ -21,7 +21,6 @@ draft: true
 
 ```{r, echo = FALSE, message=FALSE}
 
-library(palmerpenguins)
 library(tidyverse)
 library(palmerpenguins)
 penguins <- palmerpenguins::penguins
@@ -35,11 +34,15 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Heute:
 
-<embed 
-  src="../../PDFs/Syllabus.pdf" 
-  type="application/pdf"
-  style="width:100%; height:90vh;"
->
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
+```{=html}
+<embed
+    src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
+```
+:::
 
 ------------------------------------------------------------------------
 
@@ -49,7 +52,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 -   Response Labels
 
-***Stellt sicher dass diese Punkte auch ausgefüllt sind für die Schlussabgabe.***
+***Stellt sicher, dass diese Punkte auch ausgefüllt sind für die Schlussabgabe.***
 
 ------------------------------------------------------------------------
 
@@ -57,7 +60,9 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 `row.names = FALSE` sorgt dafür, dass keine neue Spalte eingefügt wird, die alle Zeilen durchnummeriert (also einen zusätzlichen „Spaltennamen“ erzeugt).
 
-Wenn ihr in eurem `dat_full` als erste Spalte eine solche Bezeichnung wie „...1“ findet, habt ihr `dat_full` wahrscheinlich ohne das Argument `row.names = FALSE` abgespeichert. Das ist nicht weiter schlimm, sollte aber bereinigt werden (z. B. mit `select()`).
+Wenn ihr in eurem `dat_full` als erste Spalte eine Bezeichnung wie „...1“ findet, habt ihr `dat_full` wahrscheinlich ohne das Argument `row.names = FALSE` abgespeichert. Das ist nicht weiter schlimm, sollte aber bereinigt werden (z. B. mit `select()`).
+
+<br>
 
 ```{r, eval = FALSE, echo=TRUE}
 
@@ -100,34 +105,37 @@ Die beiden Funktionen unterscheiden sich nur in den **verwendeten Trennzeichen**
 
 Kann **nicht** verwendet werden, um **Rows/Zeilen** auszuwählen! Auswahl von **Spalten!**
 
-Aber: Dafür gibt es Funktionen wie **`slice()`** – allerdings wollen wir in der Regel **keine Zeilen ohne logisches Kriterium** auswählen.\
+Aber: Dafür gibt es Funktionen wie **`slice()`** – allerdings wollen wir in der Regel **keine Zeilen ohne logisches Kriterium** auswählen.
+
+<br>\
 👉 **`filter()`** ist deshalb meist die bessere Option.
 
 ```{r, echo = TRUE}
-
 penguins |>
   select(bill_depth_mm) |>
-  slice(10) 
-
+  slice(10) # Auswahl 10. Zeile
 ```
 
 ------------------------------------------------------------------------
 
-## Kombination select() und full_join() - Beispiel
+## Kombination select() und full_join()
 
 ```{r, echo = TRUE, message = FALSE}
-
+# Datensatz 1
 penguins <- palmerpenguins::penguins
 penguins <- penguins |>
   mutate(id = row_number())
 
+# Datensatz 2
 penguins2 <- palmerpenguins::penguins
 penguins2 <- penguins2 |>
   mutate(id = row_number())
 ```
 
-```{r, echo = TRUE, eval = FALSE}
+<br>
 
+```{r, echo = TRUE, eval = FALSE}
+# Zusammenführen beider Datensätze
 dat_final <- penguins |>
   select(id, species, year) |>
   full_join(
@@ -138,24 +146,36 @@ dat_final <- penguins |>
 
 ------------------------------------------------------------------------
 
-## arrange()
+## arrange(): Daten sortieren
 
-**Nützlich, um höchste und niedrigste Werte einzusehen – zum Beispiel, um eine Rangliste zu erstellen.**
+👉 Sortiert Daten nach einer Variable\
+👉 Hilfreich für: **höchste / niedrigste Werte erkennen**
 
-<br><br>
+<br>
 
 ```{r echo = TRUE}
+# kleinste Werte oben
 penguins |> 
-  arrange(bill_depth_mm)
+  arrange(bill_depth_mm) |>
+  head(n = 5)
+
+# grösste Werte oben
+penguins |> 
+  arrange(desc(bill_depth_mm)) |>
+  head(n = 5)
 ```
 
 ------------------------------------------------------------------------
 
-## relocate()
+## relocate(): Spalten verschieben
 
-**Wird genutzt, um Spalten zu verschieben – nützlich, um den Datensatz übersichtlicher zu gestalten, etwa indem man wichtige Variablen (z. B. ID, Gruppe) an den Anfang stellt.**
+👉 Ändert die Position von Spalten
 
-<br><br>
+👉 Wichtige Variablen (z.B. ID, Gruppe) werden nach vorne geholt
+
+👉 Der Datensatz wird übersichtlicher\
+
+<br>
 
 ```{r, echo = TRUE}
 
@@ -176,41 +196,60 @@ penguins |> relocate(bill_depth_mm, .before = island)
 
 ### **Umgang mit fehlenden Werten:**
 
--   Finden / Identifizieren!
+1️⃣ Finden -\> Wo sind fehlende Werte?
 
--   Nachvollziehen
+2️⃣ Verstehen -\> Warum fehlen sie?
 
--   Handling - abhängig von eurem Studiendesign und Fragestellungen
-
-------------------------------------------------------------------------
-
-## Diverse Formen von Fehlenden Werten
-
--   `NA` (R-typische Kennzeichnung für *Not Available*)
-
--   `999` oder `-999` (häufig manuell gesetzte Platzhalter)
-
--   leere Zellen (`""`)
-
--   `NULL` (in manchen Programmiersprachen, aber in R selten in Datensätzen verwendet)
+3️⃣ Behandeln -\> abhängig von eurem Studiendesign und Fragestellungen
 
 ------------------------------------------------------------------------
 
-## Finden und identifizieren von fehlenden Werten
+## Formen fehlender Werte
 
-Diverse Ansätze - Konkrete Übungen in den Hands On Übungen.
+**In R (Standardfall)**
+
+`NA` = fehlender Wert (*Not Available*)
+
+-   Wird von R auomatisch erkannt
+
+-   Funktionen können damit umgehen
+
+<br>
+
+**Häufige "versteckte" fehlende Werte**
+
+-   Werden nicht als NA erkannt!
+
+-   `999` oder `-999` -\> Platzhalter
+
+-   `""` -\> leere Zellen
+
+------------------------------------------------------------------------
+
+## 1️⃣ Finden & identifizieren fehlender Werte
+
+**Grundidee:** Fehlende Werte müssen zuerst sichtbar gemacht werden.
+
+<br>
+
+**Überblick über alle fehlenden Werte**
 
 ```{r, echo = TRUE}
-
 table(is.na(penguins))
 ```
 
-<br><br>
+→ Anzahl fehlender vs. vorhandener Werte im Datensatz
+
+<br>
+
+**Fehlende Werte pro Variable**
 
 ```{r, echo = TRUE}
 
 colSums(is.na(penguins))
 ```
+
+→ Welche Variablen enthalten wie viele fehlende Werte?
 
 ------------------------------------------------------------------------
 
@@ -234,7 +273,7 @@ MNAR: Bei einer Angststudie brechen Teilnehmende mit besonders hoher Angst die U
 
 ------------------------------------------------------------------------
 
-## **Mögliche Ansätze um mit Missings umzugehen:**
+## **Mögliche Ansätze, um mit Missings umzugehen:**
 
 **Fehlende Werte entfernen**\
 Achtung: Je nach Analysemethode kann bereits **ein einziger fehlender Wert** dazu führen, dass eine ganze Versuchsperson aus der Analyse ausgeschlossen wird!
