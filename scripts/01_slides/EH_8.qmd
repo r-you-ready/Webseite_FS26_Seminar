@@ -52,7 +52,33 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 -   Response Labels
 
-***Stellt sicher, dass diese Punkte auch ausgefüllt sind für die Schlussabgabe.***
+***Stellt sicher, dass diese Punkte auch ausgefüllt sind für die Schlussabgabe!***
+
+------------------------------------------------------------------------
+
+## Inhalte heute
+
+<br>
+
+**Datenaufbereitung mit dplyr**
+
+-   Vertiefung & Nachtrag
+
+**Fehlende Werte (Missing Data)**
+
+-   Problem, Formen & Identifikation
+
+-   Ursachen & Umgang
+
+**Berechnungen mit fehlenden Werten**
+
+-   Umgang mit `NA` in Funktionen (`na.rm`)
+
+**Skalenberechnung**
+
+-   Konzept & wichtige Schritte
+
+-   Umsetzung in R
 
 ------------------------------------------------------------------------
 
@@ -134,7 +160,7 @@ penguins2 <- penguins2 |>
 
 <br>
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = TRUE, eval = TRUE}
 # Zusammenführen beider Datensätze
 dat_final <- penguins |>
   select(id, species, year) |>
@@ -142,6 +168,9 @@ dat_final <- penguins |>
     penguins2 |> select(id, island, sex),
     by = "id"
   )
+
+# Ansicht
+dat_final %>% head(n = 4)
 ```
 
 ------------------------------------------------------------------------
@@ -157,12 +186,12 @@ dat_final <- penguins |>
 # kleinste Werte oben
 penguins |> 
   arrange(bill_depth_mm) |>
-  head(n = 5)
+  head(n = 4)
 
 # grösste Werte oben
 penguins |> 
   arrange(desc(bill_depth_mm)) |>
-  head(n = 5)
+  head(n = 4)
 ```
 
 ------------------------------------------------------------------------
@@ -210,7 +239,7 @@ penguins |> relocate(bill_depth_mm, .before = island)
 
 `NA` = fehlender Wert (*Not Available*)
 
--   Wird von R auomatisch erkannt
+-   Wird von R automatisch erkannt
 
 -   Funktionen können damit umgehen
 
@@ -253,15 +282,29 @@ colSums(is.na(penguins))
 
 ------------------------------------------------------------------------
 
-## Fortgeschritten: Nachvollziehen!
+## 2️⃣ Fortgeschritten: Nachvollziehen!
 
-<br><br>
+<br>
 
--   **Missing Completely at Random (MCAR):** Fehlende Werte entstehen rein zufällig und stehen in keinem Zusammenhang mit anderen Daten.\
-    <br>
--   **Missing at Random (MAR):** Fehlende Werte hängen mit beobachteten, aber nicht mit den fehlenden Variablen selbst zusammen.\
-    <br>
--   **Missing Not at Random (MNAR):** Fehlende Werte stehen in direktem Zusammenhang mit den nicht beobachteten (fehlenden) Werten selbst.
+**Missing Completely at Random (MCAR) - komplett zufällig**
+
+Fehlende Werte entstehen rein zufällig & haben keinem Zusammenhang mit anderen Daten
+
+→ Messgerät fällt zufällig aus\
+<br>
+
+**Missing at Random (MAR) - abhängig von beobachteten Daten**
+
+Fehlende Werte hängen mit anderen beobachteten Variablen zusammen, jedoch nicht mit den fehlenden Variablen selbst.
+
+→ Jüngere Personen beantworten eine Frage seltener\
+<br>
+
+**Missing Not at Random (MNAR) - abhängig vom fehlenden Wert selbst**
+
+Fehlende Werte stehen in direktem Zusammenhang mit den nicht beobachteten (fehlenden) Werten selbst.
+
+→ Personen mit hoher Angst brechen Angststudie frühzeitig ab
 
 ::: notes
 MCAR: Während einer Online-Studie bricht bei einigen Teilnehmenden zufällig die Internetverbindung ab, sodass ihre Antworten fehlen. → Das Fehlen ist rein zufällig und unabhängig von ihren Eigenschaften oder Antworten.
@@ -275,89 +318,103 @@ MNAR: Bei einer Angststudie brechen Teilnehmende mit besonders hoher Angst die U
 
 ## **Mögliche Ansätze, um mit Missings umzugehen:**
 
+<br>
+
 **Fehlende Werte entfernen**\
 Achtung: Je nach Analysemethode kann bereits **ein einziger fehlender Wert** dazu führen, dass eine ganze Versuchsperson aus der Analyse ausgeschlossen wird!
 
-<br><br>
+<br>
 
 **Fehlende Werte imputieren**\
-Das bedeutet, fehlende Werte **durch geschätzte Werte zu ersetzen** (z. B. Mittelwert, Regression, Multiple Imputation).
-
-\
+Das bedeutet, fehlende Werte **durch geschätzte Werte zu ersetzen** (z. B. Mittelwert, Regression, Multiple Imputation).\
 → Das üben wir **nicht in diesem Seminar**.
 
 ------------------------------------------------------------------------
 
 ## Fehlende Werte bei Berechnungen beachten
 
--   Viele R-Funktionen können fehlende Werte automatisch ausschliessen, z. B. mit `na.rm = TRUE`
+<br>
 
-<br><br>
+Viele R-Funktionen können fehlende Werte automatisch ausschliessen, z. B. mit `na.rm = TRUE`
 
-```{r, eval = TRUE, echo = TRUE }
+<br>
+
+```{r, eval = TRUE, echo = TRUE}
 
 x <- c(1, NA)
 
-mean(x, na.rm = FALSE)   # fehlende Werte werden in Berechnung 	miteinbezogen, ergibt NA als Mittelwert; default Einstellung
-
-mean(x, na.rm = TRUE)    #fehlende Werte werden ausgeschlossen, ergibt 1 als Mittelwert
-
+mean(x, na.rm = FALSE)
 ```
+
+→ Fehlende Werte werden in die Berechnung miteinbezogen (default-Einstellung); ergibt NA als Mittelwert
+
+<br>
+
+```{r, eval = TRUE, echo = TRUE}
+mean(x, na.rm = TRUE)
+```
+
+→ Fehlende Werte werden explizit von der Berechnung ausgeschlossen; ergibt 1 als Mittelwert
 
 ------------------------------------------------------------------------
 
 ## Skalenberechnung
 
+<br>
+
 Damit wir unsere Analysen sinnvoll durchführen können, müssen wir oft **Skalen berechnen**, also mehrere Items zu einem Gesamtwert zusammenfassen.
 
-<br><br>
+<br>
 
 **Schritte:**
 
-1.  **Transformation der Antwortformate** (z. B. von „Trifft häufig zu“ zu numerischen Werten).
+1.  **Transformation der Antwortformate** (z.B. von „Trifft häufig zu“ zu numerischen Werten).
 
     <br>
 
-2.  **Beachtung von Reverse-Codierungen** (z. B. beim Konstrukt *Gewissenhaftigkeit*: Item „Ich bin bequem, neige zur Faulheit“ muss umgepolt werden).
+2.  **Beachtung von Reverse-Codierungen** (z.B. beim Konstrukt *Gewissenhaftigkeit*: Item „Ich bin bequem, neige zur Faulheit“ muss umgepolt werden).
 
     <br>
 
-3.  **Berechnung der Skalenwerte** (z. B. durch Mittelwertbildung der entsprechenden Items).
+3.  **Berechnung der Skalenwerte** (z.B. durch Mittelwertbildung der entsprechenden Items).
 
 ------------------------------------------------------------------------
 
-## Beispiele Berechnung von Skalenwerten
+## Beispiele: Berechnung von Skalenwerten
 
--   Einfache Variante
+<br>
 
-    <br>
+**Einfache Variante:**
 
 ```{r, eval = FALSE, echo=TRUE}
 
 dat_full <- dat_full |> 
-  mutate(mmq_mean = (question1 + question2 + question3 + question4 + question5 + question6 + question7 + question8 + question9 + question10 + question11 + question12 + question13 + question14 + question15 + question16 + question17 + question18)/18)
+  mutate(mmq_mean = (question1 + question2 + question3 + question4 + question5 + question6 + 
+                     question7 + question8 + question9 + question10 + question11 +
+                     question12 + question13 + question14 + question15 + question16 +
+                     question17 + question18)/18)
 ```
 
--   Sparsamerer Varianten: Dplyr Funktion verwenden um z.B. nicht alle Variablen auszuschreiben
+<br>
+
+**Sparsamere Varianten:** dplyr-Funktion verwenden, um z.B. nicht alle Variablen auszuschreiben
 
 ```{r, eval = FALSE, echo=TRUE}
 #Sparsamere Alternative:
-
 dat_full <- dat_full |> 
   mutate(mmq_mean = rowMeans(select(dat_full, starts_with("question")),
                              na.rm = TRUE))
 
 #Sparsamere Alternative:
-
 dat_full <- dat_full |>
-  mutate(mmq_mean = rowMeans(across(question1:question18), na.rm = TRUE))
+  mutate(mmq_mean = rowMeans(across(question1:question18),
+                             na.rm = TRUE))
 
 #Sparsamere Alternative:
-
 dat_full <- dat_full %>%
   rowwise() %>%
-  mutate(mmq_mean3 = mean(c_across(starts_with("question")), na.rm = TRUE))
-
+  mutate(mmq_mean = mean(c_across(starts_with("question")),
+                         na.rm = TRUE))
 ```
 
 ::: notes
@@ -372,7 +429,7 @@ c_across(), sodass die Spalten (columns) ausgewählt werden.
 
 ## Heute haben wir:
 
-...Fehlende Werte und mögliche Umgangsformen angeschaut
+... Fehlende Werte und mögliche Umgangsformen angeschaut
 
 ... Skalenberechnung angeschaut
 
@@ -388,12 +445,18 @@ c_across(), sodass die Spalten (columns) ausgewählt werden.
 
 ## Bis nächstes Mal
 
--   Hausübung 1 - Abgabe bis Freitag **07.11.2025** via Ilias (Ordner: Abgaben)
+<br>
 
--   Peer-Feedback bis nächsten Mittwoch **12.11.2025**
+**R-Hausübung 1**
 
-    -   Direkte Kommentierung des Quartoskripts
+-   Abgabe: **Mi,** **22.04.2026**
 
-    -   Kurze Zusammenfassung im Forum (Ordner: EH8)!
+-   via ILIAS (Ordner: Abgaben)
 
--   Hands On Block 4 fertigstellen
+-   anschliessend individuelles Feedback von uns
+
+<br>
+
+**Hands-on Block 4**
+
+-   fertigstellen
