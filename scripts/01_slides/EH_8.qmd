@@ -288,7 +288,7 @@ colSums(is.na(penguins))
 
 **Missing Completely at Random (MCAR) - komplett zufällig**
 
-Fehlende Werte entstehen rein zufällig & haben keinem Zusammenhang mit anderen Daten
+Fehlende Werte entstehen rein zufällig & haben keinen Zusammenhang mit anderen Daten
 
 → Messgerät fällt zufällig aus\
 <br>
@@ -346,7 +346,7 @@ x <- c(1, NA)
 mean(x, na.rm = FALSE)
 ```
 
-→ Fehlende Werte werden in die Berechnung miteinbezogen (default-Einstellung); ergibt NA als Mittelwert
+→ Fehlende Werte werden in die Berechnung einbezogen (default-Einstellung); ergibt NA als Mittelwert
 
 <br>
 
@@ -429,7 +429,7 @@ c_across(), sodass die Spalten (columns) ausgewählt werden.
 
 ## Heute haben wir:
 
-... Fehlende Werte und mögliche Umgangsformen angeschaut
+... Fehlende Werte und deren Umgang angeschaut
 
 ... Skalenberechnung angeschaut
 
