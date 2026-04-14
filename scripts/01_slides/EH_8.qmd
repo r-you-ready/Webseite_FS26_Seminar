@@ -59,7 +59,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 <br>
 
-**Datenaufbereitung mit dplyr**
+**Datenaufbereitung mit** `dplyr`
 
 -   Vertiefung & Nachtrag
 
@@ -81,7 +81,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## Nachtrag: row.names = FALSE
+## Nachtrag: `row.names = FALSE`
 
 `row.names = FALSE` sorgt dafür, dass keine neue Spalte eingefügt wird, die alle Zeilen durchnummeriert (also einen zusätzlichen „Spaltennamen“ erzeugt).
 
@@ -114,7 +114,7 @@ dat_full_rownames <- dat_full_rownames |>
 
 ------------------------------------------------------------------------
 
-## Nachtrag: write.csv2()
+## Nachtrag: `write.csv2()`
 
 Die beiden Funktionen unterscheiden sich nur in den **verwendeten Trennzeichen**:
 
@@ -126,7 +126,7 @@ Die beiden Funktionen unterscheiden sich nur in den **verwendeten Trennzeichen**
 
 ------------------------------------------------------------------------
 
-## Nachtrag: select()
+## Nachtrag: `select()`
 
 Kann **nicht** verwendet werden, um **Rows/Zeilen** auszuwählen! Auswahl von **Spalten!**
 
@@ -143,40 +143,9 @@ penguins |>
 
 ------------------------------------------------------------------------
 
-## Kombination select() und full_join()
+## `arrange()`: Daten sortieren
 
-```{r, echo = TRUE, message = FALSE}
-# Datensatz 1
-penguins <- palmerpenguins::penguins
-penguins <- penguins |>
-  mutate(id = row_number())
-
-# Datensatz 2
-penguins2 <- palmerpenguins::penguins
-penguins2 <- penguins2 |>
-  mutate(id = row_number())
-```
-
-<br>
-
-```{r, echo = TRUE, eval = TRUE}
-# Zusammenführen beider Datensätze
-dat_final <- penguins |>
-  select(id, species, year) |>
-  full_join(
-    penguins2 |> select(id, island, sex),
-    by = "id"
-  )
-
-# Ansicht
-dat_final %>% head(n = 4)
-```
-
-------------------------------------------------------------------------
-
-## arrange(): Daten sortieren
-
-👉 Sortiert Daten nach einer Variable\
+👉 Sortiert Daten nach einer Variable bzw. Spalte\
 👉 Hilfreich für: **höchste / niedrigste Werte erkennen**
 
 <br>
@@ -195,7 +164,7 @@ penguins |>
 
 ------------------------------------------------------------------------
 
-## relocate(): Spalten verschieben
+## `relocate()`: Spalten verschieben
 
 👉 Ändert die Position von Spalten
 
@@ -367,19 +336,74 @@ Damit wir unsere Analysen sinnvoll durchführen können, müssen wir oft **Skale
 
 **Schritte:**
 
-1.  **Transformation der Antwortformate** (z.B. von „Trifft häufig zu“ zu numerischen Werten).
+1️⃣ **Transformation der Antwortformate** (z.B. von „Trifft häufig zu“ zu numerischen Werten).
 
-    <br>
+<br>
 
-2.  **Beachtung von Reverse-Codierungen** (z.B. beim Konstrukt *Gewissenhaftigkeit*: Item „Ich bin bequem, neige zur Faulheit“ muss umgepolt werden).
+2️⃣ **Beachtung von Reverse-Codierungen** (z.B. beim Konstrukt *Gewissenhaftigkeit*: Item „Ich bin bequem, neige zur Faulheit“ muss umgepolt werden).
 
-    <br>
+<br>
 
-3.  **Berechnung der Skalenwerte** (z.B. durch Mittelwertbildung der entsprechenden Items).
+3️⃣ **Berechnung der Skalenwerte** (z.B. durch Mittelwertbildung der entsprechenden Items).
 
 ------------------------------------------------------------------------
 
-## Beispiele: Berechnung von Skalenwerten
+## 1️⃣ Transformation in numerische Werte
+
+<br>
+
+**Beispiel:** 8 Items eines Fragebogens (question_1 bis question_8) liegen als Textantworten auf einer 5-stufigen Likert-Skala vor. Diese sollen nun in numerische Werte (1 bis 5) umgewandelt werden.
+
+<br>
+
+```{r, eval = FALSE, echo = TRUE}
+dat <- dat |>
+  mutate(
+    across(
+      question_1:question_8,
+      ~ recode(.,
+        "trifft gar nicht zu" = 1,
+        "trifft eher nicht zu" = 2,
+        "teils/teils" = 3,
+        "trifft eher zu" = 4,
+        "trifft völlig zu" = 5
+      )
+    )
+  )
+```
+
+→ Alle Items werden in einem Schritt transformiert.
+
+→ Voraussetzung für jede weitere Analyse.
+
+------------------------------------------------------------------------
+
+## 2️⃣ Umpolung von Items (Reverse Coding)
+
+<br>
+
+**Ausgangssituation:** Fragebogen mit 12 Items (q_1 bis q_12) auf einer 4-stufigen Skala. Davon sind Item 2 und Item 5 noch negativ formuliert bzw. invers codiert.
+
+**Problem:** Ohne Umpolung zeigen die Items in unterschiedliche Richtungen und der Skalenwert wird falsch!
+
+```{r, eval = FALSE, echo = TRUE}
+dat <- dat |>
+  mutate(
+    across(
+      c(q_2, q_5),
+      ~ case_when(
+        . == 1 ~ 4,
+        . == 2 ~ 3,
+        . == 3 ~ 2,
+        . == 4 ~ 1
+      )
+    )
+  )
+```
+
+------------------------------------------------------------------------
+
+## 3️⃣ Berechnung von Skalenwerten
 
 <br>
 
@@ -396,7 +420,7 @@ dat_full <- dat_full |>
 
 <br>
 
-**Sparsamere Varianten:** dplyr-Funktion verwenden, um z.B. nicht alle Variablen auszuschreiben
+**Sparsamere Varianten:** `dplyr`-Funktion verwenden, um z.B. nicht alle Variablen auszuschreiben
 
 ```{r, eval = FALSE, echo=TRUE}
 #Sparsamere Alternative:
@@ -428,13 +452,15 @@ c_across(), sodass die Spalten (columns) ausgewählt werden.
 
 ## Heute haben wir:
 
+...weitere Funktionen von `dplyr` kennen gelernt
+
 ... Fehlende Werte und deren Umgang angeschaut
 
 ... Skalenberechnung angeschaut
 
 ------------------------------------------------------------------------
 
-## Congrats you mastered dplyr!!
+## Congrats you mastered `dplyr`!!
 
 <br>
 
@@ -452,7 +478,7 @@ c_across(), sodass die Spalten (columns) ausgewählt werden.
 
 -   via ILIAS (Ordner: Abgaben)
 
--   anschliessend individuelles Feedback von uns
+-   Anschliessend individuelles Feedback von uns
 
 <br>
 
