@@ -352,7 +352,7 @@ alpha(mmq_vars)
 ### Tabelle mit Geoms()
 
 | Geom | Funktion | Einsatzbereich | Bild / Beispiel |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | **geom_point()** | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) | ![](images/EH_10/geom_point.png) |
 | **geom_jitter()** | Jitter-Plot | Punkte leicht versetzen, um Überlappung zu vermeiden (v. a. bei kategorialem x) | ![](images/EH_10/geom_jitter.png) |
 | **geom_line()** | Liniendiagramm | Werteverlauf Über kontinuierliche x-Achse darstellen | ![](images/EH_10/geom_line.png) |
