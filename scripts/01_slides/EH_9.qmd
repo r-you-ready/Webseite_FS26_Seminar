@@ -56,7 +56,21 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Fragen zu Hands On Block 4?
 
+Neue Variablen im Codebook ergänzen bzw. anpassen
+
 ![](../../images/EH_7/Bild1.png){fig-align="center" width="411"}
+
+::: notes
+mmq_mean & Pre Ratings
+:::
+
+------------------------------------------------------------------------
+
+## Genzplyr 💅
+
+Falls euch die `dplyr()` Funktionen zu Öde sind 😄[genzplyr](https://hadley.github.io/genzplyr/) - Hadley Wickham
+
+![](../../images/EH_9/Genzplyr.png){fig-align="center"}
 
 ------------------------------------------------------------------------
 
@@ -221,7 +235,7 @@ notwendig für dat_full um 2x3 ANOVA zu berechnen
 
 ------------------------------------------------------------------------
 
-## Umgekehrter Fall: Long → Wide mit `pivot_wider()`
+## Umgekehrter Fall: Long → Wide mit **`pivot_wider()`**
 
 👉 Daten wieder in eine **übersichtlichere Tabellenform** bringen
 
@@ -283,7 +297,7 @@ aus [Einführung in R, Kapitel 4.1](https://methodenlehre.github.io/einfuehrung-
 
 👉 **Datenqualität bestimmt die Qualität der Ergebnisse**
 
-Paket: **psych**
+Paket: `psych`
 
 ::: notes
 psych sollte aus Diagnostik bekannt sein. Beinhaltet zb. Funktionen zu Schiefe, Kurtosis, Reliabilität
@@ -343,15 +357,7 @@ Eine Schiefe nahe 0 und eine Kurtosis von etwa 3 sprechen für eine Normalvertei
 
 -   **Visuelle Verfahren**: z.B. QQ-Plot
 
--   **Formale Tests**: z.B. Shapiro-Wilk) –\> "veraltete" Methode
-
-<br>
-
-Visuelle Verfahren werden heute meist bevorzugt, da sie weniger sensitiv gegenüber Stichprobengrössen sind.
-
-<br>
-
-Allerdings gilt: Verletzungen der Normalitätsannahme sind in der Praxis oft weniger problematisch als angenommen. Sollte es problematisch sein, kann auf nichtparametrische Verfahren ausgewichen werden.
+-   **Formale Tests**: z.B. Shapiro-Wilk –\> "veraltete" Methode, zu konservativ bei grossen Stichproben
 
 ------------------------------------------------------------------------
 
@@ -519,7 +525,7 @@ Mehrere Items einer Skala sollen dasselbe Konstrukt messen
 
 ## 5. Skalenreliabilität: Cronbach's Alpha
 
-→ Wichtiger Wert: raw_alpha (hier: 0.76)
+→ Wichtiger Wert: **raw_alpha** (hier: 0.76)
 
 ```{r echo=TRUE}
 bfi_10_extra <- bfi_10_data |>
@@ -568,8 +574,7 @@ In diesem Beispiel werden nur zwei Items verwendet - wir gehen davon aus dass bf
 ## Bis nächste Woche
 
 -   Muddiest Points Umfrage bis Sonntag 23:55
--   Forum nutzen
--   Bei Fragen: Lars kontaktieren
+-   Bei weiteren Fragen zu den bisherigen Inhalten: Forum nutzen & Lars kontaktieren
 
 **Optional / Empfehlung**
 

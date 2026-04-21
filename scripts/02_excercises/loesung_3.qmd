@@ -3,6 +3,7 @@ title: "Hands On – Coding Basics (Einheiten 5 und 6)"
 filters:
   - conditional_content
 show_solutions: true
+draft: false
 format:
   html:
     code-tools:
