@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RENV_CONFIG_AUTOLOADER_ENABLED: "FALSE"
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -37,83 +38,57 @@ jobs:
           sudo apt-get install -y \
             pkg-config \
             libuv1-dev \
-            libcurl4-openssl-dev libssl-dev libxml2-dev \
-            libfontconfig1-dev libfreetype6-dev \
-            libharfbuzz-dev libfribidi-dev \
-            libpng-dev libtiff5-dev libjpeg-dev libwebp-dev
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libfontconfig1-dev \
+            libfreetype6-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev \
+            libwebp-dev
 
-      - name: Disable renv (remove folder)
+      - name: Disable renv
         run: rm -rf renv renv.lock
 
-      - name: Detect R packages used in qmd/R files
+      - name: Cache R packages
+        uses: actions/cache@v4
+        with:
+          path: /home/runner/work/_temp/Library
+          key: ${{ runner.os }}-r-lib-${{ hashFiles('.github/workflows/publish.yml', '_quarto.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-r-lib-
+
+      - name: Install required R packages
         run: |
-          Rscript -e '
-          files <- c(
-            list.files(".", pattern="\\.qmd$", recursive=TRUE, full.names=TRUE),
-            list.files(".", pattern="\\.R$", recursive=TRUE, full.names=TRUE),
-            list.files(".", pattern="\\.Rmd$", recursive=TRUE, full.names=TRUE)
-          )
-          files <- files[!grepl("^_site/|^\\.quarto/|^renv/|^\\.git/", files)]
+          Rscript -e 'install.packages(c(
+            "rmarkdown",
+            "knitr",
+            "palmerpenguins",
+            "apaTables",
+            "afex",
+            "emmeans",
+            "effectsize",
+            "psych",
+            "effsize",
+            "skimr",
+            "here",
+            "styler",
+            "tidyverse",
+            "stringr",
+            "readr",
+            "dplyr",
+            "ggplot2"
+          ), repos = "https://cloud.r-project.org", dependencies = TRUE)'
 
-          pkgs <- character()
-          for (f in files) {
-            txt <- tryCatch(readLines(f, warn = FALSE), error = function(e) character())
-
-            m1 <- gregexpr("\\b(library|require)\\s*\\(\\s*([A-Za-z][A-Za-z0-9._]*)\\s*\\)", txt, perl=TRUE)
-            hits1 <- regmatches(txt, m1)
-            if (length(hits1)) {
-              for (h in unlist(hits1)) {
-                pkgs <- c(pkgs, sub(".*\\(\\s*([A-Za-z][A-Za-z0-9._]*)\\s*\\).*", "\\1", h))
-              }
-            }
-
-            m2 <- gregexpr("\\b(library|require)\\s*\\(\\s*\"([^\"]+)\"\\s*\\)", txt, perl=TRUE)
-            hits2 <- regmatches(txt, m2)
-            if (length(hits2)) {
-              for (h in unlist(hits2)) {
-                pkgs <- c(pkgs, sub(".*\"([^\"]+)\".*", "\\1", h))
-              }
-            }
-          }
-
-          pkgs <- unique(pkgs)
-          base_pkgs <- c("stats","graphics","grDevices","utils","datasets","methods","base","tools","compiler","parallel","grid","splines","tcltk")
-          pkgs <- setdiff(pkgs, base_pkgs)
-          pkgs <- unique(c("rmarkdown", "knitr", pkgs))
-
-          writeLines(pkgs, "ci-packages.txt")
-          '
-
-      - name: Install detected R packages
-        run: |
-          Rscript -e '
-          repos <- "https://cloud.r-project.org"
-          pkgs <- readLines("ci-packages.txt", warn = FALSE)
-
-          pkgs <- unique(c(
-            pkgs,
-            "rmarkdown", "knitr",
-            "palmerpenguins", "apaTables", "afex", "emmeans",
-            "effectsize", "psych", "effsize", "skimr",
-            "here", "styler", "tidyverse"
-          ))
-
-          avail <- rownames(available.packages(repos = repos))
-          to_install <- intersect(pkgs, avail)
-
-          install.packages(to_install, repos = repos, dependencies = TRUE)
-          '
-
-      - name: Install GitHub-only R packages (if needed)
+      - name: Install chattr
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes", repos = "https://cloud.r-project.org")'
-          Rscript -e 'tryCatch({ if (!requireNamespace("chattr", quietly = TRUE)) remotes::install_github("mlverse/chattr", dependencies = TRUE) }, error = function(e) { message("Optional GitHub package chattr could not be installed: ", conditionMessage(e)) })'
-
-      - name: Ensure core R packages are installed
-        run: |
-          Rscript -e 'install.packages(c("fs","sass","bslib","rmarkdown","knitr"), repos = "https://cloud.r-project.org", dependencies = TRUE)'
+          Rscript -e 'if (!requireNamespace("chattr", quietly = TRUE)) remotes::install_github("mlverse/chattr", dependencies = TRUE)'
 
       - name: Render website
         run: quarto render
@@ -129,6 +104,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
