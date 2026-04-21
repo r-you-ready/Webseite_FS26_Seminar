@@ -527,6 +527,10 @@ Mehrere Items einer Skala sollen dasselbe Konstrukt messen
 
 → Wichtiger Wert: **raw_alpha** (hier: 0.76)
 
+⚠️ Hinweis: Cronbach’s Alpha wird typischerweise für Skalen mit mehreren Items berechnet (hier nur 2 Items → eingeschränkte Aussagekraft)
+
+<br>
+
 ```{r echo=TRUE}
 bfi_10_extra <- bfi_10_data |>
   select(bfi_extra_1_r, bfi_extra_2)
