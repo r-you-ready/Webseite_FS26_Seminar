@@ -4,7 +4,7 @@ editor: visual
 bibliography: references.bib
 filters:
   - conditional_content
-show_solutions: false
+show_solutions: true
 draft: false
 format:
   html:
