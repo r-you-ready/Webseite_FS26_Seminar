@@ -289,8 +289,8 @@ aus [Einführung in R, Kapitel 4.1](https://methodenlehre.github.io/einfuehrung-
 
 ## Datenqualität:
 
-1.  Schiefe /Skewness
-2.  Kurtosis / Kurtosis
+1.  Schiefe (Skewness)
+2.  Wölbung (Kurtosis)
 3.  Normalverteilung der Residuen
 4.  Ausreisseranalyse
 5.  Skalenreliabilität
