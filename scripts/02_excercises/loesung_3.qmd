@@ -360,7 +360,7 @@ Die Referenzkategorie haben wir hier "male" gewählt - dies ist je nach Studiend
 Bevor wir mit den Übungen starten, ein Überblick über die Unterschiede:
 
 | Struktur | Eigenschaften | Beispiel-Inhalt |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | **Vektor** | \- Enthält Elemente **eines** Datentyps<br>- Grundbaustein in R | `c(1, 2, 3)` oder `c("Anna", "Ben")` |
 | **Liste** | \- Kann verschiedene Datentypen enthalten<br>- Elemente können unterschiedlich lang sein | Zahlenvektor, Textvektor, logischer Vektor in einer Liste |
 | **Matrix** | \- Enthält nur **einen** Datentyp<br>- Hat feste Dimensionen (Zeilen, Spalten) | 3x3-Matrix mit Zahlen 1–9 |
