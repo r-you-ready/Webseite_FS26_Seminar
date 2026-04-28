@@ -71,7 +71,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## {data-background-iframe="../../PDFs/Muddiest_Points_II.pdf#view=FitH&navpanes=0&toolbar=0" data-background-interactive=""}
+##  {data-background-iframe="../../PDFs/Muddiest_Points_II.pdf#view=FitH&navpanes=0&toolbar=0" data-background-interactive=""}
 
 ------------------------------------------------------------------------
 
@@ -167,13 +167,14 @@ penguins_subset <- penguins |>
 
 <br>
 
-**Schritt 2: Korrelationstabelle für ausgewählte Variablen erstellen**
+**Schritt 2: Korrelationstabelle für ausgewählte Variablen erstellen und speichern**
 
 *Berechnet Korrelationen, Mittelwerte und Standardabweichungen und formatiert diese im APA-Stil*
 
 ```{r, echo = TRUE, eval = TRUE}
 library(apaTables)
-apa.cor.table(penguins_subset)
+
+apa.cor.table(penguins_subset, filename = "cor_table.docx")
 ```
 
 ------------------------------------------------------------------------
@@ -280,6 +281,43 @@ rate_plot +
 
 ------------------------------------------------------------------------
 
+## `ggplot2()` - Cheatsheet
+
+:::::: {style="display: flex; justify-content: space-between; gap: 1rem;"}
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot1.png)
+:::
+
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot2.png)
+:::
+
+::: {style="flex: 1;"}
+```         
+```
+
+![](../../images/EH_10/ggplot3.png)
+:::
+::::::
+
+::: notes
+With ggplot2, you begin a plot with the function ggplot(), defining a plot object that you then add layers to. The first argument of ggplot() is the dataset to use in the graph and so ggplot(data = penguins) creates an empty graph that is primed to display the penguins data, but since we haven’t told it how to visualize it yet, for now it’s empty. This is not a very exciting plot, but you can think of it like an empty canvas you’ll paint the remaining layers of your plot onto.
+
+Next, we need to tell ggplot() how the information from our data will be visually represented. The mapping argument of the ggplot() function defines how variables in your dataset are mapped to visual properties (aesthetics) of your plot. The mapping argument is always defined in the aes() function, and the x and y arguments of aes() specify which variables to map to the x and y axes. For now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic. ggplot2 looks for the mapped variables in the data argument, in this case, penguins.
+
+To do so, we need to define a geom: the geometrical object that a plot uses to represent data. These geometric objects are made available in ggplot2 with functions that start with geom\_. People often describe plots by the type of geom that the plot uses. For example, bar charts use bar geoms (geom_bar()), line charts use line geoms (geom_line()), boxplots use boxplot geoms (geom_boxplot()), scatterplots use point geoms (geom_point()), and so on.
+
+Zusammenhang bedeutet die Verwendung von +, dass wir einzelne Elemente eines Plot-Objektes zusammenfügen.
+:::
+
+------------------------------------------------------------------------
+
 ## Argumente von `ggplot()`
 
 <br>
@@ -288,7 +326,7 @@ rate_plot +
 
 -   Wir starten immer mit einem Datensatz
 
--   Es passiert noch nichts sichtbar!
+-   Es passiert noch nichts sichtbares!
 
 ```{r, echo = TRUE, eval = TRUE}
 library(ggplot2)
@@ -410,7 +448,7 @@ ggplot(penguins) +
 
 <br>
 
-**Welche geom für welche Daten?**
+**Welche `geom` für welche Daten?**
 
 -   Je nach Art der Daten und der gewünschten Darstellungsart auszuwählen:
 
@@ -510,6 +548,8 @@ ggsave(filename = "my_first_plot.png", plot = penguins_plot)
 
 **Zum Vertiefen**
 
+-   [**Data Visualization: A Practical Introduction**](https://socviz.co/)
+
 -   **R for Data Science – Kapitel „[Exploratory data analysis](https://r4ds.hadley.nz/EDA.html)“**\
     Einführung in die Grundlogik von ggplot2
 
@@ -533,7 +573,7 @@ ggsave(filename = "my_first_plot.png", plot = penguins_plot)
 
     -   `ggplot()`
 
-**Reminder: Beim Abschlussprojekt müsst ihr 1 Tabelle oder Abbildung nach Wahl zu den simulierten Daten abgeben.**
+**Reminder: Beim Abschlussprojekt müsst ihr 1 Tabelle oder Abbildung nach Wahl zu den simulierten Daten abgeben. –\> Detail folgen!**
 
 ------------------------------------------------------------------------
 
@@ -548,3 +588,5 @@ Peerfeedback bis Mittwoch **13.05.2026 (vor der Einheit)**
 ::: notes
 Namenseinhaltung für Abgabe der Files (da wir diese via R-Funktion öffnen)
 :::
+
+16:15 Gruppe –\> Nächste Woche kommt Laura!
