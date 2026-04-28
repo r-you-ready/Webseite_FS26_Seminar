@@ -17,7 +17,7 @@ format:
     controls: true
     embed-resources: true
 bibliography: references.bib
-draft: true
+draft: false
 ---
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
@@ -71,11 +71,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## Muddiest Points II
-
-Hier kommt ein PDF-Dokument mit den Antworten der Muddiest Points!
-
-Die relevantesten Punkte werden auch direkt im Seminar noch aufgegriffen: Fragen zum aktuellen Datensatz und zur Abschlussarbeit
+## {data-background-iframe="../../PDFs/Muddiest_Points_II.pdf#view=FitH&navpanes=0&toolbar=0" data-background-interactive=""}
 
 ------------------------------------------------------------------------
 
