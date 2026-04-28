@@ -1,19 +1,17 @@
 ---
-title: "Hausübung 2 Lösung"
+title: "Hausübung 2"
 editor: visual
-draft: true
 format:
   html:
     toc: TRUE
-    echo: false
-    eval: true
-    message: false
-    warning: false
-    fig-show: "hide"
     embed-resources: true
+filters:
+  - conditional_content
+show_solutions: false
+draft: false
 ---
 
-```{r, eval = TRUE}
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(psych)
 library(knitr)
@@ -22,11 +20,9 @@ library(dplyr)
 library(ggplot2)
 ```
 
-# Hausübung 2
+# 📅 Formalitäten und Abgabe
 
-## 📅 Formalitäten und Abgabe
-
--   **Abgabe bis:** Freitag 28.11, 23:55 via ILIAS
+-   **Abgabe bis:** Freitag 08.05, 23:55 via ILIAS
 
 -   **Zip-Datei benennen:** `vorname_nachname.zip`
 
@@ -34,7 +30,7 @@ library(ggplot2)
 
     -   **Ungerendertes Quarto-Skript:** `vorname_nachname_hausuebung_2.qmd`
 
--   **Peer Feedback:** Bis 3.12 direkt an die Person und im Forum als Zusammenfassung. Im Forum bitte auch Namen der Person, für die das Feedback bestimmt ist, nennen.
+-   **Peer Feedback:** Bis 13.05 direkt an die Person und im Forum als Zusammenfassung. Im Forum bitte auch Namen der Person, für die das Feedback bestimmt ist, nennen.
 
 ## Aufgabe 1: Datensatz einlesen und Deskriptive Statistik
 
@@ -78,18 +74,21 @@ Stelle in deinem Quarto Header die folgenden Dinge ein. Achtung: Achte auf die E
 
 -   **table of contents (toc) = true**
 
-Lies den folgenden Datensatz ein: **Practice_dataset2**
+Lies den folgenden Datensatz ein: **practice_dataset2.csv**
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo = TRUE, eval = TRUE}
 practice_dataset2 <- read_delim("raw/practice_dataset2.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 ```
 :::
+::::
 
 ### 1.2 Mittelwert und Standardabweichung (Self-Efficacy)
 
 Berechne den **Mittelwert** und die **Standardabweichung** der Variable `self_efficacy` für jede Gruppe (`condition`). Runde die Ergebnisse jeweils auf drei Nachkommastellen. Speichere diese deskriptive Statistik in einen neuen Dataframe ab.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo= TRUE, eval = TRUE}
 
@@ -101,21 +100,25 @@ practice_dataset_sum <- practice_dataset2 |>
   )
 ```
 :::
+::::
 
 ### 1.3 Tabelle formatieren mit `kable`
 
-Nutze `kable` um Formatierungen am unter 1.2 erstellten Dataframe durchzuführen (Überschrift ergänzen, Spalten benennen, Nachkommastellen anpassen).
+Stelle den in Aufgabe 1.2 erstellten Dataframe mit `kable()` als Tabelle dar. Ergänze eine Tabellenüberschrift, sinnvolle Spaltennamen und stelle sicher, dass die Werte mit drei Nachkommastellen angezeigt werden.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo= TRUE, eval = TRUE}
 kable(practice_dataset_sum,   caption = "Zusammenfassung der Self-Efficacy nach Bedingung",   col.names = c("Bedingung", "Mittelwert Self-Efficacy", "SD Self-Efficacy"),   digits = 3 ) 
 ```
 :::
+::::
 
 ### 1.4 Schiefe und Kurtosis
 
 Berechne zusätzlich die **Schiefe** (`skew`) und **Kurtosis** (`kurtosi`) der Variable `self_efficacy` pro Gruppe (`condition`), mit Funktionen aus dem Paket `psych`.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo= TRUE, eval = TRUE}
 practice_dataset_dis <- practice_dataset2 |>    
@@ -127,13 +130,15 @@ practice_dataset_dis <- practice_dataset2 |>
 print(practice_dataset_dis) 
 ```
 :::
+::::
 
 ## Aufgabe 2: Wide-to-Long Transformation
 
 ### 2.1 Wide-to-Long Transformation
 
-Der Originaldatensatz enthält die Spalten `pre_mood`, `mid_mood`, `post_mood`. Verwandle diese mithilfe von `pivot_longer()` in einen **Long-Datensatz** namens `mood_long`. Die neue Spalte mit den Zeitpunkten soll `mood_time` heißen, die mit den Werten `mood_rating`.
+Der Originaldatensatz enthält die Spalten `pre_mood`, `mid_mood`, `post_mood`. Verwandle diese mithilfe von `pivot_longer()` in einen **Long-Datensatz** namens `mood_long`. Die neue Spalte mit den Zeitpunkten soll `mood_time` heissen, die mit den Werten `mood_rating`.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo = TRUE, eval = TRUE}
 mood_long <- practice_dataset2 |>
@@ -159,6 +164,7 @@ mood_long <- practice_dataset2 |>
   )
 ```
 :::
+::::
 
 ## Aufgabe 3: Plot - Verlaufsdiagramm
 
@@ -168,8 +174,9 @@ Im nächsten Schritt verwenden wir den LONG-Datensatz (Siehe Aufgabe 2.1), um de
 
 -   Dafür soll mood_time in einen Faktor mit geordneten Faktorstufen (pre, mid und post) umgewandelt werden.
 
--   Erstelle einen Summary, welches die für den Plot benötigten Angaben zusammenfasst (Durschschnittlicher Mood gruppiert nach Condition und Zeitpunkt).
+-   Erstelle einen neuen Summary-Datensatz, der für jede Kombination aus `condition` und `mood_time` den durchschnittlichen Wert von `mood_rating` enthält.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo = TRUE, eval=TRUE}
 
@@ -187,6 +194,7 @@ data_plot <- mood_long |>
 
 ```
 :::
+::::
 
 ### 3.2 Initialer Lineplot
 
@@ -194,6 +202,7 @@ Plotte die Elemente `mood_time` und `mean_mood`. Gruppiere die conditions nach F
 
 💡Tipp: Wenn du den Plot einem Objekt zuweist, kannst du ihn weiterverwenden, indem du das Objekt aufrufst und erweiterst. So musst du den Code nicht jedes Mal neu ausschreiben.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, eval= TRUE}
 plot <- data_plot |>
@@ -206,6 +215,7 @@ plot
 
 Normalerweise würde das Argument `color = condition` ausreichen, damit ggplot implizit eine Gruppierung der Daten nach der Variable `condition` vornimmt und die Datenpunkte innerhalb des Plots verbindet. Da wir vorher aber auch die Variable `mood_time` explizit als Faktor gesetzt hatten, wird nun jede Kombination aus beiden Variablen implizit als Gruppierung angesehen. Daher gibt es ohne das von uns explizite Argument `group = condition` für jede Zeile eine eigene Gruppe und die Datenpunkte würden nicht verbunden werden. Probiere den ggplot-call gerne ohne das entsprechende Argument aus und schaue, was passiert!
 :::
+::::
 
 ### 3.3 Farbpalette für Farbenblinde
 
@@ -213,6 +223,7 @@ Passe nun den Plot aus 3.2 so an, dass er eine **Farbpalette** verwendet, die f�
 
 Tipp: Verwende: `scale_color_manual`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo = TRUE}
 
@@ -220,7 +231,9 @@ cb_palette <- c(   "#000000", "#E69F00", "#56B4E9", "#009E73",   "#F0E442", "#00
 
 ```
 :::
+::::
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo= TRUE, eval = TRUE}
 plot_farbe <- plot +   
@@ -229,11 +242,13 @@ plot_farbe <- plot +
 plot_farbe
 ```
 :::
+::::
 
 ### 3.4 Datenpunkte hinzufügen
 
-Füge mit `geom_point()` die einzelnen Punkte auf der Linie ein. Stelle die grösse (`size()` auf 3)
+Füge mit `geom_point()` die einzelnen Punkte auf der Linie ein. Stelle die Grösse der Punkte mit dem Argument `size = 3` ein.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo=TRUE, eval = TRUE}
 plot_2 <- plot_farbe +   
@@ -242,6 +257,7 @@ plot_2 <- plot_farbe +
 plot_2
 ```
 :::
+::::
 
 ### 3.5 Finale Formatierung
 
@@ -249,6 +265,7 @@ Füge dem Diagramm **Titel** sowie **Achsenbeschriftungen** zu deinem Plot und v
 
 ![](../../images/EH_10/themes_ggplot.png){fig-align="center" width="518"}
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo= TRUE, eval = TRUE}
 plot_3 <- plot_2 +    
@@ -261,32 +278,38 @@ plot_3 <- plot_2 +
 print(plot_3)
 ```
 :::
+::::
 
 ### 3.6 Plot speichern
 
 Speichere den Plot ab mit `ggsave` als **png** ab.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, eval = FALSE, echo = TRUE}
 
 ggsave("mein_plot.png", plot = plot_3)
 ```
 :::
+::::
 
 ## 4. Subsetting und *t*-Test
 
-Erstelle aus dem ursprünglichen Wide Originaldatensatz einen neuen Datensatz `subset_mood`, der nur Daten der Gruppe **experimental** beinhaltet.
+Erstelle aus dem ursprünglichen Wide-Datensatz `practice_dataset2` einen neuen Datensatz `subset_mood`, der nur Personen aus der Gruppe `experimental` enthält.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo = TRUE, eval = TRUE}
 subset_mood <- practice_dataset2 |>   filter(condition == "experimental") 
 ```
 :::
+::::
 
 ### 4.1 Gepaarter *t*-Test
 
 Prüfe nun (anhand des unter 4. erstellen Datensatzes) mittels eines gepaarten *t*-Test ob sich `pre_mood` und `post_mood` in der Gruppe *experimental* unterscheiden. Nutze dafür die Funktion `t.test()`. Lass dir das Ergebnis mit `print()` ausgeben.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösungen"}
 ```{r, echo= TRUE, eval = TRUE}
 t_test_result <- t.test(subset_mood$pre_mood, subset_mood$post_mood, paired = TRUE) 
@@ -295,9 +318,10 @@ print(t_test_result)
 # hier gilt paired = TRUE, da sich die beiden Messungen bedingen (sie sind beide von der selben Person, lediglich zu unterschiedlichen Zeitpunkten aufgenommen worden) = within-subjects Vergleich 
 ```
 :::
+::::
 
 ## 5. Rendern und Hochladen
 
 -   Rendere dein Skript als HTML
 
--   Lade deine Abgabe (Skript + HTML) als ZIP ordner in ILIAS hoch und schicke sie deinem/deiner Peepartner:in.
+-   Lade deine Abgabe (Skript + HTML) als ZIP-Ordner in ILIAS hoch und schicke sie deinem/deiner Peerpartner:in.
