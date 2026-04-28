@@ -27,9 +27,11 @@ Bei Bedarf finden sich hier nochmal die Slides zur EH9:
 
 Und hier die Slides zur EH10:
 
+```{=html}
 <!--
 <iframe src="../01_slides/EH_10.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
 -->
+```
 
 # Lernziele
 
@@ -146,7 +148,6 @@ dat_full |>
   summarise(
     Gesamtmean = mean(across(starts_with("question")), na.rm = TRUE)
   )
-
 ```
 :::
 ::::
@@ -549,7 +550,7 @@ Mit graphischen Darstellungen lassen sich Verteilungen, Ausreisser und Zusammenh
 ### Überblick über wichtige ggplot2-Geoms
 
 | **Geom** | **Funktion** | **Einsatzbereich** |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | geom_point() | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) |
 | geom_line() | Liniendiagramm | Werteverlauf über kontinuierliche x-Achse darstellen |
 | geom_bar() | Balkendiagramm | Häufigkeiten oder Aggregationen für Kategorien (x = Gruppe) |
