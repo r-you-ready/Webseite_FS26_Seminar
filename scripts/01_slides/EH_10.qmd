@@ -59,7 +59,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-##  {data-background-iframe="../../PDFs/Praktikum.pdf#view=FitH&navpanes=0&toolbar=0" data-background-interactive=""}
+##  {data-background-iframe="../../PDFs/praktikum.pdf#view=FitH&navpanes=0&toolbar=0" data-background-interactive=""}
 
 ------------------------------------------------------------------------
 
