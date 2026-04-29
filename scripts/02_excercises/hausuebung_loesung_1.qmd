@@ -3,7 +3,7 @@ title: "Hausübung 1"
 editor: visual
 filters:
   - conditional_content
-show_solutions: false
+show_solutions: true
 draft: false
 ---
 
