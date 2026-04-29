@@ -35,34 +35,21 @@ library(ggplot2)
 ## Aufgabe 1: Datensatz einlesen und Deskriptive Statistik
 
 ```{r}
+#| label: download-data
 #| echo: false
 #| message: false
 #| warning: false
-#| results: false
-#| eval: true
+#| results: "hide"
 
-# Copy CSV into project root (optional)
-file.copy("raw/practice_dataset2.csv", "practice_dataset2.csv", overwrite = TRUE)
-
-# Copy CSV into _site/ folder where the HTML actually lives
-file.copy("raw/practice_dataset2.csv",
-          "_site/practice_dataset2.csv",
-          overwrite = TRUE)
-
+# Copy from raw/ into the same folder as your .qmd (ryouready/)
+file.copy(
+  from = "raw/practice_dataset2.csv",
+  to   = "practice_dataset2.csv",
+  overwrite = TRUE
+)
 ```
 
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-#| results: "asis"
-#| eval: true
-
-# Download button
-cat('<a href="practice_dataset2.csv" download class="btn btn-primary">📥 Download practice_dataset2.csv</a>')
-
-
-```
+<a href="practice_dataset2.csv" download class="btn btn-primary"> 📥 Download practice_dataset2.csv </a>
 
 ### 1.1 Vorbereitungen und Datensatz einlesen
 
