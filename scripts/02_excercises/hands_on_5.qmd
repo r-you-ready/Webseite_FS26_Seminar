@@ -352,7 +352,7 @@ alpha(mmq_vars)
 ### Tabelle mit Geoms()
 
 | Geom | Funktion | Einsatzbereich | Bild / Beispiel |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | **geom_point()** | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) | ![](images/EH_10/geom_point.png) |
 | **geom_jitter()** | Jitter-Plot | Punkte leicht versetzen, um Überlappung zu vermeiden (v. a. bei kategorialem x) | ![](images/EH_10/geom_jitter.png) |
 | **geom_line()** | Liniendiagramm | Werteverlauf Über kontinuierliche x-Achse darstellen | ![](images/EH_10/geom_line.png) |
@@ -499,5 +499,13 @@ apa.cor.table(prop_correct_vars,
 ```
 
 > **Wichtiger Hinweis:** Diese Funktion kann man auch für Regressionen und ANOVAs erstellen. Wir benutzen aber ein anderes Paket für ANOVAs (nicht ezANOVA, auf dem apaTables basiert)!
+
+------------------------------------------------------------------------
+
+# Zusatzübungen für die Extra-Schnellen
+
+-   Versuche Tabelle 1 aus dem Paper (Grinschgl et al., 2020) möglichst ident zu reproduzieren und als Word-Datei abzuspeichern
+
+-   Erstelle eine Abbildung deiner Wahl und versuche dabei möglichst viele APA-Richtlinien zu missachten.
 
 # Am Ende deiner Übungen - vergiss nicht dein Skript abzuspeichern! 😉

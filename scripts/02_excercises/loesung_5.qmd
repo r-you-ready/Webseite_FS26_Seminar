@@ -867,6 +867,16 @@ apa.cor.table(
 apaTables kann auch für andere statistische Ausgaben verwendet werden, zum Beispiel für Regressionsmodelle. Für ANOVAs verwenden wir im weiteren Verlauf jedoch ein anderes Paket.
 :::
 
+------------------------------------------------------------------------
+
+# Zusatzübungen für die Extra-Schnellen
+
+-   Versuche Tabelle 1 aus dem Paper (Grinschgl et al., 2020) möglichst ident zu reproduzieren und als Word-Datei abzuspeichern
+
+-   Erstelle eine Abbildung deiner Wahl und versuche dabei möglichst viele APA-Richtlinien zu missachten.
+
+------------------------------------------------------------------------
+
 # Zum Schluss
 
 Speichere am Ende deiner Übungen dein Skript ab, damit deine Änderungen nicht verloren gehen 😉

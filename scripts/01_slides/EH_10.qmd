@@ -275,13 +275,13 @@ rate_plot +
 
     -   Daten
 
-    -   Mapping → *Was wird dargestellt?*
+    -   Aesthetic Mappings → *Was wird dargestellt?*
 
-    -   Darstellung → *Wie wird es dargestellt?*
+    -   Layers → *Wie wird es dargestellt?*
 
 ------------------------------------------------------------------------
 
-## `ggplot2()` - Cheatsheet
+## `ggplot2()` - Cheatsheet Statistik
 
 :::::: {style="display: flex; justify-content: space-between; gap: 1rem;"}
 ::: {style="flex: 1;"}
@@ -573,7 +573,7 @@ ggsave(filename = "my_first_plot.png", plot = penguins_plot)
 
     -   `ggplot()`
 
-**Reminder: Beim Abschlussprojekt müsst ihr 1 Tabelle oder Abbildung nach Wahl zu den simulierten Daten abgeben. –\> Detail folgen!**
+**Reminder: Beim Abschlussprojekt müsst ihr 1 Tabelle oder Abbildung nach Wahl zu den simulierten Daten abgeben. –\> Details folgen!**
 
 ------------------------------------------------------------------------
 
