@@ -550,7 +550,7 @@ Mit graphischen Darstellungen lassen sich Verteilungen, Ausreisser und Zusammenh
 ### Überblick über wichtige ggplot2-Geoms
 
 | **Geom** | **Funktion** | **Einsatzbereich** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | geom_point() | Streudiagramm | Zwei numerische Variablen vergleichen (x = Var1, y = Var2) |
 | geom_line() | Liniendiagramm | Werteverlauf über kontinuierliche x-Achse darstellen |
 | geom_bar() | Balkendiagramm | Häufigkeiten oder Aggregationen für Kategorien (x = Gruppe) |
@@ -857,7 +857,7 @@ apa.cor.table(
 ```{r, echo = TRUE, eval = FALSE}
 apa.cor.table(
   prop_correct_vars,
-  filename = "outputs/propcorrtable.doc"
+  filename = "outputs/propcorrtable.docx"
 )
 ```
 :::
