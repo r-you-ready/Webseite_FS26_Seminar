@@ -4,7 +4,9 @@ editor: visual
 format:
   html:
     toc: TRUE
-    embed-resources: true
+    embed-resources: false
+resources:
+  - practice_dataset2.csv
 filters:
   - conditional_content
 show_solutions: false
