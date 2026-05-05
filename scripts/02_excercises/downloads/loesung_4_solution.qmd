@@ -4,14 +4,14 @@ editor: visual
 bibliography: references.bib
 filters:
   - conditional_content
-show_solutions: false
-draft: true
+show_solutions: true
+draft: false
 format:
   html:
     code-tools:
        source: downloads/loesung_4_solution.qmd
        toggle: false
-       caption: "Download der Lösungsdatei"
+       caption: "Download der Lösungsdatei" 
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE}
@@ -33,13 +33,10 @@ Bei Bedarf finden sich hier nochmal die Slides zur EH7:
 Und hier die Slides zur EH8:
 
 ```{=html}
-<!--
-::: {=html}
+
 <iframe src="../01_slides/EH_8.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
 
 </iframe>
-:::
--->
 ```
 
 # Lernziele
