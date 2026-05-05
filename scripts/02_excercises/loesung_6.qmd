@@ -838,6 +838,8 @@ summary(model_log)
 
 ## *t*-Tests
 
+Während Korrelation und Regression Zusammenhänge untersuchen, prüfen t-Tests **Unterschiede in Mittelwerten.**
+
 ::: {.callout-note collapse="true"}
 ### **Tabelle: Funktionen für *t*-Tests und verwandte Analysen in R**
 
@@ -860,28 +862,41 @@ summary(model_log)
 library(effsize)
 ```
 
-## t-Test für unabhängige Stichproben
+## Aufgabe 8: t-Test für unabhängige Stichproben
 
-Wir vergleichen `pre4` zwischen den Gruppen `above` und `below`.
+**Fragestellung:** Unterscheiden sich die `pre4`-Ratings zwischen den Gruppen `above` und `below`?
 
--   Starte mit einem `leveneTest()` aus dem `„car“` Paket um die Varianzhomogenität zu prüfen. Tipp: Filtere die Daten, sodass nur die beiden Gruppen `„above“` und `„below“` beinhaltet sind (d.h. ohne die Gruppe `„control“`).
+### 8.1 Daten vorbereiten
+
+Wir betrachten nur die zwei Gruppen `above` und `below`.
+
+```{r}
+dat_full_below_above <- dat_full |>
+  filter(group_all %in% c("above", "below")) |>
+  mutate(group_all = factor(group_all))
+```
+
+### 8.2 Varianzhomogenität prüfen (Levene-Test)
+
+Bevor wir den t-Test durchführen, prüfen wir, ob die Varianzen der Gruppen gleich sind.
+
+```{r, echo=TRUE, eval=FALSE}
+leveneTest(XXXX ~ XXXX, data = XXXX)
+```
 
 ::: {.callout-note collapse="true" title="Lösung"}
-```{r, eval = TRUE}
-
-dat_full_below_above <- dat_full |> 
-  filter(group_all != "control")
-
-dat_full_below_above$group_all <- as.factor(dat_full_below_above$group_all)
-
-leveneTest(dat_full_below_above$pre4, dat_full_below_above$group_all)
-
+```{r, echo = TRUE, eval=TRUE}
+leveneTest(pre4 ~ group_all, data = dat_full_below_above)
 ```
 
 Der Levene Test prüft die Homogenität der Varianzen zwischen den Gruppen. Ein nicht-signifikanter p-Wert (p \> 0.05) deutet darauf hin, dass die Varianzen in den beiden Gruppen als gleich angenommen werden können. Der vorliegende Test ist nicht signifikant (p = 0.09 \> 0.05), was darauf hinweist, dass die Varianzen in den Gruppen `„above“` und `„below“` als homogen betrachtet werden können.
 :::
 
--   Berechne nun den entsprechenden t-Test mit `t.test()`. Du kannst auch die Hilfefunktion zu Rate ziehen. Versuche dann den Output zu verstehen bzw. das Ergebnis zu interpretieren. Tipp: Wenn die Varianzhomogenität gegeben ist (d.h. der Levene Test nicht signifikant ist), muss man `var.equal = TRUE` angeben, ansonsten wird ein `Welch t-Test` berechnet.
+### 8.3 t-Test berechnen
+
+Berechne nun den entsprechenden t-Test mit `t.test()`. Du kannst auch die Hilfefunktion zu Rate ziehen. Versuche dann den Output zu verstehen bzw. das Ergebnis zu interpretieren.
+
+**Tipp:** Wenn die Varianzhomogenität gegeben ist (d.h. der Levene-Test nicht signifikant ist), muss man `var.equal = TRUE` angeben, ansonsten wird ein `Welch t-Test` berechnet.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval = TRUE}
@@ -893,13 +908,17 @@ t.test(pre4 ~ group_all, data = dat_full_below_above, var.equal = TRUE)
 Der students t-Test vergleicht die Mittelwerte der `pre4` Ratings zwischen den Gruppen `„above“` und `„below“`. Der p-Wert weisst auf einen statistisch signifikanten Unterschied der beiden Mittelwerte hin (p \< 0.05). Das 95%-Konfidenzintervall für den Mittelwertunterschied liegt zwischen 2.03 und 3.36. Das dieser Bereich **nicht** die 0 beinhaltet spricht ebenfalls für die Signifikanz der Mittelwertsunterschiede. Unter Einbezug der beiden Gruppenmittelwerte (`mean in group above` = 5.97 und `mean in group below` 3.27) deutet das Ergebnis darauf hin, dass die `„above“` Gruppe signifikant höhere `pre4` Ratings aufweist als die `„below“` Gruppe.
 :::
 
--   Nun berechnen wir noch `Cohen‘s d` als Effektstärken-Maß für den Mittelwertsunterschied. Verwende dafür `effsize::cohen.d()`.  Da es `„cohen.D“` auch im Paket `„psych“` gibt, ist es wichtig hier `„effsize::“` voranzusetzen.
+### 8.4 Effektstärke berechnen
+
+Zusätzlich zur Signifikanz berechnen wir die Effektstärke (Cohen's d).
+
+```{r, echo=TRUE, eval=FALSE}
+effsize::cohen.d(XXXX ~ XXXX, data = XXXX)
+```
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval = TRUE}
-
 effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
-
 ```
 
 Cohen's d beträgt 1.55, was auf einen großen Effekt hinweist.
@@ -909,44 +928,47 @@ Cohen's d beträgt 1.55, was auf einen großen Effekt hinweist.
 
 ------------------------------------------------------------------------
 
-## *t*-Tests für abhängige Stichproben
+## Aufgabe 9: *t*-Tests für abhängige Stichproben
 
--   Berechne einen *t*-Test für abhängige Stichproben um in der `„control“` Gruppe `Pre 1` und `Pre 4` zu vergleichen. (D.h. filtere zunächst den Datensatz, sodass nur mehr die `„control“` Gruppe
+**Fragestellung:** Verändert sich das Rating innerhalb der `control`-Gruppe von `pre1` zu `pre4`?
 
-```{r, eval = FALSE, echo = TRUE}
+### 9.1 Daten filtern
 
-t.test(datensatz$Variable1, datensatz$Variable2, paired = TRUE) 
+```{r}
+dat_full_control <- dat_full |>
+  filter(group_all == "control")
+```
 
+### 9.2 Gepaarten t-Test berechnen
+
+Hier vergleichen wir zwei Messzeitpunkte derselben Personen.
+
+```{r, echo=TRUE, eval=FALSE}
+t.test(XXXX$XXXX, XXXXX$XXXX, paired = XXXX)
 ```
 
 ::: {.callout-note collapse="true" title="Lösung"}
-```{r, eval = TRUE}
-
-dat_full_control <- dat_full |>
-  filter(group_all == "control")
-
-t.test(dat_full$pre1, dat_full$pre4, paired = TRUE)
-
+```{r, echo = TRUE, eval=TRUE}
+t.test(dat_full_control$pre1, dat_full_control$pre4, paired = TRUE)
 ```
 
 Der t-Test für abhängige Stichproben (paired = TRUE) vergleicht die Mittelwerte von `pre1` und `pre4` innerhalb der `„control“` Gruppe. Der p-Wert weisst auf einen signifikanten Unterschied zwischen den Mittelwerten dieser beiden Messzeitpunkte hin (p \< 0.05). Das 95%-Konfidenzintervall für den Mittelwertunterschied liegt zwischen 0.39 und 1.06, umschliesst damit nicht die 0, und zeigt dadurch ebenfalls einen signifikanten Mittelwertsunterschied zwsichen den beiden Messzeitpunkten an. Die Angabe `mean_difference` zeigt an, wie stark der Mittelwert von `pre1` auf `pre4`angestiegen ist (mean difference = 0.73).
 :::
 
--   Wandle den t-Test nun in einen einseitigen Test mit alternative = „greater“ oder alternative = „less“ um und berechne Cohen‘s d als Effektstärkenmaß (Achtung: paired = True setzen).
+### 9.3 Gerichteten t-Test berechnen
+
+Wenn wir eine gerichtete Hypothese haben (z.B. `pre4 > pre1`), verwenden wir `alternative = "greater"`.
+
+⚠️ Wichtig: Die Reihenfolge der Variablen bestimmt die Richtung!
+
+```{r, echo=TRUE, eval=FALSE}
+t.test(dat_full_control$XXXX, dat_full_control$XXXX, paired = XXXX, alternative = "XXXX")
+```
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE}
 
 t.test(dat_full$pre1, dat_full$pre4, paired = TRUE, alternative = "greater")
-
-
-library(effectsize)
-
-cohens_d(
-  dat_full$pre1,
-  dat_full$pre4,
-  paired = TRUE
-)
 
 ```
 
