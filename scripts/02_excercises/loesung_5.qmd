@@ -7,7 +7,11 @@ filters:
 show_solutions: true
 draft: false
 format:
-  html
+  html:
+    code-tools:
+       source: downloads/loesung_5_solution.qmd
+       toggle: false
+       caption: "Download der Lösungsdatei" 
 ---
 
 ```{r, echo = TRUE, results = 'hide', message = FALSE, warning = FALSE}
