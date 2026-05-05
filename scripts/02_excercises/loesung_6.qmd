@@ -170,6 +170,7 @@ group_summary$group_all <- factor(group_summary$group_all,
                                   levels = c("XXXX", "XXXX", "XXXX"))
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE}
 group_summary <- dat_full %>%
@@ -184,6 +185,7 @@ group_summary$group_all <- factor(group_summary$group_all,
                                   levels = c("below", "control", "above"))
 ```
 :::
+::::
 
 ## Aufgabe 2: Balkendiagramm mit Fehlerbalken erstellen
 
@@ -193,12 +195,14 @@ Jetzt erstellen wir den Plot Schritt für Schritt. Ziel ist ein Balkendiagramm, 
 
 Erstelle ein neues `ggplot`-Objekt mit dem Namen `plot_base`. Weise diesem deinen vorhin erstellten Datensatz `group_summary` als Datenbasis zu.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
 plot_base <- group_summary |> 
   ggplot()
 ```
 :::
+::::
 
 ### **2.2 Definiere die Aesthetic Mappings**
 
@@ -213,12 +217,14 @@ plot_base_updated_1 <- plot_base +
   aes(x = XXXX, y = XXXX)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
 plot_base_updated_1 <- plot_base +
   aes(x = group_all, y = group_mean_mmq)
 ```
 :::
+::::
 
 ### **2.3 Füge Balken mit `geom_col()` hinzu**
 
@@ -233,12 +239,14 @@ plot_base_updated_2 <- plot_base_updated_1 +
   geom_col(fill = XXXX, color = XXXX)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
 plot_base_updated_2 <- plot_base_updated_1 +
   geom_col(fill = "gray", color = "black")
 ```
 :::
+::::
 
 ### **2.4 Füge Fehlerbalken hinzu**
 
@@ -259,6 +267,7 @@ plot_base_updated_3 <- plot_base_updated_2 +
   )
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
 plot_base_updated_3 <- plot_base_updated_2 +
@@ -269,6 +278,7 @@ plot_base_updated_3 <- plot_base_updated_2 +
   )
 ```
 :::
+::::
 
 ### **2.5 Beschrifte den Plot und passe das Design an**
 
@@ -284,6 +294,7 @@ plot_base_updated_4 <- plot_base_updated_3 +
   XXXX
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
 plot_base_updated_4 <- plot_base_updated_3 +
@@ -295,6 +306,7 @@ plot_base_updated_4 <- plot_base_updated_3 +
   theme_classic()
 ```
 :::
+::::
 
 ### **2.6 Stelle den Wertebereich der y-Achse ein**
 
@@ -308,6 +320,7 @@ plot_mmq <- plot_base_updated_4 +
 plot_mmq
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
 plot_mmq <- plot_base_updated_4 +
@@ -317,11 +330,13 @@ plot_mmq <- plot_base_updated_4 +
 plot_mmq
 ```
 :::
+::::
 
 ### **2.7 Plot abspeichern**
 
 Speichere den Plot als PNG-Datei ab.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
 ggsave(
@@ -333,6 +348,7 @@ ggsave(
 )
 ```
 :::
+::::
 
 ## Aufgabe 3: Verlaufsplot für subjektive Performance Ratings erstellen
 
@@ -395,6 +411,7 @@ rate_plot +
 rate_plot
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, message=TRUE, warning= FALSE}
 descriptives <- dat_long |> 
@@ -432,11 +449,13 @@ rate_plot +
 rate_plot
 ```
 :::
+::::
 
 ### **3.1 Plot abspeichern**
 
 Speichere den Plot als PNG-Datei ab.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo=TRUE, eval=FALSE}
 ggsave(
@@ -448,6 +467,7 @@ ggsave(
 )
 ```
 :::
+::::
 
 ------------------------------------------------------------------------
 
@@ -492,6 +512,7 @@ dat_full |>
   )
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval = TRUE}
 dat_full |>
@@ -506,11 +527,13 @@ dat_full |>
   )
 ```
 :::
+::::
 
 ### 4.2 Berechne die Pearson-Korrelation
 
 Berechne nun die Korrelation mit `cor.test()`. Du solltest den Code dazu schon aus vorherigen Übungen kennen.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -518,6 +541,7 @@ cor.test(dat_full$mean_d1_all, dat_full$mean_d_all)
 
 ```
 :::
+::::
 
 ### 4.3 Interpretiere den Output
 
@@ -533,9 +557,11 @@ Beantworte anhand des Outputs:
 
 5.  Passt das Ergebnis zu deiner Erwartung aus dem Scatterplot?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 In dem von uns gewählten Beispiel wurde die Korrelation von `mean_d1_all` mit `mean_d_all` berechnet. Der Korrelationskoeffizient r beträgt r = 0.78, was auf eine starke positive Korrelation hinweist. Der p-Wert ist p \< 0.001, was darauf hindeutet, dass die Korrelation statistisch signifikant ist. Die Freiheitsgrade (df) betragen 157, was auf die Anzahl der Beobachtungen minus 2 zurückzuführen ist (n-2). Dass die Dauer bis zur ersten Fensteröffnung und die Dauer des gesamten Trials zusammenhängen war inhaltlich zu erwarten.
 :::
+::::
 
 ### 4.4 Berechne eine einseitige Korrelation und eine Spearman-Korrelation
 
@@ -551,6 +577,7 @@ Berechne anschliessend (für die gleichen Varialben wie bei Aufgabe 4.2):
 
 2.  eine Spearman-Korrelation als nicht-prametrische Alternative
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
 # Für eine einseitige Korrelation kannst du das Argument `alternative` verwenden, z.B. `alternative = "greater"` für eine positive Korrelation.
@@ -560,6 +587,7 @@ cor.test(dat_full$mean_d1_all, dat_full$mean_d_all, alternative = "greater")
 cor.test(dat_full$mean_d1_all, dat_full$mean_d_all, method = "spearman")
 ```
 :::
+::::
 
 ### Kurze Wiederholung: Korrelationen
 
@@ -617,6 +645,7 @@ model_1 <- lm(XXXX ~ XXXX, data = dat_full)
 summary(model_1)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval = TRUE}
 
@@ -626,6 +655,7 @@ summary(model_1)
 
 ```
 :::
+::::
 
 ### 5.2 Interpretiere den Output
 
@@ -643,6 +673,7 @@ Orientiere dich an folgenden Fragen:
 
 6.  Wie verhält sich der Determinantionskoeffizient der Regression (R²) zum Korrelationskoeffizienten der Korrelation (aus Übung 2.4)?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=FALSE}
 
@@ -654,6 +685,7 @@ Das Modell erklärt etwa 64% der Varianz in mean_d1_all (R² = 0.64), was auf ei
 👉 Insgesamt zeigt sich also: Personen mit längerer Gesamtbearbeitungszeit haben tendenziell auch eine längere Zeit der ersten Fensteröffnung. Ist ja logisch :-)
 ```
 :::
+::::
 
 ## Aufgabe 6: Multiple lineare Regression
 
@@ -673,6 +705,7 @@ model_2 <- lm(XXXX ~ XXXX + XXXX, data = dat_full)
 summary(model_2)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval = TRUE}
 model_2 <- lm(mean_d1_all ~ mean_d_all + mean_rl_all, data = dat_full)
@@ -680,6 +713,7 @@ model_2 <- lm(mean_d1_all ~ mean_d_all + mean_rl_all, data = dat_full)
 summary(model_2)
 ```
 :::
+::::
 
 ### 6.2 Prüfe Multikollinearität mit `vif()`
 
@@ -689,11 +723,13 @@ Bei multipler Regression sollten Prädiktoren nicht zu stark miteinander zusamme
 vif(XXXX)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=TRUE}
 vif(model_2)
 ```
 :::
+::::
 
 **Wie interpretiert man VIF-Werte?**
 
@@ -719,6 +755,7 @@ Beantworte anhand des Outputs:
 
 5.  Wie unterscheidet sich R² im Vergleich zu `model_1`?
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=FALSE}
 In der multiplen Regression wird mean_d1_all durch die Prädiktoren mean_d_all und mean_rl_all vorhergesagt.
@@ -734,6 +771,7 @@ Das Modell erklärt etwa 77% der Varianz (R² = 0.78) und damit mehr als das ein
 👉 Insgesamt zeigt sich: Beide Prädiktoren liefern zusätzliche, unabhängige Informationen zur Vorhersage von mean_d1_all.
 ```
 :::
+::::
 
 ### 6.4 Berechne Konfidenzintervalle der Koeffizienten
 
@@ -743,11 +781,13 @@ Berechne nun die 95%-Konfidenzintervalle der Regressionskoeffizienten.
 confint(XXXX)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=TRUE}
 confint(model_2)
 ```
 :::
+::::
 
 **Wie interpretiert man Konfidenzintervalle?**
 
@@ -767,6 +807,7 @@ Vergleiche `model_1` und `model_2` mit `anova().`
 anova(XXXX, XXXX)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=TRUE}
 anova(model_1, model_2)
@@ -778,6 +819,7 @@ Das bedeutet: Das komplexere Modell (mit `mean_rl_all`) erklärt **signifikant m
 
 👉 Der zusätzliche Prädiktor `mean_rl_all` verbessert die Vorhersage von `mean_d1_all` deutlich.
 :::
+::::
 
 ## Freiwillige Zusatzaufgabe: Einfache logistische Regression
 
@@ -807,6 +849,7 @@ model_log <- glm(
 summary(model_log)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=TRUE}
 # Vorbereiten Daten
@@ -826,6 +869,7 @@ model_log <- glm(
 summary(model_log)
 ```
 :::
+::::
 
 # Disclaimer!
 
@@ -881,6 +925,7 @@ Bevor wir den t-Test durchführen, prüfen wir, ob die Varianzen der Gruppen gle
 leveneTest(XXXX ~ XXXX, data = XXXX)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=TRUE}
 leveneTest(pre4 ~ group_all, data = dat_full_below_above)
@@ -888,6 +933,7 @@ leveneTest(pre4 ~ group_all, data = dat_full_below_above)
 
 Der Levene Test prüft die Homogenität der Varianzen zwischen den Gruppen. Ein nicht-signifikanter p-Wert (p \> 0.05) deutet darauf hin, dass die Varianzen in den beiden Gruppen als gleich angenommen werden können. Der vorliegende Test ist nicht signifikant (p = 0.09 \> 0.05), was darauf hinweist, dass die Varianzen in den Gruppen `„above“` und `„below“` als homogen betrachtet werden können.
 :::
+::::
 
 ### 8.3 t-Test berechnen
 
@@ -895,6 +941,7 @@ Berechne nun den entsprechenden t-Test mit `t.test()`. Du kannst auch die Hilfef
 
 **Tipp:** Wenn die Varianzhomogenität gegeben ist (d.h. der Levene-Test nicht signifikant ist), muss man `var.equal = TRUE` angeben, ansonsten wird ein `Welch t-Test` (bei Varianzungleichheit) berechnet.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval = TRUE}
 
@@ -904,6 +951,7 @@ t.test(pre4 ~ group_all, data = dat_full_below_above, var.equal = TRUE)
 
 Der students t-Test vergleicht die Mittelwerte der `pre4` Ratings zwischen den Gruppen `„above“` und `„below“`. Der p-Wert weisst auf einen statistisch signifikanten Unterschied der beiden Mittelwerte hin (p \< 0.05). Das 95%-Konfidenzintervall für den Mittelwertunterschied liegt zwischen 2.03 und 3.36. Das dieser Bereich **nicht** die 0 beinhaltet spricht ebenfalls für die Signifikanz der Mittelwertsunterschiede. Unter Einbezug der beiden Gruppenmittelwerte (`mean in group above` = 5.97 und `mean in group below` 3.27) deutet das Ergebnis darauf hin, dass die `„above“` Gruppe signifikant höhere `pre4` Ratings aufweist als die `„below“` Gruppe.
 :::
+::::
 
 ### 8.4 Effektstärke berechnen
 
@@ -913,6 +961,7 @@ Zusätzlich zur Signifikanz berechnen wir die Effektstärke (Cohen's d).
 effsize::cohen.d(XXXX ~ XXXX, data = XXXX)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval = TRUE}
 effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
@@ -920,6 +969,7 @@ effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
 
 Cohen's d beträgt 1.55, was auf einen großen Effekt hinweist.
 :::
+::::
 
 👉 Und schon haben wir einen der Post-Hoc t-Tests für die 2x3 ANOVA aus Grinschgl et al. (2020) berechnet (notwendig für das Abschlussprojekt)
 
@@ -944,6 +994,7 @@ Hier vergleichen wir zwei Messzeitpunkte derselben Personen.
 t.test(XXXX$XXXX, XXXXX$XXXX, paired = XXXX)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=TRUE}
 t.test(dat_full_control$pre1, dat_full_control$pre4, paired = TRUE)
@@ -951,6 +1002,7 @@ t.test(dat_full_control$pre1, dat_full_control$pre4, paired = TRUE)
 
 Der t-Test für abhängige Stichproben (paired = TRUE) vergleicht die Mittelwerte von `pre1` und `pre4` innerhalb der `„control“` Gruppe. Der p-Wert weisst auf einen signifikanten Unterschied zwischen den Mittelwerten dieser beiden Messzeitpunkte hin (p \< 0.05). Das 95%-Konfidenzintervall für den Mittelwertunterschied liegt zwischen 0.39 und 1.06, umschliesst damit nicht die 0, und zeigt dadurch ebenfalls einen signifikanten Mittelwertsunterschied zwsichen den beiden Messzeitpunkten an. Die Angabe `mean_difference` zeigt an, wie stark der Mittelwert von `pre1` auf `pre4`angestiegen ist (mean difference = 0.73).
 :::
+::::
 
 ### 9.3 Gerichteten t-Test berechnen
 
@@ -962,6 +1014,7 @@ Wenn wir eine gerichtete Hypothese haben (z.B. `pre4 > pre1`), verwenden wir `al
 t.test(dat_full_control$XXXX, dat_full_control$XXXX, paired = XXXX, alternative = "XXXX")
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval=TRUE}
 
@@ -971,5 +1024,6 @@ t.test(dat_full$pre1, dat_full$pre4, paired = TRUE, alternative = "greater")
 
 Während der ungerichtete t-test prüft, ob die Mittelwerte von `pre1` und `pre4` ungleich sind, prüft der gerichtete t-test (alternative = "greater") spezifischer, ob der Mittelwert von `pre4` signifikant größer ist als der Mittelwert von `pre1`. Dies ist auch am Ergebnis "alternative hypothesis: true mean difference is greather than 0" erkennen. Der Unterschied im `mean_difference` ist allerdings gleich geblieben, ebenso das Resultat der Signifikanzprüfung.
 :::
+::::
 
 # Am Ende deiner Übungen - vergiss nicht dein Skript abzuspeichern! 😉
