@@ -5,7 +5,7 @@ bibliography: references.bib
 filters:
   - conditional_content
 show_solutions: false
-draft: true
+draft: false
 format:
   html
 ---
@@ -37,7 +37,7 @@ Und hier die Slides zur EH12:
 
 # Lernziele
 
-✅ einfache Visualisierungen mit `ggplot2` systematisch aufbauen
+✅ Visualisierungen mit `ggplot2` systematisch aufbauen
 
 ✅ Gruppenmittelwerte mit Fehlerbalken visualisieren
 
@@ -125,7 +125,7 @@ ggplot(group_summary, aes(x = group_all, y = group_mean_mmq)) +
 
 ## Aufgabe 1: Gruppenmittelwerte für den ersten Plot vorbereiten
 
-Bevor wir den Plot erstellen können, müssen wir zunächst einen neuen, kleineren Datensatz vorbereiten. Der Plot soll später **pro Feedback-Gruppe**einen Balken zeigen. Dafür reicht der ursprüngliche Datensatz `dat_full` noch nicht aus, weil darin jede Zeile eine einzelne Person darstellt.
+Bevor wir den Plot erstellen können, müssen wir zunächst einen neuen, kleineren Datensatz vorbereiten. Der Plot soll später **pro Feedback-Gruppe** einen Balken zeigen. Dafür reicht der ursprüngliche Datensatz `dat_full` noch nicht aus, weil darin jede Zeile eine einzelne Person darstellt.
 
 Für den Plot brauchen wir stattdessen einen zusammengefassten Datensatz mit **einer Zeile pro Gruppe.**
 
@@ -154,11 +154,6 @@ Der **Standardfehler des Mittelwerts (SE)** beschreibt, **wie stark der geschät
 :::
 
 ```{r, echo=TRUE, eval = FALSE}
-# mmq_mean auf Personenebene
-# in eurem Datensatz nun (wahrscheinlich) schon enthalten
-dat_full <- dat_full |> 
-  mutate(mmq_mean = rowMeans(select(dat_full, starts_with("question")), na.rm = TRUE))
-
 # mmq_mean pro Experimentalgruppe
 group_summary <- dat_full %>%
   group_by(XXXX) %>%
@@ -175,11 +170,6 @@ group_summary$group_all <- factor(group_summary$group_all,
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE}
-
-dat_full <- dat_full |> 
-  mutate(mmq_mean = rowMeans(select(dat_full, starts_with("question")), na.rm = TRUE))
-
-
 group_summary <- dat_full %>%
   group_by(group_all) %>%
   summarize(
@@ -280,7 +270,7 @@ plot_base_updated_3 <- plot_base_updated_2 +
 
 ### **2.5 Beschrifte den Plot und passe das Design an**
 
-Füge mit `labs()` einen Titel sowie Achsenbeschriftungen hinzu. Verändere ausserdem `theme_classic().`
+Füge mit `labs()` einen Titel sowie Achsenbeschriftungen hinzu. Ergänze ausserdem `theme_classic()`.
 
 ```{r, echo=TRUE, eval = FALSE}
 plot_base_updated_4 <- plot_base_updated_3 +
@@ -326,6 +316,22 @@ plot_mmq
 ```
 :::
 
+### **2.7 Plot abspeichern**
+
+Speichere den Plot als PNG-Datei ab.
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r}
+ggsave(
+  "plot_mmq.png",
+  plot = plot_mmq,
+  width = 10,
+  height = 6,
+  dpi = 300
+)
+```
+:::
+
 ## Aufgabe 3: Verlaufsplot für subjektive Performance Ratings erstellen
 
 Nun reproduzieren wir einen zweiten Plot aus @grinschgl2021. Dafür nutzen wir den Long-Datensatz `dat_long`.
@@ -342,10 +348,6 @@ Dafür brauchen wir pro Feedback-Gruppe und Messzeitpunkt:
 
 4.  den Standardfehler
 
-::: {.callout-note collapse="true"}
-Im Datensatz liegen die Ratings als Werte zwischen 0 und 10 vor. Für die Darstellung als Percentile Rank werden Mittelwert, Standardabweichung und Standardfehler mit 10 multipliziert.
-:::
-
 **Instruktionen:**
 
 -   Lade zuerst den in der letzten Woche gespeicherten *Long-Datensatz*.
@@ -358,8 +360,8 @@ descriptives <- dat_long |>
   group_by(XXXX, XXXX) |> 
   summarize(
     N = sum(is.na(rating)),
-    mean_d = mean(XXXX, na.rm = TRUE) * 10,
-    sd_d   = sd(XXXX, na.rm = TRUE) * 10,
+    mean_d = mean(XXXX, na.rm = TRUE),
+    sd_d   = sd(XXXX, na.rm = TRUE),
     se_d   = sd_d / sqrt(N),
     .groups = "drop"
 )
@@ -397,8 +399,8 @@ descriptives <- dat_long |>
   group_by(group_all, time_rating) |> 
   summarize(
     N = sum(is.na(rating)),
-    mean_d = mean(rating, na.rm = TRUE) * 10,
-    sd_d   = sd(rating, na.rm = TRUE) * 10,
+    mean_d = mean(rating, na.rm = TRUE),
+    sd_d   = sd(rating, na.rm = TRUE),
     se_d   = sd_d / sqrt(N),
     .groups = "drop"
 )
@@ -434,7 +436,7 @@ rate_plot
 Speichere den Plot als PNG-Datei ab.
 
 ::: {.callout-note collapse="true" title="Lösung"}
-```{r, echo = TRUE, eval=FALSE}
+```{r, echo=TRUE, eval=FALSE}
 ggsave(
   "rate_plot.png",
   plot = rate_plot,
@@ -505,11 +507,7 @@ dat_full |>
 
 ### 4.2 Berechne die Pearson-Korrelation
 
-Berechne nun die Korrelation mit `cor.test()`.
-
-```{r, echo = TRUE, eval = FALSE}
-cor.test(dat_full$XXXX, dat_full$XXXX)
-```
+Berechne nun die Korrelation mit `cor.test()`. Du solltest den Code dazu schon aus vorherigen Übungen kennen.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval = FALSE}
@@ -545,16 +543,11 @@ Rufe zunächst die Hilfefunktion auf:
 ?cor.test
 ```
 
-Berechne anschliessend:
+Berechne anschliessend (für die gleichen Varialben wie bei Aufgabe 4.2):
 
 1.  eine einseitige Pearson-Korrelation für einen positiven Zusammenhang
 
 2.  eine Spearman-Korrelation als nicht-prametrische Alternative
-
-```{r, echo = TRUE, eval = FALSE}
-cor.test(dat_full$mean_d1_all, dat_full$mean_d_all, alternative = "XXXX")
-cor.test(dat_full$mean_d1_all, dat_full$mean_d_all, method = "XXXX")
-```
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r}
@@ -570,11 +563,11 @@ cor.test(dat_full$mean_d1_all, dat_full$mean_d_all, method = "spearman")
 
 Eine Korrelation beschreibt den Zusammenhang zwischen zwei Variablen.
 
--   `r > 0`: positiver Zusammenhang
+-   r \> 0: positiver Zusammenhang
 
--   `r < 0`: negativer Zusammenhang
+-   r \< 0: negativer Zusammenhang
 
--   `r ≈ 0:` kein oder kaum linearer Zusammenhang
+-   r ≈ 0: kein oder kaum linearer Zusammenhang
 
 Der Korrelationskoeffizient liegt zwischen -1 und +1. Je nöher der Wert an -1 oder +1 liegt, desto stärker ist der Zusammenhang.
 
@@ -617,8 +610,6 @@ Wir verwenden nun dieselben beiden Variablen wie bei der Korrelation und berechn
 ### 5.1 Berechne das Regressionsmodell
 
 ```{r, echo=TRUE, eval=FALSE}
-# Installiere das Paket car
-library(car)
 
 model_1 <- lm(XXXX ~ XXXX, data = dat_full)
 summary(model_1)
@@ -648,15 +639,17 @@ Orientiere dich an folgenden Fragen:
 
 5.  Wie viel Varianz erklärt das Modell ungefähr? Nutze dafür `Multiple R-squared`.
 
+6.  Wie verhält sich der Determinantionskoeffizient der Regression (R²) zum Korrelationskoeffizienten der Korrelation (aus Übung 2.4)?
+
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, echo = TRUE, eval=FALSE}
 
 Das Regressionsmodell sagt die Variable mean_d1_all durch den Prädiktor mean_d_all vorher.
 Der Regressionskoeffizient für mean_d_all ist positiv (b = 0.32). Das bedeutet: Wenn mean_d_all um eine Einheit steigt, steigt mean_d1_all im Durchschnitt um etwa 0.32 Einheitem.
 Der Effekt ist statistisch signifikant (p < .001), d.h. der Zusammenhang unterscheidet sich zuverlässig von 0.
-Das Modell erklärt etwa 64% der Varianz in mean_d1_all (R² = 0.64), was auf einen starken Zusammenhang hinweist.
+Das Modell erklärt etwa 64% der Varianz in mean_d1_all (R² = 0.64), was auf einen starken Zusammenhang hinweist. Ziehst du die Wurzel von R², bekommst du den Korrelationskoeffizenten von Aufgabe 4.2 (mit ein paar Rundungsunterschieden). 
 
-👉 Insgesamt zeigt sich also: Personen mit längerer Gesamtbearbeitungszeit haben tendenziell auch eine längere Zeit der ersten Fensteröffnung.
+👉 Insgesamt zeigt sich also: Personen mit längerer Gesamtbearbeitungszeit haben tendenziell auch eine längere Zeit der ersten Fensteröffnung. Ist ja logisch :-)
 ```
 :::
 
@@ -686,39 +679,7 @@ summary(model_2)
 ```
 :::
 
-### 6.2 Interpretiere das multiple Modell
-
-Beantworte anhand des Outputs:
-
-1.  Welche Variable wird vorhergesagt?
-
-2.  Welche Prädiktoren sind im Modell enthalten?
-
-3.  Welche Prädiktoren sind statistisch signifikant?
-
-4.  Wie viel Varianz erklärt das Model insgesamt?
-
-5.  Wie unterscheidet sich `R-squared` im Vergleich zu `model_1`?
-
-6.  Hier müssen wir auf Multikollinearität testen – mit `vif(model)` aus dem „car“ Paket (die Werte sollten größer als 0.10 sein, sodass keine Multikollinearität vorliegt). Berechne auch die Konfidenzintervalle der Beta-Koeffizienten mit `confint(model)`.
-
-::: {.callout-note collapse="true" title="Lösung"}
-```{r, echo = TRUE, eval=FALSE}
-In der multiplen Regression wird mean_d1_all durch die Prädiktoren mean_d_all und mean_rl_all vorhergesagt.
-
-Beide Prädiktoren sind statistisch signifikant (p < .001), d.h. sie tragen jeweils unabhängig zur Vorhersage bei.
-
-mean_d_all hat einen positiven Effekt (b = 0.31): Höhere Gesamtbearbeitungszeit geht mit längerer Zeit bis zur ersten Fensteröffnung einher.
-
-mean_rl_all hat einen negativen Effekt (b = -1.21): Höheres Offloading geht mit kürzerer Zeit bis zur ersten Fensteröffnung einher.
-
-Das Modell erklärt etwa 77% der Varianz (R² = 0.78) und damit mehr als das einfache Modell.
-
-👉 Insgesamt zeigt sich: Beide Prädiktoren liefern zusätzliche, unabhängige Informationen zur Vorhersage von mean_d1_all.
-```
-:::
-
-### 6.3 Prüfe Multikollinearität mit `vif()`
+### 6.2 Prüfe Multikollinearität mit `vif()`
 
 Bei multipler Regression sollten Prädiktoren nicht zu stark miteinander zusammenhängen. Eine Möglichkeit zur Prüfung ist der Variance Inflation Factor, kurz VIF.
 
@@ -742,6 +703,36 @@ Der VIF sollte nicht zu hoch sein. Häufig verwendete Daumenregeln sind:
 
 -   VIF \> 10: deutlicher Hinweis auf problematische Multikollinearität
 
+### 6.3 Interpretiere das multiple Modell
+
+Beantworte anhand des Outputs:
+
+1.  Welche Variable wird vorhergesagt?
+
+2.  Welche Prädiktoren sind im Modell enthalten?
+
+3.  Welche Prädiktoren sind statistisch signifikant?
+
+4.  Wie viel Varianz erklärt das Model insgesamt?
+
+5.  Wie unterscheidet sich R² im Vergleich zu `model_1`?
+
+::: {.callout-note collapse="true" title="Lösung"}
+```{r, echo = TRUE, eval=FALSE}
+In der multiplen Regression wird mean_d1_all durch die Prädiktoren mean_d_all und mean_rl_all vorhergesagt.
+
+Beide Prädiktoren sind statistisch signifikant (p < .001), d.h. sie tragen jeweils unabhängig zur Vorhersage bei.
+
+mean_d_all hat einen positiven Effekt (b = 0.31): Höhere Gesamtbearbeitungszeit geht mit längerer Zeit bis zur ersten Fensteröffnung einher.
+
+mean_rl_all hat einen negativen Effekt (b = -1.21): Höheres Offloading geht mit kürzerer Zeit bis zur ersten Fensteröffnung einher.
+
+Das Modell erklärt etwa 77% der Varianz (R² = 0.78) und damit mehr als das einfache Modell.
+
+👉 Insgesamt zeigt sich: Beide Prädiktoren liefern zusätzliche, unabhängige Informationen zur Vorhersage von mean_d1_all.
+```
+:::
+
 ### 6.4 Berechne Konfidenzintervalle der Koeffizienten
 
 Berechne nun die 95%-Konfidenzintervalle der Regressionskoeffizienten.
@@ -758,7 +749,7 @@ confint(model_2)
 
 **Wie interpretiert man Konfidenzintervalle?**
 
-Ein 95%-Konfidenzintervall beschreibt einen Bereich plausibler Werte für den wahren Regressionskoeffizienten. Wenn das 95%-KI die 0 nicht enthält, passt das zu einem zweiseitig signifiknten Test auf dem 5%.Niveau.
+Ein 95%-Konfidenzintervall beschreibt einen Bereich plausibler Werte für den wahren Regressionskoeffizienten. Wenn das 95%-KI die 0 nicht enthält, passt das zu einem zweiseitig signifikanten Test auf dem 5%.Niveau.
 
 ## Aufgabe 7: Modellvergleich mit `anova()`
 
@@ -826,13 +817,17 @@ log_reg <- dat_full |>
 # Berechnung Modell
 model_log <- glm(
   strategy_bin ~ mean_rl_all,
-  data = dat_log,
+  data = log_reg,
   family = binomial
 )
 
 summary(model_log)
 ```
 :::
+
+# Disclaimer!
+
+Die bisherigen Aufgaben waren rein für Übungszwecke. Für die Reproduktion des Grinschgl et al. Papers in eurem Abschlussprojekt sind keine Korrelationen und Regressionen notwendig
 
 ------------------------------------------------------------------------
 
@@ -848,10 +843,10 @@ Während Korrelation und Regression Zusammenhänge untersuchen, prüfen t-Tests 
 | **t.test** | Allgemeine Funktion für verschiedene t-Tests: Ein-Stichproben-t-Test, t-Test für unabhängige Stichproben und t-Test für abhängige Stichproben. |
 | **t.test(av, mu = x)** | Ein-Stichproben-t-Test. **av** = abhängige Variable. **x** = Vergleichswert der Population. |
 | **t.test(av \~ uv)** | Welch-t-Test für **unabhängige Stichproben**. **av** = abhängige Variable, **uv** = Gruppenvariable. |
-| **t.test(av \~ uv, var.equal = TRUE)** | Klassischer t-Test für unabhängige Stichproben (Varianzen vorausgesetzt gleich). |
+| **t.test(av \~ uv, var.equal = TRUE)** | Klassischer t-Test für unabhängige Stichproben (Varianzgleichheit voraussgesetzt). |
 | **t.test(av1, av2, paired = TRUE)** | t-Test für **abhängige Stichproben** (z. B. Prä–Post). **av1** und **av2** = gemessene Variablen. |
-| **leveneTest(av, uv)** \* | Levene-Test auf Varianzhomogenität für unabhängige Gruppen. Aus dem **car**-Paket. |
-| **effsize::cohen.d()** \* | Berechnet die standardisierte Effektgröße **Cohen’s d** + Konfidenzintervall. Aus dem **effsize**-Paket. |
+| **leveneTest(av, uv)** \* | Levene-Test auf Varianzhomogenität für unabhängige Gruppen. Aus dem `car`-Paket. |
+| **effsize::cohen.d()** \* | Berechnet die standardisierte Effektgröße **Cohen’s d** + Konfidenzintervall. Aus dem `effsize`-Paket. |
 
 \* Funktionen aus zusätzlichen Paketen.
 :::
@@ -896,7 +891,7 @@ Der Levene Test prüft die Homogenität der Varianzen zwischen den Gruppen. Ein 
 
 Berechne nun den entsprechenden t-Test mit `t.test()`. Du kannst auch die Hilfefunktion zu Rate ziehen. Versuche dann den Output zu verstehen bzw. das Ergebnis zu interpretieren.
 
-**Tipp:** Wenn die Varianzhomogenität gegeben ist (d.h. der Levene-Test nicht signifikant ist), muss man `var.equal = TRUE` angeben, ansonsten wird ein `Welch t-Test` berechnet.
+**Tipp:** Wenn die Varianzhomogenität gegeben ist (d.h. der Levene-Test nicht signifikant ist), muss man `var.equal = TRUE` angeben, ansonsten wird ein `Welch t-Test` (bei Varianzungleichheit) berechnet.
 
 ::: {.callout-note collapse="true" title="Lösung"}
 ```{r, eval = TRUE}
@@ -924,7 +919,7 @@ effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
 Cohen's d beträgt 1.55, was auf einen großen Effekt hinweist.
 :::
 
-👉 Und schon haben wir einen der Post-Hoc t-Tests für die 2x3 ANOVA aus Grinschgl et al. (2020) berechnet (notwendig für die Abschlussarbeit)
+👉 Und schon haben wir einen der Post-Hoc t-Tests für die 2x3 ANOVA aus Grinschgl et al. (2020) berechnet (notwendig für das Abschlussprojekt)
 
 ------------------------------------------------------------------------
 
