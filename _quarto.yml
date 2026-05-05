@@ -67,7 +67,7 @@ website:
           - href: scripts/02_excercises/loesung_5.qmd
             text: "Hands on - Block 5 (Woche 9 - 10) - mit Musterlösungen"
           - href: scripts/02_excercises/loesung_6.qmd
-            text: "Hands on - Block 6 (Woche 11 - 12) - Mit Musterlösungen"
+            text: "Hands on - Block 6 (Woche 11 - 12)"
           - href: scripts/02_excercises/loesung_7.qmd
             text: "Hands on - Block 7 (Woche 13)"
       - href: hausuebungen.qmd
