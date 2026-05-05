@@ -4,7 +4,7 @@ editor: visual
 bibliography: references.bib
 filters:
   - conditional_content
-show_solutions: false
+show_solutions: true
 draft: false
 format:
   html
@@ -27,11 +27,11 @@ Bei Bedarf finden sich hier nochmal die Slides zur EH9:
 
 Und hier die Slides zur EH10:
 
-```{=html}
-<!--
-<iframe src="../01_slides/EH_10.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;"></iframe>
--->
-```
+::: {=html}
+<iframe src="../01_slides/EH_10.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
+
+</iframe>
+:::
 
 # Lernziele
 
