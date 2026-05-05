@@ -434,10 +434,10 @@ rate_plot
 Speichere den Plot als PNG-Datei ab.
 
 ::: {.callout-note collapse="true" title="Lösung"}
-```{r}
+```{r, echo = TRUE, eval=FALSE}
 ggsave(
   "rate_plot.png",
-  plot = rate_plot_updated,
+  plot = rate_plot,
   width = 10,
   height = 6,
   dpi = 300
