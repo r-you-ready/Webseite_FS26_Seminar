@@ -396,7 +396,7 @@ rate_plot
 descriptives <- dat_long |> 
   group_by(group_all, time_rating) |> 
   summarize(
-    N = sum(ïs.na(rating)),
+    N = sum(is.na(rating)),
     mean_d = mean(rating, na.rm = TRUE) * 10,
     sd_d   = sd(rating, na.rm = TRUE) * 10,
     se_d   = sd_d / sqrt(N),
