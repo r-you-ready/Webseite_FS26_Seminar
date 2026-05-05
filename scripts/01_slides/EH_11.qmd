@@ -225,7 +225,7 @@ Häufige Fehler:
 
 <br>
 
-**Ist das ein echter Effekt – oder nur Zufall?**
+**Ist das ein statistisch signifikanter Effekt – oder nur Zufall?**
 
 ------------------------------------------------------------------------
 
@@ -241,7 +241,7 @@ Wir können Daten visualisieren...
 
 👉 **Aber:**
 
-→ Ist dieser Zusammenhang wirklich da oder bloss ein Zufall in unseren Daten?
+→ Ist dieser Zusammenhang wirklich belastbar oder bloss ein Zufall in unseren Daten?
 
 ------------------------------------------------------------------------
 
@@ -257,7 +257,7 @@ Sie hilft uns:
 
 -   von einer Stichprobe auf die Population zu schliessen
 
--   zu überprüfen, ob Effekte **wirklich existieren**
+-   zu überprüfen, ob Effekte **statistisch signifikant sind**
 
 -   fundierte Entscheidungen auf Basis von Daten zu treffen
 
@@ -448,7 +448,7 @@ Wir untersuchen:
 
 ⚠️ Auch Regression erlaubt keine Kausalaussagen ohne geeignetes Studiendesign!
 
-⚠️ Einfache lineare Regressionen sind ident zu Korrelationen!
+⚠️ Einfache lineare Regressionen sind identisch zu Korrelationen!
 
 ------------------------------------------------------------------------
 
@@ -468,7 +468,7 @@ model_1 <- lm(mean_rl_all ~ cvstm_propcorrect,
 summary(model_1)
 ```
 
-⚠️Ident zur Korrelation: `r = sqrt(r_squared)`
+⚠️Identisch zur Korrelation: r = sqrt(r_squared)
 
 ------------------------------------------------------------------------
 
