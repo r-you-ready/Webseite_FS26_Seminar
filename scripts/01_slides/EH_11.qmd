@@ -41,7 +41,7 @@ dat_full_long <- dat_full |>
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
 
-FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**11. Einheit**, 06.05.2026
+FS 2026<br><br><br> **LV-Leitung**: PD Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**11. Einheit**, 06.05.2026
 
 ------------------------------------------------------------------------
 
@@ -63,17 +63,29 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 <br>
 
--   Fragen Hands on Block 5
+-   Fragen Hands on Block 5 & R Hausübung 1
 
--   Repetition: ggplot()
+-   Repetition: `ggplot()`
 
 -   Inferenzstatistik: Korrelation & Regression
 
 ------------------------------------------------------------------------
 
-## Fragen zu Hands On Block 5?
+## Fragen zu Hands On Block 5 & HÜ 1?
 
 ![](../../images/EH_7/Bild1.png){fig-align="center" width="411"}
+
+::: notes
+zu HÜ sollten jetzt alle Feedback bekommen haben. Bei uns melden, falls etwas unklar ist.
+
+Häufige Fehler:
+
+-   absoluter Pfad
+
+-   Unnötiges Laden von Paketen
+
+-   "weder noch" bei Big 5 Items falsch umgewandelt
+:::
 
 ------------------------------------------------------------------------
 
@@ -125,7 +137,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 <br>
 
-➡️ aes() legt fest, welche Variablen auf den Achsen dargestellt werden.
+➡️ `aes()` legt fest, welche Variablen auf den Achsen dargestellt werden.
 
 ------------------------------------------------------------------------
 
@@ -145,7 +157,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 <br>
 
-➡️ geom() bestimmt, wie die Daten dargestellt werden (z.B. Punkte).
+➡️ `geom()` bestimmt, wie die Daten dargestellt werden (z.B. Punkte).
 
 ------------------------------------------------------------------------
 
@@ -185,7 +197,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 <br>
 
-➡️ labs() fügt Beschriftungen hinzu und macht die Grafik verständlich.
+➡️ `labs()` fügt Beschriftungen hinzu und macht die Grafik verständlich.
 
 ------------------------------------------------------------------------
 
@@ -205,7 +217,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 <br>
 
-➡️ theme() verändert das Aussehen der Grafik (Design).
+➡️ `theme()` verändert das Aussehen der Grafik (Design).
 
 ------------------------------------------------------------------------
 
@@ -245,7 +257,7 @@ Sie hilft uns:
 
 -   von einer Stichprobe auf die Population zu schliessen
 
--   zu überprüfen, ob Effekte wirklich existieren
+-   zu überprüfen, ob Effekte **wirklich existieren**
 
 -   fundierte Entscheidungen auf Basis von Daten zu treffen
 
@@ -259,7 +271,7 @@ Sie hilft uns:
 
 <br>
 
-Die Wahl des statistischen Tests hängt ab von:
+Die Wahl des statistischen Tests hängt ab von, z.B.:
 
 -   unserer Fragestellung
 
@@ -268,6 +280,8 @@ Die Wahl des statistischen Tests hängt ab von:
 <br>
 
 👉 Diese Überlegungen habt ihr bereits im Datenanalyseplan gemacht.
+
+👉 Durch das Festlegen von Analysen in einer Präregistrierung oder einem Datenanalyseplan spart man sich nun Arbeit und Zeit!
 
 ------------------------------------------------------------------------
 
@@ -287,7 +301,7 @@ Die Wahl des statistischen Tests hängt ab von:
 
 <br>
 
-👉 Diese helfen euch, den passenden Test systematisch auszuwählen.
+👉 Diese helfen euch, den passenden Test systematisch auszuwählen. Es gibt aber noch viele weitere statistische Analyseverfahren, die in diesen Entscheidungbäumen nicht abgebildet sind!
 
 ------------------------------------------------------------------------
 
@@ -303,7 +317,7 @@ Wir konzentrieren uns auf vier zentrale Verfahren:
 
 -   **t-Test** → Unterschiede zwischen zwei Gruppen
 
--   **ANOVA** → Unterschiede zwischen mehreren Gruppen
+-   **One-Way und Mixed ANOVA** → Unterschiede zwischen mehreren Gruppen
 
 <br>
 
@@ -434,6 +448,8 @@ Wir untersuchen:
 
 ⚠️ Auch Regression erlaubt keine Kausalaussagen ohne geeignetes Studiendesign!
 
+⚠️ Einfache lineare Regressionen sind ident zu Korrelationen!
+
 ------------------------------------------------------------------------
 
 ## Einfache lineare Regression
@@ -451,6 +467,8 @@ model_1 <- lm(mean_rl_all ~ cvstm_propcorrect,
 
 summary(model_1)
 ```
+
+⚠️Ident zur Korrelation: `r = sqrt(r_squared)`
 
 ------------------------------------------------------------------------
 
@@ -509,7 +527,7 @@ Damit wir eine lineare Regression sinnvoll interpretieren können:
 
 -   linearer Zusammenhang zwischen Prädiktor(en) und abhängiger Variable
 
--   normalverteilte Residuen
+-   normalverteilte Residuen (siehe Hands On 5)
 
 -   Homoskedastizität
 
@@ -579,7 +597,7 @@ Siehe hier: [**Lineare Regression mit R (einfach, multiple, hierarchisch)**](htt
 
 ## Hands On - Block 6!
 
--   Visualisierungen mit ggplot2
+-   Visualisierungen mit `ggplot2`
 
 -   Korrelationen
 
@@ -589,8 +607,14 @@ Siehe hier: [**Lineare Regression mit R (einfach, multiple, hierarchisch)**](htt
 
 ## Heute haben wir:
 
--   Aufbau von ggplot() repetiert
+-   Aufbau von `ggplot()` repetiert
 
 -   Korrelationen und Regressionen in R kennengelernt
 
 **Reminder: R Übung bis Freitag 08.05., Peer Feedback über ILIAS bis 13.05.**
+
+------------------------------------------------------------------------
+
+## Peer Feedback:
+
+--siehe Datei im Ordner Abgaben—
