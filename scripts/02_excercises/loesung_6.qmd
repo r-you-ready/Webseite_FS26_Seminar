@@ -29,6 +29,7 @@ Bei Bedarf finden sich hier nochmal die Slides zur EH11:
 
 Und hier die Slides zur EH12:
 
+```{=html}
 <!--
 ::: {=html}
 <iframe src="../01_slides/EH_12.html" width="100%" height="500" style="border:0; display:block; margin: 0 0 2rem 0;">
@@ -36,6 +37,7 @@ Und hier die Slides zur EH12:
 </iframe>
 :::
 --->
+```
 
 # Lernziele
 
@@ -200,6 +202,8 @@ Erstelle ein neues `ggplot`-Objekt mit dem Namen `plot_base`. Weise diesem deine
 ```{r}
 plot_base <- group_summary |> 
   ggplot()
+
+plot_base
 ```
 :::
 ::::
@@ -222,6 +226,8 @@ plot_base_updated_1 <- plot_base +
 ```{r}
 plot_base_updated_1 <- plot_base +
   aes(x = group_all, y = group_mean_mmq)
+
+plot_base_updated_1
 ```
 :::
 ::::
@@ -244,6 +250,8 @@ plot_base_updated_2 <- plot_base_updated_1 +
 ```{r}
 plot_base_updated_2 <- plot_base_updated_1 +
   geom_col(fill = "gray", color = "black")
+
+plot_base_updated_2
 ```
 :::
 ::::
@@ -276,6 +284,8 @@ plot_base_updated_3 <- plot_base_updated_2 +
     width = 0.2,
     color = "black"
   )
+
+plot_base_updated_3
 ```
 :::
 ::::
@@ -377,7 +387,7 @@ Dafür brauchen wir pro Feedback-Gruppe und Messzeitpunkt:
 descriptives <- dat_long |> 
   group_by(XXXX, XXXX) |> 
   summarize(
-    N = sum(is.na(rating)),
+    N = sum(!is.na(rating)),
     mean_d = mean(XXXX, na.rm = TRUE),
     sd_d   = sd(XXXX, na.rm = TRUE),
     se_d   = sd_d / sqrt(N),
@@ -417,7 +427,7 @@ rate_plot
 descriptives <- dat_long |> 
   group_by(group_all, time_rating) |> 
   summarize(
-    N = sum(is.na(rating)),
+    N = sum(!is.na(rating)),
     mean_d = mean(rating, na.rm = TRUE),
     sd_d   = sd(rating, na.rm = TRUE),
     se_d   = sd_d / sqrt(N),
