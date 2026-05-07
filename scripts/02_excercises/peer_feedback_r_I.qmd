@@ -73,7 +73,7 @@ Gehe dabei **mindestens auf die aufgeführten Fragen ein**.
 
 -   Sind die Lösungen **fachlich korrekt**?
 -   Wurden **geeignete Funktionen und Lösungswege** gewählt?
--   Werden die **gelernten Methoden korrekt angewendet**?
+-   Werden die **gelernten Funktionen korrekt angewendet**?
 
 ### 5. Nachvollziehbarkeit und Dokumentation
 
