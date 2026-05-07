@@ -150,7 +150,7 @@ dat_full |>
 
 dat_full |>
   summarise(
-    Gesamtmean = mean(across(starts_with("question")), na.rm = TRUE)
+    Gesamtmean = mean(across(starts_with("question")))
   )
 ```
 :::

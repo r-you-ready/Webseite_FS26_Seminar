@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-Ihr euch gegenseitig Feedback zu euren Codebooks.\
+Ihr gebt euch gegenseitig Feedback zu euren Codebooks.\
 Ziel ist es, die Dokumentation eures finalen Datensatzes zu verbessern und sicherzustellen, dass alle Variablen klar, vollständig und nachvollziehbar beschrieben sind.
 
 ------------------------------------------------------------------------
