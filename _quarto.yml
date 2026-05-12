@@ -127,6 +127,9 @@ website:
             text: "Memes :)"
       - href: scripts/04_misc/leistungsnachweis.qmd
         text: "Leistungsnachweis"
+        contents:
+          - href: scripts/04_misc/checkliste_abschlussarbeit_FS26.qmd
+            text: "Checkliste Abschlussarbeit"
       - href: scripts/04_misc/checkliste_abschlussarbeit.qmd
         text: "Checkliste Abschlussarbeit"
       - href: scripts/04_misc/individuelle_loesungen.qmd
