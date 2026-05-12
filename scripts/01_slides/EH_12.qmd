@@ -281,7 +281,7 @@ Der p-Wert zeigt, wie plausibel ein solcher Unterschied wäre, wenn H₀ wahr is
 ### **Varianten des t-Tests**
 
 | Situation | Fragestellung | R-Funktion |
-|---------------------|-----------------------------|----------------------|
+|----|----|----|
 | Ein-Stichproben-t-Test | Unterscheidet sich ein Mittelwert von einem festen Vergleichswert? | `t.test(av, mu = x)` |
 | t-Test für unabhängige Stichproben | Unterscheiden sich zwei unabhängige Gruppen? | `t.test(av ~ uv, data = dat)` |
 | Gepaarter t-Test | Unterscheiden sich zwei Messzeitpunkte derselben Personen? | `t.test(av1, av2, paired = TRUE)` |
