@@ -5,30 +5,30 @@ editor: visual
 draft: true
 ---
 
-**Abgabe bis 11.1.2026 - 23:55**
+**Abgabe bis 14.06.2026 - 23:55**
 
 **Abgabe als ZIP-File: vorname_nachname_abschlussarbeit.zip**
 
-Für die Abschlussarbeit erhaltet ihr simulierte Daten. Diese werden den Daten des Originalpapers in den meisten Aspekten sehr ähnlich sein. Allerdings müssen einige Teile davon zusätzlich bereinigt werden, bevor sie ausgewertet werden können. Die folgende Checkliste soll euch dabei helfen, an alle relevanten Aspekte der Datenbereinigung zu denken.
+Für die Abschlussarbeit erhaltet ihr simulierte Daten. Diese werden den Daten des Originalpapers in den meisten Aspekten sehr ähnlich sein. Allerdings müssen einige Teile der Daten zusätzlich bereinigt werden, bevor sie ausgewertet werden können. Die folgende Checkliste soll euch dabei helfen, an alle relevanten Aspekte der Datenbereinigung zu denken.
 
 Die Datensatzaufbereitung erfolgt im *processing*-Skript. Der final aufbereitete Datensatz (*dat_full*) sowie der Long-Datensatz (*dat_long*) werden im Ordner *data/processed* gespeichert.
 
 ## **Aspekte, die bei der Bereinigung (`processing`) beachtet werden sollten**
 
--   Haben alle Daten die gleiche Anzahl an Beobachtungen?
+-   Haben alle Versuchspersonen (VPN) die gleiche Anzahl an Beobachtungen?
 
 ```         
--   Gibt es Personen mit fehlenden Werten, die ausgeschlossen werden müssen?
+-   Gibt es VPN mit fehlenden Werten, die ausgeschlossen werden müssen?
 
--   Gibt es Personen doppelt im Datensatz?
+-   Gibt es VPN doppelt im Datensatz?
 ```
 
--   Gibt es unmögliche Werte in den Daten, z. B. *-999*? Wie können diese Daten ersetzt werden z.B aus anderen Variablen berechnet werden?
+-   Gibt es unmögliche Werte in den Daten, z. B. *-999*? Wie können diese Daten ersetzt und z.B. aus anderen Variablen berechnet werden?
 
 -   Gibt es reverse-kodierte Fragebogenvariablen (*var_name_r*)?
 
 -   Gibt es Variablen, die nicht den korrekten Datentyp haben, z. B. numerische Variablen, die als Character angezeigt werden? Schaut euch diese Variablen genau an!\
-    (Beispiel: *drei* = 3, *stimme voll und ganz zu* = höchster Wert)
+    (Beispiel: *drei* = 3, *stimme voll und ganz zu* = höchster Wert der Likert-Skala)
 
 ## **Weitere vorbereitende Schritte im processed-Datensatz**
 
@@ -40,7 +40,7 @@ Die Datensatzaufbereitung erfolgt im *processing*-Skript. Der final aufbereitete
 
 -   Berechnung der *mmq_mean* Variable
 
--   Erstellung Long-Datensatz
+-   Erstellung des Long-Datensatzes
 
 -   Speichern der Daten (Wide & Long)!
 
@@ -146,7 +146,7 @@ Dementsprechend werden auch die Effekte der Analysen ähnlich ausfallen:
 
 ![](../../images/EH_12/possible_results.png){fig-align="center"}
 
-\##**Unplausible Resultate**
+**Unplausible Resultate**
 
 Ergebnisse die ein komplett anderes Gesamtbild hinterlassen sind nicht zu erwarten!
 
