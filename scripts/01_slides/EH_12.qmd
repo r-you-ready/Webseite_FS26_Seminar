@@ -17,7 +17,7 @@ format:
     controls: true
     embed-resources: true
 bibliography: references.bib
-draft: true
+draft: false
 ---
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
@@ -50,7 +50,7 @@ dat_full <- dat_full |>
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
 
-FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**12. Einheit**, 13.05.2026
+FS 2026<br><br><br> **LV-Leitung**: PD Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**12. Einheit**, 13.05.2026
 
 ------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 -   **+2 Extrapunkte** für das beste Cheatsheet durch Kursabstimmung
 
-**Deadline:** EH13, 20.05.\
+**Deadline:** EH13, **20.05.**\
 **Abstimmung:** EH14, 27.05.\
 **Maximal:** 4 Extrapunkte
 
@@ -126,7 +126,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 **Simulierte Datensätze**
 
-Auf ILIAS findet ihr im Ordner *Individuelle Daten Abschlussarbeit* einen Ordner mit eurem Namen. Dieser ist nach dem PsychDS-Systemstrukturiert und enthält im Unterordner *raw* eure persönlichen, simulierten Datensätze für die Abschlussarbeit.
+Auf ILIAS findet ihr im Ordner *Individuelle Daten Abschlussarbeit* einen Ordner mit eurem Namen. Dieser ist nach dem PsychDS-System8 strukturiert und enthält im Unterordner *raw* eure persönlichen, simulierten Datensätze für die Abschlussarbeit.
 
 ![](../../images/EH_12/Daten_Abschlussarbeit.png){fig-align="center" width="400"}
 
@@ -178,9 +178,9 @@ Mit einem t-Test prüfen wir, ob sich Mittelwerte statistisch bedeutsam voneinan
 
 -   Unterscheidet sich eine Gruppe von einem festen Vergleichswert?
 
--   Unterscheiden sich zwei unabhängige Gruppen voneinander?
+-   Unterscheiden sich zwei unabhängige Gruppen voneinander? (between-subjects)
 
--   Verändert sich eine Variable innerhalb derselben Personen über zwei Messzeitpunkte?
+-   Verändert sich eine Variable innerhalb derselben Personen über zwei Messzeitpunkte? (within-subjects)
 
 <br>
 
@@ -190,19 +190,13 @@ Wir fokussieren auf den t-Test für unabhängige Stichproben.
 
 ------------------------------------------------------------------------
 
-## Inferenzstatistik: t-Test
-
-![](../../images/EH_11/T-Test.png){fig-align="center" width="400"}
-
-------------------------------------------------------------------------
-
-## Inferenzstatistik: t-Test
+## Inferenzstatistik: t-Test für unabhängige Stichproben
 
 ### **Beispiel Abschlussarbeit: Erwartete PCT-Leistung**
 
 <br>
 
-**Fragestellung:** Unterscheiden sich Personen in der `above`- und `below`-Gruppe darin, wie sie ihre kommende Leistung im Pattern Copy Task im Vergleich zu anderen Studierenden einschätzen?
+**Fragestellung:** Unterscheiden sich Personen in der `above`- und `below`-Gruppe darin, wie sie ihre kommende Leistung im Pattern Copy Task einschätzen?
 
 **Variablen:**
 
@@ -214,7 +208,7 @@ Wir fokussieren auf den t-Test für unabhängige Stichproben.
 
 -   Abhängige Variable: `pre4`
 
-    -   Rating der erwarteten eigenen PCT-Leistung im Vergleich zu anderen Studierenden
+    -   Rating der erwarteten eigenen PCT-Leistung (im Vergleich zu anderen Studierenden)
 
     -   nach drei vorherigen Fake-Feedbacks
 
@@ -281,16 +275,16 @@ Der p-Wert zeigt, wie plausibel ein solcher Unterschied wäre, wenn H₀ wahr is
 ### **Varianten des t-Tests**
 
 | Situation | Fragestellung | R-Funktion |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Ein-Stichproben-t-Test | Unterscheidet sich ein Mittelwert von einem festen Vergleichswert? | `t.test(av, mu = x)` |
-| t-Test für unabhängige Stichproben | Unterscheiden sich zwei unabhängige Gruppen? | `t.test(av ~ uv, data = dat)` |
-| Gepaarter t-Test | Unterscheiden sich zwei Messzeitpunkte derselben Personen? | `t.test(av1, av2, paired = TRUE)` |
+| t-Test für unabhängige Stichproben | Unterscheiden sich zwei unabhängige Gruppen? –\> between-subjects Vergleich | `t.test(av ~ uv, data = dat)` |
+| Gepaarter t-Test | Unterscheiden sich zwei Messzeitpunkte derselben Personen? –\> within-subjects Vergleich | `t.test(av1, av2, paired = TRUE)` |
 
 <br>
 
 **Für unser Beispiel:**
 
-Wir verwenden einen t-Test für unabhängige Stichproben.
+t-Test für unabhängige Stichproben
 
 ```{r, eval=FALSE, echo=TRUE}
 t.test(pre4 ~ group_all, data = dat_full)
@@ -398,9 +392,9 @@ leveneTest(pre4 ~ group_all, data = dat_full_below_above)
 
 **Interpretation**
 
--   p ≥ .05: kein statistischer Hinweis auf unterschiedliche Varianzen (klassischer t-Test möglich)
+-   p ≥ .05: kein statistischer Hinweis auf unterschiedliche Varianzen (klassischer t-Test möglich, `var.equal = TRUE`)
 
--   p \< .05: Hinweis auf unterschiedliche Varianzen (Welch-t-Test verwenden)
+-   p \< .05: Hinweis auf unterschiedliche Varianzen (Welch-t-Test verwenden, `var.equal = FALSE`)
 
 ------------------------------------------------------------------------
 
@@ -434,29 +428,7 @@ t.test(pre4 ~ group_all,
 <br>
 
 **Praktische Empfehlung:**\
-Wenn ihr unsicher seid, verwendet den Welch-t-Test. Er ist bei ungleichen Varianzen robuster.
-
-------------------------------------------------------------------------
-
-## Inferenzstatistik: t-Test
-
-### **t-Test in R**
-
-<br>
-
-Für unser Beispiel:
-
-```{r, echo=TRUE, eval=TRUE}
-t.test(pre4 ~ group_all, 
-       data = dat_full_below_above, 
-       var.equal = TRUE)
-```
-
--   Links steht die abhängige Variable: `pre4`
-
--   Rechts steht die Gruppierungsvariable: `group_all`
-
--   R vergleicht die Mittelwerte von `pre4` zwischen den Gruppen `above` und `below`
+Wenn ihr unsicher seid, verwendet den Welch-t-Test. Er ist bei ungleichen Varianzen robuster. Am besten schaut ihr auch die Varianzhomogenität aber mit den Levene Test an.
 
 ------------------------------------------------------------------------
 
@@ -501,9 +473,7 @@ Personen in der Gruppe `above` schätzen ihre kommende Leistung im Pattern Copy 
 <br>
 
 **Aber:**\
-Der p-Wert sagt noch nicht, wie gross der Unterschied ist.
-
-Dafür brauchen wir zusätzlich eine Effektgrösse.
+Der p-Wert sagt noch nicht, wie gross der Unterschied ist. Dafür brauchen wir zusätzlich eine Effektgrösse.
 
 ------------------------------------------------------------------------
 
@@ -515,7 +485,7 @@ Dafür brauchen wir zusätzlich eine Effektgrösse.
 
 Ein signifikanter p-Wert zeigt, dass ein Unterschied statistisch nachweisbar ist.
 
-Er sagt aber nicht direkt, wie gross dieser Unterscheid ist.
+Er sagt aber nicht, wie gross dieser Unterscheid ist.
 
 <br>
 
@@ -570,4 +540,4 @@ Die Gruppen unterscheiden sich nicht nur statistisch signifikant, sondern auch d
 
 ## Hausübung
 
-R-Übung III bis 27.05.26
+R-Übung III bis 27.05.26 –\> auf diese letzte Hausübung gibt es kein Feedback

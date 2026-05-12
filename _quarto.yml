@@ -88,7 +88,7 @@ website:
           - href: scripts/02_excercises/peer_feedback_r_I.qmd
             text: "Peer-Feedback R Übung I (13.05.26)"
           - href: scripts/02_excercises/hausuebung_loesung_3.qmd
-            text: "Hausübung 3 - Mit Lösungen"
+            text: "R Übung III (27.05.26)"
       - href: scripts/04_misc/wettbewerb_cheatsheet.qmd
         text: "Wettbewerb: R-Cheatsheet"
       - href: scripts/04_misc/muddiest_points.qmd
