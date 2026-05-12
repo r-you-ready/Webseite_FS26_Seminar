@@ -10,7 +10,7 @@ format:
     code-fold: false
     theme: cosmo
 editor: visual
-draft: true
+draft: false
 ---
 
 ::: {.callout-important appearance="simple"}
@@ -35,7 +35,7 @@ Die simulierten Daten stellen realistische mögliche Stichproben des Originalexp
 -   Die grundlegende Datenstruktur entspricht der Originalstudie.
 -   Die Stichproben sind zufällig generiert.
 
-::: {.callout-note appearance="simple"}
+::: {.callout-important appearance="simple"}
 ## Wichtig für die Interpretation
 
 Eure Ergebnisse werden **nicht identisch** zur Originalstudie sein. Signifikanzen, Mittelwerte, Standardabweichungen und Effektstärken können von den Ergebnissen der Originalstudie abweichen.
@@ -68,7 +68,7 @@ Ziel ist es, alle potenziellen Probleme **systematisch zu identifizieren und zu 
 
 Die folgenden Punkte stellen typische Probleme dar, die in den Datensätzen auftreten können. Nicht jeder Fehler tritt in jedem Datensatz auf.
 
-::: {.callout-tip appearance="simple"}
+::: {.callout-note appearance="simple"}
 #### Vorgehen
 
 Prüft die Datensätze schrittweise und dokumentiert eure Entscheidungen im Code. Ziel ist nicht nur das Finden von Fehlern, sondern ein nachvollziehbarer und begründeter Umgang mit diesen.
@@ -164,7 +164,7 @@ Im Skript `analysis.qmd` werden die für die Analysen notwendigen Vorbereitungen
 
 Das Testen der Voraussetzungen ist optional. Wenn Voraussetzungen geprüft werden, muss dies im Datenanalyseplan beschrieben werden. Bei Verletzungen der Voraussetzungen soll angemessen reagiert werden.
 
-::: {.callout-note appearance="simple"}
+::: {.callout-important appearance="simple"}
 ## Post-hoc-Tests
 
 Post-hoc-Tests werden nur für die **2 × 3 Mixed ANOVA** und die **MMQ-ANOVA** erwartet. Sollten andere ANOVAs zufällig signifikant werden, sind dafür keine zusätzlichen Post-hoc-Tests erforderlich.
