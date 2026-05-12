@@ -58,11 +58,13 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Heute:
 
+```{=html}
 <embed 
   src="../../PDFs/Syllabus.pdf" 
   type="application/pdf"
   style="width:100%; height:90vh;"
 >
+```
 
 ------------------------------------------------------------------------
 
@@ -186,7 +188,7 @@ effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
 ## **Grundlegende t-Test-Funktionen**
 
 | **Funktion** | **Beschreibung** |
-|------------------------------------|------------------------------------|
+|----|----|
 | `t.test` | Allgemeine Funktion für verschiedene t-Tests: Ein-Stichproben-, unabhängige und abhängige Stichproben. |
 | `t.test(av, mu = x)` | Ein-Stichproben-t-Test. *av* = abhängige Variable, *x* = Vergleichswert der Population. |
 | `t.test(av ~ uv)` | Welch-t-Test für unabhängige Stichproben. *av* = abhängige Variable, *uv* = Gruppenvariable (Ungleiche Varianzen erlaubt). |
@@ -197,7 +199,7 @@ effsize::cohen.d(pre4 ~ group_all, data = dat_full_below_above)
 ## **Paired t-Test, Varianzhomogenität und Effektgrössen**
 
 | **Funktion** | **Beschreibung** |
-|------------------------------------|------------------------------------|
+|----|----|
 | `t.test(av1, av2, paired = TRUE)` | t-Test für abhängige Stichproben (z. B. Prä–Post). *av1* und *av2* = Messzeitpunkte. |
 | `leveneTest(av, uv)` \* | Levene-Test auf Varianzhomogenität für unabhängige Gruppen. Aus dem **car**-Paket. |
 | `effsize::cohen.d()` \* | Berechnet Cohen’s d + Konfidenzintervall. Aus dem **efffsize**-Paket. |

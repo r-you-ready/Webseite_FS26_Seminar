@@ -66,11 +66,13 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Heute:
 
+```{=html}
 <embed 
   src="../../PDFs/Syllabus.pdf" 
   type="application/pdf"
   style="width:100%; height:90vh;"
 >
+```
 
 ------------------------------------------------------------------------
 
