@@ -10,7 +10,7 @@ format:
     code-fold: false
     theme: cosmo
 editor: visual
-draft: false
+draft: true
 ---
 
 ::: {.callout-important appearance="simple"}
@@ -35,7 +35,7 @@ Die simulierten Daten stellen realistische mögliche Stichproben des Originalexp
 -   Die grundlegende Datenstruktur entspricht der Originalstudie.
 -   Die Stichproben sind zufällig generiert.
 
-::: {.callout-important appearance="simple"}
+::: {.callout-note appearance="simple"}
 ## Wichtig für die Interpretation
 
 Eure Ergebnisse werden **nicht identisch** zur Originalstudie sein. Signifikanzen, Mittelwerte, Standardabweichungen und Effektstärken können von den Ergebnissen der Originalstudie abweichen.
@@ -68,52 +68,38 @@ Ziel ist es, alle potenziellen Probleme **systematisch zu identifizieren und zu 
 
 Die folgenden Punkte stellen typische Probleme dar, die in den Datensätzen auftreten können. Nicht jeder Fehler tritt in jedem Datensatz auf.
 
-::: {.callout-note appearance="simple"}
+::: {.callout-tip appearance="simple"}
 #### Vorgehen
 
 Prüft die Datensätze schrittweise und dokumentiert eure Entscheidungen im Code. Ziel ist nicht nur das Finden von Fehlern, sondern ein nachvollziehbarer und begründeter Umgang mit diesen.
 :::
 
-#### Datenstruktur und IDs
+#### Rekodierung von Items
 
--   Inkonsistente oder unterschiedlich benannte ID-Variablen ("Participant Identifier")
--   IDs im falschen Datentyp, z. B. als Text statt numerisch
--   Doppelte IDs innerhalb eines Datensatzes
+-   Gibt es Items, welche noch zu rekodieren sind?
 
-#### Fehlende Werte
+#### Umgang mit fehlenden Werten
 
--   Vollständig leere Beobachtungen, z.B. leere Zeilen
--   Ungewöhnliche Codierungen fehlender Werte, z. B. spezielle Zahlenwerte
+-   Gibt es vollständig leere Beobachtungen (z.B. leere Zeilen)?
+-   Gibt es Personen mit fehlenden Werten, die von der Analyse ausgeschlossen werden müssen?
 
-#### Variableninhalte
+#### Umgang mit unmöglichen Werten
 
--   Werte in unerwartetem Format, z. B. Zahlen (numeric) als Text (character)
--   Inkonsistente Schreibweisen innerhalb einer Variable
+-   Gibt es unmögliche Werte in den Daten (z.B. -999)? Wie können diese Daten sinnvoll behandelt oder ersetzt werden?
 
-#### Fragebogen-Items
+#### Überprüfung und Anpassung von Datentypen
 
--   Einzelne Items mit abweichender Kodierung –\> WAS IST DAMIT GEMEINT? GGF WEG
--   Items, die in ihrer Richtung angepasst werden müssen (Reverse Items)
+-   Gibt es Variablen, welche nicht den korrekten Datentyp haben (z.B. numerische Variablen, die als character definiert sind)? Schaut euch die Variablen genau an!
 
-#### Skalierung und Wertebereiche –\> WAS IST DAMIT GEMEINT?
+#### Überprüfung von Variablennamen
 
--   Variablen mit unerwartetem Wertebereich
--   Uneinheitliche Skalierung innerhalb eines Konstrukts
-
-#### Variablennamen –\> KANN DAS VORKOMMEN?
-
--   Unterschiedliche Bezeichnungen derselben Variable
--   Uneinheitliche Schreibweisen oder Formate
+-   Sind die Variablen konsistent und nach snake_case benannt?
 
 #### Redundanz und irrelevante Inhalte
 
--   Doppelte Variablen, d. h. gleicher Inhalt unter anderem Namen
--   Zusätzliche Variablen ohne inhaltliche Bedeutung
-
-#### Datenkonsistenz über Datensätze hinweg –\> WEGLASSEN?
-
--   Unterschiede in Struktur oder Variablen zwischen Datensätzen
--   Probleme beim Zusammenführen der Datensätze
+-   Gibt es doppelte Variablen (d.h. gleicher Inhalt unter anderem Namen)?
+-   Gibt es zusätzliche Variablen ohne inhaltliche Bedeutung?
+-   Gibt es Personen, welche im Datensatz doppelt vorkommen?
 
 ### Weitere Verarbeitungsschritte
 
@@ -157,14 +143,14 @@ Im Skript `analysis.qmd` werden die für die Analysen notwendigen Vorbereitungen
     -   Trial Duration in der Pattern Copy Task
     -   MMQ, inkl. post-hoc t-Tests
     -   Arbeitsgedächtnisleistung in der Feature Switch Detection Task
--   Bericht der jeweiligen Effektstärken, insbesondere η²
+    -   inkl. Effektstärken, insbesondere η²
 -   Erstellung einer Tabelle oder Abbildung aus der Studie nach Wahl
 
 ### Optional: Voraussetzungen testen
 
 Das Testen der Voraussetzungen ist optional. Wenn Voraussetzungen geprüft werden, muss dies im Datenanalyseplan beschrieben werden. Bei Verletzungen der Voraussetzungen soll angemessen reagiert werden.
 
-::: {.callout-important appearance="simple"}
+::: {.callout-note appearance="simple"}
 ## Post-hoc-Tests
 
 Post-hoc-Tests werden nur für die **2 × 3 Mixed ANOVA** und die **MMQ-ANOVA** erwartet. Sollten andere ANOVAs zufällig signifikant werden, sind dafür keine zusätzlichen Post-hoc-Tests erforderlich.
@@ -174,6 +160,8 @@ Post-hoc-Tests werden nur für die **2 × 3 Mixed ANOVA** und die **MMQ-ANOVA** 
 
 Folgende Punkte müssen im Datenanalyseplan angepasst werden:
 
+-   Data Access
+-   Data Identifiers
 -   Data Collection Procedures
 -   Missing Data
 -   Unit of Analysis / Data Exclusion
@@ -221,7 +209,7 @@ Plausible Ergebnisse zeigen in der Regel:
 
 -   ähnliche Muster zwischen den Gruppen,
 -   vergleichbare Grössenordnungen,
--   dieselbe ungefähre Richtung zentraler Effekte.
+-   dieselbe Richtung zentraler Effekte.
 
 ### Was kann variieren?
 
@@ -242,11 +230,11 @@ Kleine Unterschiede sind normal. Systematische Abweichungen, die das Gesamtbild 
 Ein Warnsignal liegt vor, wenn:
 
 -   das Gesamtmuster stark von der Originalstudie abweicht,
--   zentrale Effekte vollständig verschwinden oder sich umkehren,
+-   zentrale Effekte sich umkehren,
 -   Wertebereiche offensichtlich nicht plausibel sind,
 -   eine Abbildung oder Tabelle ein komplett anderes Bild vermittelt als erwartet.
 
-In solchen Fällen sollte zuerst die Datenaufbereitung überprüft werden.
+In solchen Fällen sollte zuerst die Datenaufbereitung überprüft werden. Wenn ihr euch weiterhin unsicher seid - meldet euch bei uns!
 
 ### Beispiele für plausible Ergebnisse
 
@@ -280,7 +268,7 @@ Auch Mittelwerte und Standardabweichungen werden nicht exakt identisch sein.
 
 ### Unplausible Ergebnisse
 
-Ergebnisse, die ein komplett anderes Gesamtbild erzeugen, sind nicht zu erwarten. Solche Resultate sind ein Hinweis darauf, dass in der Datenaufbereitung oder Analyse etwas überprüft werden sollte.
+Ergebnisse, die ein komplett anderes Gesamtbild erzeugen, sind nicht zu erwarten. Solche Resultate sind ein Hinweis darauf, dass die Datenaufbereitung oder Analyse noch einmal überprüft werden sollte.
 
 ![](../../images/EH_12/unpluaisble_results.png){fig-align="center"}
 
