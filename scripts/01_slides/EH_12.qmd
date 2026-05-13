@@ -275,7 +275,7 @@ Der p-Wert zeigt, wie plausibel ein solcher Unterschied wäre, wenn H₀ wahr is
 ### **Varianten des t-Tests**
 
 | Situation | Fragestellung | R-Funktion |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Ein-Stichproben-t-Test | Unterscheidet sich ein Mittelwert von einem festen Vergleichswert? | `t.test(av, mu = x)` |
 | t-Test für unabhängige Stichproben | Unterscheiden sich zwei unabhängige Gruppen? –\> between-subjects Vergleich | `t.test(av ~ uv, data = dat)` |
 | Gepaarter t-Test | Unterscheiden sich zwei Messzeitpunkte derselben Personen? –\> within-subjects Vergleich | `t.test(av1, av2, paired = TRUE)` |
@@ -433,7 +433,7 @@ Wenn ihr unsicher seid, verwendet den Welch-t-Test. Er ist bei ungleichen Varian
 t-Test für unabhängige Stichproben
 
 ```{r, eval=TRUE, echo=TRUE}
-t.test(pre4 ~ group_all, data = dat_full_below_above)
+t.test(pre4 ~ group_all, data = dat_full_below_above, var.equal = TRUE)
 ```
 
 ------------------------------------------------------------------------
@@ -452,9 +452,9 @@ Ein typischer t-Test-Output enthält:
 
 -   `p-value`: Signifikanztest (\< .001)
 
--   `confidence interval`: Konfidenzintervall des Mittelwertsunterschieds \[20.25; 22.64\]
+-   `confidence interval`: Konfidenzintervall des Mittelwertsunterschieds \[20.25; 33.63\]
 
--   `sample estimates`: Mittelwerte der Gruppen (50.66 vs. 32.72)
+-   `sample estimates`: Mittelwerte der Gruppen (59.66 vs. 32.72)
 
 ------------------------------------------------------------------------
 
