@@ -9,7 +9,7 @@ resources:
   - practice_dataset2.csv
 filters:
   - conditional_content
-show_solutions: false
+show_solutions: true
 draft: false
 ---
 
