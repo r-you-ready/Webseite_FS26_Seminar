@@ -275,20 +275,10 @@ Der p-Wert zeigt, wie plausibel ein solcher Unterschied wäre, wenn H₀ wahr is
 ### **Varianten des t-Tests**
 
 | Situation | Fragestellung | R-Funktion |
-|------------------------|------------------------|------------------------|
+|-------------------|----------------------------|------------------------|
 | Ein-Stichproben-t-Test | Unterscheidet sich ein Mittelwert von einem festen Vergleichswert? | `t.test(av, mu = x)` |
 | t-Test für unabhängige Stichproben | Unterscheiden sich zwei unabhängige Gruppen? –\> between-subjects Vergleich | `t.test(av ~ uv, data = dat)` |
 | Gepaarter t-Test | Unterscheiden sich zwei Messzeitpunkte derselben Personen? –\> within-subjects Vergleich | `t.test(av1, av2, paired = TRUE)` |
-
-<br>
-
-**Für unser Beispiel:**
-
-t-Test für unabhängige Stichproben
-
-```{r, eval=FALSE, echo=TRUE}
-t.test(pre4 ~ group_all, data = dat_full)
-```
 
 ------------------------------------------------------------------------
 
@@ -429,6 +419,22 @@ t.test(pre4 ~ group_all,
 
 **Praktische Empfehlung:**\
 Wenn ihr unsicher seid, verwendet den Welch-t-Test. Er ist bei ungleichen Varianzen robuster. Am besten schaut ihr auch die Varianzhomogenität aber mit den Levene Test an.
+
+------------------------------------------------------------------------
+
+## Inferenzstatistik: t-Test
+
+### **Unser Beispiel**
+
+<br>
+
+**Für unser Beispiel:**
+
+t-Test für unabhängige Stichproben
+
+```{r, eval=TRUE, echo=TRUE}
+t.test(pre4 ~ group_all, data = dat_full_below_above)
+```
 
 ------------------------------------------------------------------------
 
