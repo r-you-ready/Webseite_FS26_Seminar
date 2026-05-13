@@ -126,7 +126,7 @@ FS 2026<br><br><br> **LV-Leitung**: PD Dr. Sandra Grinschgl / MSc. Laura Hirt<br
 
 **Simulierte Datensätze**
 
-Auf ILIAS findet ihr im Ordner *Individuelle Daten Abschlussarbeit* einen Ordner mit eurem Namen. Dieser ist nach dem PsychDS-System8 strukturiert und enthält im Unterordner *raw* eure persönlichen, simulierten Datensätze für die Abschlussarbeit.
+Auf ILIAS findet ihr im Ordner *Individuelle Daten Abschlussarbeit* einen Ordner mit eurem Namen. Dieser ist nach dem PsychDS-System strukturiert und enthält im Unterordner *raw* eure persönlichen, simulierten Datensätze für die Abschlussarbeit.
 
 ![](../../images/EH_12/Daten_Abschlussarbeit.png){fig-align="center" width="400"}
 
@@ -275,7 +275,7 @@ Der p-Wert zeigt, wie plausibel ein solcher Unterschied wäre, wenn H₀ wahr is
 ### **Varianten des t-Tests**
 
 | Situation | Fragestellung | R-Funktion |
-|-------------------|----------------------------|------------------------|
+|----|----|----|
 | Ein-Stichproben-t-Test | Unterscheidet sich ein Mittelwert von einem festen Vergleichswert? | `t.test(av, mu = x)` |
 | t-Test für unabhängige Stichproben | Unterscheiden sich zwei unabhängige Gruppen? –\> between-subjects Vergleich | `t.test(av ~ uv, data = dat)` |
 | Gepaarter t-Test | Unterscheiden sich zwei Messzeitpunkte derselben Personen? –\> within-subjects Vergleich | `t.test(av1, av2, paired = TRUE)` |
@@ -418,7 +418,7 @@ t.test(pre4 ~ group_all,
 <br>
 
 **Praktische Empfehlung:**\
-Wenn ihr unsicher seid, verwendet den Welch-t-Test. Er ist bei ungleichen Varianzen robuster. Am besten schaut ihr auch die Varianzhomogenität aber mit den Levene Test an.
+Wenn ihr unsicher seid, verwendet den Welch-t-Test. Er ist bei ungleichen Varianzen robuster. Am besten schaut ihr euch die Varianzhomogenität aber mit den Levene Test an.
 
 ------------------------------------------------------------------------
 
