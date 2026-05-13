@@ -190,7 +190,7 @@ Wir fokussieren auf den t-Test für unabhängige Stichproben.
 
 ------------------------------------------------------------------------
 
-## Inferenzstatistik: t-Test für unabhängige Stichproben
+## Inferenzstatistik: t-Test
 
 ### **Beispiel Abschlussarbeit: Erwartete PCT-Leistung**
 
