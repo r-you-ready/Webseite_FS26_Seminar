@@ -22,7 +22,6 @@ draft: true
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 
-
 options(scipen = 999)
 library(tidyverse)
 library(palmerpenguins)
@@ -30,12 +29,9 @@ library(apaTables)
 library(car)
 library(afex)
 library(emmeans)
-
 library(effectsize)
 
-
 penguins <- drop_na(palmerpenguins::penguins)
-
 
 bfi_10_data <- read_delim("raw/bfi_10_data.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
@@ -47,7 +43,6 @@ dat_full_long <- dat_full |>
         names_to = "time_rating",
         values_to = "rating"
       )
-
 
 dat_full$group_all <- as.factor(dat_full$group_all)
 
@@ -66,94 +61,253 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Heute:
 
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
 ```{=html}
-<embed 
-  src="../../PDFs/Syllabus.pdf" 
-  type="application/pdf"
-  style="width:100%; height:90vh;"
->
+<embed
+    src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
 ```
-
-------------------------------------------------------------------------
-
-## ANOVA - Analysis of Variance
-
-Testet, ob sich Mittelwerte in mehreren Gruppen unterscheiden
-
-**Verschiedene Arten**
-
--   **One-Way ANOVA (einfaktoriell):**\
-    Ein Faktor (eine UV) mit mehr als zwei Stufen.
-
--   **Mehrfaktorielle ANOVA:**\
-    Zwei oder mehr Faktoren (UVs).
-
--   **Mixed ANOVA:**\
-    Kombination aus Within-Subject-Faktoren (Messwiederholung) und Between-Subject-Faktoren.
-
--   **Multivariate ANOVA (MANOVA):**\
-    Mindestens zwei abhängige Variablen.
-
--   **ANCOVA:**\
-    Kontrolle für eine zusätzliche Drittvariable (Kovariate).
-
-------------------------------------------------------------------------
-
-## Voraussetzungen
-
--   **Normalverteilung der abhängigen Variablen**
--   **Varianzhomogenität (Levene-Test)**
--   **Sphärizität (Mauchly Test) bei Mixed ANOVA**
-
-------------------------------------------------------------------------
-
-## Einfaktorielle ANOVA
-
-**Unterscheiden sich die Mittelwerte der drei Gruppen voneinander?**
-
-**AV**: `mean_rl_all`
-
-**Fixed Effekt:** `group_all` 👉 Dieser Effekt interessiert uns
-
-**Random Intercept:** `(1 | code)` 👉 Irrelevant bei One-Way ANOVA wird aber von der Funktion `afex` verlangt.
-
-<br>
-
-```{r, echo = TRUE}
-leveneTest(mean_rl_all ~ group_all, data = dat_full)
-
-```
-
-```{r, echo= TRUE, eval = TRUE}
-model_1 <- aov_4(mean_rl_all ~ group_all + (1 | code), data = dat_full)
-```
-
-::: notes
-Der Random Intercept (1 \| code) ist bei einer einfaktoriellen One-Way ANOVA irrelevant, weil jede Person nur einen einzigen Messwert fuer die AV hat. Die Personenvariabilität wird vom Residuum aufgefangen. Wäre nur relevant bei multilevel strukturen oder messwiederholungen. AFEX ist aber für mixed designs gebaut, und verangt deshalb einen random Intercept obwohl dieser keinemn effekt hat.
 :::
 
 ------------------------------------------------------------------------
 
-## Output One-Way ANOVA (Beispiel)
+## Inhalte heute
 
-```{r, echo= TRUE,, eval=FALSE}
-model_1 <- aov_4(mean_rl_all ~ group_all + (1 | code), data = dat_full)
+<br>
 
-summary(model_1)
-```
+-   Fragen zur Abschlussarbeit
 
-![](../../images/EH_13/output_anova.png){fig-align="center"}
+-   **Inferenzstatistik: ANOVA**
+
+    -   Von t-Tests zu ANOVAs
+
+    -   One-Way ANOVA und Mixed ANOVA
+
+    -   ANOVA-Output, Effektstärken und Post-hoc-Tests
+
+    -   Voraussetzungen, Verletzungen und Alternativen
 
 ------------------------------------------------------------------------
 
-## ANOVA: Different Package - same result
+## Von t-Tests zu ANOVAs
 
-**BASE-R**
+<br>
+
+**Kernidee:**
+
+-   Ein t-Test vergleicht Mittelwerte zwischen zwei Gruppen.
+
+-   Eine ANOVA erweitert diese Idee auf Designs mit:
+
+    -   mehr als zwei Gruppen
+
+    -   mehr als einem Faktor
+
+    -   Messwiederholungen
+
+    -   Kombinationen aus Between- und Within-Subject-Faktoren
+
+<br>
+
+**Beispiel:**
+
+Statt nur zu fragen: Unterscheidet sich Gruppe A von Gruppe B?...
+
+... fragen wir bei einer ANOVA: Unterscheiden sich die Mittelwerte zwischen mehreren Gruppen?
+
+------------------------------------------------------------------------
+
+## ANOVA - Analysis of Variance (1)
+
+<br>
+
+Die ANOVA testet, ob sich **Mittelwerte zwischen Gruppen oder Bedingungen** systematisch unterscheiden.
+
+Dabei wird vereinfacht gefragt: Ist die Variation zwischen Gruppen grösser als die Variation innerhalb der Gruppen?
+
+<br>
+
+**Grundidee**
+
+-   Gruppen unterscheiden sich stärker voneinander\
+    → spricht eher gegen H₀
+
+-   Werte innerhalb der Gruppen streuen stark\
+    → Unterschied wird unsicherer
+
+-   Der **F-Wert** setzt diese beiden Informationen ins Verhältnis
+
+------------------------------------------------------------------------
+
+## ANOVA - Analysis of Variance (2)
+
+<br>
+
+**Nullhypothese**
+
+Alle Gruppenmittelwerte stammen aus Populationen mit gleichem Mittelwert.
+
+H0: μ1=μ2=μ3
+
+<br>​
+
+**Alternativhypothese**
+
+Mindestens ein Mittelwert unterscheidet sich von mindestens einem anderen.
+
+------------------------------------------------------------------------
+
+## Welche ANOVA bei welchem Design?
+
+<br>
+
+| Design | Fragestellung | Beispiel |
+|-------------------|----------------------------|-------------------------|
+| **One-Way ANOVA** | Ein Faktor mit mehreren Gruppen | Unterscheiden sich drei Feedbackgruppen? |
+| Mehrfaktorielle ANOVA | Zwei oder mehr Faktoren (UVs) | Gibt es Effekte von Feedbackgruppe und Geschlecht? |
+| **Mixed ANOVA** | Kombination aus Within-Subject- und Between-Subject-Faktoren | Verändert sich ein Rating über die Zeit je nach Feedbackgruppe? |
+| MANOVA | Mehrere abhängige Variablen | Gruppenunterschiede in mehreren Outcomes gleichzeitig |
+| ANCOVA | Gruppenvergleich mit Kovariate | Gruppenvergleich unter Kontrolle von Vorwissen |
+
+<br>
+
+------------------------------------------------------------------------
+
+## Voraussetzungen der ANOVA
+
+<br>
+
+Damit die Ergebnisse einer klassischen ANOVA sinnvoll interpretierbar sind, sollten bestimmte Voraussetzungen ungefähr erfüllt sein:
+
+-   **Unabhängigkeit der Beobachtungen**\
+    Messwerte verschiedener Personen sollten unabhängig voneinander sein.
+
+-   **Normalverteilung der abhängigen Variable(n)**\
+    Besonders relevant bei kleinen Stichproben.
+
+-   **Varianzhomogenität**\
+    Die Streuung sollte in den Gruppen ähnlich gross sein.\
+    → Prüfung z.B. mit dem **Levene-Test**
+
+-   **Sphärizität bei Messwiederholungen**\
+    Relevant bei Within-Subject-Faktoren mit mindestens drei Stufen.\
+    → Prüfung z. B. mit dem **Mauchly-Test**
+
+<br>
+
+Nicht jede kleine Abweichung macht eine ANOVA unbrauchbar, aber Verletzungen sollten erkannt, berichtet und bei Bedarf korrigiert werden.
+
+::: notes
+Sphärizität (auch *Zirkularität*) ist eine zusätzliche Annahme, die bei statistischen Verfahren mit Messwiederholung gemacht werden muss. Ist Sphärizität gegeben, so sind die [Varianzen](#0) der Differenzen aller Messpaare (daher aller Stufen der unabhängigen Variablen) der Messungen gleich, ähnlich [Homoskedastizität](#0). Sphärizität kann gemessen werden, wenn drei oder mehr Stufen der unabhängigen Variablen existieren.
+:::
+
+------------------------------------------------------------------------
+
+## One-Way ANOVA: Beispiel
+
+<br>
+
+**Fragestellung**
+
+Unterscheiden sich die drei Feedbackgruppen darin, wie häufig sie im PCT das Modellfenster öffnen?
+
+→ Als Mass des Offloading-Verhaltens
+
+<br>
+
+**Abhängige Variable:** `mean_rl_all`\
+= durchschnittliche Anzahl der Modellfenster-Öffnungen über 20 Testdurchgänge
+
+**Unabhängige Variable:** `group_all`\
+= Feedbackgruppe (`below`, `control`, `above`)
+
+<br>​
+
+Die ANOVA prüft zunächst nur:
+
+**Gibt es irgendwo einen Mittelwertsunterschied zwischen den Gruppen?**
+
+→ Welche Gruppen sich genau unterscheiden, wird erst mit **Post-hoc-Tests** geprüft.
+
+------------------------------------------------------------------------
+
+## One-Way ANOVA mit `afex`
+
+<br>
+
+1.  **Vorbereitung: Varianzhomogenität prüfen mit Levene-Test**
+
+```{r, echo=TRUE, eval=TRUE}
+leveneTest(mean_rl_all ~ group_all, data = dat_full)
+```
+
+→ Levene-Test nicht signifikant; keinen Hinweis auf verletzte Varianzhomogenität.
+
+<br>
+
+2.  **ANOVA berechnen**
+
+```{r, echo=TRUE}
+model_1 <- aov_4(mean_rl_all ~ group_all + (1 | code),
+                 data = dat_full
+)
+```
+
+**Fixed Effekt:** `group_all`
+
+→ Dieser Effekt interessiert uns
+
+**Random Intercept:** `(1 | code)`
+
+→ Irrelevant bei One-Way ANOVA, wird aber von der Funktion `afex` verlangt.
+
+:::: notes
+::: notes
+Der Random Intercept (1 \| code) ist bei einer einfaktoriellen One-Way ANOVA irrelevant, weil jede Person nur einen einzigen Messwert für die AV hat. Die Personenvariabilität wird vom Residuum aufgefangen. Wäre nur relevant bei multilevel strukturen oder messwiederholungen. AFEX ist aber für mixed designs gebaut, und verangt deshalb einen random Intercept obwohl dieser keinemn effekt hat.
+:::
+::::
+
+------------------------------------------------------------------------
+
+## Output One-Way ANOVA interpretieren
 
 <br>
 
 ```{r, echo=TRUE}
+model_1 <- aov_4(mean_rl_all ~ group_all + (1 | code),
+                 data = dat_full
+)
 
+summary(model_1)
+```
+
+<br>
+
+-   `num Df`, `den Df` = Freiheitsgrade
+
+-   `F` = Teststatistik
+
+-   `Pr(>F)` = p-Wert
+
+-   `ges` = Effektstärke
+
+**Interpretation**
+
+→ Es gibt keinen klaren Hinweis darauf, dass sich die Feedbackgruppen in der durchschnittlichen Anzahl an Modellfenster-Öffnungen unterscheiden.
+
+------------------------------------------------------------------------
+
+## Gleiche ANOVA, anderes Package
+
+<br>
+
+Eine One-Way ANOVA kann in R mit verschiedenen Funktionen berechnet werden.
+
+**Base R**
+
+```{r, echo=TRUE}
 model_aov <- aov(mean_rl_all ~ group_all, data = dat_full)
 summary(model_aov)
 ```
@@ -163,7 +317,6 @@ summary(model_aov)
 **aov_ez**
 
 ```{r, echo=TRUE}
-
 model_aov_ez <- aov_ez(
   id = "code",
   dv = "mean_rl_all",
@@ -172,187 +325,439 @@ model_aov_ez <- aov_ez(
 )
 
 summary(model_aov_ez)
-
-
 ```
-
-------------------------------------------------------------------------
-
-## ANOVA: Effektstärken
-
-generalisiertes **`η2`** & partielles **`η2`** - Wie viel Varianz wird durch die Gruppenzugehörigkeit erklärt?
-
-```{r, echo=TRUE}
-
-eta_squared(model_1, generalized = TRUE)
-
-eta_squared(model_1, partial = TRUE)
-
-```
-
-------------------------------------------------------------------------
-
-## Unterschiede generalisiertes und partielles η²
-
-<br>
-
--   Das generalisierte und `partielle` `η²`sind beides Masse, welche den **Anteil an erklärter Varianz** einer **abhängigen Variable** angeben.
-
-<br>
-
--   Das `generalisierte η²` berechnet den Anteil der erklärten Varianz einer abhängigen Variable unter **Einbezug der gesamten Varianz, also aller Effekte.**
-
-<br>
-
--   Das `partielle η²` beachtet bei der Berechnung des Anteils an erklärter Varianz für die **abhängige Variable nicht die gesamte Varianz**, sondern nur jene, welche dem **zuvor definierten Effekt** zugeschrieben werden kann.
 
 ::: notes
-> **Partielles Eta-Quadrat:** Wie gross ist der Effekt dieses Faktors, wenn ich alle anderen Einfluessen ignoriere? Wenn eine Kovariate hinzugefuegt wird und weitere Varianz erklaert, vergroessert sich das partielle Eta-Quadrat tendenziell, da der verbleibende Fehleranteil kleiner wird.
->
-> **Generalisertes Eta-Quadrat:** Wie gross ist der Effekt im gesamten Datensatz, also unter Beruecksichtigung aller anderen Quellen der Varianz?
+**Wichtig**
+
+Die Ausgabe sieht unterschiedlich aus, aber die zentralen Ergebnisse sind gleich:
+
+-   gleicher F-Wert
+
+-   gleicher p-Wert
+
+-   gleiche inhaltliche Schlussfolgerung
 :::
 
 ------------------------------------------------------------------------
 
-## Post-Hoc t-Tests mit `pairs`
-
-**Verschiedene Möglichkeiten**
-
--   Klassische t-Tests, wie im Paper und in EH 12
+## Effektstärken bei ANOVAs
 
 <br>
 
--   Schneller mit `pairs()`, womit alle möglichen Vergleiche simultan berechnet werden (aber ohne Effektstärken) –\> Ergänzung für Fortgeschrittene im Hands-On!
+**Ein signifikanter *p*-Wert sagt nur:** Unter H₀ wäre ein solches Ergebnis unwahrscheinlich.
 
 <br>
 
-```{r, echo=FALSE, eval = TRUE}
-posthoc_tests <- emmeans(object = model_1, specs = ~ group_all)
-pairs(posthoc_tests)
+Er sagt aber nicht, wie gross oder relevant der Effekt ist!
+
+Dafür brauchen wir **Effektstärken**.
+
+<br>
+
+Bei ANOVAs werden häufig Varianten von η2 berichtet.
+
+<br>
+
+**Grundidee**
+
+$$
+\eta^2 = \frac{\text{erklärte Varianz}}{\text{gesamte Varianz}}
+$$
+
+**Inhaltliche Frage**
+
+Wie viel Varianz in der abhängigen Variable wird durch den Faktor erklärt?
+
+------------------------------------------------------------------------
+
+## Generalisiertes und partielles η²
+
+<br>
+
+Beide Masse beschreiben den Anteil erklärter Varianz, unterscheiden sich aber darin, welche Varianz als Vergleichsbasis verwendet wird.
+
+**Generalisiertes η² (`ges`)**
+
+-   berücksichtigt die gesamte relevante Varianz im Modell
+
+-   ist dadurch oft konservativer / kleiner
+
+-   gut vergleichbar über verschiedene Designs hinweg
+
+→ Wie gross ist der Effekt im Verhältnis zur gesamten Modellvarianz?
+
+<br>
+
+**Partielles η² (`pes`)**
+
+-   bezieht den Effekt nur auf die Varianz, die für diesen Effekt noch „übrig“ ist
+
+-   fällt deshalb häufig grösser aus
+
+→ Wie gross ist der Effekt, wenn andere Effekte herausgerechnet werden?
+
+------------------------------------------------------------------------
+
+## Effektstärken in R berechnen
+
+<br>
+
+Mit dem Package `effectsize` können Effektstärken direkt aus dem Modell berechnet werden.
+
+<br>
+
+**Generalisiertes η²**
+
+```{r}
+eta_squared(model_1, generalized = TRUE)
 ```
 
--   Optimalerweise: Präregistrieren, welche Post-Hoc-Tests berechnet werden und wie diese korrigiert werden sollen
+→ Die Gruppenzugehörigkeit erklärt ungefähr 1% der Varianz in der durchschnittlichen Anzahl an Modellfenster-Öffnungen.
+
+<br>
+
+**Partielles η²**
+
+```{r}
+eta_squared(model_1, partial = TRUE)
+```
 
 ------------------------------------------------------------------------
 
-## Korrektur für multiples Testen:
+## Post-hoc-Tests: Welche Gruppen unterscheiden sich?
 
-![](../../images/EH_13/Korrekturen.png){fig-align="center"}
+<br>
+
+Eine ANOVA mit mehr als zwei Gruppen beantwortet zuerst nur die globale Frage:
+
+→ Gibt es irgendwo einen Unterschied zwischen den Gruppen?
+
+→ Um zu prüfen, welche Gruppen sich konkret voneinander zu unterscheiden, brauchen wir **Post-hoc-Tests** oder geplante Kontraste.
+
+<br>
+
+**Mögliche Paarvergleiche bei unserem Beispiel:**
+
+-   `above` vs. `below`
+
+-   `above` vs. `control`
+
+-   `below` vs. `control`
+
+**Wichtig:** Je mehr Tests berechnet werden, desto höher wird das Risiko für falsch-positive Ergebnisse.
+
+→ Deshalb müssen p-Werte bei multiplen Tests korrigiert werden.
 
 ------------------------------------------------------------------------
 
-## Reminder 2x3 ANOVA
+## Post-hoc-Tests: Zwei Möglichkeiten (1)
 
-**AV** = Rating
+<br>
+
+**Möglichkeit 1: Klassische t-Tests**
+
+-   Einzelne Paarvergleiche wie im Paper und in EH 12
+
+-   Effektstärken können direkt mitberechnet werden
+
+-   Korrektur für multiples Testen muss bewusst festgelegt werden
+
+------------------------------------------------------------------------
+
+## Post-hoc-Tests: Zwei Möglichkeiten (2)
+
+<br>
+
+**Möglichkeit 2: `pairs()`**
+
+```{r, echo=TRUE}
+pairs(emmeans(model_1, ~ group_all))
+```
+
+<br>
+
+-   berechnet alle Paarvergleiche gleichzeitig
+
+-   korrigiert p-Werte automatisch, hier mit **Tukey-Korrektur**
+
+-   praktisch und schnell, aber ohne direkte Effektstärken
+
+<br>
+
+**Optimal**
+
+Vorab festlegen, welche Post-hoc-Tests berechnet werden und wie für multiples Testen korrigiert wird.
+
+------------------------------------------------------------------------
+
+## Mixed ANOVA: Gruppenvergleiche über die Zeit
+
+<br>
+
+Bei einer Mixed ANOVA werden zwei Arten von Faktoren kombiniert:
+
+**Between-Subject-Faktor**
+
+-   Unterschiede zwischen Personen oder Gruppen
+
+-   Beispiel Feedbackgruppe: below vs. control vs. above
+
+**Within-Subject-Faktor**
+
+-   Mehrere Messungen innerhlab derselben Person.
+
+-   Beispiel Messzeitpunkt: pre1 vs. pre4
+
+<br>
+
+**Fragestellung**
+
+Verändern sich Ratings über die Zeit unterschiedlich je nach Feedbackgruppe?
+
+------------------------------------------------------------------------
+
+## Beispiel: 2 x 3 Mixed ANOVA
+
+<br>
+
+**AV** = Rating der erwarteten Leistung
 
 **Between Subjects Faktor** = Feedbackgruppe (`below` vs. `control` vs. `above`)
 
 **Within Subjects Faktor:** Messzeitpunkt (Messwiederholter Faktor, `pre 1` vs. `pre 4`)
+
+→ **Zentrale Frage:** Gibt es eine Interaktion zwischen Feedbackgruppe und Messzeitpunkt?
 
 ![](../../images/EH_12/original_results_1.png){fig-align="center"}
 
 ------------------------------------------------------------------------
 
-## 2x3 mixed ANOVA: Vorbereitungen
-
-***Mixed-ANOVA mit `afex`***
+## Mixed ANOVA mit `afex`
 
 <br>
 
-**AV** = Rating
+Für eine Mixed ANOVA brauchen wir die Daten im **Long Format**.
 
 <br>
 
-**Between Subjects Faktor** = Feedbackgruppe (`below` vs. `control` vs. `above`)
+**Modellstruktur**
 
-<br>
-
-**Within Subjects Faktor:** Messzeitpunkt (Messwiederholter Faktor, `pre 1` vs. `pre 4`)
-
-👉 Long Datensatz
-
-***Muster:***
-
-```{r, echo = TRUE, eval=FALSE}
-mixed_anova <- aov_4(AV ~ between_factor + (messwiederholter_faktor | ID) data = dat_full_long)
+```{r, echo=TRUE}
+mixed_anova <- aov_4(
+  rating ~ group_all + (time_rating | code),
+  data = dat_full_long
+)
 ```
+
+-   `rating` = AV
+
+-   `group_all` = Between-Subject-Faktor
+
+-   `time_rating` = Within-Subject-Faktor
+
+-   `code` = Personen-ID
+
+**Wichtig**
+
+Der Within-Subject-Faktor steht innerhalb der Klammer mit der Personen-ID:
+
+```{r, echo=TRUE, eval=FALSE}
+(time_rating | code)
+```
+
+Das zeigt: Jede Person hat mehrere Messwerte über die Zeit.
 
 ------------------------------------------------------------------------
 
-## Beispielhafter Output mit **η2**
+## Mixed ANOVA: Drei zentrale Effekte
 
-```{r, echo=TRUE, eval = TRUE}
-mixed_anova <- aov_4(rating ~ group_all + (time_rating | code), data = dat_full_long, anova_table = list(es = c("ges" ,"pes")))
+<br>
 
+Eine 2 × 3 Mixed ANOVA liefert typischerweise drei Effekte:
 
-summary(mixed_anova)
-mixed_anova$anova_table
+**1. Haupteffekt Gruppe**
+
+Unterscheiden sich die Feedbackgruppen insgesamt voneinander?
+
+```{r, echo=TRUE, eval=FALSE}
+group_all
 ```
+
+<br>
+
+**2. Haupteffekt Zeit**
+
+Verändern sich die Ratings insgesamt von pre 1 zu pre 4?
+
+```{r, echo=TRUE, eval=FALSE}
+time_rating
+```
+
+<br>
+
+**3. Interaktion Gruppe × Zeit**
+
+Verändert sich das Rating über die Zeit unterschiedlich je nach Feedbackgruppe?
+
+```{r, echo=TRUE, eval=FALSE}
+group_all:time_rating
+```
+
+→ Die Interaktion ist zentral, weil sie zeigt, ob sich die Veränderung der Ratings je nach Feedbackgruppe unterscheidet.
 
 ------------------------------------------------------------------------
 
-```{r, echo=TRUE, eval = FALSE}
-mixed_anova <- aov_4(rating ~ group_all + (time_rating | code), data = dat_full_long, anova_table = list(es = c("ges" ,"pes")))
+## Mixed ANOVA: Output interpretieren
 
+```{r, echo=TRUE, eval=TRUE}
+mixed_anova <- aov_4(
+  rating ~ group_all + (time_rating | code),
+  data = dat_full_long
+)
 
 summary(mixed_anova)
+```
+
+**Interpretation**
+
+-   Die Feedbackgruppen unterscheiden sich insgesamt.
+
+-   Die Ratings verändern sich insgesamt über die Zeit.
+
+-   Die Veränderung über die Zeit hängt von der Feedbackgruppe ab.
+
+→ Die Feedbackgruppen entwickeln sich zwischen pre 1 und pre 4 unterschiedlich.
+
+------------------------------------------------------------------------
+
+## Mixed ANOVA: mit Effektstärken
+
+<br>
+
+**Gleiche Ergebnisse, zusätzlich Effektstärken**
+
+```{r, echo=TRUE}
 mixed_anova$anova_table
 ```
 
-![](../../images/EH_13/output_2x3_anova.png){fig-align="center"}
+<br>
+
+→ Das generalisierte η² zeigt, dass die Interaktion einen relevanten Anteil der Varianz erklärt.
 
 ------------------------------------------------------------------------
 
 ## Vergleich mit @grinschgl2021
 
-Im Paper wurde nur das reine **η2 berichtet. Berechnet mit `eta_squared()`** aus dem Package `effectsize`.
+<br>
 
-```{r, echo=FALSE}
+Im Paper wurde nur das **reine** **η2** berichtet.
 
+Dieses wurde mit `eta_squared()` aus dem Package `effectsize` berechnet:
+
+```{r}
 eta_squared(mixed_anova, partial = FALSE)
 ```
 
 <br>
 
+**Bericht im Paper**
+
 We observed a main effect of the factor **“feedback group”, F(2, 156) = 19.74, p \< 0.001, η2 = 0.12**, as well as a main effect of the factor “time of pre-rating”, **F(1, 156) = 22.67, p \< 0.001, η2 = 0.04**. Most importantly, we also found a significant interaction between these factors, **F(2, 156) = 20.09, p \< 0.001, η2 = 0.07**.
+
+→ Die Ergebnisse aus unserer Analyse entsprechen inhaltlich den berichteten Ergebnissen im Paper.
 
 ------------------------------------------------------------------------
 
-## Verletzungen der Voraussetzungen in ANOVAs
+## Voraussetzungen und Alternativen (1)
 
-**Normalverteilung (one-way ANOVA)**
+<br>
 
--   `Kruskal-Wallis-Test` –\> Besonders robust gegen Verletzungen der Normalverteilungsannahme
+**Was tun bei verletzten Voraussetzungen?**
+
+ANOVAs sind teilweise robust, aber Verletzungen sollten nicht ignoriert werden.
+
+<br>
+
+**Normalverteilung (One-Way ANOVA)**
+
+Bei starken Verletzungen:
+
+-   Transformation prüfen
+
+-   robuste Verfahren nutzen
+
+-   Kruskal-Wallis-Test bei One-Way Designs als einfache Alternative
+
+<br>
 
 **Varianzhomogenität**
 
--   Einfaktoriell: `Welch-ANOVA`
+Bei ungleichen Varianzen:
 
-**Mixed ANOVA**
-
--   Relativ robust gegenüber Verletzungen der Normalverteilung
-
-<!-- -->
-
--   Robuste ANOVA mit `WRS2` Paket
-
--   Multilevel Model mit `lme4`
-
-Bei @grinschgl2021 wurde dies aber außer Acht gelassen. Auf jeden Fall sollte man sich im Vorfeld der Datenerhebung überlegen ob und wie man Voraussetzungen überprüft und wie man bei potenziellen Verletzungen vorgeht.
+-   Welch-ANOVA statt klassischer One-Way ANOVA
 
 ------------------------------------------------------------------------
 
-## Verletzung Sphärizität
+## Voraussetzungen und Alternativen (2)
 
-**Beispiel aus den Daten Hausübung:**
+<br>
 
--   Der **Mauchly-Test** ist relevant bei mindestens **drei Within-Faktoren** (z.B bei der Hausübung) .
+**Messwiederholung / Sphärizität**
 
--   Sollte nicht signifikant sein, sodass wir **Sphärizität** annehmen können (ähnlich zum Levene Test).
+Bei Verletzung der Sphärizität:
 
--   Der Test wird automatisch ausgegeben. Wenn nicht signifikant ist Sphärizität gegeben, asonsten muss korrigiert werden. 👉 Werte nach **Greenhouse-Geisser-Korrektu**r interpretieren.
+-   Greenhouse-Geisser-korrigierte Werte interpretieren
 
-    -   Diese werden mit model\$anova_table automatisch ausgegeben. Mit `summary()` bekommt man in der ersten Tabelle die unkorrigierten Werte. Beispiel:
+-   robuste ANOVA-Verfahren prüfen (`WRS2` Paket)
+
+-   Multilevel-Modell als flexiblere Alternative (mit `lme4`)
+
+<br>
+
+Bei @grinschgl2021 wurde dies aber ausser Acht gelassen. Auf jeden Fall sollte man sich im Vorfeld der Datenerhebung überlegen, ob und wie man Voraussetzungen überprüft und wie man bei potenziellen Verletzungen vorgeht.
+
+------------------------------------------------------------------------
+
+## Sphärizität bei Messwiederholungen (1)
+
+<br>
+
+**Wann ist das relevant?**
+
+Bei Mixed ANOVAs mit einem **Within-Subject-Faktor mit mindestens drei Stufen**
+
+→ Aufgabe Hausübung
+
+<br>
+
+**Was prüft der Mauchly-Test?**
+
+-   Ob die Voraussetzung der **Sphärizität** verletzt ist.
+
+-   nicht signifikant → kein Hinweis auf Verletzung
+
+-   signifikant → Sphärizität verletzt
+
+<br>
+
+**Wenn Sphärizität verletzt ist:**
+
+→ **Greenhouse-Geisser-korrigierte Werte** interpretieren
+
+------------------------------------------------------------------------
+
+## Sphärizität bei Messwiederholungen (2)
+
+<br>
+
+**In R mit `afex`:**
+
+-   `summary(model)` zeigt zunächst die unkorrigierten Werte
+
+-   `model$anova_table` enthält die korrigierten Werte
+
+<br>
 
 ![](../../images/EH_13/Mauchly_Test.png){fig-align="center"}
 
@@ -365,18 +770,34 @@ Je stärker die Verletzung, desto konservativer die Korrektur.
 
 ------------------------------------------------------------------------
 
-## Heute haben wir:
+## Heute haben wir gelernt...:
 
--   ANOVAs kennengelernt
+-   ANOVAs erweitern t-Tests auf Designs mit mehreren Gruppen oder Faktoren.
 
--   Post-hoc Tests und Effektstärken berechnet
+-   Eine One-Way ANOVA prüft, ob sich mehrere Gruppenmittelwerte unterscheiden.
 
--   Vorausetzungsprüfungen und Alternativen angeschaut
+-   Der F-Test zeigt zuerst nur, ob es irgendwo einen Unterschied gibt.
+
+-   Post-hoc-Tests zeigen, welche Gruppen sich unterscheiden.
+
+-   Effektstärken zeigen, wie gross ein Effekt ist.
+
+-   Mixed ANOVAs kombinieren Gruppenvergleiche mit Messwiederholungen.
+
+-   Bei ANOVAs sollten Voraussetzungen geprüft und bei Verletzungen passende Alternativen gewählt werden.
 
 ------------------------------------------------------------------------
 
 ## Bis nächste Woche:
 
--   **Muddiest Points!!** Bis Sonntag! siehe Ilias EH 13
+-   **Muddiest Points 3**
 
--   **Hausübung** bis Freitag **und Peerfeedback** bis Mittwoch**!**
+    -   Bis am Sonntag, 24.05.
+
+    -   ILIAS Ordner Sitzung 13
+
+-   **Abgabe R-Hausübung 3**
+
+    -   Bis nächsten Mittwoch, 27.05.
+
+------------------------------------------------------------------------
