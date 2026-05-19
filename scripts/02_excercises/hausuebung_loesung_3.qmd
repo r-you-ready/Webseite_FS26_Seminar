@@ -232,7 +232,7 @@ ggplot(summary_data, aes(x = messzeitpunkt, y = mean_wb,
 
 # 📊 ANOVAs und Post-hoc t-Tests
 
-Prüfe die Daten auf Varianzhomogenität und nutze dafür den Levene-Test. Der Levene-Test wird für die abhängige Variable über den Between-Faktor berechnet (also: Sind die Varianzen der AV über die drei Gruppen hinweg ähnlich verteilt?).
+Prüfe die Daten auf Varianzhomogenität und nutze dafür den Levene-Test. Der Levene-Test wird für die abhängige Variable über den Between-Faktor berechnet (also: Sind die Varianzen der AV über die zwei Gruppen hinweg ähnlich verteilt?).
 
 -   Ergänze dafür den Code um die nötigen Variablen. Der Test prüft gegen Varianzhomogenität; daher bedeutet ein nicht signifikantes Ergebnis, dass die Voraussetzung für die ANOVA nicht verletzt ist.
 
