@@ -1,17 +1,13 @@
 ---
-title: "Hands On – Analyze (Einheiten 11 und 12)"
+title: "Hands On – Analyze (Einheiten 13 und 14)"
 editor: visual
 bibliography: references.bib
 filters:
   - conditional_content
 show_solutions: false
-draft: true
+draft: false
 format:
-  html:
-    code-tools:
-       source: downloads/loesung_7_solution.qmd
-       toggle: false
-       caption: "Download der Lösungsdatei"
+  html
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE, warning=FALSE}
@@ -96,6 +92,7 @@ Das Ziel ist, eine einfaktorielle ANOVA mit `aov_4` (aus dem Paket "afex") für 
 
 Dazu soll in einem ersten Schritt ein `Levene-Test` berechnet werden, um die Varianzhomogenität des Between-Faktors zu überprüfen.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, echo = TRUE}
@@ -107,6 +104,7 @@ leveneTest(mean_rl_all ~ group_all, data= dat_full)
 Der Levene-Test ist **nicht** signifikant (p \> 0.05). Damit gibt es keinen statistischen Hinweis auf eine Verletzung der Varianzhomogenität. Die Voraussetzung kann für diese Analyse daher als unproblematisch betrachtet werden.
 
 :::
+::::
 
 ### 1.2. Definition der ANOVA
 
@@ -121,6 +119,7 @@ summary(model_1)
 
 Dabei gibt der Term `(1 | code)` an, welche Variable die Versuchspersonen eindeutig identifiziert. Obwohl es sich hier nicht um ein Messwiederholungsdesign handelt, benötigt `aov_4()` diese Information zur Modellschätzung.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, echo = TRUE}
@@ -130,6 +129,7 @@ summary(model_1)
 ```
 
 :::
+::::
 
 ### 1.3. Interpretation des Outputs und Vergleich mit @grinschgl2021
 
@@ -137,11 +137,13 @@ Versuche nun einmal, den Output des Modells zu interpretieren und mit dem @grins
 
 👉 Und schon haben wir eine ANOVA für die Offloading Variablen berechnet!
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 Die ANOVA ist nicht signifikant (p \> 0.05). Es gibt also **keinen** statistisch signifikanten Hinweis darauf, dass sich die Gruppen in der Offloadinghäufigkeit unterscheiden.
 
 :::
+::::
 
 ### 1.4. Berechnung der Effektstärken
 
@@ -157,6 +159,7 @@ Lasse dir das Ergebnis mit `model$anova_table` ausgeben.
 
 → Bei einfaktoriellen ANOVAs sind partielles und generalisiertes `η²` identisch.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r}
@@ -170,6 +173,7 @@ model_1$anova_table
 Das partielle Eta² und das generalisierte Eta² sind identisch und betragen 0.01, was auf einen sehr kleinen Effekt hinweist. Die Gruppenzugehörigkeit kann also nur wenig Varianz des Offloadingverhalten erklären. Dies hat sich auch in der ANOVA gezeigt, bei welcher die Gruppierungsvariable aufgrund geringer Varianzerklärung nicht signifikant wurde.
 
 :::
+::::
 
 ### 1.5. Post-hoc *t*-Tests
 
@@ -177,6 +181,7 @@ Da der globale ANOVA-Test nicht signifikant ist, wären Post-hoc-Tests inhaltlic
 
 #### 1.5.1. Lade das Paket `emmeans`
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r}
@@ -184,6 +189,7 @@ library(emmeans)
 ```
 
 :::
+::::
 
 #### 1.5.2. Vorbereitungen
 
@@ -209,6 +215,7 @@ die geschätzten Mittelwerte und Standardfehler für die Gruppen in einem neuen 
 
 Diese Informationen brauchen wir im nächsten Schritt, um die Gruppen paarweise miteinander zu vergleichen.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, echo = TRUE, eval = TRUE}
@@ -219,6 +226,7 @@ new_object
 ```
 
 :::
+::::
 
 #### 1.5.3. Post-hoc-Tests mit `pairs()`
 
@@ -234,6 +242,7 @@ Das ist eine Alternative zu den einzelnen t-Tests in @grinschgl2021 (so wie in E
 
 -   oder mit `t.test()`.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r}
@@ -243,12 +252,14 @@ pairs(new_object)
 Die einzelnen post-hoc Tests zeigen **keine** signifikanten Unterschiede zwischen den jeweiligen Gruppen (alle p-Werte \> 0.05). Auch dieses Resultat war zu erwarten, da ja schon der globale Test mit der ANOVA keinerlei Unterschiede zwischen irgendwelchen Gruppen signalisiert hat.
 
 :::
+::::
 
 ::: {.callout-note collapse="true"}
 ## Tukey-Korrektur
 
 Die Tukey-Korrektur ist ein simultanes Verfahren für Post-hoc-Gruppenvergleiche, das verhindert, dass sich der Alpha-Fehler durch viele t-Tests (familywise error rate) aufsummiert. Sie wird bevorzugt eingesetzt, wenn alle Gruppen miteinander verglichen werden sollen.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, eval = TRUE, echo=TRUE}
@@ -257,8 +268,9 @@ pairs(new_object)
 
 Auch hier zeigen die post-hoc Tests keine signifikanten Unterschiede zwischen den jeweiligen Gruppen (alle p-Werte \> 0.05).
 :::
+::::
 
-:::
+
 
 ::: {.callout-note collapse="true"}
 ## Fortgeschritten - Effektstärken mit `pairs()`
@@ -301,6 +313,7 @@ Definiere das 2x3 ANOVA-Modell aus @grinschgl2021 nach folgendem Muster.
 mixed_anova <- aov_4(AV ~ between_factor + (within_faktor | ID), data = df_long)
 ```
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, echo=TRUE, eval = TRUE}
@@ -314,11 +327,13 @@ summary(mixed_anova)
 `time_rating` ist der Within-Subjects-Faktor, weil jede Person zu mehreren Zeitpunkten gemessen wurde. Der Term `(time_rating| code)` sagt dem Modell, dass `time_rating` innerhalb der Personen-Id `code` wiederholt gemessen wurde.
 
 :::
+::::
 
 ### 2.2. Berechnung der Effektstärken
 
 Ergänze den Code wir vorher um `anova_table = list(es = c("ges" ,"pes"))`, um die partielles und generalisiertes `η²` ausgeben zu lassen.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r}
@@ -332,6 +347,7 @@ mixed_anova$anova_table
 ```
 
 :::
+::::
 
 #### 2.2.1. Effektstärke in @grinschgl2021
 
@@ -339,6 +355,7 @@ Im Paper wird jedoch nur das reine `η²` berichtet (weder generalisiert noch pa
 
 → Wende `eta_squared()` aus dem Paket `effectsize` auf dein ANOVA-Modell an und setze dabei `partial = FALSE`. So solltest du zu demselben Ergebnis wie das Paper kommen.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, echo = TRUE}
@@ -350,16 +367,19 @@ eta_squared(mixed_anova, partial = FALSE)
 ```
 
 :::
+::::
 
 ### 2.3. Interpretation des Outputs und Vergleich mit @grinschgl2021
 
 Versuche nun, das Ergebnis dieser Mixed ANOVA zu interpretieren und mit @grinschgl2021 zu vergleichen.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 Die Resultate der von uns gerechneten ANOVA und der in @grinschgl2021 berichteten ANOVA stimmen überein. Es gibt signifikante Haupteffekte für den Between-Faktor `group_all` (p \< 0.05, η² = 0.12), den Within-Faktor `time_rating` (p \< 0.05, η² = 0.04) und die Interaktion beider Variablen `group_all:time_rating` (p \< 0.05, η² = 0.07). Der signifikante Haupteffekt von `group_all` zeigt, dass sich die Gruppen im Rating unterschwieden, wenn über die Messzeitpunkte gemittelt wird. Der signifikante Haupteffekt von `time_rating` zeigt, dass sich das Rating über die Zeit verändert, wenn über die Gruppen gemittelt wird. Die signifikante Interaktion `group_all:time_rating` zeigt, dass die Veränderung über die Zeit nicht in allen Gruppen gleich ausfällt. Die Effektstärken deuten auf kleine bis mittlere Effekte hin.
 
 :::
+::::
 
 ### 2.4. Post-Hoc *t*-Tests
 
@@ -391,6 +411,7 @@ Dieses Objekt enthält die modellbasierten Mittelwerte für jede Kombination aus
 
 → Diese Werte bilden die Grundlage für die folgenden Post-hoc-Tests.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, eval = TRUE}
@@ -401,6 +422,7 @@ results
 ```
 
 :::
+::::
 
 #### 2.4.2. Gruppenunterschiede innerhalb jedes Messzeitpunkts
 
@@ -408,6 +430,7 @@ Zuerst können wir prüfen, ob sich die Gruppen i**nnerhalb der einzelnen Messze
 
 Ergänze dazu die Funktion `pairs(model)` noch um das Argument `simple = "group_all"`.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, echo=TRUE}
@@ -417,6 +440,7 @@ pairs(results, simple = "group_all")
 ```
 
 :::
+::::
 
 Dieser Test beantwortet folgende Fragen:
 
@@ -434,6 +458,7 @@ Als nächstes können wir prüfen, ob sich das Rating **innerhalb jeder Gruppe**
 
 Ergänze dazu die Funktion `pairs(model)` noch um das Argument `simple = "time_rating"`.
 
+:::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
 
 ```{r, echo=TRUE}
@@ -443,6 +468,7 @@ pairs(results, simple = "time_rating")
 ```
 
 :::
+::::
 
 Dieser Test beantwortet folgende Fragen:
 
