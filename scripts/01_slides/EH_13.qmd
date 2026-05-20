@@ -279,8 +279,6 @@ model_1 <- aov_4(mean_rl_all ~ group_all + (1 | code),
 summary(model_1)
 ```
 
-<br>
-
 -   `num Df`, `den Df` = Freiheitsgrade
 
 -   `F` = Teststatistik
@@ -292,6 +290,8 @@ summary(model_1)
 **Interpretation**
 
 → Es gibt keinen Hinweis darauf, dass sich die Feedbackgruppen in der durchschnittlichen Anzahl an Modellfenster-Öffnungen unterscheiden.
+
+→ Deswegen werden auch keine Post-hoc-Tests durchgeführt!
 
 ------------------------------------------------------------------------
 
@@ -583,7 +583,7 @@ Eine ANOVA mit mehr als zwei Gruppen beantwortet zuerst nur die globale Frage:
 
 → Gibt es irgendwo einen Unterschied zwischen den Gruppen?
 
-→ Um zu prüfen, welche Gruppen sich konkret voneinander zu unterscheiden, brauchen wir **Post-hoc-Tests** oder geplante Kontraste.
+→ Um bei einem signifikanten Ergebnis zu prüfen, welche Gruppen sich konkret voneinander zu unterscheiden, brauchen wir **Post-hoc-Tests** oder geplante Kontraste.
 
 <br>
 
@@ -598,6 +598,8 @@ Eine ANOVA mit mehr als zwei Gruppen beantwortet zuerst nur die globale Frage:
 <br>
 
 Ihr könnt grundsätzlich wählen zwischen:
+
+<br>
 
 **Möglichkeit 1: Klassische t-Tests**
 
@@ -669,7 +671,7 @@ Bei unserer 2x3 Mixed ANOVA können wir mindestens drei verschiedene Fragen stel
 |------------------------------------|------------------------------------|
 | Unterscheiden sich die Gruppen innerhalb eines Zeitpunkts? | Gruppenvergleiche bei `pre1` und bei `pre4` |
 | Verändert sich jede Gruppe über die Zeit? | `pre1` vs. `pre4` innerhalb jeder Gruppe |
-| Unterscheiden sich die Veränderungen zwischen den Gruppen? | Veränderungsscores zwischen den Gruppen vergleichen |
+| **Zusatz:** Unterscheiden sich die Veränderungen zwischen den Gruppen? | Veränderungsscores zwischen den Gruppen vergleichen |
 
 ------------------------------------------------------------------------
 
@@ -677,7 +679,7 @@ Bei unserer 2x3 Mixed ANOVA können wir mindestens drei verschiedene Fragen stel
 
 <br>
 
-Zuerst berechnen wir die geschätzten margninalen Mittelwerte für jede Kombination aus Messzeitpunkt und Feedbackgruppe.
+Zuerst berechnen wir die **geschätzten margninalen Mittelwerte** für jede Kombination aus Messzeitpunkt und Feedbackgruppe.
 
 ```{r,echo=TRUE, eval=TRUE}
 results <- emmeans(
@@ -688,7 +690,9 @@ results <- emmeans(
 
 <br>
 
-Diese modellbasierten Mittelwerte aus dem ANOVA-Modell sind die Grundlage für die folgenden Paarvergleiche.
+`emmeans()` nimmt unser fertiges ANOVA-Modell und berechnet daraus die modellbasierten Mittelwerte für alle Kombinationen.
+
+Im nächsten Schritt vergleichen wir diese Mittelwerte paarweise, um herauszufinden, **wo** die Unterschiede liegen.
 
 ------------------------------------------------------------------------
 
