@@ -423,92 +423,6 @@ eta_squared(model_1, partial = TRUE)
 
 ------------------------------------------------------------------------
 
-## Post-hoc-Tests: Welche Gruppen unterscheiden sich? (1)
-
-<br>
-
-Eine ANOVA mit mehr als zwei Gruppen beantwortet zuerst nur die globale Frage:
-
-→ Gibt es irgendwo einen Unterschied zwischen den Gruppen?
-
-→ Um zu prüfen, welche Gruppen sich konkret voneinander zu unterscheiden, brauchen wir **Post-hoc-Tests** oder geplante Kontraste.
-
-<br>
-
-**Wichtig:** Die One-Way ANOVA für `mean_rl_all` ist nicht signifikant!
-
-Deswegen wären Post-hoc-Tests hier inhaltlich nicht notwendig und nicht durchzuführen.
-
-→ Wir zeigen sie hier zu Übungszwecken trotzdem, um die Syntax von:
-
--   `emmeans()`
-
--   und `pairs()` kennenzulernen.
-
-------------------------------------------------------------------------
-
-## Post-hoc-Tests: Welche Gruppen unterscheiden sich? (2)
-
-<br>
-
-**Mögliche Paarvergleiche bei unserem Beispiel:**
-
--   `above` vs. `below`
-
--   `above` vs. `control`
-
--   `below` vs. `control`
-
-**Wichtig:** Je mehr Tests berechnet werden, desto höher wird das Risiko für falsch-positive Ergebnisse.
-
-→ Deshalb sollte man sich überlegen, ob p-Werte für multiples Testen korrigiert werden sollen.
-
-------------------------------------------------------------------------
-
-## Post-hoc-Tests: Zwei Möglichkeiten (1)
-
-<br>
-
-Ihr könnt grundsätzlich wählen zwischen:
-
-**Möglichkeit 1: Klassische t-Tests**
-
--   Einzelne Paarvergleiche wie im Paper und in EH 12
-
--   Effektstärken müssen über eine extra Funktion (`cohen.d`) berechnet werden
-
--   Korrektur für multiples Testen muss bewusst festgelegt werden
-
-------------------------------------------------------------------------
-
-## Post-hoc-Tests: Zwei Möglichkeiten (2)
-
-<br>
-
-**Möglichkeit 2: Modellbasierte Vergleiche mit `pairs()`**
-
-```{r, echo=TRUE}
-pairs(emmeans(model_1, ~ group_all))
-```
-
-<br>
-
--   basiert direkt auf dem ANOVA-Modell
-
--   berechnet alle Paarvergleiche gleichzeitig
-
--   korrigiert p-Werte automatisch, hier mit **Tukey-Korrektur**
-
--   praktisch und schnell, aber ohne Effektstärken, diese müssen wieder extra berechnet werden
-
-<br>
-
-**Optimal**
-
-Vorab festlegen, welche Post-hoc-Tests berechnet werden und wie für multiples Testen korrigiert wird.
-
-------------------------------------------------------------------------
-
 ## Mixed ANOVA: Gruppenvergleiche über die Zeit
 
 <br>
@@ -661,6 +575,68 @@ We observed a main effect of the factor **“feedback group”, F(2, 156) = 19.7
 
 ------------------------------------------------------------------------
 
+## Post-hoc-Tests: Welche Gruppen unterscheiden sich?
+
+<br>
+
+Eine ANOVA mit mehr als zwei Gruppen beantwortet zuerst nur die globale Frage:
+
+→ Gibt es irgendwo einen Unterschied zwischen den Gruppen?
+
+→ Um zu prüfen, welche Gruppen sich konkret voneinander zu unterscheiden, brauchen wir **Post-hoc-Tests** oder geplante Kontraste.
+
+<br>
+
+**Wichtig:** Je mehr Tests berechnet werden, desto höher wird das Risiko für falsch-positive Ergebnisse.
+
+→ Deshalb sollte man sich überlegen, ob p-Werte für multiples Testen korrigiert werden sollen.
+
+------------------------------------------------------------------------
+
+## Post-hoc-Tests: Zwei Möglichkeiten (1)
+
+<br>
+
+Ihr könnt grundsätzlich wählen zwischen:
+
+**Möglichkeit 1: Klassische t-Tests**
+
+-   Einzelne Paarvergleiche wie im Paper und in EH 12
+
+-   Effektstärken müssen über eine extra Funktion (`cohen.d`) berechnet werden
+
+-   Korrektur für multiples Testen muss bewusst festgelegt werden
+
+------------------------------------------------------------------------
+
+## Post-hoc-Tests: Zwei Möglichkeiten (2)
+
+<br>
+
+**Möglichkeit 2: Modellbasierte Vergleiche mit `pairs()`**
+
+```{r, echo=TRUE}
+pairs(emmeans(model_1, ~ group_all))
+```
+
+<br>
+
+-   basiert direkt auf dem ANOVA-Modell
+
+-   berechnet alle Paarvergleiche gleichzeitig
+
+-   korrigiert p-Werte automatisch, hier mit **Tukey-Korrektur**
+
+-   praktisch und schnell, aber ohne Effektstärken, diese müssen wieder extra berechnet werden
+
+<br>
+
+**Optimal**
+
+Vorab festlegen, welche Post-hoc-Tests berechnet werden und wie für multiples Testen korrigiert wird.
+
+------------------------------------------------------------------------
+
 ## Mixed ANOVA: Post-hoc-Tests
 
 <br>
@@ -796,7 +772,7 @@ Angenommen:
 
 ------------------------------------------------------------------------
 
-## Möglichkeit 3: Direkter Vergleich der Veränderungen (1)
+## Zusatz: Möglichkeit 3: Direkter Vergleich der Veränderungen (1)
 
 <br>
 
@@ -819,11 +795,11 @@ Dies berechnet die geschätzten Mittelwerte für `time_rating`, getrennt nach `g
 
 ------------------------------------------------------------------------
 
-## Möglichkeit 3: Direkter Vergleich der Veränderungen (2)
+## Zusatz: Möglichkeit 3: Direkter Vergleich der Veränderungen (2)
 
 <br>
 
-Nun berehcnen wir die Veränderung von `pre1` zu `pre4` innerhalb jeder Gruppe:
+Nun berechnen wir die Veränderung von `pre1` zu `pre4` innerhalb jeder Gruppe:
 
 ```{r, echo=TRUE, eval=TRUE}
 change_by_group <- contrast(
@@ -838,7 +814,7 @@ Dies sagt uns nun also, wie stark sich jede Gruppe verändert, aber noch nicht, 
 
 ------------------------------------------------------------------------
 
-## Möglichkeit 3: Direkter Vergleich der Veränderungen (3)
+## Zusatz: Möglichkeit 3: Direkter Vergleich der Veränderungen (3)
 
 <br>
 
