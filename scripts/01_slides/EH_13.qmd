@@ -166,7 +166,7 @@ Mindestens ein Mittelwert unterscheidet sich von mindestens einem anderen.
 <br>
 
 | Design | Fragestellung | Beispiel |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | **One-Way ANOVA** | Ein Faktor mit mehreren Gruppen | Unterscheiden sich drei Feedbackgruppen? |
 | Mehrfaktorielle ANOVA | Zwei oder mehr Faktoren (UVs) | Gibt es Effekte von Feedbackgruppe und Geschlecht? |
 | **Mixed ANOVA** | Kombination aus Within-Subject- und Between-Subject-Faktoren | Verändert sich ein Rating über die Zeit je nach Feedbackgruppe? |
@@ -668,7 +668,7 @@ Die ANOVA sagt uns zunächst aber nur, **dass** sich die zeitliche Veränderung 
 Bei unserer 2x3 Mixed ANOVA können wir mindestens drei verschiedene Fragen stellen:
 
 | Frage | Vergleich |
-|------------------------------------|------------------------------------|
+|----|----|
 | Unterscheiden sich die Gruppen innerhalb eines Zeitpunkts? | Gruppenvergleiche bei `pre1` und bei `pre4` |
 | Verändert sich jede Gruppe über die Zeit? | `pre1` vs. `pre4` innerhalb jeder Gruppe |
 | **Zusatz:** Unterscheiden sich die Veränderungen zwischen den Gruppen? | Veränderungsscores zwischen den Gruppen vergleichen |

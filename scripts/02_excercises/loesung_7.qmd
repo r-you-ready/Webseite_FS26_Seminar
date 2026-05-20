@@ -104,7 +104,7 @@ Nutze die folgende Vorlage, um die passende ANOVA für diese Fragestellung zu de
 
 ```{r, eval = FALSE , echo = TRUE}
 
-model_1 <- aov_4(AV ~ Between-F + (1 | ID), data = data)
+model_1 <- aov_4(AV ~ between_factor + (1 | ID), data = data)
 
 summary(model_1)
 ```
