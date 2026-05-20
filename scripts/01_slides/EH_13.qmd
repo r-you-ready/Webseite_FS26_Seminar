@@ -690,7 +690,7 @@ Die ANOVA sagt uns zunächst aber nur, **dass** sich die zeitliche Veränderung 
 Bei unserer 2x3 Mixed ANOVA können wir mindestens drei verschiedene Fragen stellen:
 
 | Frage | Vergleich |
-|----|----|
+|------------------------------------|------------------------------------|
 | Unterscheiden sich die Gruppen innerhalb eines Zeitpunkts? | Gruppenvergleiche bei `pre1` und bei `pre4` |
 | Verändert sich jede Gruppe über die Zeit? | `pre1` vs. `pre4` innerhalb jeder Gruppe |
 | Unterscheiden sich die Veränderungen zwischen den Gruppen? | Veränderungsscores zwischen den Gruppen vergleichen |
@@ -729,7 +729,8 @@ Damit werden folgende Fragen beantwortet:
 ```{r, echo=TRUE, eval=TRUE}
 pairs(
   results,
-  simple = "group_all"
+  simple = "group_all",
+  adjust = "bonferroni"
 )
 ```
 
@@ -770,7 +771,8 @@ Damit werden folgende Fragen beantwortet:
 ```{r, echo=TRUE, eval=TRUE}
 pairs(
   results,
-  simple = "time_rating"
+  simple = "time_rating",
+  adjust = "bonferroni"
 )
 ```
 
