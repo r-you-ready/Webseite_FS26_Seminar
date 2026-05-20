@@ -197,7 +197,7 @@ summary(mixed_anova)
 
 ### 2.2. Berechnung der Effektstärken
 
-Ergänze den Code wir vorher um `anova_table = list(es = c("ges" ,"pes"))`, um die partielles und generalisiertes `η²` ausgeben zu lassen.
+Ergänze den Code wir vorher um `anova_table = list(es = c("ges" ,"pes"))`, um dir partielles und generalisiertes `η²` ausgeben zu lassen.
 
 ::: {.content-visible when-meta="show_solutions"}
 ::: {.callout-note collapse="true" title = "Lösung"}
