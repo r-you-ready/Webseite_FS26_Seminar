@@ -17,12 +17,12 @@ format:
     controls: true
     embed-resources: true
 bibliography: references.bib
-draft: true
+draft: false
 ---
 
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
 
-FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**14. Einheit**, 27.05.2026
+FS 2026<br><br><br> **LV-Leitung**: PD Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**14. Einheit**, 27.05.2026
 
 ------------------------------------------------------------------------
 
@@ -74,7 +74,7 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
     -   Seminarevaluation
 
-    -   kurze Zusatzevaluation
+    -   Kurze Zusatzevaluation via Ilias
 
 ------------------------------------------------------------------------
 
@@ -181,11 +181,17 @@ Projektordner/data/raw/data_pct.csv
 
 **4.5 Formelle Vorgaben:** Warn- und Fehlermeldungen werden nicht unterdrückt, sondern transparent dargestellt und interpretiert...
 
-→ Der YAML-Header muss angepasst werden!
+→ Der YAML-Header muss in beiden R Skripten (processing und analysis) angepasst werden!
 
 <br>
 
 ![](../../images/EH_14/yaml_header.png){fig-align="center" width="411"}
+
+::: notes
+warning: true
+
+message: true
+:::
 
 ------------------------------------------------------------------------
 
@@ -227,7 +233,7 @@ Die Abgabefrist der Abschlussarbeit wurde um eine Woche verlängert.
 
 -   Open-Science-Praktiken
 
--   Möglichkeiten zur Steigerung der Transparenz, z.B. durch **Datenanalysepläne** und **Codebooks**
+-   Massnahmen zur Steigerung der Transparenz, z.B. durch **Datenanalysepläne** und **Codebooks**
 
 -   Grundlagen des FAIR Forschungsdatenmanagement – PsychDS
 
@@ -307,7 +313,7 @@ Die Abgabefrist der Abschlussarbeit wurde um eine Woche verlängert.
 
 <br>
 
--   **14 Punkte Insgesamt**
+-   **14 Punkte insgesamt**
 
 -   **7 Punkte dürft ihr euch selbst vergeben**
 
@@ -337,7 +343,7 @@ Die Abgabefrist der Abschlussarbeit wurde um eine Woche verlängert.
 
 ## Gruppe Sandra 16:15
 
-Hier noch Link einfügen!
+<https://scanserveruls.unibe.ch/evasys/online.php?pswd=KE6VY> 
 
 ![](../../images/EH_14/eval_sandra.png){fig-align="center"}
 
@@ -368,7 +374,9 @@ Hier noch Link einfügen!
 <br>
 
 <p align="center">
-  <img src="../../images/EH_14/methodenberatung.png" style="max-height: 75vh; width: auto;">
+
+<img src="../../images/EH_14/methodenberatung.png" style="max-height: 75vh; width: auto;"/>
+
 </p>
 
 ------------------------------------------------------------------------
@@ -376,3 +384,5 @@ Hier noch Link einfügen!
 ## Schöne Sommerferien und alles Gute!
 
 ![](../../images/EH_14/sommerferien.png){fig-align="center"}
+
+Bei Fragen: Forum nutzen!
