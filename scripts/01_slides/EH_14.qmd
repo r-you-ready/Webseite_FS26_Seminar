@@ -20,44 +20,6 @@ bibliography: references.bib
 draft: true
 ---
 
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-
-
-options(scipen = 999)
-library(tidyverse)
-library(palmerpenguins)
-library(apaTables)
-library(car)
-library(afex)
-library(emmeans)
-
-library(effectsize)
-
-
-penguins <- drop_na(palmerpenguins::penguins)
-
-
-bfi_10_data <- read_delim("raw/bfi_10_data.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
-
-dat_full <- read_csv("raw/dat_full.csv")
-
-dat_full_long <- dat_full |>
-      pivot_longer(
-        cols = c(pre1, pre4),
-        names_to = "time_rating",
-        values_to = "rating"
-      )
-
-
-dat_full$group_all <- as.factor(dat_full$group_all)
-
-dat_full <- dat_full |>
-  mutate(pre1 = pre1*10,
-         pre2 = pre2*10,
-         pre3 = pre3*10,
-         pre4 = pre4*10)
-```
-
 ## R u Ready? Reproduzierbare Datenaufbereitung und -analyse mit R
 
 FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> **Tutor**: BSc. Lars Schilling<br><br><br>**14. Einheit**, 27.05.2026
@@ -66,77 +28,248 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ## Heute:
 
+::: {style="width:100%; height:80vh; background:#777; padding:20px; box-sizing:border-box; border-radius:10px; overflow:auto; "}
 ```{=html}
-<embed 
-  src="../../PDFs/Syllabus.pdf" 
-  type="application/pdf"
-  style="width:100%; height:90vh;"
->
+<embed
+    src="../../PDFs/Syllabus.pdf#view=FitH&navpanes=0&toolbar=0"
+    type="application/pdf"
+    style="width:100%; height:220vh; border:0; display:block; background:white;"
+  >
 ```
+:::
 
 ------------------------------------------------------------------------
 
-## Congrats
+## Congrats!
 
 ![](../../images/EH_14/mastered_r.png)
 
 ------------------------------------------------------------------------
 
-## Fragen zu Hausübung 3 - Hands On 7?
+## Inhalte heute
+
+<br>
+
+1.  Offene Fragen zu HÜ3 / Hands-On 7
+
+2.  Muddiest Points III
+
+3.  Gruppe Laura: Wettbewerb Cheatsheet
+
+4.  Abschlussarbeit: letzte Informationen & Repetition
+
+    -   relative Pfade mit `here()`
+
+    -   YAML-Header
+
+    -   verlängerte Abgabefrist
+
+    -   Feedback-Möglichkeiten zur Arbeit
+
+5.  Recap: zentrale Take-Home Messages
+
+6.  Evaluation & Abschluss
+
+    -   Selbstevaluation der Mitarbeit
+
+    -   Seminarevaluation
+
+    -   kurze Zusatzevaluation
 
 ------------------------------------------------------------------------
 
-### Muddiest Points
+## 1. Offene Fragen zu HÜ 3 / Hands-On 7?
 
--   Auf Website
-
-**Werden nach Weihnachten ins FAQ integriert.**
+![](../../images/EH_7/Bild1.png){fig-align="center" width="411"}
 
 ------------------------------------------------------------------------
 
-## **Recap**
+##  {data-background-iframe="../../PDFs/Muddiest_Points_III.pdf#view=FitH&navpanes=0&toolbar=0" data-background-interactive=""}
 
-**Konzeptionelle Kompetenzen**
+------------------------------------------------------------------------
+
+## 3. Gruppe Laura: Wettbewerb Cheatsheet
+
+<br>
+
+**So stimmt ihr ab:**
+
+::::: columns
+::: {.column width="50%"}
+![](../../images/EH_14/cheatsheet.png){fig-align="center" width="100%"}
+:::
+
+::: {.column width="50%"}
+![](../../images/EH_14/cheatsheet_abstimmung.png){fig-align="center" width="100%"}
+:::
+:::::
+
+<br>
+
+::: center
+# Die zwei Zusatzpunkte gehen an …
+:::
+
+------------------------------------------------------------------------
+
+## **4. Abschlussarbeit**
+
+#### Repetition: relative Pfade mit `here()`
+
+<br>
+
+Relative Pfade starten im Projektordner (dort, wo `ryouready.Rproj` liegt)
+
+Es gibt zwei Varianten:
+
+<br>
+
+**Variante 1: relativer Pfad von Hand**
+
+```{r, echo=TRUE, eval=FALSE}
+dat_pct <- read.csv("data/raw/data_pct.csv")
+```
+
+<br>
+
+**Logik:**
+
+```         
+Projektordner
+└── data
+    └── raw
+        └── data_pct.csv
+```
+
+------------------------------------------------------------------------
+
+## **4. Abschlussarbeit**
+
+#### Repetition: relative Pfade mit `here()`
+
+<br>
+
+**Variante 2: relativer Pfad mit `here()`**
+
+```{r, echo=TRUE, eval=FALSE}
+dat_pct <- read.csv(
+  here::here("data", "raw", "data_pct.csv")
+)
+```
+
+<br>
+
+**Logik:**
+
+```         
+here::here("data", "raw", "data_pct.csv")
+```
+
+baut automatisch den passenden Pfad aus den einzelnen Teilen:
+
+```         
+Projektordner/data/raw/data_pct.csv
+```
+
+------------------------------------------------------------------------
+
+## **4. Abschlussarbeit**
+
+#### Repetition: Anpassung des YAML-Headers
+
+<br>
+
+**4.5 Formelle Vorgaben:** Warn- und Fehlermeldungen werden nicht unterdrückt, sondern transparent dargestellt und interpretiert...
+
+→ Der YAML-Header muss angepasst werden!
+
+<br>
+
+![](../../images/EH_14/yaml_header.png){fig-align="center" width="411"}
+
+------------------------------------------------------------------------
+
+## **4. Abschlussarbeit**
+
+#### Verlängerung der Abgabefrist
+
+<br>
+
+Die Abgabefrist der Abschlussarbeit wurde um eine Woche verlängert.
+
+→ Deadline ist neu der `21.06.2026, 23:55 Uhr`
+
+------------------------------------------------------------------------
+
+## **4. Abschlussarbeit**
+
+#### Feedback-Möglichkeiten zur Arbeit
+
+<br>
+
+-   Wenn du individuelles Feedback zu deiner Abschlussarbeit möchtest
+
+-   Infos zur genauen Zusammensetzung deiner Note
+
+-   Oder anderen Seminar-bezogenen Dinge
+
+👉 Selbstständig bei uns (laura.hirt\@unibe.ch / sandra.grinschgl\@unibe.ch) melden!
+
+------------------------------------------------------------------------
+
+## **5. Recap**
+
+#### **Konzeptionelle Kompetenzen**
+
+<br>
 
 -   Replikationskrise und ihre Ursachen
 
 -   Open-Science-Praktiken
 
--   Möglichkeiten zur Steigerung der Transparenz, z. B. durch Datenanalysepläne und Codebooks
+-   Möglichkeiten zur Steigerung der Transparenz, z.B. durch **Datenanalysepläne** und **Codebooks**
 
 -   Grundlagen des FAIR Forschungsdatenmanagement – PsychDS
 
 ------------------------------------------------------------------------
 
-## **Praktische Kompetenzen**
+## **5. Recap**
 
--   Installation von RStudio sowie Installation und Laden von Paketen
+#### **Praktische Kompetenzen**
+
+<br>
+
+-   RStudio und Pakete installieren, laden und nutzen
 
 -   Anlegen von Projekten; Einführung in die RStudio- und Quarto-Benutzeroberfläche
 
--   Coding-Basics (z. B. Erstellen und Verändern von Vektoren, mathematische Operatoren, Arbeitsverzeichnis setzen)
+-   Coding-Basics: z.B. Verktoren, Operatoren, Objekte, Working Directory
 
--   Stilregeln und Fehlersuche (Error Detection) in R
+-   Stilregeln und systematische Fehlersuche (Error Detection) in R
 
--   Datenimport und -export
+-   Daten importieren und exportieren
 
 -   Manipulation von Data Frames, Matrizen und Listen
 
--   Umwandeln von Data Frames zwischen Wide- und Long-Format
+-   Daten zwischen Wide- und Long-Format umwandeln
 
 -   Verwendung des Pipe-Operators `%>%` oder `|>`
 
 ------------------------------------------------------------------------
 
-## **Praktische Kompetenzen**
+## **5. Recap**
+
+#### **Praktische Kompetenzen**
+
+<br>
 
 -   Umgang mit fehlenden Werten
 
--   Filtern, Manipulieren und Gruppieren von Datensätzen (Data Wrangling)
+-   Filtern, Manipulation und Gruppierung von Datensätzen (Data Wrangling)
 
 -   Umkodieren von Variablen
 
--   Berechnen von deskriptiver Statistik (z. B. Mittelwerte, Standardabweichungen, Schiefe, Kurtosis)
+-   Berechnen von deskriptiven Statistiken (z. B. Mittelwerte, Standardabweichungen, Schiefe, Kurtosis)
 
 -   Überprüfung der Normalverteilung inkl. visueller Darstellung der Residuen
 
@@ -150,122 +283,96 @@ FS 2026<br><br><br> **LV-Leitung**: Dr. Sandra Grinschgl / MSc. Laura Hirt<br> *
 
 ------------------------------------------------------------------------
 
-## Was wir nicht gemacht haben:
+## **5. Recap**
 
--   Wiederholung/Auffrischung von Statistik
+#### **Was dieses Seminar nicht leisten konnte**
 
--   Ein „Kochbuch“ für die Masterarbeit ein Cheatsheet mit „allen Funktionen“ in R
+<br>
 
--   komplexe statistische Analysen in R wie etwa Strukturgleichungsmodelle oder Multilevel Models
+-   vollständige Wiederholung/Auffrischung der Statistik
+
+-   „Kochbuch“ für jede mögliche Masterarbeit
+
+-   vollständiges Cheatsheet mit „allen Funktionen“ in R
+
+-   komplexe statistische Modelle, z.B. Strukturgleichungsmodelle oder Mehrebenenmodelle
 
     -   Siehe weiterführende Methodenseminare der Abteilungen Gesundheitspsychologie und Psychologie der Digitalisierung
 
 ------------------------------------------------------------------------
 
-## Errinnerung Leistungsbeurteilung
+## **6. Recap: Evaluation & Abschluss**
 
-<iframe src="../../PDFs/LeistungsnachweisHS25.pdf" width="100%" height="600px">
+#### **Selbstevaluation der Mitarbeit**
 
-</iframe>
-
-------------------------------------------------------------------------
-
-**Leistungsbeurteilung:**
-
-**✅ Mitarbeit - 14 Punkte**
-
-**✅ Regelmässige Hausübungen** **-** **40 Punkte**
-
-**⬜ Abschlussprojekt - 46 Punkte**
-
-------------------------------------------------------------------------
-
-## **Mitarbeit**
+<br>
 
 -   **14 Punkte Insgesamt**
 
 -   **7 Punkte dürft ihr euch selbst vergeben**
 
-👉Umfrage auf ILIAS!
+👉Umfrage auf ILIAS (Woche 14)!
 
-![](../../images/EH_13/Mitarbeit.png){fig-align="center"}
+![](../../images/EH_14/evaluation_mitarbeit.png){fig-align="center"}
 
 ------------------------------------------------------------------------
 
-## **Mitarbeit**
+## **6. Recap: Evaluation & Abschluss**
+
+#### **Seminarevaluation: Standardfragebogen der Uni**
+
+<br>
+
+**Bitte verwendet den Link, welcher zu eurer Gruppe gehört!**
+
+------------------------------------------------------------------------
+
+## Gruppe Laura 12:15
+
+<https://scanserveruls.unibe.ch/evasys/public/online/index/index?online_php=&pswd=SMKNC&ONLINEID=157540934219219477945284313175345624895804>
+
+![](../../images/EH_14/eval_laura.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Gruppe Sandra 16:15
+
+Hier noch Link einfügen!
+
+![](../../images/EH_14/eval_sandra.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## **6. Recap: Evaluation & Abschluss**
+
+#### **Zusatzfragebogen**
+
+<br>
+
+**Auf ILIAS in Ordner EH14**
 
 ![](../../images/EH_14/Zusatzeval.png){fig-align="center"}
 
 ------------------------------------------------------------------------
 
-## **Abschlussarbeit**
+## **Weiterführende Ressourcen**
 
-**Deadline 11.1.2026 - 23:55**
+<br>
 
-**Checkliste auf Website**
-
-------------------------------------------------------------------------
-
-## Feedback-Möglichkeit
-
--   Wenn du individuelles Feedback zu deiner Abschlussarbeit möchtest
-
--   Zur Zusammensetzung deiner Note
-
--   Zu anderen Seminar-bezogenen Dingen
-
-👉 Selbstständig bei und (aaron.friedli\@unibe.ch / sandra.grinschgl\@unibe.ch) melden!
-
-Aaron nur mehr bis Ende Januar erreichbar!
-
-------------------------------------------------------------------------
-
-## **Evaluation**
-
-**Standardfragebogen der Uni**
-
-------------------------------------------------------------------------
-
-## 10:15
-
-<https://scanserveruls.unibe.ch/evasys/public/online/index/index?online_php=&pswd=F7GK9&ONLINEID=65188644261466756196721217091602273395940>
-
-![](../../images/EH_14/eval_1015.png){fig-align="center"}
-
-------------------------------------------------------------------------
-
-## 16:15
-
-<https://scanserveruls.unibe.ch/evasys/public/online/index/index?online_php=&pswd=SFR8Z&ONLINEID=799329654453545430845235731708924671495875>
-
-![](../../images/EH_14/eval_1615.png){fig-align="center"}
-
-------------------------------------------------------------------------
-
-## **Zusatzfragebogen**
-
-**Auf ILIAS in Ordner EH 14**
-
-![](../../images/EH_14/Zusatzeval.png){fig-align="center"}
-
-------------------------------------------------------------------------
-
-## **Weiterführende Ressourcen!**
-
-![](../../images/EH_14/Weiterführende%20Resssourcen.png){fig-align="center"}
+![](../../images/EH_14/ressourcen.png){fig-align="center"}
 
 ------------------------------------------------------------------------
 
 ## Methodenberatung
 
-**Ab Januar/Februrar von Laura Hirt**
+<br>
 
-<iframe src="../../PDFs/Flyer_Methodenberatung.pdf" width="100%" height="600px">
-
-</iframe>
+<p align="center">
+  <img src="../../images/EH_14/methodenberatung.png" style="max-height: 75vh; width: auto;">
+</p>
 
 ------------------------------------------------------------------------
 
-## Schöne Ferien!
+## Schöne Sommerferien und alles Gute!
 
-![](../../images/EH_14/Winter_break.png){fig-align="center"}
+![](../../images/EH_14/sommerferien.png){fig-align="center"}
