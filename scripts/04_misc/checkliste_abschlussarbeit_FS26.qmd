@@ -16,7 +16,7 @@ draft: false
 ::: {.callout-important appearance="simple"}
 ## Abgabe
 
-**Deadline:** Sonntag, **14.06.2026**, 23:55 Uhr\
+**Deadline:** Sonntag, **21.06.2026**, 23:55 Uhr\
 **Abgabe:** ZIP-Datei über ILIAS\
 **Benennung der ZIP-Datei:** `vorname_nachname_abschlussarbeit.zip`
 

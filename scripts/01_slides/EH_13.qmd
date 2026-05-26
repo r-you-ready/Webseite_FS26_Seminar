@@ -166,7 +166,7 @@ Mindestens ein Mittelwert unterscheidet sich von mindestens einem anderen.
 <br>
 
 | Design | Fragestellung | Beispiel |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **One-Way ANOVA** | Ein Faktor mit mehreren Gruppen | Unterscheiden sich drei Feedbackgruppen? |
 | Mehrfaktorielle ANOVA | Zwei oder mehr Faktoren (UVs) | Gibt es Effekte von Feedbackgruppe und Geschlecht? |
 | **Mixed ANOVA** | Kombination aus Within-Subject- und Between-Subject-Faktoren | Verändert sich ein Rating über die Zeit je nach Feedbackgruppe? |
@@ -375,7 +375,7 @@ Wie viel Varianz in der abhängigen Variable wird durch den Faktor erklärt?
 
 Beide Masse beschreiben den Anteil erklärter Varianz, unterscheiden sich aber darin, welche Varianz als Vergleichsbasis verwendet wird.
 
-**Generalisiertes η² (`ges`)**
+**Generalisiertes η² (`ges`) –\>** wird mit **`$anova_table`** ausgegeben
 
 -   berücksichtigt die gesamte relevante Varianz im Modell
 
@@ -618,7 +618,7 @@ Ihr könnt grundsätzlich wählen zwischen:
 **Möglichkeit 2: Modellbasierte Vergleiche mit `pairs()`**
 
 ```{r, echo=TRUE}
-pairs(emmeans(model_1, ~ group_all))
+pairs(emmeans(model_1, ~ group_all)) #Beispiel für Oneway ANOVA
 ```
 
 <br>
@@ -668,7 +668,7 @@ Die ANOVA sagt uns zunächst aber nur, **dass** sich die zeitliche Veränderung 
 Bei unserer 2x3 Mixed ANOVA können wir mindestens drei verschiedene Fragen stellen:
 
 | Frage | Vergleich |
-|----|----|
+|------------------------------------|------------------------------------|
 | Unterscheiden sich die Gruppen innerhalb eines Zeitpunkts? | Gruppenvergleiche bei `pre1` und bei `pre4` |
 | Verändert sich jede Gruppe über die Zeit? | `pre1` vs. `pre4` innerhalb jeder Gruppe |
 | **Zusatz:** Unterscheiden sich die Veränderungen zwischen den Gruppen? | Veränderungsscores zwischen den Gruppen vergleichen |
@@ -846,7 +846,7 @@ ANOVAs sind teilweise robust, aber Verletzungen sollten nicht ignoriert werden.
 
 <br>
 
-**Normalverteilung (One-Way ANOVA)**
+**Normalverteilung**
 
 Bei starken Verletzungen,
 
@@ -856,7 +856,7 @@ Bei starken Verletzungen,
 
 <br>
 
-**Varianzhomogenität**
+**Varianzhomogenität (Levene Test)**
 
 Bei ungleichen Varianzen:
 
