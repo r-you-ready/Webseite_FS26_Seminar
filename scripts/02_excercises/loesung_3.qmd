@@ -2,14 +2,9 @@
 title: "Hands On – Coding Basics (Einheiten 5 und 6)"
 filters:
   - conditional_content
-show_solutions: true
+show_solutions: false
 draft: false
-format:
-  html:
-    code-tools:
-       source: downloads/loesung_3_solution.qmd
-       toggle: false
-       caption: "Download der Lösungsdatei" 
+format: html
 ---
 
 Bei Bedarf findest du hier nochmals die Slides zu Einheit 5:
@@ -360,7 +355,7 @@ Die Referenzkategorie haben wir hier "male" gewählt - dies ist je nach Studiend
 Bevor wir mit den Übungen starten, ein Überblick über die Unterschiede:
 
 | Struktur | Eigenschaften | Beispiel-Inhalt |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **Vektor** | \- Enthält Elemente **eines** Datentyps<br>- Grundbaustein in R | `c(1, 2, 3)` oder `c("Anna", "Ben")` |
 | **Liste** | \- Kann verschiedene Datentypen enthalten<br>- Elemente können unterschiedlich lang sein | Zahlenvektor, Textvektor, logischer Vektor in einer Liste |
 | **Matrix** | \- Enthält nur **einen** Datentyp<br>- Hat feste Dimensionen (Zeilen, Spalten) | 3x3-Matrix mit Zahlen 1–9 |

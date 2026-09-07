@@ -6,12 +6,7 @@ filters:
   - conditional_content
 show_solutions: false
 draft: false
-format:
-  html:
-    code-tools:
-       source: downloads/loesung_7_solution.qmd
-       toggle: false
-       caption: "Download der Lösungsdatei"
+format: html
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE, warning=FALSE}

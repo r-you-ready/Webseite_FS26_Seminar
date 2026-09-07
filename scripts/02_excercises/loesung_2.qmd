@@ -2,13 +2,8 @@
 title: "Hands On – Coding Basics (Einheiten 3 und 4)"
 filters:
   - conditional_content
-show_solutions: true
-format:
-  html:
-    code-tools:
-       source: downloads/loesung_2_solution.qmd
-       toggle: false
-       caption: "Download der Lösungsdatei" 
+show_solutions: false
+format: html
 ---
 
 ```{r, include = FALSE}
