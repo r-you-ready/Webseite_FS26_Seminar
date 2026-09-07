@@ -4,7 +4,6 @@ editor: visual
 ---
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE}
-
 library(tidyverse)
 library(readxl)
 library(skimr)
@@ -13,7 +12,7 @@ library(here)
 
 # Aufgabenstellung
 
--   Abgabefrist: **7.11.2025**
+-   Abgabefrist: **22.04.2026**
 
 -   Abgabe auf **ILIAS** und Weitergabe an Peerpartner:in
 
@@ -36,8 +35,6 @@ file.copy(
   to   = "fake_bfi_dataset.csv",
   overwrite = TRUE
 )
-
-
 ```
 
 # Aufgabe 1: Datensatz aufbereiten und beschreiben
@@ -56,22 +53,20 @@ Nutze die **dplyr**-Funktionen, die wir kennengelernt haben, um die folgenden Au
 
 ```{r, echo = FALSE, results = 'hide', message=FALSE}
 
-
 data <- read_delim("raw/fake_bfi_dataset.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
-
 
 data <- data |> 
   rename(Postleitzahl = Ort)
 ```
 
--   Welche Spalte scheint doppelt vorhanden zu sein? Lösche sie aus dem Datensatz.
+-   Im Datensatz gibt es eine doppelt vorhandene Spalte. Identifiziere diese und entferne sie.
 
 ```{r, echo = FALSE, results = 'hide', message=FALSE}
 
 data <- select(data, - Ort_2)
 ```
 
--   Personen die nicht volljährig sind dürfen nicht an der Studie teilnehmen und müssen ausgeschlossen werden.
+-   Personen, die nicht volljährig sind, dürfen nicht an der Studie teilnehmen und müssen ausgeschlossen werden.
 
 ```{r, echo = FALSE, results = 'hide', message=FALSE}
 
@@ -84,15 +79,13 @@ data <- filter(data, Age >= 18)
 
 data <- data |>
   mutate(Alterskohorte = ifelse(Age >60, "alt", "jung"))
-
 ```
 
--   Welche Variablen sollten Faktoren sein? Wandle sie in Faktoren um
+-   Welche Variablen sollten Faktoren (kategoriale Variablen) sein? Wandle sie in Faktoren um
 
 ```{r, echo = FALSE, results = 'hide', message=FALSE}
 data$Gender <- as.factor(data$Gender)
 data$Alterskohorte <- as.factor(data$Alterskohorte)
-
 ```
 
 -   Erstelle eine Kopie des Datensatzes nur mit den demographischen Variablen.
@@ -100,7 +93,6 @@ data$Alterskohorte <- as.factor(data$Alterskohorte)
 ```{r, echo = FALSE, results = 'hide', message=FALSE}
 data_demographic <- data |> 
   select(Age, Gender, Postleitzahl, Alterskohorte)
-
 ```
 
 **Verwende die dplyr-Funktionen, um die folgenden Fragen zu beantworten:**
@@ -113,7 +105,6 @@ data <- data %>%
   group_by(Postleitzahl) %>%
   mutate(proportion = n() / nrow(data)) %>%
   ungroup()
-
 ```
 
 -   In welchem Quartier leben proportional am meisten Personen, die sich als weiblich beschreiben?
@@ -128,17 +119,15 @@ data_demographic %>%
     proportion_weiblich = n_female / n_total
   ) %>%
   arrange(desc(proportion_weiblich))
-
 ```
 
--   Wie hoch ist das durschnittliche Alter pro Quartier?
+-   Wie hoch ist das durchschnittliche Alter pro Quartier?
 
 ```{r, echo = FALSE, results = 'hide', message=FALSE}
 
 data_demographic |>
   group_by(Postleitzahl) |> 
-  summarize(durschnittsalter = mean(Age))
-
+  summarize(durchschnittsalter = mean(Age, na.rm = TRUE))
 ```
 
 -   Wie alt sind die jüngsten Personen getrennt nach Gender?
@@ -147,8 +136,7 @@ data_demographic |>
 
 data_demographic |>
   group_by(Gender) |> 
-  summarize(min_age = min(Age))
-
+  summarize(min_age = min(Age, na.rm = TRUE))
 ```
 
 -   Erstelle eine Rangliste der Quartiere nach durchschnittlichem Alter (vom höchsten zum niedrigsten).
@@ -157,7 +145,7 @@ data_demographic |>
 
 rangliste <- data_demographic |>
   group_by(Postleitzahl) |> 
-  summarise(mean_age = mean(Age)) |> 
+  summarise(mean_age = mean(Age, na.rm = TRUE)) |> 
   arrange(desc(mean_age))
 
 rangliste
@@ -169,16 +157,18 @@ rangliste
 
 Führe die folgenden Schritte durch:
 
--   Untersuche den Datensatz auf fehlende Werte. Wie viele fehlende Werte gibt es insgesamt, und in welchen Variablen treten sie auf
+-   Untersuche den Datensatz auf fehlende Werte. Wie viele fehlende Werte gibt es insgesamt, und in welchen Variablen treten sie auf?
 
 ```{r, echo = FALSE, results = 'hide', message= FALSE}
 
 skim(data)
 
 table(is.na(data))
+
+colSums(is.na(data))
 ```
 
--   Einige **Personen** haben keine Angabe zu ihrer Geschlechtsidentität gemacht. Ersetze diese **fehlenden Werte (NAs)** durch *"Keine Angabe"*. Nutze dafür die Funktion `mutate()` und `replace_na().` Beachte: Gender wurde bereits als Faktor definiert, muss aber erneut zu einem Character transformiert werden.
+-   Einige **Personen** haben keine Angabe zu ihrer Geschlechtsidentität gemacht. Ersetze diese **fehlenden Werte (NAs)** durch *"Keine Angabe"*. Nutze dafür die Funktion `mutate()` und `replace_na().` Beachte: Gender wurde bereits als Faktor definiert, muss aber erneut zu einem Character transformiert werden. Anschliessend soll die Variable erneut als Faktor definiert werden.
 
 ```{r, echo = FALSE, results = 'hide'}
 
@@ -188,9 +178,9 @@ library(tidyr)
 data <- data %>%
   mutate(
     Gender = as.character(Gender),
-    Gender = replace_na(Gender, "Keine Angabe")
+    Gender = replace_na(Gender, "Keine Angabe"),
+    Gender = as.factor(Gender)
   )
-
 ```
 
 -   **Zeilen mit fehlenden Werten löschen**\
@@ -217,7 +207,6 @@ data_drop_na <- drop_na(data)
 Verwende dafür eine Kombination aus `mutate()`, `across()` und `case_when()` oder `recode()`.
 
 ```{r, echo = FALSE, results = 'hide'}
-
 
 data_numeric <- data_drop_na %>%
   mutate(
@@ -248,12 +237,11 @@ data_numeric <- data_drop_na %>%
       )
     )
   )
-
 ```
 
 -   **Umpolen der negativ formulierten Items**
 
-Die negativ formulierten Items enden alle mit `_r` (für reverse). Poole diese Items um.
+Die negativ formulierten Items enden alle mit `_r` (für reverse). Pole diese Items um.
 
 Suche dir eine dplyr Funktion, welche helfen kann alle Variablen auszuwählen welche mit `_r` aufhören.
 
@@ -276,13 +264,12 @@ data_reversed <- data_numeric %>%
       )
     )
   )
-
 ```
 
 -   **Berechnung der Big-Five-Skalen**
 
     -   Erstelle neue Variablen, die den **Mittelwert jedes Big-Five-Faktors** pro Person enthalten.
-    -   Mit welcher Funktion kannst du dir ersparen alle Variablen auszuschreiben?
+    -   Mit welcher Funktion kannst du dir ersparen, alle Variablen auszuschreiben?
 
 ```{r, echo = FALSE, results = 'hide'}
 
@@ -296,8 +283,6 @@ data_bfi_scores <- data_reversed |>
     neuroticism = rowMeans(select(data_reversed, starts_with("neuro"))),
     openness = rowMeans(select(data_reversed, starts_with("open")))
   )
-
-
 ```
 
 -   **Zusammenhänge zwischen Skalen testen**
@@ -313,11 +298,7 @@ cor.test(
   data_bfi_scores$extraversion,
   data_bfi_scores$openness
 )
-
-
 ```
-
-<!-- -->
 
 -   Berechne die **Durchschnittswerte**, **Standardabweichungen** und **Mediane** der Big-Five-Faktoren Extraversion und Offenheit, unterteilt nach der **Geschlechtsangabe**.
 
@@ -340,12 +321,11 @@ data_summary <- data_bfi_scores %>%
       na.rm = TRUE
     )
   )
-
 ```
 
 -   Rendere dein Skript!
 
-**Gib dein Skript und deine gerenderte Datei als ZIP (Dateinaname: vorname_nachname_hausübung_1.ZIP) datei auf ILIAS ab und leite es deinem oder deiner Peerpartner:in weiter.**
+**Gib dein Skript und deine gerenderte Datei als ZIP (Dateinaname: vorname_nachname_hausübung_1.ZIP) auf ILIAS ab und leite sie deiner/m Peerpartner:in weiter.**
 
 # Instruktionen Peerfeedback:
 
@@ -363,4 +343,4 @@ data_summary <- data_bfi_scores %>%
 
 -   Welche Punkte lassen sich noch verbessern?
 
-![](images/EH_8/Forum_Peer_Feedback.png){fig-align="center"}
+![](../../images/EH_8/Forum_Peer_Feedback.png){fig-align="center"}

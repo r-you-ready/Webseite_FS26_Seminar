@@ -2,16 +2,12 @@
 title: "Hands On – Coding Basics (Einheiten 1 und 2)"
 filters:
   - conditional_content
-show_solutions: true
+show_solutions: false
 format:
   html:
-    code-tools:
-       source: downloads/loesung_1_solution.qmd
-       toggle: false
-       caption: "Download der Lösungsdatei" 
 ---
 
-# Lösung - Codings Basics (Einheiten 1 und 2)
+# Codings Basics (Einheiten 1 und 2)
 
 Bei Bedarf finden sich hier nochmal die Slides zur EH1:
 
