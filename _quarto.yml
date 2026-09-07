@@ -57,19 +57,19 @@ website:
         text: "Übungen zu den Einheiten"
         contents: 
           - href: scripts/02_excercises/loesung_1.qmd
-            text: "Hands on - Block 1 (Woche 1 - 2) - mit Musterlösungen"
+            text: "Hands on - Block 1 (Woche 1 - 2)"
           - href: scripts/02_excercises/loesung_2.qmd
-            text: "Hands on - Block 2 (Woche 3 - 4) - mit Musterlösungen"
+            text: "Hands on - Block 2 (Woche 3 - 4)"
           - href: scripts/02_excercises/loesung_3.qmd
-            text: "Hands on - Block 3 (Woche 5 - 6) - mit Musterlösungen"
+            text: "Hands on - Block 3 (Woche 5 - 6)"
           - href: scripts/02_excercises/loesung_4.qmd
-            text: "Hands on - Block 4 (Woche 7 - 8) - mit Musterlösungen"
+            text: "Hands on - Block 4 (Woche 7 - 8)"
           - href: scripts/02_excercises/loesung_5.qmd
-            text: "Hands on - Block 5 (Woche 9 - 10) - mit Musterlösungen"
+            text: "Hands on - Block 5 (Woche 9 - 10)"
           - href: scripts/02_excercises/loesung_6.qmd
-            text: "Hands on - Block 6 (Woche 11 - 12) - mit Musterlösungen"
+            text: "Hands on - Block 6 (Woche 11 - 12)"
           - href: scripts/02_excercises/loesung_7.qmd
-            text: "Hands on - Block 7 (Woche 13) - mit Musterlösungen"
+            text: "Hands on - Block 7 (Woche 13)"
       - href: hausuebungen.qmd
         text: "Hausübungen"
         contents:
